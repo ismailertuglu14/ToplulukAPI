@@ -1,5 +1,14 @@
 ﻿<Properties StartupConfiguration="Multiple Projects">
-  <MonoDevelop.Ide.ItemProperties.Services.Authentication.Topluluk.Services.AuthenticationAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
+      <Items>
+        <StartupItem ItemId="{39001941-D332-4154-9230-69BC316E0A70}" ItemName="Topluluk.Services.AuthenticationAPI" ConfigurationId="Default" />
+        <StartupItem ItemId="{124F85AE-4BD8-4052-938A-3B05595DA956}" ItemName="Topluluk.Services.CommunityAPI" ConfigurationId="Default" />
+        <StartupItem ItemId="{10D25C32-1D8F-4B8F-BF28-EBCA6EC64DFE}" ItemName="Topluluk.Services.FileAPI" ConfigurationId="Default" />
+        <StartupItem ItemId="{4C25E0DA-2827-4135-A21D-2519204FFAD1}" ItemName="Topluluk.Services.User.API" ConfigurationId="Default" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
   <MonoDevelop.Ide.Workbench ActiveDocument="Services/Community/Topluluk.Services.CommunityAPI.Services/Implementation/CommunityService.cs">
     <Files>
       <File FileName="Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" />
@@ -77,26 +86,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Services.User.Topluluk.Services.User.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations>
-    <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
-      <Items>
-        <StartupItem ItemId="{39001941-D332-4154-9230-69BC316E0A70}" ItemName="Topluluk.Services.AuthenticationAPI" ConfigurationId="Default" />
-        <StartupItem ItemId="{124F85AE-4BD8-4052-938A-3B05595DA956}" ItemName="Topluluk.Services.CommunityAPI" ConfigurationId="Default" />
-        <StartupItem ItemId="{10D25C32-1D8F-4B8F-BF28-EBCA6EC64DFE}" ItemName="Topluluk.Services.FileAPI" ConfigurationId="Default" />
-        <StartupItem ItemId="{4C25E0DA-2827-4135-A21D-2519204FFAD1}" ItemName="Topluluk.Services.User.API" ConfigurationId="Default" />
-      </Items>
-    </MultiItemSolutionRunConfiguration>
-  </MultiItemStartupConfigurations>
-  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI.Services FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Services.Community.Topluluk.Services.CommunityAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Services.File.Topluluk.Services.FileAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.Gateways.Topluluk.Api.Gateways PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI.Data FirstBuild="True" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI.Model FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/Controllers/FileController.cs" relfile="Services/File/Topluluk.Services.FileAPI/Controllers/FileController.cs" line="36" column="1" />
@@ -105,7 +94,18 @@
       <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" relfile="Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" line="71" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI.Data FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Services.File.Topluluk.Services.FileAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI.Services FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI.Model FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Services.Community.Topluluk.Services.CommunityAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.Authentication.Topluluk.Services.AuthenticationAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Gateways.Topluluk.Api.Gateways PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI FirstBuild="True" />
   <DisabledProjects>
     <String>Topluluk.Shared/Topluluk.Shared.csproj</String>
   </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.Services.User.Topluluk.Services.User.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>
