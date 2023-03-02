@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Core\" />
+    <None Remove="Implementation\" />
+    <None Remove="Interface\" />
+    <None Remove="Azure.Storage.Blobs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Implementation\" />
+    <Folder Include="Interface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Shared\DBHelper\DBHelper.csproj" />
+    <ProjectReference Include="..\Topluluk.Services.FileAPI.Model\Topluluk.Services.FileAPI.Model.csproj" />
+    <ProjectReference Include="..\Topluluk.Services.FileAPI.Data\Topluluk.Services.FileAPI.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.15.0" />
+  </ItemGroup>
+</Project>

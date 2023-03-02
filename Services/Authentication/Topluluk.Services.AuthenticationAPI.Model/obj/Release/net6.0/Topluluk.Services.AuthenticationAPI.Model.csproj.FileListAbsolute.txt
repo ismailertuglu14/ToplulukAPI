@@ -1,0 +1,17 @@
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.deps.json
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.runtimeconfig.json
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Release/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Release/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.AssemblyInfo.cs
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.csproj.CopyComplete
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/refint/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Model.genruntimeconfig.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Release/net6.0/ref/Topluluk.Services.AuthenticationAPI.Model.dll

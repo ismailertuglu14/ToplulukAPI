@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Core\" />
+    <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="Interface\" />
+    <None Remove="Implementation\" />
+    <None Remove="AutoMapper" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Newtonsoft.Json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Interface\" />
+    <Folder Include="Implementation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Shared\DBHelper\DBHelper.csproj" />
+    <ProjectReference Include="..\Topluluk.Services.User.Data\Topluluk.Services.User.Data.csproj" />
+    <ProjectReference Include="..\Topluluk.Services.User.Model\Topluluk.Services.User.Model.csproj" />
+  </ItemGroup>
+</Project>

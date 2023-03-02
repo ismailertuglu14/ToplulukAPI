@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Topluluk.Services.User.API.props" />
+</Project>

@@ -1,0 +1,12 @@
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/bin/Debug/net6.0/Topluluk.Services.FileAPI.Model.deps.json
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/bin/Debug/net6.0/Topluluk.Services.FileAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/bin/Debug/net6.0/Topluluk.Services.FileAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.AssemblyInfo.cs
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/refint/Topluluk.Services.FileAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/Topluluk.Services.FileAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/obj/Debug/net6.0/ref/Topluluk.Services.FileAPI.Model.dll

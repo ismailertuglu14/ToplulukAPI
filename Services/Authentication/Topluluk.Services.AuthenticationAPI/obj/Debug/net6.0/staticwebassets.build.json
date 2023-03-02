@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "K9KVxh67ruxMKgzD3SWmpFP8czuNpsS14m+Gmw/1BbE=",
+  "Source": "Topluluk.Services.AuthenticationAPI",
+  "BasePath": "_content/Topluluk.Services.AuthenticationAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
