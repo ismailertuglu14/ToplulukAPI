@@ -112,3 +112,7 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/System.IO.Hashing.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/System.Memory.Data.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/RabbitMQ.Client.dll

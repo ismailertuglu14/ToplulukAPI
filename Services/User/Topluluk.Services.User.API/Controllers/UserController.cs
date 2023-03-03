@@ -13,6 +13,7 @@ using Topluluk.Services.User.Services.Interface;
 using Topluluk.Shared.BaseModels;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Enums;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,7 +23,7 @@ namespace Topluluk.Services.User.API.Controllers
     [Route("[controller]")]
     public class UserController : BaseController
     {
-        
+
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
@@ -30,20 +31,27 @@ namespace Topluluk.Services.User.API.Controllers
             _userService = userService;
 
         }
-        [HttpGet]
-        public async Task<Response<string>> GetById(string id)
+        
+        [HttpPost("[action]")]
+        public async Task<Response<string>> GetUserById(string userId)
         {
-            return await _userService.GetUserById(id);
+            return await _userService.GetUserById(userId);
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> Index()
+        [HttpGet("{userName}")]
+        public async Task<Response<string>> GetUserByUserName([FromRoute] string userName)
         {
-            //var httpClient = new HttpClient();
-            //var content = new { userName = "string", password = "string" };
-            //var content2 = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
-            //var response = await httpClient.PostAsync("https://localhost:7231/authentication/signin",content2);
-            return Ok($"Calisiyor....");
+            return await _userService.GetUserByUserName(userName);
+        }
+
+        /// <summary>
+        /// https://topluluk.com/user?suggestions=5
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions([FromQuery]int suggestions)
+        {
+            return await _userService.GetUserSuggestions( UserId  ,suggestions);
         }
 
         [HttpPost("[action]")]
@@ -59,11 +67,24 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpPost("[action]")]
+        public async Task<Response<string>> ChangeBannerImage(IFormFile file)
+        {
+            return await _userService.ChangeBannerImage(UserId, file);
+        }
+
+        [HttpPost("Follow")]
         public async Task<Response<string>> FollowUser( [FromBody] UserFollowDto userFollowInfo)
         {
+            userFollowInfo.SourceId = UserId;
             return await _userService.FollowUser(userFollowInfo);
         }
 
+        [HttpPost("UnFollow")]
+        public async Task<Response<string>> UnFollowUser([FromBody] UserFollowDto userFollowInfo)
+        {
+            userFollowInfo.SourceId = GetUserId();
+            return await _userService.UnFollowUser(userFollowInfo);
+        }
 
         // For Http Calls coming from other services
 

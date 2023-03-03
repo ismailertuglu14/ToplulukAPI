@@ -10296,7 +10296,8 @@
       "RabbitMQ.Client >= 6.4.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "Topluluk.Services.CommunityAPI.Data >= 1.0.0",
-      "Topluluk.Services.CommunityAPI.Services >= 1.0.0"
+      "Topluluk.Services.CommunityAPI.Services >= 1.0.0",
+      "Topluluk.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -10329,6 +10330,9 @@
             },
             "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI.Services/Topluluk.Services.CommunityAPI.Services.csproj": {
               "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI.Services/Topluluk.Services.CommunityAPI.Services.csproj"
+            },
+            "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+              "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
             }
           }
         }

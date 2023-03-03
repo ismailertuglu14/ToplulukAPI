@@ -3,6 +3,7 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Configuration;
 using Topluluk.Services.FileAPI.Services.Interface;
 using Topluluk.Shared.Dtos;
@@ -58,6 +59,19 @@ namespace Topluluk.Services.FileAPI.Services.Implementation
             return _blobContainerClient.GetBlobs().Any(b => b.Name == fileName);
         }
 
+        public async Task<Response<string>> UploadOneAsync(string containerName, IFormFile file)
+        {
+            _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            await _blobContainerClient.CreateIfNotExistsAsync();
+            await _blobContainerClient.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
+
+  
+            string fileNewName = await FileRenameAsync(containerName, file.FileName, HasFile);
+            BlobClient blobClient = _blobContainerClient.GetBlobClient(fileNewName);
+            await blobClient.UploadAsync(file.OpenReadStream());
+                  
+            return await Task.FromResult(Response<string>.Success(blobClient.Uri.AbsoluteUri,ResponseStatus.Success));
+        }
     }
 }
 

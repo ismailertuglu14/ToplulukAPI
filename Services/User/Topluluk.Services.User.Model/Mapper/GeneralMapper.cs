@@ -9,6 +9,7 @@ namespace Topluluk.Services.User.Model.Mapper
 		public GeneralMapper()
 		{
 			CreateMap<UserInsertDto, _User>().ReverseMap();
+			CreateMap<_User, UserSuggestionsDto>();
 		}
 	}
 }

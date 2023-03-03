@@ -11,6 +11,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Dto
         public string Description { get; set; }
         //public IFormFile? CoverImage { get; set; }
         //public IFormFile? BannerImage { get; set; }
+        public IFormFile? CoverImage { get; set; }
         public bool IsVisible { get; set; } = true;
         // Kullanıcılar topluluğa katılabilmek için izin istemek zorunda mı ?
         public bool IsPublic { get; set; } = true;

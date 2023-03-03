@@ -30,6 +30,8 @@ namespace Topluluk.Services.FileAPI.Services.Implementation
         public List<string> GetFiles(string containerName) => _storage.GetFiles(containerName);
 
         public bool HasFile(string containerName, string fileName) => _storage.HasFile(containerName, fileName);
+
+        public async Task<Response<string>> UploadOneAsync(string containerName, IFormFile file) => await _storage.UploadOneAsync(containerName, file);
     }
 }
 

@@ -309,6 +309,9 @@
             "projectReferences": {
               "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Services/Topluluk.Services.FileAPI.Services.csproj": {
                 "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Services/Topluluk.Services.FileAPI.Services.csproj"
+              },
+              "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }
             }
           }
@@ -323,6 +326,26 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "DotNetCore.CAP": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "DotNetCore.CAP.MongoDB": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "DotNetCore.CAP.RabbitMQ": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.19.0, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

@@ -15,7 +15,8 @@
           "RabbitMQ.Client": "6.4.0",
           "Swashbuckle.AspNetCore": "6.2.3",
           "Topluluk.Services.CommunityAPI.Data": "1.0.0",
-          "Topluluk.Services.CommunityAPI.Services": "1.0.0"
+          "Topluluk.Services.CommunityAPI.Services": "1.0.0",
+          "Topluluk.Shared": "1.0.0"
         },
         "runtime": {
           "Topluluk.Services.CommunityAPI.dll": {}

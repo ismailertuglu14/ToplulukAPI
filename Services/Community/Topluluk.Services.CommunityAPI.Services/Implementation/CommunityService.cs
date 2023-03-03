@@ -13,6 +13,7 @@ using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Topluluk.Services.CommunityAPI.Services.Implementation
 {
@@ -21,6 +22,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         private readonly ICommunityRepository _communityRepository;
         private readonly IMapper _mapper;
         private readonly ICapPublisher _capPublisher;
+
         public CommunityService(ICommunityRepository communityRepository, IMapper mapper, ICapPublisher capPublisher)
         {
             _communityRepository = communityRepository;
@@ -100,6 +102,12 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             community.AdminId = communityInfo.CreatedById;
             community.Participiants.Add(communityInfo.CreatedById!);
             DatabaseResponse response = await _communityRepository.InsertAsync(community);
+
+            using var stream = new MemoryStream();
+            await communityInfo.CoverImage.CopyToAsync(stream);
+            var imageData = stream.ToArray();
+
+            await _capPublisher.PublishAsync(QueueConstants.COMMUNITY_IMAGE_UPLOAD, new { CommunityId = response.Data, CoverImage = imageData , FileName = communityInfo.CoverImage.FileName });
             await _capPublisher.PublishAsync<CommunityUserJoinDto>(QueueConstants.COMMUNITY_CREATE_USER_UPDATE, new() { UserId = communityInfo.CreatedById, CommunityId = response.Data });
             //var httpResponse = await HttpRequestHelper.handle(new{ UserId = communityInfo.CreatedById, CommunityId = response.Data }, "https://localhost:7202/user/updatecommunities", HttpType.POST);
             return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
@@ -139,7 +147,15 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo)
         {
-            throw new NotImplementedException();
+
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == dtoInfo.CommunityId);
+
+            if(!community.Participiants.Contains(dtoInfo.UserId) || community.AdminId != dtoInfo.AdminId)
+                return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.NotAuthenticated));
+
+            community.AdminId = dtoInfo.UserId;
+            _communityRepository.Update(community);
+            return await Task.FromResult(Response<string>.Success("Successfully updated new admin.", ResponseStatus.Success));
         }
 
         public async Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo)
@@ -160,7 +176,15 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-     
+        public async Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto)
+        {
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == dto.CommunityId);
+            community.CoverImage = dto.CoverImage;
+            Console.WriteLine($"ismail DEBUG: {dto.CoverImage}");
+            _communityRepository.Update(community);
+            return await Task.FromResult(Response<string>.Success($"Success ${community.CoverImage}", ResponseStatus.Success));
+
+        }
     }
 }
 
