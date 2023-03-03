@@ -11,6 +11,8 @@ namespace Topluluk.Services.User.Model.Entity
 		public string UserName { get; set; }
         public string? Bio { get; set; }
 		public string? ProfileImage { get; set; }
+		public string? BannerImage { get; set; }
+
 		public DateTime? BirthdayDate { get; set; }
 
 		public bool IsPrivate { get; set; } = false;

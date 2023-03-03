@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -36,6 +37,16 @@ namespace Topluluk.Services.User.Services.Implementation
             }
             return await Task.FromResult(Response<string>.Fail("", ResponseStatus.NotFound));
 
+        }
+
+        public async Task<Response<string>> GetUserByUserName(string userName)
+        {
+            _User? user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
+
+            if(user != null)
+                return await Task.FromResult(Response<string>.Success(JsonConvert.SerializeObject(JsonConvert.SerializeObject(user, Formatting.None), Formatting.None), ResponseStatus.Success));
+
+            return await Task.FromResult(Response<string>.Fail("User not found!", ResponseStatus.NotFound));
         }
 
         public async Task<Response<string>> InsertUser(UserInsertDto userInfo)
@@ -143,7 +154,25 @@ namespace Topluluk.Services.User.Services.Implementation
            throw new NotImplementedException();
         }
 
-        public Task<Response<string>> GetUserSuggestions(int limit = 4)
+        public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5)
+        {
+            /* id, image, firstName, lastName, userName, isPrivate(direkt follow edip edememe durumu için gerekli.)
+             */
+
+            _User currentUser = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+            // Sorgulanan kullanıcı bizi bloklamamış olmalı
+            // Bizim sorguladığımız kullanıcıyı bloklamamış olmamız lazım.
+            DatabaseResponse response = await _userRepository.GetAllAsync(limit,0, u => u.IsDeleted == false);
+            //u.BlockedUsers!.Contains("") == false
+            //&& currentUser.BlockedUsers!.Contains(u.Id) == false
+            List<UserSuggestionsDto> userSuggestions = _mapper.Map<List<UserSuggestionsDto>>(response.Data);
+
+            return await Task.FromResult(Response<List<UserSuggestionsDto>>.Success(userSuggestions, ResponseStatus.Success));
+
+        }
+
+        public Task<Response<List<UserSuggestionsDto>>> GetUserSuggestionsMore(int skip = 0, int take = 5)
         {
             throw new NotImplementedException();
         }
@@ -203,6 +232,11 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
+        public Task<Response<string>> ChangeBannerImage(string userId, IFormFile file)
+        {
+            throw new NotImplementedException();
+        }
+
         // For Http calls coming from other services
         public async Task<Response<string>> UpdateCommunities(string userId, string communityId)
         {
@@ -211,6 +245,7 @@ namespace Topluluk.Services.User.Services.Implementation
             _userRepository.Update(user);
             return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
         }
+
     }
 }
 

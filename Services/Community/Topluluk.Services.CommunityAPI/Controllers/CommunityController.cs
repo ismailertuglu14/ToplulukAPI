@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DotNetCore.CAP;
+using Microsoft.AspNetCore.Mvc;
 using Topluluk.Services.CommunityAPI.Model.Dto;
 using Topluluk.Services.CommunityAPI.Model.Entity;
 using Topluluk.Services.CommunityAPI.Services.Interface;
 using Topluluk.Shared.BaseModels;
+using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,7 +17,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
     {
         
         private readonly ICommunityService _communityService;
-        
+
         public CommunityController(ICommunityService communityService)
         {
             _communityService = communityService;
@@ -46,7 +48,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> Create(CommunityCreateDto communityInfo)
+        public async Task<Response<string>> Create([FromForm] CommunityCreateDto communityInfo)
         {
             communityInfo.CreatedById = GetUserId();
             return await _communityService.Create(communityInfo);
@@ -62,6 +64,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo)
         {
+            dtoInfo.AdminId = GetUserId();
             return await _communityService.AssignUserAsAdmin(dtoInfo);
         }
         [HttpPost("[action]")]
@@ -70,6 +73,16 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             dtoInfo.AssignedById = GetUserId();
             return await _communityService.AssignUserAsModerator(dtoInfo);
         }
+
+        // Http call methods
+
+        [NonAction]
+        [CapSubscribe(QueueConstants.COMMUNITY_IMAGE_UPLOADED)]
+        public async Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto)
+        {
+            return await _communityService.UpdateCoverImage(dto);
+        }
     }
+    
 }
 

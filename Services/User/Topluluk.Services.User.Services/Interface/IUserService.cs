@@ -9,10 +9,12 @@ namespace Topluluk.Services.User.Services.Interface
 	public interface IUserService
 	{
 		Task<Response<string>> GetUserById(string id);
+		Task<Response<string>> GetUserByUserName(string userName);
 
-		Task<Response<string>> GetUserSuggestions(int limit = 4);
-
-		Task<Response<string>> InsertUser(UserInsertDto userInfo);
+        Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5);
+		Task<Response<List<UserSuggestionsDto>>> GetUserSuggestionsMore(int skip = 0, int take = 5);
+		
+        Task<Response<string>> InsertUser(UserInsertDto userInfo);
 
 		Task<Response<string>> DeleteUserById(string id);
 
@@ -25,9 +27,10 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<string>> SearchUser(string text, int skip = 0, int take = 5);
 
 		Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files);
+		Task<Response<string>> ChangeBannerImage(string userId, IFormFile file);
 
-		// Http calls services
-		Task<Response<string>> UpdateCommunities(string userId, string communityId);
+        // Http calls services
+        Task<Response<string>> UpdateCommunities(string userId, string communityId);
     }
 }
 

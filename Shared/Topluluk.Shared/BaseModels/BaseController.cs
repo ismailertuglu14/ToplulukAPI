@@ -10,7 +10,8 @@ namespace Topluluk.Shared.BaseModels
 	{
 		public string UserName { get { return GetUserName(); } }
 		public string Token { get { return GetRequestToken(); } }
-
+        public string UserId { get { return GetUserId(); } }
+        
         [NonAction]
         public string GetUserName()
         {

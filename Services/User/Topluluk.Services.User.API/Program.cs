@@ -38,13 +38,14 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddInfrastructure();
 var mapperConfig = new MapperConfiguration(cfg =>
 {
+    cfg.AllowNullCollections = true;
     cfg.AddProfile(new GeneralMapper());
 });
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

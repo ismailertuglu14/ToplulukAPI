@@ -20,6 +20,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> DeclineUserJoinRequest();
 		Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo);
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
+        Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
     }
 }
 
