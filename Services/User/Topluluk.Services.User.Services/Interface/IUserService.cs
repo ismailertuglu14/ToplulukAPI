@@ -24,13 +24,14 @@ namespace Topluluk.Services.User.Services.Interface
 
 		Task<Response<string>> BlockUser(string sourceId, string targetId);
 
-		Task<Response<string>> SearchUser(string text, int skip = 0, int take = 5);
+		Task<Response<List<UserSearchResponseDto>>?> SearchUser(string text, int skip = 0, int take = 5);
 
 		Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files);
-		Task<Response<string>> ChangeBannerImage(string userId, IFormFile file);
+		Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto);
 
         // Http calls services
         Task<Response<string>> UpdateCommunities(string userId, string communityId);
+		Task UserBanngerChanged(string userId, string fileName);
     }
 }
 

@@ -39,6 +39,7 @@ namespace Topluluk.Services.User.Model.Entity
 			Comments = new HashSet<string>();
 			Followings = new HashSet<string>();
 			Followers = new HashSet<string>();
+			BlockedUsers = new HashSet<string>();
         }
 
 	}

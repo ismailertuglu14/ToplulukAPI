@@ -9,6 +9,9 @@ namespace Topluluk.Shared.Constants
 
 		public const string USER_CHANGE_IMAGE = "user.imagechange";
 
+		public const string USER_CHANGE_BANNER = "user.changebanner";
+		public const string USER_DELETE_BANNER = "user.deletebanner";
+        public const string USER_BANNER_CHANGED = "user.bannerchanged";
     }
 }
 

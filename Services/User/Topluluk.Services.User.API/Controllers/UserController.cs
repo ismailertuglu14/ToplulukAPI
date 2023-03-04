@@ -15,8 +15,6 @@ using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Topluluk.Services.User.API.Controllers
 {
     [ApiController]
@@ -67,9 +65,10 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> ChangeBannerImage(IFormFile file)
+        public async Task<Response<string>> ChangeBannerImage([FromForm]UserChangeBannerDto changeBannerDto)
         {
-            return await _userService.ChangeBannerImage(UserId, file);
+            changeBannerDto.UserId = UserId;
+            return await _userService.ChangeBannerImage(changeBannerDto);
         }
 
         [HttpPost("Follow")]
@@ -86,6 +85,18 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.UnFollowUser(userFollowInfo);
         }
 
+        [HttpPost("Block")]
+        public async Task<Response<string>> BlockUser( [FromForm] string targetId )
+        {
+            return await _userService.BlockUser(UserId, targetId);
+        }
+
+        [HttpPost("Search")]
+        public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery]string text)
+        {
+            return await _userService.SearchUser(text);
+        }
+
         // For Http Calls coming from other services
 
         // When the User joins the community
@@ -96,7 +107,6 @@ namespace Topluluk.Services.User.API.Controllers
             Console.WriteLine(userInfo);
             return await _userService.UpdateCommunities(userInfo.UserId, userInfo.CommunityId);
         }
-
 
         // If the community the user is requesting to join is private
         [NonAction]
@@ -114,6 +124,19 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.UpdateCommunities(userInfo.UserId, userInfo.CommunityId);
         }
+
+        [NonAction]
+        [CapSubscribe(QueueConstants.USER_BANNER_CHANGED)]
+        public async Task UserBannerChanged(UserBannerChangedDto userBannerChangedDto)
+        {
+            await _userService.UserBanngerChanged(userBannerChangedDto.UserId, userBannerChangedDto.FileName);
+        }
+
+    }
+    public class UserBannerChangedDto
+    {
+        public string UserId { get; set; }
+        public string FileName { get; set; }
     }
 }
 

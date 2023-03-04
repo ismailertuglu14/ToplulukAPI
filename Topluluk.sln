@@ -75,6 +75,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{788370
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ReportAPI", "Services\Report\Topluluk.Services.ReportAPI\Topluluk.Services.ReportAPI.csproj", "{55E30A70-E610-4191-8062-21DDDB982BFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.MailAPI", "Services\Mail\Topluluk.Services.MailAPI\Topluluk.Services.MailAPI.csproj", "{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +179,10 @@ Global
 		{55E30A70-E610-4191-8062-21DDDB982BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55E30A70-E610-4191-8062-21DDDB982BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55E30A70-E610-4191-8062-21DDDB982BFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -218,5 +224,6 @@ Global
 		{04401C3E-C154-40C4-A9DB-C7C755AE74E4} = {D6BD2EB3-95DB-490E-A40F-7BE163FF0666}
 		{78837069-B2E5-40CF-A97C-42703931A8BF} = {B2E286F5-5793-4097-BB38-F9E049159374}
 		{55E30A70-E610-4191-8062-21DDDB982BFB} = {78837069-B2E5-40CF-A97C-42703931A8BF}
+		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D} = {B4A0D484-1A80-4D49-9C1F-7E23DA5675F0}
 	EndGlobalSection
 EndGlobal

@@ -4,11 +4,14 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using AutoMapper;
+using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Model.Dto;
+using Topluluk.Services.User.Model.Entity;
 using Topluluk.Services.User.Services.Interface;
+using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
@@ -19,14 +22,16 @@ namespace Topluluk.Services.User.Services.Implementation
 	public class UserService : IUserService
 	{
         private readonly IUserRepository _userRepository;
+        private readonly ICapPublisher _capPublisher;
         private readonly IMapper _mapper;
 
-		public UserService(IUserRepository userRepository, IMapper mapper)
+		public UserService(IUserRepository userRepository,ICapPublisher capPublisher, IMapper mapper)
 		{
             _userRepository = userRepository;
+            _capPublisher = capPublisher;
             _mapper = mapper;
 		}
-
+        // We dont use it
         public async Task<Response<string>> GetUserById(string id)
         {
             DatabaseResponse response = _userRepository.GetById(id);
@@ -39,6 +44,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
         }
 
+        // Use this function instead of GetUserById
         public async Task<Response<string>> GetUserByUserName(string userName)
         {
             _User? user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
@@ -149,9 +155,31 @@ namespace Topluluk.Services.User.Services.Implementation
             // Kullanıcı blocklanırken source ve target userlardaki takip ve takipçi listesinden
             // birbirlerini temizlemeliyiz.
             // Sadece sourceUser' ın blockedAccount listesine targetUser' ın Id bilgisi verilmeli.
-           // _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userInfo.SourceId);
-           // _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userInfo.TargetId);
-           throw new NotImplementedException();
+            _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == sourceId);
+            _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == targetId);
+            if (sourceUser.BlockedUsers == null)
+                sourceUser.BlockedUsers = new List<string>();
+
+            if (sourceUser.BlockedUsers!.Contains(targetId))
+                return await Task.FromResult(Response<string>.Success("This user already blocked.", ResponseStatus.Success));
+
+            sourceUser.BlockedUsers!.Add(targetId);
+
+            if (sourceUser.Followings!.Contains(targetId))
+            {
+                sourceUser.Followings.Remove(targetId);
+                targetUser.Followers!.Remove(sourceId);
+            }
+
+            if (sourceUser.Followers!.Contains(targetId))
+            {
+                sourceUser.Followers.Remove(targetId);
+                targetUser.Followings!.Remove(sourceId);
+            }
+
+            // todo Update both users
+            _userRepository.BulkUpdate(new() { sourceUser,targetUser });
+            return await Task.FromResult(Response<string>.Success("User blocked successfully.", ResponseStatus.Success));
         }
 
         public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5)
@@ -177,9 +205,16 @@ namespace Topluluk.Services.User.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<Response<string>> SearchUser(string text, int skip = 0, int take = 5)
+        // Need best practice get user algorithm
+        public async Task<Response<List<UserSearchResponseDto>>?> SearchUser(string text, int skip = 0, int take = 5)
         {
-            throw new NotImplementedException();
+            if (text == null)
+                return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(null, ResponseStatus.Success));
+
+            DatabaseResponse response = await _userRepository.GetAllAsync(take,skip, u => u.UserName.Contains(text) || u.FirstName.Contains(text) || u.LastName.Contains(text));
+
+            List<UserSearchResponseDto> users = _mapper.Map<List<_User>, List<UserSearchResponseDto>>(response.Data);
+            return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(users, ResponseStatus.Success));
         }
 
         public async Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files)
@@ -232,12 +267,24 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
-        public Task<Response<string>> ChangeBannerImage(string userId, IFormFile file)
+        public async Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto)
         {
-            throw new NotImplementedException();
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == changeBannerDto.UserId);
+            using var stream = new MemoryStream();
+            await changeBannerDto.File.CopyToAsync(stream);
+            var imageData = stream.ToArray();
+            if (user.BannerImage != null)
+            {
+                await _capPublisher.PublishAsync<UserChangeBannerDto>(QueueConstants.USER_DELETE_BANNER, new(){ UserId = changeBannerDto.UserId, File = changeBannerDto.File });
+            }
+
+            await _capPublisher.PublishAsync(QueueConstants.USER_CHANGE_BANNER, new { UserId = changeBannerDto.UserId, FileName = changeBannerDto.File.FileName, BannerImage = imageData });
+
+            return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
         }
 
         // For Http calls coming from other services
+
         public async Task<Response<string>> UpdateCommunities(string userId, string communityId)
         {
             _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
@@ -246,6 +293,14 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
         }
 
+        public async Task UserBanngerChanged(string userId, string fileName)
+        {
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+            user.BannerImage = fileName;
+            _userRepository.Update(user);
+        }
     }
+    
 }
 
