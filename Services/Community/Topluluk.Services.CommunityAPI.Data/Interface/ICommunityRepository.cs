@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using DBHelper.Repository;
 using DBHelper.Repository.Mongo;
 using Topluluk.Services.CommunityAPI.Model.Entity;
@@ -10,8 +11,7 @@ namespace Topluluk.Services.CommunityAPI.Data.Interface
 	{
 		Task<DatabaseResponse> AddItemToArrayProperty(string id, string arrayName, object item);
 		Task<DatabaseResponse> RemoveItemFromArrayProperty<T>(string id, string arrayName, string addId);
-
-
+		Task<Community> GetFirstCommunity(Expression<Func<Community, bool>> predicate);
     }
 }
 

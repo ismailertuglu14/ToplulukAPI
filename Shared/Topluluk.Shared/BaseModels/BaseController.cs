@@ -13,18 +13,18 @@ namespace Topluluk.Shared.BaseModels
         public string UserId { get { return GetUserId(); } }
         
         [NonAction]
-        public string GetUserName()
+        private string GetUserName()
         {
             return TokenHelper.GetUserNameByToken(Request);
         }
 
         [NonAction]
-        public string GetUserId()
+        private string GetUserId()
         {
             return TokenHelper.GetUserIdByToken(Request);
         }
         [NonAction]
-        public string GetRequestToken()
+        private string GetRequestToken()
         {
             return TokenHelper.GetToken(Request);
         }

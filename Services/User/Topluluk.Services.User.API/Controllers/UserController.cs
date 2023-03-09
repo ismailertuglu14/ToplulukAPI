@@ -81,7 +81,7 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpPost("UnFollow")]
         public async Task<Response<string>> UnFollowUser([FromBody] UserFollowDto userFollowInfo)
         {
-            userFollowInfo.SourceId = GetUserId();
+            userFollowInfo.SourceId = UserId;
             return await _userService.UnFollowUser(userFollowInfo);
         }
 
@@ -94,7 +94,7 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpPost("Search")]
         public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery]string text)
         {
-            return await _userService.SearchUser(text);
+            return await _userService.SearchUser(text,UserId);
         }
 
         // For Http Calls coming from other services
@@ -130,6 +130,12 @@ namespace Topluluk.Services.User.API.Controllers
         public async Task UserBannerChanged(UserBannerChangedDto userBannerChangedDto)
         {
             await _userService.UserBanngerChanged(userBannerChangedDto.UserId, userBannerChangedDto.FileName);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<Response<string>> PostCreated( [FromBody] PostCreatedDto dto)
+        {
+            return await _userService.PostCreated(dto.UserId,dto.PostId);
         }
 
     }

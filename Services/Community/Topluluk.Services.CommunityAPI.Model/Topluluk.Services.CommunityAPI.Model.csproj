@@ -11,12 +11,14 @@
     <None Remove="Entity\" />
     <None Remove="Mapper\" />
     <None Remove="Validators\" />
+    <None Remove="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dto\" />
     <Folder Include="Entity\" />
     <Folder Include="Mapper\" />
     <Folder Include="Validators\" />
+    <Folder Include="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />

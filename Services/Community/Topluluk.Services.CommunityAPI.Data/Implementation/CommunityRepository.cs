@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Net;
 using DBHelper.Connection;
 using DBHelper.Repository.Mongo;
@@ -44,6 +45,19 @@ namespace Topluluk.Services.CommunityAPI.Data.Implementation
         public Task<DatabaseResponse> RemoveItemFromArrayProperty<T>(string id, string arrayName, string addId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Community> GetFirstCommunity(Expression<Func<Community, bool>> predicate)
+        {
+
+            // GetFirstAsync(c => c.Id == communityId && c.IsVisible == true && c.IsRestricted == false);
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+
+            var defaultFilter = Builders<Community>.Filter.Eq(c => c.IsDeleted, false);
+            var finalFilter = Builders<Community>.Filter.And(defaultFilter, predicate);
+
+            return await database!.GetCollection<Community>(collectionName).Find(finalFilter).FirstOrDefaultAsync();
         }
     }
 }

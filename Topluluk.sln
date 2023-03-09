@@ -77,6 +77,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ReportAPI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.MailAPI", "Services\Mail\Topluluk.Services.MailAPI\Topluluk.Services.MailAPI.csproj", "{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI", "Services\Post\Topluluk.Services.PostAPI\Topluluk.Services.PostAPI.csproj", "{770279CA-C088-4EA9-8863-AE8A68B6EF32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Data", "Services\Post\Topluluk.Services.PostAPI.Data\Topluluk.Services.PostAPI.Data.csproj", "{E3087A54-2D00-4F93-8E41-8DC39EF43568}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Model", "Services\Post\Topluluk.Services.PostAPI.Model\Topluluk.Services.PostAPI.Model.csproj", "{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Services", "Services\Post\Topluluk.Services.PostAPI.Services\Topluluk.Services.PostAPI.Services.csproj", "{9F7A90A8-0636-4884-B841-1139F8158C5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,6 +191,22 @@ Global
 		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{770279CA-C088-4EA9-8863-AE8A68B6EF32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770279CA-C088-4EA9-8863-AE8A68B6EF32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770279CA-C088-4EA9-8863-AE8A68B6EF32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770279CA-C088-4EA9-8863-AE8A68B6EF32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3087A54-2D00-4F93-8E41-8DC39EF43568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3087A54-2D00-4F93-8E41-8DC39EF43568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3087A54-2D00-4F93-8E41-8DC39EF43568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3087A54-2D00-4F93-8E41-8DC39EF43568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -225,5 +249,9 @@ Global
 		{78837069-B2E5-40CF-A97C-42703931A8BF} = {B2E286F5-5793-4097-BB38-F9E049159374}
 		{55E30A70-E610-4191-8062-21DDDB982BFB} = {78837069-B2E5-40CF-A97C-42703931A8BF}
 		{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D} = {B4A0D484-1A80-4D49-9C1F-7E23DA5675F0}
+		{770279CA-C088-4EA9-8863-AE8A68B6EF32} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
+		{E3087A54-2D00-4F93-8E41-8DC39EF43568} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
+		{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
+		{9F7A90A8-0636-4884-B841-1139F8158C5B} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
 	EndGlobalSection
 EndGlobal

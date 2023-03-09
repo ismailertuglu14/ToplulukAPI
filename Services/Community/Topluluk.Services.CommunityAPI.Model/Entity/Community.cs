@@ -10,6 +10,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 		public string? AdminId { get; set; }
 		public ICollection<Moderator> ModeratorIds { get; set; }
 		public string Title { get; set; }
+		public string Slug { get; set; }
 		public string Description { get; set; }
 		public string? CoverImage { get; set; }
 		public string? BannerImage { get; set; }
@@ -29,6 +30,8 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 
 		public ICollection<string> BlockedUsers { get; set; }
 
+		public ICollection<string> Posts { get; set; }
+
 		public bool HasPrice { get; set; } = false;
 		public int Price { get; set; } = 0;
 
@@ -39,6 +42,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 			Participiants = new HashSet<string>();
 			Cities = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();
+			Posts = new HashSet<string>();
 		}
 	}
 	public class Moderator
