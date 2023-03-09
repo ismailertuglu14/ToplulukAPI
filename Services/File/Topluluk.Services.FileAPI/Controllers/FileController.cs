@@ -68,6 +68,19 @@ namespace Topluluk.Services.FileAPI.Controllers
         {
             return new();
         }
+
+        [NonAction]
+        [CapSubscribe(QueueConstants.USER_CHANGE_BANNER)]
+        public async Task UserChangeBanner(UserChangeBannerDto dto)
+        {
+            using var stream = new MemoryStream(dto.BannerImage);
+            var formFile = new FormFile(stream, 0, stream.Length, null, dto.FileName);
+            var files = new FormFileCollection();
+            files.Add(formFile);
+            var result = await _storageService.UploadAsync("user-banner", files);
+            var imageUrl = result[0];
+            await _publisher.PublishAsync<UserBannerChangedDto>(QueueConstants.USER_BANNER_CHANGED, new() { UserId = dto.UserId, FileName = imageUrl });
+        }
     }
 
     public class CommunityImageUploadDto
@@ -75,6 +88,17 @@ namespace Topluluk.Services.FileAPI.Controllers
         public string CommunityId { get; set; }
         public string FileName { get; set; }
         public byte[]? CoverImage { get; set; }
+    }
+    public class UserChangeBannerDto
+    {
+        public string UserId { get; set; }
+        public string FileName { get; set; }
+        public byte[]? BannerImage { get; set; }
+    }
+    public class UserBannerChangedDto
+    {
+        public string UserId { get; set; }
+        public string FileName { get; set; }
     }
 }
 

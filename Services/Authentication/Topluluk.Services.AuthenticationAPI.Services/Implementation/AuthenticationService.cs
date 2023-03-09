@@ -56,7 +56,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 // User found but password wrong.
                 else
                 {
-                    if(user.AccessFailedCount < 5)
+                    if(user.AccessFailedCount < 15)
                     {
                         user.AccessFailedCount += 1;
                     }

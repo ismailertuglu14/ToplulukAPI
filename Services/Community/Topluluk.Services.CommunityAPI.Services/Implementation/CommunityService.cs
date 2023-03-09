@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using AutoMapper;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using Topluluk.Services.CommunityAPI.Data.Interface;
 using Topluluk.Services.CommunityAPI.Model.Dto;
+using Topluluk.Services.CommunityAPI.Model.Dto.Http;
 using Topluluk.Services.CommunityAPI.Model.Entity;
 using Topluluk.Services.CommunityAPI.Services.Interface;
 using Topluluk.Shared.Constants;
@@ -54,9 +57,34 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<List<object>>.Fail("User-Agent cant null", ResponseStatus.Success));
         }
 
+
+        public async Task<Response<string>> GetCommunityById(string userId, string communityId)
+        {
+            Community? community = await _communityRepository.GetFirstCommunity(c => c.Id == communityId && c.IsVisible == true && c.IsRestricted == false);
+            CommunityGetDto _community = new();
+            CommunityGetAdminDto adminDto = new();
+
+            if (community == null)
+            {
+                return await Task.FromResult(Response<string>.Fail("",ResponseStatus.NotFound));
+            }
+
+            if (community.AdminId == userId)
+            {
+                _community.IsOwner = true;
+            }
+
+            else if (community.ModeratorIds.Any(m => m.UserId == userId))
+            {
+
+            }
+
+            return await Task.FromResult(Response<string>.Success(JsonConvert.SerializeObject(community), ResponseStatus.Success));
+        }
+
         public async Task<Response<string>> Join(CommunityJoinDto communityInfo)
         {
-            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityInfo.CommunityId);
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityInfo.CommunityId );
 
             if (community.Participiants.Contains(communityInfo.UserId))
             {
@@ -98,16 +126,39 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<string>> Create(CommunityCreateDto communityInfo)
         {
+
+            string slug = StringToSlugConvert(communityInfo.Title);
+            bool isSluqUnique = false;
+            byte index = 0;
+            Community? existingCommunity = await _communityRepository.GetFirstAsync(c => c.Slug == slug);
+            if (existingCommunity != null)
+            {
+                // If the slug already exists in the database, add a number to the end of the slug and save the new entity
+                int number = 1;
+                string newSlug = $"{slug}-{number}";
+                while (await _communityRepository.GetFirstAsync(c=> c.Slug == newSlug) != null)
+                {
+                    number++;
+                    newSlug = $"{slug}-{number}";
+                }
+                slug = newSlug;
+            }
+
             Community community = _mapper.Map<Community>(communityInfo);
+            community.Slug = slug;
             community.AdminId = communityInfo.CreatedById;
             community.Participiants.Add(communityInfo.CreatedById!);
             DatabaseResponse response = await _communityRepository.InsertAsync(community);
 
-            using var stream = new MemoryStream();
-            await communityInfo.CoverImage.CopyToAsync(stream);
-            var imageData = stream.ToArray();
+            if (communityInfo.CoverImage != null)
+            {
+                using var stream = new MemoryStream();
+                await communityInfo.CoverImage.CopyToAsync(stream);
+                var imageData = stream.ToArray();
 
-            await _capPublisher.PublishAsync(QueueConstants.COMMUNITY_IMAGE_UPLOAD, new { CommunityId = response.Data, CoverImage = imageData , FileName = communityInfo.CoverImage.FileName });
+                await _capPublisher.PublishAsync(QueueConstants.COMMUNITY_IMAGE_UPLOAD, new { CommunityId = response.Data, CoverImage = imageData , FileName = communityInfo.CoverImage.FileName });
+            }
+
             await _capPublisher.PublishAsync<CommunityUserJoinDto>(QueueConstants.COMMUNITY_CREATE_USER_UPDATE, new() { UserId = communityInfo.CreatedById, CommunityId = response.Data });
             //var httpResponse = await HttpRequestHelper.handle(new{ UserId = communityInfo.CreatedById, CommunityId = response.Data }, "https://localhost:7202/user/updatecommunities", HttpType.POST);
             return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
@@ -183,6 +234,46 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             Console.WriteLine($"ismail DEBUG: {dto.CoverImage}");
             _communityRepository.Update(community);
             return await Task.FromResult(Response<string>.Success($"Success ${community.CoverImage}", ResponseStatus.Success));
+
+        }
+
+        private string StringToSlugConvert(string phrase)
+        {
+            char[] turkishChars = new char[] { 'ç', 'ğ', 'ı', 'i', 'ö', 'ş', 'ü' };
+            char[] englishChars = new char[] { 'c', 'g', 'i', 'i', 'o', 's', 'u' };
+
+            string str = phrase.ToLower();
+
+            for (int i = 0; i < turkishChars.Length; i++)
+            {
+                str = str.Replace(turkishChars[i], englishChars[i]);
+            }
+
+            str = Regex.Replace(str, @"\s+", " ").Trim(); // convert multiple spaces into one space  
+            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim(); // cut and trim it  
+            str = Regex.Replace(str, @"\s", "-"); // hyphens  
+
+            return str;
+        }
+
+        public Task<Response<string>> DeletePermanently(string ownerId, string communityId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Response<List<string>>> GetParticipiants(string id)
+        {
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == id);
+            return await Task.FromResult(Response<List<string>>.Success(community.Participiants.ToList(), ResponseStatus.Success));
+        }
+
+        public async Task<Response<string>> PostCreated(PostCreatedCommunityDto dto)
+        {
+            var community = await _communityRepository.GetFirstAsync(c => c.Id == dto.CommunityId);
+            // post Id
+            community.Posts.Add(dto.Id);
+            _communityRepository.Update(community);
+            return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
 
         }
     }

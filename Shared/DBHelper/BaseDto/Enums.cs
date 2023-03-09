@@ -5,8 +5,7 @@ namespace DBHelper.BaseDto
     {
         MSSQL = 0,
         REDIS = 1,
-        MongoDB = 2,
-        
+        MongoDB = 2,      
     }
 }
 

@@ -25,5 +25,6 @@
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     <PackageReference Include="DotNetCore.CAP" Version="6.0.1" />
+    <PackageReference Include="RestSharp" Version="108.0.3" />
   </ItemGroup>
 </Project>
