@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Model.Dto;
+using Topluluk.Services.User.Model.Dto.Http;
 using Topluluk.Services.User.Model.Entity;
 using Topluluk.Services.User.Services.Interface;
 using Topluluk.Shared.Constants;
@@ -285,7 +286,22 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
         }
 
-        // For Http calls coming from other services
+
+
+
+
+
+
+
+
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\
+
+
+
+
+
+
+
 
         public async Task<Response<string>> UpdateCommunities(string userId, string communityId)
         {
@@ -306,6 +322,14 @@ namespace Topluluk.Services.User.Services.Implementation
         {
             var user = await _userRepository.GetFirstAsync(u => u.Id == userId);
             user.Posts!.Add(id);
+            _userRepository.Update(user);
+            return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
+        }
+
+        public async Task<Response<string>> DeletePost(PostDeleteDto dto)
+        {
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == dto.UserId);
+            user.Posts!.Remove(dto.PostId);
             _userRepository.Update(user);
             return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
         }

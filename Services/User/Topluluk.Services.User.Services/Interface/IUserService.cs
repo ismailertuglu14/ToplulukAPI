@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Topluluk.Services.User.Model.Dto;
+using Topluluk.Services.User.Model.Dto.Http;
 using Topluluk.Shared.Dtos;
 
 namespace Topluluk.Services.User.Services.Interface
@@ -33,6 +34,8 @@ namespace Topluluk.Services.User.Services.Interface
         Task<Response<string>> UpdateCommunities(string userId, string communityId);
 		Task UserBanngerChanged(string userId, string fileName);
 		Task<Response<string>> PostCreated(string userId,string id);
+		Task<Response<string>> DeletePost(PostDeleteDto dto);
     }
+
 }
 

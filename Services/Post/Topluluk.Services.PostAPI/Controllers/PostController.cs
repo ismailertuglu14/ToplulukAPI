@@ -34,6 +34,18 @@ namespace Topluluk.Services.PostAPI.Controllers
             return await _postService.Create(postDto);
         }
 
+        [HttpPost("[action]")]
+        public async Task<Response<string>> Delete(PostDeleteDto postDto)
+        {
+            postDto.UserId = UserId;
+            return await _postService.Delete(postDto);
+        }
+        [HttpPost("[action]")]
+        public async Task<Response<string>> Comment(CommentCreateDto commentDto)
+        {
+            commentDto.UserId = UserId;
+            return await _postService.Comment(commentDto);
+        }
     }
 }
 

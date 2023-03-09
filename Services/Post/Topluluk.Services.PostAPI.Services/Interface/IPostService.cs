@@ -7,21 +7,23 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 {
 	public interface IPostService
 	{
-		Task<Response<string>> Create(CreatePostDto postDto);
+
+        Task<Response<string>> GetPostById(string postId, bool isDeleted = false);
+        Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10);
+
+        Task<Response<string>> Create(CreatePostDto postDto);
 
 		Task<Response<string>> Update();
 
-        Task<Response<string>> Delete(string postId);
+        Task<Response<string>> Delete(PostDeleteDto postDto);
 
 		Task<Response<string>> Interaction(string postId, InteractionType interactionType);
 
-		Task<Response<string>> Comment(string userId, string postId, string comment);
-		// Her kullanıcı kendi yorumunu silebilir.
-		// Adminler herkesin yorumunu silebilir.
-		Task<Response<string>> DeleteComment(string userId, string commentId);
+		Task<Response<string>> Comment(CommentCreateDto commentDto);
+        // Her kullanıcı kendi yorumunu silebilir.
+        // Adminler herkesin yorumunu silebilir.
+        Task<Response<string>> DeleteComment(string userId, string commentId);
 		Task<Response<string>> UpdateComment(string userId, string commentId, string newComment);
-
-        
 
     }
 }

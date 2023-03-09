@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Topluluk.Services.User.Model.Dto;
+using Topluluk.Services.User.Model.Dto.Http;
 using Topluluk.Services.User.Services.Interface;
 using Topluluk.Shared.BaseModels;
 using Topluluk.Shared.Constants;
@@ -138,6 +139,11 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.PostCreated(dto.UserId,dto.PostId);
         }
 
+        [HttpPost("DeletePost")]
+        public async Task<Response<string>> DeletePost( PostDeleteDto dto)
+        {
+            return await _userService.DeletePost(dto);
+        }
     }
     public class UserBannerChangedDto
     {

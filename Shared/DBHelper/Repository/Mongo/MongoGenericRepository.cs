@@ -310,10 +310,10 @@ namespace DBHelper.Repository.Mongo
 
         public DatabaseResponse Insert(T entity)
         {
-            entity.CreatedAt = DateTime.Now;
             var database = GetConnection();
             var collectionName = string.Format("{0}Collection", typeof(T).Name);
 
+            entity.CreatedAt = DateTime.Now;
 
             database.GetCollection<T>(collectionName).InsertOne(entity);
 
@@ -326,9 +326,10 @@ namespace DBHelper.Repository.Mongo
 
         public async Task<DatabaseResponse> InsertAsync(T entity)
         {
-            entity.CreatedAt = DateTime.Now;
             var database = GetConnection();
             var collectionName = string.Format("{0}Collection", typeof(T).Name);
+
+            entity.CreatedAt = DateTime.Now;
 
             await database.GetCollection<T>(collectionName).InsertOneAsync(entity);
 

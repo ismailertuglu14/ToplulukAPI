@@ -73,7 +73,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 
             }
 
-            return await Task.FromResult(Response<TokenDto>.Fail("Username or password wrong!", ResponseStatus.Success));
+            return await Task.FromResult(Response<TokenDto>.Fail("Username or password wrong!", ResponseStatus.NotAuthenticated));
         }
 
         public async Task<Response<string>> SignUp(CreateUserDto userDto)

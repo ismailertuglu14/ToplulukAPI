@@ -31,9 +31,21 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             _client = new RestClient();
         }
 
-        public Task<Response<string>> Comment(string userId, string postId, string comment)
+        public async Task<Response<string>> Comment(CommentCreateDto commentDto)
         {
-            throw new NotImplementedException();
+            Comment comment = _mapper.Map<Comment>(commentDto);
+
+            Post? post = await _postRepository.GetFirstAsync(p => p.Id == commentDto.PostId);
+
+            if (post != null)
+            {
+                post.Comments.Add(comment);
+                _postRepository.Update(post);
+
+                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+            }
+
+            return await Task.FromResult(Response<string>.Fail("Post not found", Shared.Enums.ResponseStatus.NotFound));
         }
 
         public async Task<Response<string>> Create(CreatePostDto postDto)
@@ -96,12 +108,49 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public Task<Response<string>> Delete(string postId)
+        public async Task<Response<string>> Delete(PostDeleteDto postDto)
+        {
+            //Servislerden birisi false dönerse post silinmesini iptal etmek adına yeniden postu yazıcaz.
+            bool cSuccess = false;
+            bool uSuccess = false;
+
+            Post post = await _postRepository.GetFirstAsync(p => p.Id == postDto.PostId);
+
+            _postRepository.Delete(post.Id);
+
+            // Topluluğa aitse topluluktan kaldır
+            if (post.CommunityId != null)
+            {
+                // Community servisine post silinme isteği
+            //    var communityDeleteRequest = new RestRequest("https://").AddBody();
+              //  var communityDeleteResponse = await _client.ExecutePostAsync(communityDeleteRequest);
+            }
+
+            // User servisine post silinme isteği
+
+            PostDeleteDto postDeleteDto = new() { PostId = postDto.PostId, UserId = postDto.UserId };
+            var userDeleteRequest = new RestRequest("https://localhost:7202/User/DeletePost").AddBody(postDeleteDto);
+            var userDeleteResponse = await _client.ExecutePostAsync(userDeleteRequest);
+
+            if (userDeleteResponse.IsSuccessStatusCode == true)
+            {
+                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+            }
+
+            return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.InitialError));
+        }
+
+        public Task<Response<string>> DeleteComment(string userId, string commentId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Response<string>> DeleteComment(string userId, string commentId)
+        public Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<string>> GetPostById(string postId, bool isDeleted = false)
         {
             throw new NotImplementedException();
         }
