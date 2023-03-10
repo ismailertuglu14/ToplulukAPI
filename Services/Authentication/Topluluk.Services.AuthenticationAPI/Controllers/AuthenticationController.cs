@@ -34,6 +34,8 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         {
             return await _authenticationService.SignUp(userDto);
         }
+
+
     }
 }
 

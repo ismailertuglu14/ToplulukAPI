@@ -209,6 +209,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "RestSharp": {
+              "target": "Package",
+              "version": "[108.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -26,6 +26,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
         Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
 		//http
 		Task<Response<string>> PostCreated(PostCreatedCommunityDto dto);
+		Task<Response<string>> GetCommunityTitle(string id);
     }
 }
 

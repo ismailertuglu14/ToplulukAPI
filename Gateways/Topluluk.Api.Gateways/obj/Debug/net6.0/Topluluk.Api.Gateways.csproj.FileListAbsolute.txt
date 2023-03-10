@@ -30,3 +30,12 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/Topluluk.Api.Gateways.pdb
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/Topluluk.Api.Gateways.genruntimeconfig.cache
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/ref/Topluluk.Api.Gateways.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/ocelot.json
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/FluentValidation.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.MiddlewareAnalysis.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.Extensions.DiagnosticAdapter.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Ocelot.dll

@@ -27,6 +27,7 @@ namespace Topluluk.Services.PostAPI.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
             // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostCommentRepository, PostCommentRepository>();
             // services.AddTransient<IErrorRepository, ErrorRepository>();
             // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
         }

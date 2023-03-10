@@ -41,16 +41,7 @@ namespace Topluluk.Services.AuthenticationAPI.Model.Validators
                 .MaximumLength(64)
                     .WithMessage("Password must be between length min 6 and max 64 length");
 
-            RuleFor(u => u.PasswordConfirm)
-              .NotEmpty()
-              .NotNull()
-                  .WithMessage("Passwords does not match")
-              .MinimumLength(6)
-              .MaximumLength(64)
-                  .WithMessage("Password must be between length min 6 and max 64 length")
-              .Equal(u => u.Password)
-              .When(u => !String.IsNullOrWhiteSpace(u.Password));
-
+         
             RuleFor(u => u.Email)
                 .NotEmpty()
                 .NotNull()

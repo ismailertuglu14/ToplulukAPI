@@ -30,7 +30,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 
 		public ICollection<string> BlockedUsers { get; set; }
 
-		public ICollection<string> Posts { get; set; }
+		//public ICollection<string> Posts { get; set; }
 
 		public bool HasPrice { get; set; } = false;
 		public int Price { get; set; } = 0;
@@ -42,7 +42,6 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 			Participiants = new HashSet<string>();
 			Cities = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();
-			Posts = new HashSet<string>();
 		}
 	}
 	public class Moderator

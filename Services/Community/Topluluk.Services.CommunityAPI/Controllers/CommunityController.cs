@@ -105,6 +105,12 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.PostCreated(dtoInfo);
         }
+
+        [HttpGet("getCommunityTitle")]
+        public async Task<Response<string>> GetCommunityTitle(string id)
+        {
+            return await _communityService.GetCommunityTitle(id);
+        }
     }
     
 }

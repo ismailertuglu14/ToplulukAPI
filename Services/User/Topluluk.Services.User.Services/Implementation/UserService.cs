@@ -321,7 +321,7 @@ namespace Topluluk.Services.User.Services.Implementation
         public async Task<Response<string>> PostCreated(string userId,string id)
         {
             var user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-            user.Posts!.Add(id);
+            //user.Posts!.Add(id);
             _userRepository.Update(user);
             return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
         }
@@ -329,10 +329,18 @@ namespace Topluluk.Services.User.Services.Implementation
         public async Task<Response<string>> DeletePost(PostDeleteDto dto)
         {
             _User user = await _userRepository.GetFirstAsync(u => u.Id == dto.UserId);
-            user.Posts!.Remove(dto.PostId);
+          //  user.Posts!.Remove(dto.PostId);
             _userRepository.Update(user);
             return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
         }
+
+        public async Task<Response<string>> GetUserByToken(string userId)
+        {
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+            throw new NotImplementedException();
+        }
+
     }
     
 }

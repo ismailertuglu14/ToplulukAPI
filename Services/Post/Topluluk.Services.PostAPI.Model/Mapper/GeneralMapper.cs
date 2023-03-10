@@ -10,7 +10,7 @@ namespace Topluluk.Services.PostAPI.Model.Mapper
 		public GeneralMapper()
 		{
 			CreateMap<CreatePostDto, Post>();
-			CreateMap<CommentCreateDto, Comment>();
+			CreateMap<CommentCreateDto, PostComment>();
 		}
 	}
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using RestSharp;
 using Topluluk.Services.AuthenticationAPI.Data.Implementation;
 using Topluluk.Services.AuthenticationAPI.Data.Interface;
 using Topluluk.Services.AuthenticationAPI.Model.Dto;
@@ -16,6 +17,7 @@ using Topluluk.Shared;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
+using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 {
@@ -25,7 +27,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-		public AuthenticationService(IAuthenticationRepository repository, IMapper mapper, IConfiguration configuration)
+        public AuthenticationService(IAuthenticationRepository repository, IMapper mapper, IConfiguration configuration)
 		{
             _repository = repository;
             _mapper = mapper;
@@ -102,7 +104,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             return await Task.FromResult(Response<string>.Fail(checkUniqueResult.Errors,ResponseStatus.InitialError));
 
         }
-        
+
         // UserName and Email must be unique
         private async Task<Response<string>> CheckUserNameAndEmailUnique(string userName, string email)
         {

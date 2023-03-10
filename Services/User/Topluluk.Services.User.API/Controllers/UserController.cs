@@ -98,7 +98,18 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.SearchUser(text,UserId);
         }
 
-        // For Http Calls coming from other services
+        [HttpGet("[action]")]
+        public async Task<Response<string>> GetUserByToken()
+        {
+            return await _userService.GetUserByToken(this.UserId);
+        }
+
+
+
+
+        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
 
         // When the User joins the community
         [NonAction]

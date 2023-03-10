@@ -14,11 +14,11 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public List<InteractionType> Interactions { get; set; }
 		public int SharedCount { get; set; }
 		public int CommentsCount { get; set; }
-		public List<Comment> Comments { get; set; }
+		public List<PostComment> Comments { get; set; }
 
 		public GetPostDto()
 		{
-			Comments = new List<Comment>();
+			Comments = new List<PostComment>();
 			Interactions = new List<InteractionType>();
 		}
 	}

@@ -26,8 +26,8 @@ namespace Topluluk.Services.User.Model.Entity
 
 		public ICollection<string>? Communities { get; set; }
 		public ICollection<string>? CommunityRequests { get; set; }
-		public ICollection<string>? Posts { get; set; }
-		public ICollection<string>? Comments { get; set; }
+		//public ICollection<string>? Comments { get; set; }
+		//public ICollection<string>? Posts { get; set; }
 
 		public User()
 		{
@@ -35,8 +35,6 @@ namespace Topluluk.Services.User.Model.Entity
 			CommunityRequests = new HashSet<string>();
 			IncomingFollowRequests = new HashSet<string>();
 			OutgoingFollowRequests = new HashSet<string>();
-			Posts = new HashSet<string>();
-			Comments = new HashSet<string>();
 			Followings = new HashSet<string>();
 			Followers = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();

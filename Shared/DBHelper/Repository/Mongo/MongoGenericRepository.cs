@@ -104,7 +104,10 @@ namespace DBHelper.Repository.Mongo
 
         public void DeleteCompletely(string id)
         {
-            throw new NotImplementedException();
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+
+            database.GetCollection<T>(collectionName).DeleteOne(x => x.Id == id);
         }
 
         public void ExecuteScript(string script)

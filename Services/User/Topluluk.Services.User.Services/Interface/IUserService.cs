@@ -11,7 +11,7 @@ namespace Topluluk.Services.User.Services.Interface
 	{
 		Task<Response<string>> GetUserById(string id);
 		Task<Response<string>> GetUserByUserName(string userName);
-
+		Task<Response<string>> GetUserByToken(string userId);
         Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5);
 		Task<Response<List<UserSuggestionsDto>>> GetUserSuggestionsMore(int skip = 0, int take = 5);
 		
@@ -35,6 +35,7 @@ namespace Topluluk.Services.User.Services.Interface
 		Task UserBanngerChanged(string userId, string fileName);
 		Task<Response<string>> PostCreated(string userId,string id);
 		Task<Response<string>> DeletePost(PostDeleteDto dto);
+		Task<Response<string>> GetUserInfoForPost(string id);
     }
 
 }

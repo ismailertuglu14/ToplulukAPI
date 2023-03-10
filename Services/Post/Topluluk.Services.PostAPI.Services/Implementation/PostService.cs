@@ -21,6 +21,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 	{
 
         private readonly IPostRepository _postRepository;
+        private readonly IPostCommentRepository _commentRepository;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
 
@@ -33,15 +34,12 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
         public async Task<Response<string>> Comment(CommentCreateDto commentDto)
         {
-            Comment comment = _mapper.Map<Comment>(commentDto);
+            PostComment comment = _mapper.Map<PostComment>(commentDto);
 
             Post? post = await _postRepository.GetFirstAsync(p => p.Id == commentDto.PostId);
 
             if (post != null)
             {
-                post.Comments.Add(comment);
-                _postRepository.Update(post);
-
                 return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
             }
 
@@ -51,8 +49,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         public async Task<Response<string>> Create(CreatePostDto postDto)
         {
             Post post = _mapper.Map<Post>(postDto);
-            DatabaseResponse response = await _postRepository.InsertAsync(post);
 
+            DatabaseResponse response = await _postRepository.InsertAsync(post);
 
             // Post topluluk da paylaşılacak
             if (post.CommunityId != null)
@@ -110,34 +108,12 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
         public async Task<Response<string>> Delete(PostDeleteDto postDto)
         {
-            //Servislerden birisi false dönerse post silinmesini iptal etmek adına yeniden postu yazıcaz.
-            bool cSuccess = false;
-            bool uSuccess = false;
 
             Post post = await _postRepository.GetFirstAsync(p => p.Id == postDto.PostId);
 
-            _postRepository.Delete(post.Id);
+            _postRepository.DeleteById(post.Id);
 
-            // Topluluğa aitse topluluktan kaldır
-            if (post.CommunityId != null)
-            {
-                // Community servisine post silinme isteği
-            //    var communityDeleteRequest = new RestRequest("https://").AddBody();
-              //  var communityDeleteResponse = await _client.ExecutePostAsync(communityDeleteRequest);
-            }
-
-            // User servisine post silinme isteği
-
-            PostDeleteDto postDeleteDto = new() { PostId = postDto.PostId, UserId = postDto.UserId };
-            var userDeleteRequest = new RestRequest("https://localhost:7202/User/DeletePost").AddBody(postDeleteDto);
-            var userDeleteResponse = await _client.ExecutePostAsync(userDeleteRequest);
-
-            if (userDeleteResponse.IsSuccessStatusCode == true)
-            {
-                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
-            }
-
-            return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.InitialError));
+            return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
         }
 
         public Task<Response<string>> DeleteComment(string userId, string commentId)
@@ -150,9 +126,40 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<Response<string>> GetPostById(string postId, bool isDeleted = false)
+        public async Task<Response<string>> GetPostById(string postId, bool isDeleted = false)
         {
-            throw new NotImplementedException();
+            GetPostByIdDto postDto = new();
+
+            Post post = await _postRepository.GetFirstAsync(p => p.Id == postId);
+
+            postDto.Description = post.Description;
+            postDto.CreatedAt = post.CreatedAt ?? DateTime.Now;
+            postDto.Files = post.Files;
+            postDto.InteractionCount = post.Interactions.Count;
+
+            int commentCount = 0;//_commentRepository.GetAll(10, 0, c => c.PostId == postId).Data.Count;
+            postDto.CommentCount = commentCount;
+
+
+            
+            //postDto.CommunityTitle = _
+
+
+
+            if (post.CommunityId != null)
+            {
+                // Get community title request
+                var communityGetTitleRequest = new RestRequest("https://localhost:7132/Community/getCommunityTitle").AddParameter("id", post.CommunityId);
+                var communityGetTitleResponse = await _client.ExecuteGetAsync<Response<string>>(communityGetTitleRequest);
+                var communityResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<string>>(communityGetTitleResponse.Content);
+                postDto.CommunityTitle = communityResponse?.Data;
+            }
+
+            // Get username, firstname, lastname, 
+
+
+
+            return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
         }
 
         public Task<Response<string>> Interaction(string postId, InteractionType interactionType)

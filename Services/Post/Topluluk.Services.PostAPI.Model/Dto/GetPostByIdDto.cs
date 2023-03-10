@@ -1,0 +1,39 @@
+﻿using System;
+using Topluluk.Services.PostAPI.Model.Entity;
+
+namespace Topluluk.Services.PostAPI.Model.Dto
+{
+	public class GetPostByIdDto
+	{
+		public string Id { get; set; }
+
+		public string UserId { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string? ProfileImage { get; set; }
+
+		public string? CommunityTitle { get; set; }
+
+		public string Description { get; set; }
+		public DateTime CreatedAt { get; set; }
+
+		// Kullanıcı postu paylaşan kişiyi takip ediyor mu?
+		public bool IsUserFollowing { get; set; }
+
+		public int InteractionCount { get; set; }
+		public ICollection<InteractionType>? InteractedByIds { get; set; }
+
+		public ICollection<string>? Files { get; set; }
+
+		public int CommentCount { get; set; }
+		public ICollection<PostComment>? Comments { get; set; }
+
+		public GetPostByIdDto()
+		{
+			InteractedByIds = new HashSet<InteractionType>();
+            Files = new HashSet<string>();
+			Comments = new HashSet<PostComment>();
+		}
+	}
+}
+
