@@ -126,7 +126,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<Response<string>> GetPostById(string postId, bool isDeleted = false)
+        public async Task<Response<GetPostByIdDto>> GetPostById(string postId, string sourceUserId, bool isDeleted = false)
         {
             GetPostByIdDto postDto = new();
 
@@ -140,12 +140,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             int commentCount = 0;//_commentRepository.GetAll(10, 0, c => c.PostId == postId).Data.Count;
             postDto.CommentCount = commentCount;
 
-
-            
-            //postDto.CommunityTitle = _
-
-
-
             if (post.CommunityId != null)
             {
                 // Get community title request
@@ -156,10 +150,13 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
 
             // Get username, firstname, lastname, 
+            var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
+                .AddParameter("id", post.UserId)
+                .AddParameter("sourceUserId", sourceUserId);
+                
 
 
-
-            return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+            return await Task.FromResult(Response<GetPostByIdDto>.Success(postDto, Shared.Enums.ResponseStatus.Success));
         }
 
         public Task<Response<string>> Interaction(string postId, InteractionType interactionType)
@@ -176,6 +173,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             throw new NotImplementedException();
         }
+
     }
 }
 

@@ -8,7 +8,7 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 	public interface IPostService
 	{
 
-        Task<Response<string>> GetPostById(string postId, bool isDeleted = false);
+        Task<Response<GetPostByIdDto>> GetPostById(string postId, string sourceUserId, bool isDeleted = false);
         Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10);
 
         Task<Response<string>> Create(CreatePostDto postDto);

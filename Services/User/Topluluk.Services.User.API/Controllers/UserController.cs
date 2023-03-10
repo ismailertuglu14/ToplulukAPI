@@ -155,6 +155,13 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.DeletePost(dto);
         }
+
+        [HttpPost("GetUserInfoForPost")]
+        public async Task<Response<GetUserInfoForPostResponseDto>> GetUserInfoForPost(string id, string sourceUserId)
+        {
+            return await _userService.GetUserInfoForPost(id, sourceUserId);
+        }
+
     }
     public class UserBannerChangedDto
     {
