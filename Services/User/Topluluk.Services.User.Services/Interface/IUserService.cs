@@ -35,7 +35,7 @@ namespace Topluluk.Services.User.Services.Interface
 		Task UserBanngerChanged(string userId, string fileName);
 		Task<Response<string>> PostCreated(string userId,string id);
 		Task<Response<string>> DeletePost(PostDeleteDto dto);
-		Task<Response<GetUserInfoForPostResponseDto>> GetUserInfoForPost(string id, string sourceUserId);
+		Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId);
     }
 
 }

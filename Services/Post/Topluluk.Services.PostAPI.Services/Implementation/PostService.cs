@@ -132,6 +132,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
             Post post = await _postRepository.GetFirstAsync(p => p.Id == postId);
 
+            postDto.Id = postId;
             postDto.Description = post.Description;
             postDto.CreatedAt = post.CreatedAt ?? DateTime.Now;
             postDto.Files = post.Files;
@@ -149,12 +150,20 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 postDto.CommunityTitle = communityResponse?.Data;
             }
 
+            // TODO HATA VAR TODO
             // Get username, firstname, lastname, 
             var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
                 .AddParameter("id", post.UserId)
                 .AddParameter("sourceUserId", sourceUserId);
-                
+            var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userInfoRequest);
+            var userResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<UserInfoGetResponse>>(userInfoResponse.Content);
 
+            postDto.UserId = userResponse.Data.UserId;
+            postDto.FirstName = userResponse.Data.FirstName;
+            postDto.LastName = userResponse.Data.LastName;
+            postDto.IsUserFollowing = userResponse.Data.IsUserFollowing;
+            postDto.ProfileImage = userResponse.Data.ProfileImage;
+            postDto.UserName = userResponse.Data.UserName;
 
             return await Task.FromResult(Response<GetPostByIdDto>.Success(postDto, Shared.Enums.ResponseStatus.Success));
         }

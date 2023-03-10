@@ -341,9 +341,9 @@ namespace Topluluk.Services.User.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<Response<GetUserInfoForPostResponseDto>> GetUserInfoForPost(string id, string sourceUserId)
+        public async Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId)
         {
-            GetUserInfoForPostResponseDto dto = new();
+            UserInfoGetResponse dto = new();
             _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
 
             dto.UserId = user.Id;
@@ -353,7 +353,7 @@ namespace Topluluk.Services.User.Services.Implementation
             dto.ProfileImage = user.ProfileImage;
             dto.IsUserFollowing = user.Followers.Contains(sourceUserId);
 
-            return await Task.FromResult(Response<GetUserInfoForPostResponseDto>.Success(dto,ResponseStatus.Success));
+            return await Task.FromResult(Response<UserInfoGetResponse>.Success(dto,ResponseStatus.Success));
         }
     }
     

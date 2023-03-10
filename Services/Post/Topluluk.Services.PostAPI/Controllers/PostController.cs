@@ -28,9 +28,9 @@ namespace Topluluk.Services.PostAPI.Controllers
 
 
         [HttpGet("GetPost")]
-        public async Task<Response<GetPostByIdDto>> GetPostById(string id, string sourceUserId)
+        public async Task<Response<GetPostByIdDto>> GetPostById(string id)
         {
-            return await _postService.GetPostById(id, sourceUserId);
+            return await _postService.GetPostById(id, this.UserId);
         }
 
         [HttpPost("[action]")]

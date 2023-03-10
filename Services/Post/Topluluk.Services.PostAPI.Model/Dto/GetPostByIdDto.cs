@@ -10,6 +10,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public string UserId { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public string UserName { get; set; }
 		public string? ProfileImage { get; set; }
 
 		public string? CommunityTitle { get; set; }
