@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.User.Model.Entity
 {
@@ -12,6 +13,8 @@ namespace Topluluk.Services.User.Model.Entity
         public string? Bio { get; set; }
 		public string? ProfileImage { get; set; }
 		public string? BannerImage { get; set; }
+
+		public GenderEnum? Gender { get; set; }
 
 		public DateTime? BirthdayDate { get; set; }
 
@@ -38,6 +41,7 @@ namespace Topluluk.Services.User.Model.Entity
 			Followings = new HashSet<string>();
 			Followers = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();
+			Gender = GenderEnum.Unspecified;
         }
 
 	}

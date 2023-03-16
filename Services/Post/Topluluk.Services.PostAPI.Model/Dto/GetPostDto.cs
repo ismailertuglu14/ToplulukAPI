@@ -5,20 +5,20 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 {
 	public class GetPostDto
 	{
+		public string Id { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public string? ProfileImage { get; set; }
 
 		public string Description { get; set; }
 		public DateTime SharedAt { get; set; }
+		// Oran orantı kur.
 		public List<InteractionType> Interactions { get; set; }
-		public int SharedCount { get; set; }
+
 		public int CommentsCount { get; set; }
-		public List<PostComment> Comments { get; set; }
 
 		public GetPostDto()
 		{
-			Comments = new List<PostComment>();
 			Interactions = new List<InteractionType>();
 		}
 	}

@@ -10,8 +10,8 @@ namespace Topluluk.Services.User.Services.Interface
 	public interface IUserService
 	{
 		Task<Response<string>> GetUserById(string id);
+		Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin(string id);
 		Task<Response<string>> GetUserByUserName(string userName);
-		Task<Response<string>> GetUserByToken(string userId);
         Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5);
 		Task<Response<List<UserSuggestionsDto>>> GetUserSuggestionsMore(int skip = 0, int take = 5);
 		

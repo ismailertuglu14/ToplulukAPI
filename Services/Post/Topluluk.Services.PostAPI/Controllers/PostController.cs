@@ -27,6 +27,12 @@ namespace Topluluk.Services.PostAPI.Controllers
         }
 
 
+        [HttpGet("[action]")]
+        public async Task<Response<string>> GetPostsForFeedScreen()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpGet("GetPost")]
         public async Task<Response<GetPostByIdDto>> GetPostById(string id)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
 namespace Topluluk.Services.PostAPI.Model.Dto
@@ -7,8 +8,12 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 	{
 		public string? UserId { get; set; }
 		public string? CommunityId { get; set; }
+
+		[MaxLength(1024)]
 		public string Description { get; set; }
+		public bool IsShownOnProfile { get; set; } = true;
 		public IFormFileCollection? Files { get; set; }
+		
 	}
 }
 

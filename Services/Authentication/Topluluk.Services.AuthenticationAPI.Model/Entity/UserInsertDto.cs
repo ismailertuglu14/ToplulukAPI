@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.AuthenticationAPI.Model.Entity
 {
@@ -13,6 +14,7 @@ namespace Topluluk.Services.AuthenticationAPI.Model.Entity
         public string LastName { get; set; }
         public string UserName { get; set; }
         public DateTime BirthdayDate { get; set; }
+        public GenderEnum? Gender { get; set; }
     }
 }
 

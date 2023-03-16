@@ -26,12 +26,14 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
         private readonly IAuthenticationRepository _repository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly RestClient _client;
 
         public AuthenticationService(IAuthenticationRepository repository, IMapper mapper, IConfiguration configuration)
 		{
             _repository = repository;
             _mapper = mapper;
             _configuration = configuration;
+            _client = new RestClient();
 		}
 
         public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto)
@@ -95,14 +97,13 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             {
                 response = await _repository.InsertAsync(userCredential);
 
-                // Request to UserService
-                UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now };
-                HttpResponseMessage httpResponse = await HttpRequestHelper.handle(content, "https://localhost:7202/user/insertuser", HttpType.POST);
+                UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
+                var userInsertRequest = new RestRequest("https://localhost:7202/user/insertuser").AddBody(content);
+                var userInsertResponse = await _client.ExecutePostAsync(userInsertRequest);
                 return await Task.FromResult(Response<string>.Success("Successfull",ResponseStatus.Success)); 
             }
 
             return await Task.FromResult(Response<string>.Fail(checkUniqueResult.Errors,ResponseStatus.InitialError));
-
         }
 
         // UserName and Email must be unique

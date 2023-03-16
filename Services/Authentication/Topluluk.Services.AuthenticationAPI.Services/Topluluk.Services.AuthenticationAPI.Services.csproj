@@ -23,6 +23,6 @@
     <ProjectReference Include="..\Topluluk.Services.AuthenticationAPI.Data\Topluluk.Services.AuthenticationAPI.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="108.0.3" />
+    <PackageReference Include="RestSharp" Version="109.0.1" />
   </ItemGroup>
 </Project>

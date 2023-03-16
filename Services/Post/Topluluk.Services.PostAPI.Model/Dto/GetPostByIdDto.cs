@@ -22,11 +22,15 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public bool IsUserFollowing { get; set; }
 
 		public int InteractionCount { get; set; }
+
+		// Sadece tanıdığı takip ettiği kişileri öncelikli olarak gösterebilmek adına kullanıyoruz.
+		// Eğer tanıdığı kişi yok ise listenin ilk elemanını gösterebiliriz.
 		public ICollection<InteractionType>? InteractedByIds { get; set; }
 
 		public ICollection<string>? Files { get; set; }
 
 		public int CommentCount { get; set; }
+
 		public ICollection<PostComment>? Comments { get; set; }
 
 		public GetPostByIdDto()

@@ -16,6 +16,7 @@ using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
+using ZstdSharp.Unsafe;
 using _User = Topluluk.Services.User.Model.Entity.User;
 
 namespace Topluluk.Services.User.Services.Implementation
@@ -39,6 +40,27 @@ namespace Topluluk.Services.User.Services.Implementation
 
             if(response.Data != null)
             {
+                _User user = await _userRepository.GetFirstAsync(response.Data);
+                GetUserByIdDto dto = new();
+                dto.Id = user.Id;
+                dto.FirstName = user.FirstName;
+                dto.LastName = user.LastName;
+                dto.UserName = user.UserName;
+                dto.ProfileImage = user.ProfileImage;
+                dto.BannerImage = user.BannerImage;
+                dto.IsPrivate = user.IsPrivate;
+                dto.FollowersCount = user.Followers.Count();
+                dto.FollowingCount = user.Followings.Count();
+
+                //dto.CommunityRequests =
+                if (user.IsPrivate != true)
+                {
+                    // Post servisinie istek atıp kullanıcının postlarını getir.
+                    // Community servisine istek atıp kullanıcının topluluklarını getir.
+                    //
+                }
+
+
                 return await Task.FromResult(Response<string>.Success(JsonConvert.SerializeObject(response,Formatting.None), ResponseStatus.Success));
             }
             return await Task.FromResult(Response<string>.Fail("", ResponseStatus.NotFound));
@@ -276,6 +298,7 @@ namespace Topluluk.Services.User.Services.Implementation
             using var stream = new MemoryStream();
             await changeBannerDto.File.CopyToAsync(stream);
             var imageData = stream.ToArray();
+
             if (user.BannerImage != null)
             {
                 await _capPublisher.PublishAsync<UserChangeBannerDto>(QueueConstants.USER_DELETE_BANNER, new(){ UserId = changeBannerDto.UserId, File = changeBannerDto.File });
@@ -286,20 +309,38 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
         }
 
+        // todo FollowingRequest leri kullanıcı adı, ad, soyad, id, kullanıcı resmi ve istek attığı tarih ile dön.
+        public async Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin(string id)
+        {
+            GetUserAfterLoginDto dto = new();
 
+            try
+            {
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
 
+                dto.Id = user.Id;
+                dto.FirstName = user.FirstName;
+                dto.LastName = user.LastName;
+                dto.UserName = user.UserName;
+                dto.BannerImage = user.BannerImage;
+                dto.ProfileImage = user.ProfileImage;
+                dto.FollowersCount = user.Followers!.Count;
+                dto.FollowingsCount = user.Followings!.Count;
+                //dto.FollowingRequests = new List<FollowingRequestDto>() {
+                //    new(){ }
+                //};
 
+                return await Task.FromResult(Response<GetUserAfterLoginDto>.Success(dto, ResponseStatus.Success));
+            }
+            catch
+            {
+                return await Task.FromResult(Response<GetUserAfterLoginDto>.Fail("Failed", ResponseStatus.NotAuthenticated));
 
-
-
+            }
+        }
 
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\
-
-
-
-
-
 
 
 
@@ -334,12 +375,6 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> GetUserByToken(string userId)
-        {
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-            throw new NotImplementedException();
-        }
 
         public async Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId)
         {
@@ -355,6 +390,8 @@ namespace Topluluk.Services.User.Services.Implementation
 
             return await Task.FromResult(Response<UserInfoGetResponse>.Success(dto,ResponseStatus.Success));
         }
+
+
     }
     
 }

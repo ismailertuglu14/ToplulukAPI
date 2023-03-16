@@ -19,6 +19,7 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 		public ICollection<string> SharedBy { get; set; }
 		public string Description { get; set; }
 		public ICollection<InteractionType> Interactions { get; set; }
+		public bool IsShownOnProfile { get; set; } = true;
 		// For statistics 
 		public ICollection<string> SavedBy { get; set; }
 		//public Dictionary<string, int> Viewing { get; set; }

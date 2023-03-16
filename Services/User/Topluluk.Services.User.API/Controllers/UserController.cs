@@ -99,9 +99,9 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<Response<string>> GetUserByToken()
+        public async Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin()
         {
-            return await _userService.GetUserByToken(this.UserId);
+            return await _userService.GetUserAfterLogin(this.UserId);
         }
 
 

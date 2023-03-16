@@ -25,10 +25,11 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         private readonly IMapper _mapper;
         private readonly RestClient _client;
 
-        public PostService(IPostRepository postRepository, IMapper mapper)
+        public PostService(IPostRepository postRepository, IPostCommentRepository commentRepository, IMapper mapper)
         {
             _postRepository = postRepository;
             _mapper = mapper;
+            _commentRepository = commentRepository;
             _client = new RestClient();
         }
 
@@ -40,6 +41,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
             if (post != null)
             {
+                await _commentRepository.InsertAsync(comment);
                 return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
             }
 
@@ -138,8 +140,23 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             postDto.Files = post.Files;
             postDto.InteractionCount = post.Interactions.Count;
 
-            int commentCount = 0;//_commentRepository.GetAll(10, 0, c => c.PostId == postId).Data.Count;
-            postDto.CommentCount = commentCount;
+           var _comments = await _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId);
+            if (_comments.Data != null && _comments.Data.Count > 0)
+            {
+                postDto.CommentCount = _comments.Data?.Count;
+
+                CommentGetDto commentDto = new();
+
+                foreach (PostComment c in _comments.Data)
+                {
+                    commentDto.Id = c.Id;
+                    //commentDto.
+                }
+
+
+                postDto.Comments = _comments.Data;
+            }
+
 
             if (post.CommunityId != null)
             {
@@ -150,8 +167,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 postDto.CommunityTitle = communityResponse?.Data;
             }
 
-            // TODO HATA VAR TODO
-            // Get username, firstname, lastname, 
             var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
                 .AddParameter("id", post.UserId)
                 .AddParameter("sourceUserId", sourceUserId);
@@ -165,7 +180,22 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             postDto.ProfileImage = userResponse.Data.ProfileImage;
             postDto.UserName = userResponse.Data.UserName;
 
+
+            
+
             return await Task.FromResult(Response<GetPostByIdDto>.Success(postDto, Shared.Enums.ResponseStatus.Success));
+        }
+
+        // Feed ekranındaki postlar için hazırlanmış metod.
+        public async Task<Response<List<GetPostDto>>> GetPosts(string userId, int take = 10, int skip = 0)
+        {
+            // User servise istek atıp takip ettiğimiz kullanıcıların id listesini döndürcez.
+
+            // Kullanıcının takip ettiği kullanıcıların postları, kendi postları, kendi katıldığı topluluklarının postları
+            var response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == userId);
+
+            return await Task.FromResult(Response<List<GetPostDto>>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
+
         }
 
         public Task<Response<string>> Interaction(string postId, InteractionType interactionType)

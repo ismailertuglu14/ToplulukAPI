@@ -85,6 +85,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Services", "Services\Post\Topluluk.Services.PostAPI.Services\Topluluk.Services.PostAPI.Services.csproj", "{9F7A90A8-0636-4884-B841-1139F8158C5B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI", "Services\Search\Topluluk.Services.SearchAPI\Topluluk.Services.SearchAPI.csproj", "{5801BFAD-3333-4D57-A078-C99179E45513}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +211,10 @@ Global
 		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F7A90A8-0636-4884-B841-1139F8158C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5801BFAD-3333-4D57-A078-C99179E45513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5801BFAD-3333-4D57-A078-C99179E45513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5801BFAD-3333-4D57-A078-C99179E45513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5801BFAD-3333-4D57-A078-C99179E45513}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -253,5 +261,7 @@ Global
 		{E3087A54-2D00-4F93-8E41-8DC39EF43568} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
 		{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
 		{9F7A90A8-0636-4884-B841-1139F8158C5B} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
+		{AD9B04B4-D540-4A17-B5F9-D6F04D3244FA} = {B2E286F5-5793-4097-BB38-F9E049159374}
+		{5801BFAD-3333-4D57-A078-C99179E45513} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
 	EndGlobalSection
 EndGlobal
