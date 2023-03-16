@@ -38,23 +38,23 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<List<Community>>.Success(communities.Data, ResponseStatus.Success));
         }
 
-        public async Task<Response<List<object>>> GetCommunitySuggestions(int skip, int take,HttpRequest request)
+        public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(int skip, int take,HttpRequest request)
         {
             
             DatabaseResponse response = await _communityRepository.GetAllAsync(take,skip,c => c.IsPublic == true);
+            List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
+            //if (request.Headers["User-Agent"].ToString().Contains("Mobile"))
+            //{
+            //    List<CommunitySuggestionMobileDto> suggestions = _mapper.Map<List<CommunitySuggestionMobileDto>>(response.Data);
 
-            if (request.Headers["User-Agent"].ToString().Contains("Mobile"))
-            {
-                List<CommunitySuggestionMobileDto> suggestions = _mapper.Map<List<CommunitySuggestionMobileDto>>(response.Data);
-
-                return await Task.FromResult(Response<List<object>>.Success(new(suggestions), ResponseStatus.Success));
-            }
-            else if(request.Headers["User-Agent"].ToString().Contains("Web"))
-            {
-                List<CommunitySuggestionWebDto> suggestions = _mapper.Map<List<CommunitySuggestionWebDto>>(response.Data);
-                return await Task.FromResult(Response<List<object>>.Success(new(suggestions), ResponseStatus.Success));
-            }
-            return await Task.FromResult(Response<List<object>>.Fail("User-Agent cant null", ResponseStatus.Success));
+            //    return await Task.FromResult(Response<List<object>>.Success(new(suggestions), ResponseStatus.Success));
+            //}
+            //else if(request.Headers["User-Agent"].ToString().Contains("Web"))
+            //{
+            //    List<CommunitySuggestionWebDto> suggestions = _mapper.Map<List<CommunitySuggestionWebDto>>(response.Data);
+            //    return await Task.FromResult(Response<List<object>>.Success(new(suggestions), ResponseStatus.Success));
+            //}
+            return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
         }
 
 
@@ -282,6 +282,14 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         {
             Community community = await _communityRepository.GetFirstAsync(c => c.Id == id);
             return await Task.FromResult(Response<string>.Success(community.Title, ResponseStatus.Success));
+        }
+
+        public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId)
+        {
+            DatabaseResponse response = await _communityRepository.GetAllAsync(10, 0, c => c.Participiants.Contains(userId) && c.IsPublic == true && c.IsRestricted == false);
+            List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
+            return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
+
         }
     }
 }

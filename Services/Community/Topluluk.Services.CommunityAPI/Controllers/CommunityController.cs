@@ -37,7 +37,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         /// <param name="take"></param>
         /// <returns></returns>
         [HttpGet("communities")]
-        public async Task<Response<List<object>>> GetCommunitiySuggestions(int skip, int take)
+        public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitiySuggestions(int skip, int take)
         {
             return await _communityService.GetCommunitySuggestions(skip, take, Request);
         }
@@ -87,6 +87,13 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         }
 
         // Http call methods
+
+        [HttpGet("user-communities")]
+        public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string id)
+        {
+            return await _communityService.GetUserCommunities(id);
+        }
+
 
         [NonAction]
         [CapSubscribe(QueueConstants.COMMUNITY_IMAGE_UPLOADED)]

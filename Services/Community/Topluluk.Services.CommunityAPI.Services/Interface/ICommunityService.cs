@@ -10,7 +10,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 	public interface ICommunityService
 	{
 		Task<Response<List<Community>>> GetCommunities();
-		Task<Response<List<object>>> GetCommunitySuggestions(int skip, int take, HttpRequest request);
+		Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(int skip, int take, HttpRequest request);
 		Task<Response<string>> GetCommunityById(string userId, string id);
 		Task<Response<string>> Join(CommunityJoinDto communityInfo);
 		Task<Response<string>> Create(CommunityCreateDto communityInfo);
@@ -25,6 +25,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
         Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
 		//http
+		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId);
 		Task<Response<string>> PostCreated(PostCreatedCommunityDto dto);
 		Task<Response<string>> GetCommunityTitle(string id);
     }

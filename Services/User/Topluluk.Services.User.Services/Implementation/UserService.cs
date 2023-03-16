@@ -37,7 +37,7 @@ namespace Topluluk.Services.User.Services.Implementation
         public async Task<Response<string>> GetUserById(string id)
         {
             DatabaseResponse response = _userRepository.GetById(id);
-
+            
             if(response.Data != null)
             {
                 _User user = await _userRepository.GetFirstAsync(response.Data);
@@ -228,7 +228,7 @@ namespace Topluluk.Services.User.Services.Implementation
             throw new NotImplementedException();
         }
 
-        //
+        // Mesaj ekranındaki search 
         public async Task<Response<List<UserSearchResponseDto>>?> SearchUser(string? text, string userId, int skip = 0, int take = 10)
         {
             if (text == null)
