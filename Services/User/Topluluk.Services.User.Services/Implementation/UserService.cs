@@ -228,7 +228,7 @@ namespace Topluluk.Services.User.Services.Implementation
             throw new NotImplementedException();
         }
 
-        // Need best practice get user algorithm
+        //
         public async Task<Response<List<UserSearchResponseDto>>?> SearchUser(string? text, string userId, int skip = 0, int take = 10)
         {
             if (text == null)
@@ -239,6 +239,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
 
             List<UserSearchResponseDto> users = _mapper.Map<List<_User>, List<UserSearchResponseDto>>(response.Data);
+            
             return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(users, ResponseStatus.Success));
         }
 
