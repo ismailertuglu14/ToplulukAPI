@@ -5,6 +5,8 @@ using Topluluk.Shared.Helper;
 
 namespace Topluluk.Shared.BaseModels
 {
+    [ApiController]
+    [Route("[controller]")]
     [EnableCors("MyPolicy")]
 	public class BaseController : ControllerBase
 	{

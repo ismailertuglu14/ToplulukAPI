@@ -12,8 +12,6 @@ using Topluluk.Shared.Dtos;
 
 namespace Topluluk.Services.AuthenticationAPI.Controllers
 { 
-    [ApiController]
-    [Route("[controller]")]
     public class AuthenticationController : BaseController
     {
         private readonly IAuthenticationService _authenticationService;

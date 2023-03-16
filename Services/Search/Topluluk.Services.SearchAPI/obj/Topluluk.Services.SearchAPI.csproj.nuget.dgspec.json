@@ -4,6 +4,112 @@
     "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj": {}
   },
   "projects": {
+    "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj",
+        "projectName": "Topluluk.Services.SearchAPI.Model",
+        "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj",
+        "packagesPath": "/Users/ismail/.nuget/packages/",
+        "outputPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Model/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ismail/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
+        "projectName": "Topluluk.Services.SearchAPI.Services",
+        "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
+        "packagesPath": "/Users/ismail/.nuget/packages/",
+        "outputPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Services/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ismail/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -25,7 +131,17 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj": {
+                "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj"
+              },
+              "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj": {
+                "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj"
+              },
+              "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -58,6 +174,85 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+        "projectName": "Topluluk.Shared",
+        "projectPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+        "packagesPath": "/Users/ismail/.nuget/packages/",
+        "outputPath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Shared/Topluluk.Shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ismail/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.19.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.27.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

@@ -89,6 +89,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{AD9B04
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI", "Services\Search\Topluluk.Services.SearchAPI\Topluluk.Services.SearchAPI.csproj", "{5801BFAD-3333-4D57-A078-C99179E45513}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Data", "Services\Search\Topluluk.Services.SearchAPI.Data\Topluluk.Services.SearchAPI.Data.csproj", "{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Model", "Services\Search\Topluluk.Services.SearchAPI.Model\Topluluk.Services.SearchAPI.Model.csproj", "{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Services", "Services\Search\Topluluk.Services.SearchAPI.Services\Topluluk.Services.SearchAPI.Services.csproj", "{13C4CD64-CEF9-487E-93DE-F4847398900C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -215,6 +221,18 @@ Global
 		{5801BFAD-3333-4D57-A078-C99179E45513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5801BFAD-3333-4D57-A078-C99179E45513}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5801BFAD-3333-4D57-A078-C99179E45513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -263,5 +281,8 @@ Global
 		{9F7A90A8-0636-4884-B841-1139F8158C5B} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
 		{AD9B04B4-D540-4A17-B5F9-D6F04D3244FA} = {B2E286F5-5793-4097-BB38-F9E049159374}
 		{5801BFAD-3333-4D57-A078-C99179E45513} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
+		{E56F01A1-3A4E-4483-84FC-2624E46CCB6D} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
+		{A93C7BE7-D2EB-4FD4-89E5-9288974E454C} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
+		{13C4CD64-CEF9-487E-93DE-F4847398900C} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
 	EndGlobalSection
 EndGlobal
