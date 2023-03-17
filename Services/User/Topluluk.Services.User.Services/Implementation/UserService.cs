@@ -48,16 +48,9 @@ namespace Topluluk.Services.User.Services.Implementation
                 dto.ProfileImage = user.ProfileImage;
                 dto.BannerImage = user.BannerImage;
                 dto.IsPrivate = user.IsPrivate;
+                dto.Gender = user.Gender ?? GenderEnum.Unspecified;
                 dto.FollowersCount = user.Followers.Count();
                 dto.FollowingCount = user.Followings.Count();
-
-                //dto.CommunityRequests =
-                if (user.IsPrivate != true)
-                {
-                    // Post servisinie istek atıp kullanıcının postlarını getir.
-                    // Community servisine istek atıp kullanıcının topluluklarını getir.
-                    //
-                }
 
 
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
@@ -84,13 +77,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 dto.FollowersCount = user.Followers.Count();
                 dto.FollowingCount = user.Followings.Count();
 
-                //dto.CommunityRequests =
-                if (user.IsPrivate != true)
-                {
-                    // Post servisinie istek atıp kullanıcının postlarını getir.
-                    // Community servisine istek atıp kullanıcının topluluklarını getir.
-                    //
-                }
+             
 
 
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));

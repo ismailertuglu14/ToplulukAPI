@@ -1,4 +1,6 @@
 ﻿using System;
+using Topluluk.Shared.Enums;
+
 namespace Topluluk.Services.User.Model.Dto
 {
 	public class GetUserByIdDto
@@ -10,7 +12,7 @@ namespace Topluluk.Services.User.Model.Dto
         public string? Bio { get; set; }
         public string? ProfileImage { get; set; }
         public string? BannerImage { get; set; }
-
+        public GenderEnum Gender { get; set; }
         public bool IsPrivate { get; set; } = false;
 
         public int FollowingCount { get; set; }

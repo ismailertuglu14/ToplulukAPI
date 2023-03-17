@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +34,20 @@ namespace Topluluk.Services.FileAPI.Controllers
         {
             return Ok("Çalışıyor");
         }
-
+        // POST:
+        [HttpPost("[action]")]
+        public async Task<Response<string>> UploadCommunityCoverImage([FromBody] CommunityCoverImageDto CoverImage)
+        {
+            var byteArrayContent = Encoding.UTF8.GetBytes(CoverImage.CoverImage);
+            using (var stream = new MemoryStream(byteArrayContent))
+            {
+                var file = new FormFile(stream, 0, byteArrayContent.Length, "CoverImage", "filename.jpg");
+                // replace "filename" and "filename.ext" with your desired file name and extension
+                // you can now use the "file" instance as an IFormFile
+                var result = await _storageService.UploadOneAsync("community-images", file);
+                return await Task.FromResult(Response<string>.Success(result.Data, ResponseStatus.Success));
+            }    
+        }
         // POST:
         [HttpPost("[action]")]
         public async Task<Response<List<string>>> UploadUserImage(IFormFileCollection files)
@@ -99,6 +114,10 @@ namespace Topluluk.Services.FileAPI.Controllers
     {
         public string UserId { get; set; }
         public string FileName { get; set; }
+    }
+    public class CommunityCoverImageDto
+    {
+        public string CoverImage { get; set; }
     }
 }
 

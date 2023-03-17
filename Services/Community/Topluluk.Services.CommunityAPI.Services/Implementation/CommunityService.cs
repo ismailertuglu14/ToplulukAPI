@@ -58,16 +58,33 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         }
 
 
-        public async Task<Response<string>> GetCommunityById(string userId, string communityId)
+        public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string communityId)
         {
             Community? community = await _communityRepository.GetFirstCommunity(c => c.Id == communityId && c.IsVisible == true && c.IsRestricted == false);
-            CommunityGetDto _community = new();
+            CommunityGetByIdDto _community = new();
             CommunityGetAdminDto adminDto = new();
 
-            if (community == null)
+            if (community == null )
             {
-                return await Task.FromResult(Response<string>.Fail("",ResponseStatus.NotFound));
+                return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Not found",ResponseStatus.NotFound));
             }
+
+            if (community.IsDeleted == true)
+            {
+                return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Deleted", ResponseStatus.NotFound));
+            }
+
+            if (community.IsRestricted == true)
+            {
+                return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Restricted", ResponseStatus.NotFound));
+            }
+
+            if (community.IsVisible == false)
+            {
+                return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Not Visible public", ResponseStatus.NotFound));
+            }
+
+            // @@@@@@ starts here
 
             if (community.AdminId == userId)
             {
@@ -78,8 +95,22 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             {
 
             }
+            else
+            {
+                _community.AdminId = "";
+                _community.AdminName = "";
+                _community.AdminImage = "";
 
-            return await Task.FromResult(Response<string>.Success(JsonConvert.SerializeObject(community), ResponseStatus.Success));
+                _community.Title = community.Title;
+                _community.Description = community.Description;
+                _community.IsOwner = false;
+                _community.CoverImage = community.CoverImage;
+                _community.BannerImage = community.BannerImage;
+                _community.ParticipiantsCount = community.Participiants.Count;
+                
+            }
+
+            return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
 
         public async Task<Response<string>> Join(CommunityJoinDto communityInfo)

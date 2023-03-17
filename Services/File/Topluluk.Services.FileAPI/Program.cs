@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using Topluluk.Services.FileAPI.Data.Settings;
@@ -50,6 +51,14 @@ builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
 builder.Services.AddInfrastructure();
 builder.Services.AddStorage<AzureStorage>();
+builder.Services.Configure<FormOptions>(o =>  // currently all set to max, configure it to your needs!
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = long.MaxValue; // <-- !!! long.MaxValue
+    o.MultipartBoundaryLengthLimit = int.MaxValue;
+    o.MultipartHeadersCountLimit = int.MaxValue;
+    o.MultipartHeadersLengthLimit = int.MaxValue;
+});
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
@@ -72,6 +81,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.Use(async (context, next) =>
+{
+    context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null; // unlimited I guess
+    await next.Invoke();
+});
 app.Run();
 
