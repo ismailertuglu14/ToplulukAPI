@@ -101,6 +101,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 _community.AdminName = "";
                 _community.AdminImage = "";
 
+                _community.Location = community.Location ?? "";
                 _community.Title = community.Title;
                 _community.Description = community.Description;
                 _community.IsOwner = false;

@@ -13,6 +13,8 @@ namespace Topluluk.Services.CommunityAPI.Model.Dto
         public string Title { get; set; }
         public string Description { get; set; }
 
+        public string? Location { get; set; }
+
         public string? CoverImage { get; set; }
         public string? BannerImage { get; set; }
 

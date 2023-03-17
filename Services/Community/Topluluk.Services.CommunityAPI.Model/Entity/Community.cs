@@ -19,7 +19,8 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 		// Kullanıcılar topluluğa katılabilmek için izin istemek zorunda mı ?
 		public bool IsPublic { get; set; } = true;
 		public bool IsRestricted { get; set; } = false;
-		public int? ParticipiantLimit { get; set; } 
+		public int? ParticipiantLimit { get; set; }
+		public string? Location { get; set; }
 		public ICollection<string> Participiants { get; set; }
 
 		public ICollection<string> JoinRequestWaitings { get; set; }

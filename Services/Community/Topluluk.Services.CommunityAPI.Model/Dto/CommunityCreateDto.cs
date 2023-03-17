@@ -9,6 +9,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Dto
         public string? CreatedById { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string? Location { get; set; }
         //public IFormFile? CoverImage { get; set; }
         //public IFormFile? BannerImage { get; set; }
         public IFormFile? CoverImage { get; set; }
