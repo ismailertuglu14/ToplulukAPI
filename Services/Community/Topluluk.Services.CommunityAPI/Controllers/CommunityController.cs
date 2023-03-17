@@ -18,7 +18,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
     {
 
         private readonly ICommunityService _communityService;
-
+        
         public CommunityController(ICommunityService communityService)
         {
             _communityService = communityService;

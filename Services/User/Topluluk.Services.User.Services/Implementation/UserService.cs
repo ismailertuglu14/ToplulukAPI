@@ -400,7 +400,20 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<UserInfoGetResponse>.Success(dto,ResponseStatus.Success));
         }
 
+        public async Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id)
+        {
 
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+            if (user != null)
+            {
+                GetCommunityOwnerDto dto = new();
+                dto.OwnerId = user.Id;
+                dto.Name = user.FirstName + ' ' + user.LastName;
+                dto.ProfileImage = user.ProfileImage;
+                return await Task.FromResult(Response<GetCommunityOwnerDto>.Success(dto, ResponseStatus.Success));
+            }
+            return await Task.FromResult(Response<GetCommunityOwnerDto>.Fail("Not found", ResponseStatus.NotFound));
+        }
     }
     
 }

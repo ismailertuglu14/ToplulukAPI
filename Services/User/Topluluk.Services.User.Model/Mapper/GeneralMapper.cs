@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Topluluk.Services.User.Model.Dto;
+using Topluluk.Services.User.Model.Dto.Http;
 using _User = Topluluk.Services.User.Model.Entity.User;
 namespace Topluluk.Services.User.Model.Mapper
 {
@@ -12,6 +13,7 @@ namespace Topluluk.Services.User.Model.Mapper
 			CreateMap<_User, UserSuggestionsDto>();
 			CreateMap<_User, UserSearchResponseDto>().ReverseMap();
 			CreateMap<_User, GetUserByIdDto>();
+			CreateMap<_User, GetCommunityOwnerDto>();
 		}
 	}
 }

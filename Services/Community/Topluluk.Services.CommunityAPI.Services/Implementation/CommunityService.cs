@@ -7,6 +7,7 @@ using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RestSharp;
 using Topluluk.Services.CommunityAPI.Data.Interface;
 using Topluluk.Services.CommunityAPI.Model.Dto;
 using Topluluk.Services.CommunityAPI.Model.Dto.Http;
@@ -17,6 +18,7 @@ using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
 using static System.Net.Mime.MediaTypeNames;
+using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.CommunityAPI.Services.Implementation
 {
@@ -25,12 +27,14 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         private readonly ICommunityRepository _communityRepository;
         private readonly IMapper _mapper;
         private readonly ICapPublisher _capPublisher;
+        private readonly RestClient _client;
 
         public CommunityService(ICommunityRepository communityRepository, IMapper mapper, ICapPublisher capPublisher)
         {
             _communityRepository = communityRepository;
             _mapper = mapper;
             _capPublisher = capPublisher;
+            _client = new RestClient();
         }
         public async Task<Response<List<Community>>> GetCommunities()
         {
@@ -86,30 +90,18 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
             // @@@@@@ starts here
 
-            if (community.AdminId == userId)
-            {
-                _community.IsOwner = true;
-            }
-
-            else if (community.ModeratorIds.Any(m => m.UserId == userId))
-            {
-
-            }
-            else
-            {
-                _community.AdminId = "";
-                _community.AdminName = "";
-                _community.AdminImage = "";
-
-                _community.Location = community.Location ?? "";
-                _community.Title = community.Title;
-                _community.Description = community.Description;
-                _community.IsOwner = false;
-                _community.CoverImage = community.CoverImage;
-                _community.BannerImage = community.BannerImage;
-                _community.ParticipiantsCount = community.Participiants.Count;
-                
-            }
+            var request = new RestRequest("https://localhost:7202/user/communityOwner").AddQueryParameter("id", community.AdminId);
+            var response = await _client.ExecuteGetAsync<Response<GetCommunityOwnerDto>>(request);
+            _community.AdminId = response.Data.Data.OwnerId;
+            _community.AdminName = response.Data.Data.Name;
+            _community.AdminImage = response.Data.Data.ProfileImage;
+            _community.Location = community.Location ?? "";
+            _community.Title = community.Title;
+            _community.Description = community.Description;
+            _community.IsOwner = false;
+            _community.CoverImage = community.CoverImage;
+            _community.BannerImage = community.BannerImage;
+            _community.ParticipiantsCount = community.Participiants.Count;
 
             return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
