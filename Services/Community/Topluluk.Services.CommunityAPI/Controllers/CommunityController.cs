@@ -39,7 +39,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpGet("communities")]
         public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitiySuggestions(int skip, int take)
         {
-            return await _communityService.GetCommunitySuggestions(skip, take, Request);
+            return await _communityService.GetCommunitySuggestions(this.UserId,Request,skip, take);
         }
         [HttpPost("[action]")]
         public async Task<Response<string>> Join(CommunityJoinDto communityInfo)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using AutoMapper;
@@ -42,10 +43,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<List<Community>>.Success(communities.Data, ResponseStatus.Success));
         }
 
-        public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(int skip, int take,HttpRequest request)
+        public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5)
         {
-            
-            DatabaseResponse response = await _communityRepository.GetAllAsync(take,skip,c => c.IsPublic == true);
+            DatabaseResponse response = await _communityRepository.GetAllAsync(take,skip,c => c.IsPublic != false && c.IsVisible != false && !c.Participiants.Contains(userId));
             List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
             //if (request.Headers["User-Agent"].ToString().Contains("Mobile"))
             //{
