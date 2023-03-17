@@ -33,14 +33,13 @@ namespace Topluluk.Services.User.Services.Implementation
             _capPublisher = capPublisher;
             _mapper = mapper;
 		}
-        // We dont use it
-        public async Task<Response<string>> GetUserById(string id)
+
+        public async Task<Response<GetUserByIdDto>> GetUserById(string id)
         {
-            DatabaseResponse response = _userRepository.GetById(id);
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
             
-            if(response.Data != null)
+            if(user != null)
             {
-                _User user = await _userRepository.GetFirstAsync(response.Data);
                 GetUserByIdDto dto = new();
                 dto.Id = user.Id;
                 dto.FirstName = user.FirstName;
@@ -61,21 +60,43 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
 
 
-                return await Task.FromResult(Response<string>.Success(JsonConvert.SerializeObject(response,Formatting.None), ResponseStatus.Success));
+                return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
             }
-            return await Task.FromResult(Response<string>.Fail("", ResponseStatus.NotFound));
+            return await Task.FromResult(Response<GetUserByIdDto>.Fail("", ResponseStatus.NotFound));
 
         }
 
         // Use this function instead of GetUserById
-        public async Task<Response<string>> GetUserByUserName(string userName)
+        public async Task<Response<GetUserByIdDto>> GetUserByUserName(string userName)
         {
             _User? user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
 
-            if(user != null)
-                return await Task.FromResult(Response<string>.Success(JsonConvert.SerializeObject(JsonConvert.SerializeObject(user, Formatting.None), Formatting.None), ResponseStatus.Success));
+            if (user != null)
+            {
+                GetUserByIdDto dto = new();
+                dto.Id = user.Id;
+                dto.FirstName = user.FirstName;
+                dto.LastName = user.LastName;
+                dto.UserName = user.UserName;
+                dto.ProfileImage = user.ProfileImage;
+                dto.BannerImage = user.BannerImage;
+                dto.IsPrivate = user.IsPrivate;
+                dto.FollowersCount = user.Followers.Count();
+                dto.FollowingCount = user.Followings.Count();
 
-            return await Task.FromResult(Response<string>.Fail("User not found!", ResponseStatus.NotFound));
+                //dto.CommunityRequests =
+                if (user.IsPrivate != true)
+                {
+                    // Post servisinie istek atıp kullanıcının postlarını getir.
+                    // Community servisine istek atıp kullanıcının topluluklarını getir.
+                    //
+                }
+
+
+                return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
+            }
+
+            return await Task.FromResult(Response<GetUserByIdDto>.Fail("User not found!", ResponseStatus.NotFound));
         }
 
         public async Task<Response<string>> InsertUser(UserInsertDto userInfo)

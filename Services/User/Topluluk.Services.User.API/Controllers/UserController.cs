@@ -18,8 +18,7 @@ using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.User.API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+
     public class UserController : BaseController
     {
 
@@ -32,13 +31,13 @@ namespace Topluluk.Services.User.API.Controllers
         }
         
         [HttpPost("[action]")]
-        public async Task<Response<string>> GetUserById(string userId)
+        public async Task<Response<GetUserByIdDto>> GetUserById(string userId)
         {
             return await _userService.GetUserById(userId);
         }
 
         [HttpGet("{userName}")]
-        public async Task<Response<string>> GetUserByUserName([FromRoute] string userName)
+        public async Task<Response<GetUserByIdDto>> GetUserByUserName([FromRoute] string userName)
         {
             return await _userService.GetUserByUserName(userName);
         }
@@ -104,7 +103,7 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.GetUserAfterLogin(this.UserId);
         }
 
-
+        
 
 
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -144,18 +143,7 @@ namespace Topluluk.Services.User.API.Controllers
             await _userService.UserBanngerChanged(userBannerChangedDto.UserId, userBannerChangedDto.FileName);
         }
 
-        [HttpPost("[action]")]
-        public async Task<Response<string>> PostCreated( [FromBody] PostCreatedDto dto)
-        {
-            return await _userService.PostCreated(dto.UserId,dto.PostId);
-        }
-
-        [HttpPost("DeletePost")]
-        public async Task<Response<string>> DeletePost( PostDeleteDto dto)
-        {
-            return await _userService.DeletePost(dto);
-        }
-
+  
         [HttpGet("GetUserInfoForPost")]
         public async Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId)
         {
