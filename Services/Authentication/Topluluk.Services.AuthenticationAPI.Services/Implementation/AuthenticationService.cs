@@ -80,9 +80,10 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             return await Task.FromResult(Response<TokenDto>.Fail("Username or password wrong!", ResponseStatus.NotAuthenticated));
         }
 
-        public async Task<Response<string>> SignUp(CreateUserDto userDto)
+        public async Task<Response<TokenDto>> SignUp(CreateUserDto userDto)
         {
             DatabaseResponse response = new();
+            TokenHelper _tokenHelper = new TokenHelper(_configuration);
 
             UserCredential userCredential = new()
             {
@@ -100,10 +101,14 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
                 var userInsertRequest = new RestRequest("https://localhost:7202/user/insertuser").AddBody(content);
                 var userInsertResponse = await _client.ExecutePostAsync(userInsertRequest);
-                return await Task.FromResult(Response<string>.Success("Successfull",ResponseStatus.Success)); 
+                TokenDto token = _tokenHelper.CreateAccessToken(response.Data, userDto.UserName, 2);
+                UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
+
+                UpdateRefreshToken(user, token, 2);
+                return await Task.FromResult(Response<TokenDto>.Success(token,ResponseStatus.Success)); 
             }
 
-            return await Task.FromResult(Response<string>.Fail(checkUniqueResult.Errors,ResponseStatus.InitialError));
+            return await Task.FromResult(Response<TokenDto>.Fail(checkUniqueResult.Errors,ResponseStatus.InitialError));
         }
 
         // UserName and Email must be unique

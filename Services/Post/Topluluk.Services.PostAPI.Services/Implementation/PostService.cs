@@ -14,6 +14,8 @@ using System.Text.Json;
 using DotNetCore.CAP;
 using Topluluk.Services.PostAPI.Model.Dto.Http;
 using RestSharp;
+using Topluluk.Services.POSTAPI.Model.Dto.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Topluluk.Services.PostAPI.Services.Implementation
 {
@@ -52,6 +54,13 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             Post post = _mapper.Map<Post>(postDto);
 
+            var getUserRequest = new RestRequest("https://localhost:7202/User/GetUserById").AddQueryParameter("userId", postDto.UserId);
+            var getUserResponse = await _client.ExecutePostAsync<Response<GetUserByIdDto>>(getUserRequest);
+            post.FirstName = getUserResponse.Data.Data.FirstName;
+            post.LastName = getUserResponse.Data.Data.LastName;
+            post.ProfileImage = getUserResponse.Data.Data.ProfileImage;
+            
+                
             DatabaseResponse response = await _postRepository.InsertAsync(post);
 
             // Post topluluk da paylaşılacak
@@ -91,21 +100,22 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
 
             }
+            return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
 
-            PostCreatedUserDto postCreatedUserDto = new() { PostId = response.Data, UserId = postDto.UserId};
-            var userCreateRequest = new RestRequest("https://localhost:7202/User/PostCreated").AddBody(postCreatedUserDto);
-            var userCreateResponse = await _client.ExecutePostAsync(userCreateRequest);
+            //PostCreatedUserDto postCreatedUserDto = new() { PostId = response.Data, UserId = postDto.UserId};
+            //var userCreateRequest = new RestRequest("https://localhost:7202/User/PostCreated").AddBody(postCreatedUserDto);
+            //var userCreateResponse = await _client.ExecutePostAsync(userCreateRequest);
 
-            if (userCreateResponse.IsSuccessStatusCode == true)
-            {
-                return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
-            }
-            else
-            {
-                // Post silindi ve fonksiyon bitirildi.
-                _postRepository.Delete(post);
-                return await Task.FromResult(Response<string>.Fail("Failed",Shared.Enums.ResponseStatus.InitialError));
-            }
+            //if (userCreateResponse.IsSuccessStatusCode == true)
+            //{
+            //    return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
+            //}
+            //else
+            //{
+            //    // Post silindi ve fonksiyon bitirildi.
+            //    _postRepository.Delete(post);
+            //    return await Task.FromResult(Response<string>.Fail("Failed",Shared.Enums.ResponseStatus.InitialError));
+            //}
         }
 
         public async Task<Response<string>> Delete(PostDeleteDto postDto)
@@ -189,13 +199,46 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         // Feed ekranındaki postlar için hazırlanmış metod.
         public async Task<Response<List<GetPostDto>>> GetPosts(string userId, int take = 10, int skip = 0)
         {
-            // User servise istek atıp takip ettiğimiz kullanıcıların id listesini döndürcez.
+            // Communit servise istek atıp takip ettiğimiz kullanıcıların id listesini döndürcez.
+            //var userCommunitiesRequest = new RestRequest("https://localhost:7132/community/user-communities").AddQueryParameter("id", userId);
+            ////var userCommunitiesResponse = await _client.ExecuteGetAsync<Response<List<string>>>(userCommunitiesRequest);
+            //List<string> userCommunities = new();
+
+            //if (userCommunitiesResponse.IsSuccessful == true)
+            //{
+            //    foreach (var community in userCommunitiesResponse.Data.Data)
+            //    {user
+            //        userCommunities.Add(community);
+            //    }
+            //}
+
 
             // Kullanıcının takip ettiği kullanıcıların postları, kendi postları, kendi katıldığı topluluklarının postları
             var response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == userId);
+            List<GetPostDto> posts = _mapper.Map<List<Post>, List<GetPostDto>>(response.Data);
 
-            return await Task.FromResult(Response<List<GetPostDto>>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
 
+            return await Task.FromResult(Response<List<GetPostDto>>.Success(posts, Shared.Enums.ResponseStatus.Success));
+
+        }
+
+        // Kullanıcı ekranında kullanıcının paylaşımlarını listelemek için kullanılacak action
+        // https://localhost:xxxx/post/suer
+        public async Task<Response<List<GetPostDto>>> GetUserPosts(string userId, int take = 10, int skip = 0)
+        {
+            try
+            {
+
+                DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == userId);
+                List<GetPostDto> dto = _mapper.Map<List<Post>, List<GetPostDto>>(response.Data);
+                return await Task.FromResult(Response<List<GetPostDto>>.Success(dto, Shared.Enums.ResponseStatus.Success));
+            }
+            catch
+            (Exception e)
+            {
+                return await Task.FromResult(Response<List<GetPostDto>>.Fail($"Error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+
+            }
         }
 
         public Task<Response<string>> Interaction(string postId, InteractionType interactionType)

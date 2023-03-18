@@ -73,10 +73,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseCors();
-app.Use(async (context, next) =>
-{
-    context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null; // unlimited I guess
-    await next.Invoke();
-});
+//app.Use(async (context, next) =>
+//{
+//    context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null; // unlimited I guess
+//    await next.Invoke();
+//});
 app.Run();
 

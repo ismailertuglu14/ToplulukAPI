@@ -64,7 +64,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<string>> Delete(string id)
         {
-            return await _communityService.Delete(id);
+            return await _communityService.Delete(this.UserId,id);
         }
 
         [HttpPost("[action]/{id}")]

@@ -45,20 +45,19 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5)
         {
-            DatabaseResponse response = await _communityRepository.GetAllAsync(take,skip,c => c.IsPublic != false && c.IsVisible != false && !c.Participiants.Contains(userId));
-            List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
-            //if (request.Headers["User-Agent"].ToString().Contains("Mobile"))
-            //{
-            //    List<CommunitySuggestionMobileDto> suggestions = _mapper.Map<List<CommunitySuggestionMobileDto>>(response.Data);
+            try
+            {
+                DatabaseResponse response = await _communityRepository.GetAllAsync(take, skip, c => c.IsPublic != false && c.IsVisible != false && !c.Participiants.Contains(userId));
+                List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
 
-            //    return await Task.FromResult(Response<List<object>>.Success(new(suggestions), ResponseStatus.Success));
-            //}
-            //else if(request.Headers["User-Agent"].ToString().Contains("Web"))
-            //{
-            //    List<CommunitySuggestionWebDto> suggestions = _mapper.Map<List<CommunitySuggestionWebDto>>(response.Data);
-            //    return await Task.FromResult(Response<List<object>>.Success(new(suggestions), ResponseStatus.Success));
-            //}
-            return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
+
+                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
+            }
+            catch(Exception e)
+            {
+                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
+
+            }
         }
 
 
@@ -199,13 +198,30 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<Response<string>> Delete(string communityId)
+        public async Task<Response<string>> Delete(string ownerId,string communityId)
         {
-            DatabaseResponse response = _communityRepository.DeleteById(communityId);
-            if(response.IsSuccess == true)
-                return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
+            try
+            {
+                Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
 
-            return await Task.FromResult(Response<string>.Fail("Failed while deleting community", ResponseStatus.Success));
+                if (community.AdminId == ownerId)
+                {
+                    _communityRepository.DeleteById(communityId);
+                    return await Task.FromResult(Response<string>.Success("Deleted", ResponseStatus.Success));
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("Not authorized for delete community. You are not an admin!", ResponseStatus.NotAuthenticated));
+
+                }
+
+
+            }
+            catch(Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured: {e}", ResponseStatus.NotAuthenticated));
+
+            }
 
         }
 
@@ -280,9 +296,30 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return str;
         }
 
-        public Task<Response<string>> DeletePermanently(string ownerId, string communityId)
+        public async Task<Response<string>> DeletePermanently(string ownerId, string communityId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
+
+                if (community.AdminId == ownerId)
+                {
+                    _communityRepository.DeleteCompletely(communityId);
+                    return await Task.FromResult(Response<string>.Success("Deleted", ResponseStatus.Success));
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("Not authorized for delete community. You are not an admin!", ResponseStatus.NotAuthenticated));
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured: {e}", ResponseStatus.InitialError));
+
+            }
         }
 
         public async Task<Response<List<string>>> GetParticipiants(string id)

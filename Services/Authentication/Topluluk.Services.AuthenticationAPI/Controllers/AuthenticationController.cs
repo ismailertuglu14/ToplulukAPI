@@ -28,7 +28,7 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> SignUp(CreateUserDto userDto)
+        public async Task<Response<TokenDto>> SignUp(CreateUserDto userDto)
         {
             return await _authenticationService.SignUp(userDto);
         }

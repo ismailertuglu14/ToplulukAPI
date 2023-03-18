@@ -28,9 +28,15 @@ namespace Topluluk.Services.PostAPI.Controllers
 
 
         [HttpGet("[action]")]
-        public async Task<Response<string>> GetPostsForFeedScreen()
+        public async Task<Response<List<GetPostDto>>> GetPostsForFeedScreen()
         {
-            throw new NotImplementedException();
+            return await _postService.GetPosts(this.UserId);
+        }
+
+        [HttpGet("user")]
+        public async Task<Response<List<GetPostDto>>> GetPostsForUserScreen(int take,int skip)
+        {
+            return await _postService.GetUserPosts(this.UserId,take,skip);
         }
 
         [HttpGet("GetPost")]

@@ -13,6 +13,9 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 		// bu post duruma göre silinecek veyahut topluluğu takip etmeyen kullanıcılar
 		// tarafından görülemeyecektir.
 		public string UserId { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string? ProfileImage { get; set; }
 		public string? CommunityId { get; set; }
 		public string? SharedById { get; set; }
 		public ICollection<string> Files { get; set; }
