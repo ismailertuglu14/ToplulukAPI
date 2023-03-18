@@ -83,19 +83,84 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             
         }
 
-        public Task<Response<string>> DeleteCompletelyEvent(string userId, string id)
+
+        public async Task<Response<string>> DeleteCompletelyEvent(string userId, string id)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
+                if (_event.UserId == userId)
+                {
+                    _eventRepository.DeleteCompletely(id);
+                    return await Task.FromResult(Response<string>.Success("Deleted Completely", Shared.Enums.ResponseStatus.Success));
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", Shared.Enums.ResponseStatus.NotAuthenticated));
+
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
         }
 
-        public Task<Response<string>> DeleteEvent(string userId, string id)
+        public async Task<Response<string>> DeleteEvent(string userId, string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
+                if (_event == null) throw new Exception("Not Found"); 
+                if (_event.UserId == userId)
+                {
+                    _eventRepository.DeleteById(id);
+                    return await Task.FromResult(Response<string>.Success("Deleted", Shared.Enums.ResponseStatus.Success));
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", Shared.Enums.ResponseStatus.NotAuthenticated));
+
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
         }
 
-        public Task<Response<string>> ExpireEvent(string userId, string id)
+        public async Task<Response<string>> ExpireEvent(string userId, string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
+                if (_event == null) throw new Exception("Not Found");
+                if (_event.UserId == userId)
+                {
+                    // Expire code here...
+                    _event.IsExpired = true;
+                    DatabaseResponse response = _eventRepository.Update(_event);
+                    if (response.IsSuccess == true)
+                    {
+                        return await Task.FromResult(Response<string>.Success("Event expired", Shared.Enums.ResponseStatus.Success));
+                    }
+                    else
+                    {
+                        return await Task.FromResult(Response<string>.Fail("Failed event expire", Shared.Enums.ResponseStatus.InitialError));
+
+                    }
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", Shared.Enums.ResponseStatus.NotAuthenticated));
+                }
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
         }
 
         public Task<Response<string>> GetEventById(string userId, string id)

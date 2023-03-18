@@ -1,0 +1,15 @@
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/bin/Release/net6.0/Topluluk.Services.PostAPI.Model.deps.json
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/bin/Release/net6.0/Topluluk.Services.PostAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/bin/Release/net6.0/Topluluk.Services.PostAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/bin/Release/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/bin/Release/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.AssemblyInfo.cs
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.csproj.CopyComplete
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/refint/Topluluk.Services.PostAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/Topluluk.Services.PostAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Model/obj/Release/net6.0/ref/Topluluk.Services.PostAPI.Model.dll

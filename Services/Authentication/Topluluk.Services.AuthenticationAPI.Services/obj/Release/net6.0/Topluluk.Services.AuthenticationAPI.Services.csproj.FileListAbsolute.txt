@@ -19,3 +19,5 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Services/obj/Release/net6.0/refint/Topluluk.Services.AuthenticationAPI.Services.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Services/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.Services.pdb
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Services/obj/Release/net6.0/ref/Topluluk.Services.AuthenticationAPI.Services.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Services/bin/Release/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI.Services/bin/Release/net6.0/Topluluk.Services.CommunityAPI.Model.pdb

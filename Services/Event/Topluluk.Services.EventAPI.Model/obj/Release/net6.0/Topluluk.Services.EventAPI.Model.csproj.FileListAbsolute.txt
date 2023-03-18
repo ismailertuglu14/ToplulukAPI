@@ -1,0 +1,15 @@
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/bin/Release/net6.0/Topluluk.Services.EventAPI.Model.deps.json
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/bin/Release/net6.0/Topluluk.Services.EventAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/bin/Release/net6.0/Topluluk.Services.EventAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/bin/Release/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/bin/Release/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.AssemblyInfo.cs
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.csproj.CopyComplete
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/refint/Topluluk.Services.EventAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/Topluluk.Services.EventAPI.Model.pdb
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Model/obj/Release/net6.0/ref/Topluluk.Services.EventAPI.Model.dll

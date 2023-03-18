@@ -1,29 +1,31 @@
-﻿<Properties GitUserInfo="UsingMD" StartupConfiguration="Multiple Projects">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Services.Authentication.Topluluk.Services.AuthenticationAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Services.Post.Topluluk.Services.PostAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI.Model FirstBuild="True" />
-  <MonoDevelop.Ide.ItemProperties.Services.User.Topluluk.Services.User.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services/Event/Topluluk.Services.EventAPI.Services/Interface/IEventService.cs">
+﻿<Properties StartupConfiguration="Multiple Projects" GitUserInfo="UsingMD">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/File/Topluluk.Services.FileAPI/Program.cs">
     <Files>
       <File FileName="Services/User/Topluluk.Services.User.API/Controllers/UserController.cs" />
-      <File FileName="Services/Event/Topluluk.Services.EventAPI/Controllers/EventController.cs" Line="39" Column="10" />
-      <File FileName="Services/Event/Topluluk.Services.EventAPI.Services/Implementation/EventService.cs" Line="1" Column="1" />
-      <File FileName="Services/Event/Topluluk.Services.EventAPI/Program.cs" />
+      <File FileName="Services/Event/Topluluk.Services.EventAPI/Controllers/EventController.cs" />
+      <File FileName="Services/Event/Topluluk.Services.EventAPI.Services/Implementation/EventService.cs" />
       <File FileName="Services/Community/Topluluk.Services.CommunityAPI.Services/Interface/ICommunityService.cs" />
       <File FileName="Services/Event/Topluluk.Services.EventAPI.Model/Dto/Http/GetCommunityByIdDto.cs" />
       <File FileName="Services/Community/Topluluk.Services.CommunityAPI.Services/Implementation/CommunityService.cs" />
       <File FileName="Services/Community/Topluluk.Services.CommunityAPI.Data/Implementation/CommunityRepository.cs" />
-      <File FileName="Services/Community/Topluluk.Services.CommunityAPI.Model/Entity/Community.cs" Line="34" Column="1" />
-      <File FileName="Services/Event/Topluluk.Services.EventAPI.Services/Interface/IEventService.cs" Line="10" Column="36" />
-      <File FileName="Services/Event/Topluluk.Services.EventAPI.Model/Dto/GetUserEventDto.cs" Line="20" Column="1" />
+      <File FileName="Services/Community/Topluluk.Services.CommunityAPI.Model/Entity/Community.cs" />
+      <File FileName="Services/Event/Topluluk.Services.EventAPI.Services/Interface/IEventService.cs" />
+      <File FileName="Services/Event/Topluluk.Services.EventAPI.Model/Dto/GetUserEventDto.cs" />
+      <File FileName="Services/Event/Topluluk.Services.EventAPI/Program.cs" Line="42" Column="1" />
+      <File FileName="Services/Authentication/Topluluk.Services.AuthenticationAPI/Program.cs" Line="67" Column="1" />
+      <File FileName="Services/File/Topluluk.Services.FileAPI/Program.cs" Line="89" Column="1" />
+      <File FileName="Services/Authentication/Topluluk.Services.AuthenticationAPI/Controllers/AuthenticationController.cs" Line="15" Column="59" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Topluluk" expanded="True">
             <Node name="Services" expanded="True">
+              <Node name="Authentication" expanded="True">
+                <Node name="Topluluk.Services.AuthenticationAPI" expanded="True">
+                  <Node name="Controllers" expanded="True" />
+                </Node>
+              </Node>
               <Node name="Community" expanded="True">
                 <Node name="Topluluk.Services.CommunityAPI" expanded="True">
                   <Node name="Controllers" expanded="True" />
@@ -57,9 +59,12 @@
                 <Node name="Topluluk.Services.EventAPI.Services" expanded="True">
                   <Node name="Core" expanded="True" />
                   <Node name="Implementation" expanded="True" />
-                  <Node name="Interface" expanded="True">
-                    <Node name="IEventService.cs" selected="True" />
-                  </Node>
+                  <Node name="Interface" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="File" expanded="True">
+                <Node name="Topluluk.Services.FileAPI" expanded="True">
+                  <Node name="Program.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="User" expanded="True">
@@ -73,8 +78,10 @@
               </Node>
             </Node>
             <Node name="Shared" expanded="True">
-              <Node name="Topluluk.Shared" expanded="True">
-                <Node name="Dependencies" expanded="True" />
+              <Node name="DBHelper" expanded="True">
+                <Node name="Repository" expanded="True">
+                  <Node name="Mongo" expanded="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -82,19 +89,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="59" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="52" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="45" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" relfile="Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" line="406" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="33" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" relfile="Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" line="391" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Services/Implementation/PostService.cs" relfile="Services/Post/Topluluk.Services.PostAPI.Services/Implementation/PostService.cs" line="55" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Services/Implementation/EventService.cs" relfile="Services/Event/Topluluk.Services.EventAPI.Services/Implementation/EventService.cs" line="29" column="1" />
-      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" relfile="Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" line="48" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Gateways.Topluluk.Api.Gateways PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
       <Items>
@@ -107,17 +102,36 @@
       </Items>
     </MultiItemSolutionRunConfiguration>
   </MultiItemStartupConfigurations>
-  <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.ItemProperties.Services.Community.Topluluk.Services.CommunityAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.File.Topluluk.Services.FileAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.Mail.Topluluk.Services.MailAPI FirstBuild="True" PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.ItemProperties.Gateways.Topluluk.Api.Gateways PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.ItemProperties.Services.Event.Topluluk.Services.EventAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="59" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="52" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="45" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" relfile="Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" line="406" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" relfile="Services/Post/Topluluk.Services.PostAPI/Controllers/PostController.cs" line="33" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" relfile="Services/User/Topluluk.Services.User.Services/Implementation/UserService.cs" line="391" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Post/Topluluk.Services.PostAPI.Services/Implementation/PostService.cs" relfile="Services/Post/Topluluk.Services.PostAPI.Services/Implementation/PostService.cs" line="55" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI.Services/Implementation/EventService.cs" relfile="Services/Event/Topluluk.Services.EventAPI.Services/Implementation/EventService.cs" line="29" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" relfile="Services/Community/Topluluk.Services.CommunityAPI/Controllers/CommunityController.cs" line="48" column="1" />
+      <Breakpoint file="/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Event/Topluluk.Services.EventAPI/Controllers/EventController.cs" relfile="Services/Event/Topluluk.Services.EventAPI/Controllers/EventController.cs" line="45" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Services.Mail.Topluluk.Services.MailAPI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Services.Authentication.Topluluk.Services.AuthenticationAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.ItemProperties.Services.Report.Topluluk.Services.ReportAPI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.Event.Topluluk.Services.EventAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.File.Topluluk.Services.FileAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <DisabledProjects>
     <String>Topluluk.Shared/Topluluk.Shared.csproj</String>
   </DisabledProjects>
-  <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI.Data FirstBuild="True" />
   <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI.Services FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Services.Post.Topluluk.Services.PostAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.QR.Topluluk.Services.QRAPI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.User.Topluluk.Services.User.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI.Data FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Services.Search.Topluluk.Services.SearchAPI.Model FirstBuild="True" />
 </Properties>

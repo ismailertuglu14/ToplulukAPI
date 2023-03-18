@@ -20,8 +20,9 @@ namespace Topluluk.Services.EventAPI.Model.Entity
 		public int ParticipiantLimit { get; set; }
 		public bool IsLimited { get; set; } = false;
 
+		public bool IsExpired { get; set; } = false;
 
-        public DateTime? StartDate { get; set; } = DateTime.Now;
+		public DateTime? StartDate { get; set; } = DateTime.Now;
         public DateTime? EndDate { get; set; } = DateTime.Now.AddYears(1);
 
         public ICollection<InteractionType> Interactions { get; set; }

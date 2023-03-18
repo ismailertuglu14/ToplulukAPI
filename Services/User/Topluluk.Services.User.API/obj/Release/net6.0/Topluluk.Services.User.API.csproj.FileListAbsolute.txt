@@ -106,3 +106,8 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/obj/Release/net6.0/Topluluk.Services.User.API.pdb
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/obj/Release/net6.0/Topluluk.Services.User.API.genruntimeconfig.cache
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/obj/Release/net6.0/ref/Topluluk.Services.User.API.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/bin/Release/net6.0/DotNetCore.CAP.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/bin/Release/net6.0/DotNetCore.CAP.MongoDB.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/bin/Release/net6.0/DotNetCore.CAP.RabbitMQ.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/bin/Release/net6.0/RabbitMQ.Client.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.API/bin/Release/net6.0/RestSharp.dll

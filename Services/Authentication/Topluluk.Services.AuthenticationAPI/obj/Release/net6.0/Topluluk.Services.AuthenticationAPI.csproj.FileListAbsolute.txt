@@ -106,3 +106,6 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.pdb
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Release/net6.0/Topluluk.Services.AuthenticationAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Release/net6.0/ref/Topluluk.Services.AuthenticationAPI.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Release/net6.0/RestSharp.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Release/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Release/net6.0/Topluluk.Services.CommunityAPI.Model.pdb

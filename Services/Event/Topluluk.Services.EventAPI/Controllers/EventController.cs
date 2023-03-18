@@ -38,6 +38,24 @@ namespace Topluluk.Services.EventAPI.Controllers
         {
             return new();
         }
+
+        [HttpPost("delete")]
+        public async Task<Response<string>> DeleteEvent(string id)
+        {
+            return await _eventService.DeleteEvent(this.UserId, id);
+        }
+
+        [HttpPost("delete-completely")]
+        public async Task<Response<string>> DeleteEventCompletely(string id)
+        {
+            return await _eventService.DeleteCompletelyEvent(this.UserId, id);
+        }
+        [HttpPost("expire")]
+        public async Task<Response<string>> EventExpire(string id)
+        {
+            return await _eventService.ExpireEvent(this.UserId, id);
+        }
+
     }
 }
 

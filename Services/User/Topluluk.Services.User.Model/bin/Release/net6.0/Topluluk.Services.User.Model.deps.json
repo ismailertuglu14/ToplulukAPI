@@ -1784,6 +1784,7 @@
       },
       "Topluluk.Shared/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.Extensions.Configuration": "6.0.0",
           "MongoDB.Bson": "2.19.0",

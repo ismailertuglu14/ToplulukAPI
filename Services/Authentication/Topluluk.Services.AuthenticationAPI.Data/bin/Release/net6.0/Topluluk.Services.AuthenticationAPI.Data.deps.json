@@ -10,6 +10,7 @@
         "dependencies": {
           "DBHelper": "1.0.0",
           "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
+          "Topluluk.Services.CommunityAPI.Model": "1.0.0",
           "Topluluk.Shared": "1.0.0"
         },
         "runtime": {
@@ -2190,8 +2191,18 @@
           "Topluluk.Services.AuthenticationAPI.Model.dll": {}
         }
       },
+      "Topluluk.Services.CommunityAPI.Model/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Topluluk.Shared": "1.0.0"
+        },
+        "runtime": {
+          "Topluluk.Services.CommunityAPI.Model.dll": {}
+        }
+      },
       "Topluluk.Shared/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "MongoDB.Bson": "2.19.0",
@@ -3602,6 +3613,11 @@
       "sha512": ""
     },
     "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Topluluk.Services.CommunityAPI.Model/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

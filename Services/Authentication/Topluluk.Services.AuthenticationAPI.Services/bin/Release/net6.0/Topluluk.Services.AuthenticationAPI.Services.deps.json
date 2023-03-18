@@ -9,6 +9,7 @@
       "Topluluk.Services.AuthenticationAPI.Services/1.0.0": {
         "dependencies": {
           "DBHelper": "1.0.0",
+          "RestSharp": "109.0.1",
           "Topluluk.Services.AuthenticationAPI.Data": "1.0.0",
           "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
           "Topluluk.Shared": "1.0.0"
@@ -1271,6 +1272,14 @@
           }
         }
       },
+      "RestSharp/109.0.1": {
+        "runtime": {
+          "lib/net6.0/RestSharp.dll": {
+            "assemblyVersion": "109.0.1.0",
+            "fileVersion": "109.0.1.0"
+          }
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -2180,6 +2189,7 @@
         "dependencies": {
           "DBHelper": "1.0.0",
           "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
+          "Topluluk.Services.CommunityAPI.Model": "1.0.0",
           "Topluluk.Shared": "1.0.0"
         },
         "runtime": {
@@ -2201,8 +2211,18 @@
           "Topluluk.Services.AuthenticationAPI.Model.dll": {}
         }
       },
+      "Topluluk.Services.CommunityAPI.Model/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Topluluk.Shared": "1.0.0"
+        },
+        "runtime": {
+          "Topluluk.Services.CommunityAPI.Model.dll": {}
+        }
+      },
       "Topluluk.Shared/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "MongoDB.Bson": "2.19.0",
@@ -2914,6 +2934,13 @@
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
     },
+    "RestSharp/109.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OkJ23uaV8qwCKuR7RKBUFlnXxIDZ7P1jEaoDawXgysujIcWZgIwE6p90kJZxY9EVv9ESjZtGlSmP8k+kOfDH9g==",
+      "path": "restsharp/109.0.1",
+      "hashPath": "restsharp.109.0.1.nupkg.sha512"
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -3618,6 +3645,11 @@
       "sha512": ""
     },
     "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Topluluk.Services.CommunityAPI.Model/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
