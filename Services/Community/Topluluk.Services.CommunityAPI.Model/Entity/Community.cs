@@ -39,6 +39,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 		public Community()
 		{
 			ModeratorIds = new HashSet<Moderator>();
+			JoinRequestWaitings = new HashSet<string>();
 			Questions = new HashSet<Question>();
 			Participiants = new HashSet<string>();
 			Cities = new HashSet<string>();

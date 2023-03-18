@@ -95,6 +95,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Services", "Services\Search\Topluluk.Services.SearchAPI.Services\Topluluk.Services.SearchAPI.Services.csproj", "{13C4CD64-CEF9-487E-93DE-F4847398900C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI", "Services\Event\Topluluk.Services.EventAPI\Topluluk.Services.EventAPI.csproj", "{F7368149-68D4-4BAF-9B6F-3480B9960884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI.Data", "Services\Event\Topluluk.Services.EventAPI.Data\Topluluk.Services.EventAPI.Data.csproj", "{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI.Model", "Services\Event\Topluluk.Services.EventAPI.Model\Topluluk.Services.EventAPI.Model.csproj", "{DB79D25B-0B97-4B33-98B6-AAF520D42F59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI.Services", "Services\Event\Topluluk.Services.EventAPI.Services\Topluluk.Services.EventAPI.Services.csproj", "{305C531F-25ED-47A6-AFC5-4E73996CF291}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -233,6 +241,22 @@ Global
 		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13C4CD64-CEF9-487E-93DE-F4847398900C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7368149-68D4-4BAF-9B6F-3480B9960884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7368149-68D4-4BAF-9B6F-3480B9960884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7368149-68D4-4BAF-9B6F-3480B9960884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7368149-68D4-4BAF-9B6F-3480B9960884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB79D25B-0B97-4B33-98B6-AAF520D42F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB79D25B-0B97-4B33-98B6-AAF520D42F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB79D25B-0B97-4B33-98B6-AAF520D42F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB79D25B-0B97-4B33-98B6-AAF520D42F59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -284,5 +308,9 @@ Global
 		{E56F01A1-3A4E-4483-84FC-2624E46CCB6D} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
 		{A93C7BE7-D2EB-4FD4-89E5-9288974E454C} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
 		{13C4CD64-CEF9-487E-93DE-F4847398900C} = {AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}
+		{F7368149-68D4-4BAF-9B6F-3480B9960884} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
+		{16F02A88-8E29-4FAB-98C8-52424A5F5F4F} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
+		{DB79D25B-0B97-4B33-98B6-AAF520D42F59} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
+		{305C531F-25ED-47A6-AFC5-4E73996CF291} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
 	EndGlobalSection
 EndGlobal

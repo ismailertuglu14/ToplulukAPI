@@ -50,12 +50,7 @@ builder.Services.Configure<FormOptions>(o =>  // currently all set to max, confi
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-}));
+
 builder.Services.AddInfrastructure();
 
 var app = builder.Build();

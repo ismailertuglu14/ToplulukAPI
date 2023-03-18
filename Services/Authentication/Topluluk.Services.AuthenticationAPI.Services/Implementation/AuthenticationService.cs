@@ -101,11 +101,21 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
                 var userInsertRequest = new RestRequest("https://localhost:7202/user/insertuser").AddBody(content);
                 var userInsertResponse = await _client.ExecutePostAsync(userInsertRequest);
-                TokenDto token = _tokenHelper.CreateAccessToken(response.Data, userDto.UserName, 2);
-                UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
 
-                UpdateRefreshToken(user, token, 2);
-                return await Task.FromResult(Response<TokenDto>.Success(token,ResponseStatus.Success)); 
+                if (userInsertResponse.IsSuccessful == true)
+                {
+                    TokenDto token = _tokenHelper.CreateAccessToken(response.Data, userDto.UserName, 2);
+                    UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
+                    UpdateRefreshToken(user, token, 2);
+                    return await Task.FromResult(Response<TokenDto>.Success(token, ResponseStatus.Success));
+                }
+                else
+                {
+                    _repository.DeleteCompletely(response.Data);
+                    return await Task.FromResult(Response<TokenDto>.Fail("Error occured while user inserting!", ResponseStatus.InitialError));
+
+                }
+
             }
 
             return await Task.FromResult(Response<TokenDto>.Fail(checkUniqueResult.Errors,ResponseStatus.InitialError));

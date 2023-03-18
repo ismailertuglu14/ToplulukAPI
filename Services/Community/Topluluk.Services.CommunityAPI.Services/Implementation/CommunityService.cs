@@ -352,6 +352,19 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
 
         }
+
+        public async Task<Response<bool>> CheckCommunityExist(string id)
+        {
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == id);
+            if (community != null)
+            {
+                return await Task.FromResult(Response<bool>.Success(true, ResponseStatus.Success));
+            }
+            else
+            {
+                return await Task.FromResult(Response<bool>.Success(false, ResponseStatus.Success));
+            }
+        }
     }
 }
 

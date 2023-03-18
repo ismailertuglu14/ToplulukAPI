@@ -101,6 +101,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.UpdateCoverImage(dto);
         }
+
         [HttpGet("Participiants/{id}")]
         public async Task<List<string>> GetParticipiants(string id)
         {
@@ -118,7 +119,13 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.GetCommunityTitle(id);
         }
-    }
+
+        [HttpGet("check-exist")]
+        public async Task<Response<bool>> CheckCommunityExist(string id)
+        {
+            return await _communityService.CheckCommunityExist(id);
+        }
+     }
     
 }
 
