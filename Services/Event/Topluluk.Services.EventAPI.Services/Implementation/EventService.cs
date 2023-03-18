@@ -35,7 +35,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
             // check community is exist ;
             // check is user is participiant of community
-            if (dto.CommunityId != null || dto.CommunityId != String.Empty)
+            if (dto.CommunityId != null && dto.CommunityId != String.Empty)
             {
                 
                 var getParticipiantsRequest = new RestRequest($"https://localhost:7132/Community/Participiants/{dto.CommunityId}");
@@ -81,6 +81,36 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
 
             }
             
+        }
+
+        public Task<Response<string>> DeleteCompletelyEvent(string userId, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<string>> DeleteEvent(string userId, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<string>> ExpireEvent(string userId, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<string>> GetEventById(string userId, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<string>> GetEventSuggestions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<string>> GetUserEvents(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
