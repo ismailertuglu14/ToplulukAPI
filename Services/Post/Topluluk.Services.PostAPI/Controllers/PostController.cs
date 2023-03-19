@@ -70,7 +70,7 @@ namespace Topluluk.Services.PostAPI.Controllers
         [HttpGet("comments")]
         public async Task<Response<List<CommentGetDto>>> GetComments(string id)
         {
-            return await _postService.GetComments(id);
+            return await _postService.GetComments(this.UserId, id);
         }
 
 

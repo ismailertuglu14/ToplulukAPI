@@ -363,7 +363,18 @@ namespace DBHelper.Repository.Mongo
             return dbResponse;
         }
 
-      
+        public async Task<DatabaseResponse> GetListById(List<string> ids)
+        {
+            DatabaseResponse response = new();
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+            var filter = Builders<T>.Filter.In(x => x.Id, ids);
+         
+            response.Data = await database.GetCollection<T>(collectionName).Find(filter).ToListAsync();
+
+            response.IsSuccess = true;
+            return await Task.FromResult(response);
+        }
     }
 }
 

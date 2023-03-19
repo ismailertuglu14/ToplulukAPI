@@ -11,6 +11,8 @@ namespace DBHelper.Repository
         int Count();
 
         DatabaseResponse GetById(string id);
+        Task<DatabaseResponse> GetListById(List<string> ids);
+
         Task<DatabaseResponse> GetByIdAsync(string id);
 
         DatabaseResponse GetByIdWithDeleted(string id);

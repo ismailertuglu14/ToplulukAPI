@@ -204,6 +204,11 @@ namespace DBHelper.Repository.SQL
         {
             throw new NotImplementedException();
         }
+
+        public Task<DatabaseResponse> GetListById(List<string> ids)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

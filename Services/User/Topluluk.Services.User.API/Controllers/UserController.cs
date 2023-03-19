@@ -169,5 +169,6 @@ namespace Topluluk.Services.User.API.Controllers
         public string UserId { get; set; }
         public string FileName { get; set; }
     }
+ 
 }
 

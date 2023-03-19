@@ -133,7 +133,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<Response<List<CommentGetDto>?>> GetComments(string postId, int take = 10, int skip = 0)
+        public async Task<Response<List<CommentGetDto>?>> GetComments(string userId, string postId, int take = 10, int skip = 0)
         {
             try
             {
@@ -147,13 +147,15 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 {
                     int i = 0;
                     List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
+                    
+                       
                     foreach (var comment in comments)
                     {
-                        var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id", comments[i].UserId);
+                        var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id",comment.UserId);
                         var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
                         comments[i].UserName = userInfoResponse.Data.Data.UserName;
                         comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
-
+                     //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);        
                     }
                     return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
 
