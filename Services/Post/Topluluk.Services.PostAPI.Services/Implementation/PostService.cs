@@ -133,6 +133,44 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
+        public async Task<Response<List<CommentGetDto>?>> GetComments(string postId, int take = 10, int skip = 0)
+        {
+            try
+            {
+                DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
+
+                if (response.Data.Count == 0)
+                {
+                    return await Task.FromResult(Response<List<CommentGetDto>?>.Success(null, Shared.Enums.ResponseStatus.Success));
+                }
+                else if (response.Data.Count > 0)
+                {
+                    int i = 0;
+                    List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
+                    foreach (var comment in comments)
+                    {
+                        var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id", comments[i].UserId);
+                        var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
+                        comments[i].UserName = userInfoResponse.Data.Data.UserName;
+                        comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
+
+                    }
+                    return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
+
+                }
+
+
+
+                return await Task.FromResult(Response<List<CommentGetDto>?>.Success(null, Shared.Enums.ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+             return await Task.FromResult(Response<List<CommentGetDto>?>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+
+            }
+        }
+
         public Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10)
         {
             throw new NotImplementedException();

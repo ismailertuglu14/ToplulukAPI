@@ -21,6 +21,7 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 		Task<Response<string>> Interaction(string postId, InteractionType interactionType);
 
 		Task<Response<string>> Comment(CommentCreateDto commentDto);
+        Task<Response<List<CommentGetDto>>> GetComments(string postId, int take = 10, int skip = 0);
         // Her kullanıcı kendi yorumunu silebilir.
         // Adminler herkesin yorumunu silebilir.
         Task<Response<string>> DeleteComment(string userId, string commentId);

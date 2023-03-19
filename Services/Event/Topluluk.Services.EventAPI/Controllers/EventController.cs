@@ -34,9 +34,9 @@ namespace Topluluk.Services.EventAPI.Controllers
 
         // https://localhost:xxxx/event/user/1213123123
         [HttpGet("user/{id}")]
-        public async Task<Response<string>> GetUserEvents()
+        public async Task<Response<List<FeedEventDto>>> GetUserEvents(string id)
         {
-            return new();
+            return await _eventService.GetUserEvents(id);
         }
 
         [HttpPost("delete")]
@@ -55,6 +55,7 @@ namespace Topluluk.Services.EventAPI.Controllers
         {
             return await _eventService.ExpireEvent(this.UserId, id);
         }
+
 
     }
 }

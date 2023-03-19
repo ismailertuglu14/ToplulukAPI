@@ -149,12 +149,19 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.GetUserInfoForPost(id, sourceUserId);
         }
-        
+
+        [HttpGet("user-info-comment")]
+        public async Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id)
+        {
+            return await _userService.GetUserInfoForComment(id);
+        }
+
         [HttpGet("communityOwner")]
         public async Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id)
         {
             return await _userService.GetCommunityOwner(id);
         }
+        
 
     }
     public class UserBannerChangedDto

@@ -414,6 +414,13 @@ namespace Topluluk.Services.User.Services.Implementation
             }
             return await Task.FromResult(Response<GetCommunityOwnerDto>.Fail("Not found", ResponseStatus.NotFound));
         }
+
+        public async Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id)
+        {
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+            UserInfoForCommentDto dto = _mapper.Map<UserInfoForCommentDto>(user);
+            return await Task.FromResult(Response<UserInfoForCommentDto>.Success(dto, ResponseStatus.Success));
+        }
     }
     
 }

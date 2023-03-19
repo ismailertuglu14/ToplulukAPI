@@ -66,6 +66,14 @@ namespace Topluluk.Services.PostAPI.Controllers
             commentDto.UserId = UserId;
             return await _postService.Comment(commentDto);
         }
+
+        [HttpGet("comments")]
+        public async Task<Response<List<CommentGetDto>>> GetComments(string id)
+        {
+            return await _postService.GetComments(id);
+        }
+
+
     }
 }
 

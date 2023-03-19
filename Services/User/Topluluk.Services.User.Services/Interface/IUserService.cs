@@ -37,6 +37,7 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<string>> DeletePost(PostDeleteDto dto);
 		Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId);
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
+		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);
     }
 
 }

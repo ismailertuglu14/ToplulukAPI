@@ -138,7 +138,6 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 if (_event == null) throw new Exception("Not Found");
                 if (_event.UserId == userId)
                 {
-                    // Expire code here...
                     _event.IsExpired = true;
                     DatabaseResponse response = _eventRepository.Update(_event);
                     if (response.IsSuccess == true)
@@ -173,10 +172,33 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<Response<string>> GetUserEvents(string id)
+        public async Task<Response<List<FeedEventDto>>> GetUserEvents(string id)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                DatabaseResponse response = await _eventRepository.GetAllAsync(5, 0, e => e.UserId == id);
+                if (response.IsSuccess == true)
+                {
+                    List<FeedEventDto> dto = _mapper.Map<List<Event>, List<FeedEventDto>>(response.Data);
+                    
+                    int i = 0;
+                    foreach(var e in dto)
+                    {
+                        e.EventId = response.Data[i].Id;
+                    }
+                    return await Task.FromResult(Response<List<FeedEventDto>>.Success(dto, Shared.Enums.ResponseStatus.Success));
+
+                }
+                return await Task.FromResult(Response<List<FeedEventDto>>.Fail("Some error occured", Shared.Enums.ResponseStatus.InitialError));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<FeedEventDto>>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
+
+            }
         }
-    }
 }
 

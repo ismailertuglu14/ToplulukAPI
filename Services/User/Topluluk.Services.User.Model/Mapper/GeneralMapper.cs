@@ -14,6 +14,7 @@ namespace Topluluk.Services.User.Model.Mapper
 			CreateMap<_User, UserSearchResponseDto>().ReverseMap();
 			CreateMap<_User, GetUserByIdDto>();
 			CreateMap<_User, GetCommunityOwnerDto>();
+			CreateMap<_User, UserInfoForCommentDto>();
 		}
 	}
 }

@@ -12,6 +12,7 @@ namespace Topluluk.Services.PostAPI.Model.Mapper
 			CreateMap<CreatePostDto, Post>();
 			CreateMap<CommentCreateDto, PostComment>();
 			CreateMap<Post,GetPostDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count));
+			CreateMap<PostComment, CommentGetDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count));
 		}
 	}
 }
