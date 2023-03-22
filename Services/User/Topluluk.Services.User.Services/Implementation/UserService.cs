@@ -454,6 +454,35 @@ namespace Topluluk.Services.User.Services.Implementation
             UserInfoForCommentDto dto = _mapper.Map<UserInfoForCommentDto>(user);
             return await Task.FromResult(Response<UserInfoForCommentDto>.Success(dto, ResponseStatus.Success));
         }
+
+        public async Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto)
+        {
+            try
+            {
+                if (userId == dto.UserId)
+                {
+                    _User user = await _userRepository.GetFirstAsync(u => u.Id == dto.UserId);
+                    if (user != null)
+                    {
+                        user.IsPrivate = dto.IsPrivate;
+                        _userRepository.Update(user);
+                        return await Task.FromResult(Response<string>.Success($"Privacy status Successfully updated to {user.IsPrivate}", ResponseStatus.Success));
+                    }
+                    return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotAuthenticated));
+
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+
+            }
+        }
     }
     
 }

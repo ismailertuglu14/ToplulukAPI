@@ -109,6 +109,11 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.DeleteUserById(this.UserId, this.Token, dto);
         }
 
+        [HttpPost("privacy-change")]
+        public async Task<Response<string>> PrivacyChange(UserPrivacyChangeDto dto)
+        {
+            return await _userService.PrivacyChange(this.UserId, dto);
+        }
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 

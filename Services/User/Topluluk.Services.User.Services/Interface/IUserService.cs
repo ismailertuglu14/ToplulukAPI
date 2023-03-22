@@ -30,6 +30,8 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files);
 		Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto);
 
+		Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto);
+		
         // Http calls services
         Task<Response<string>> UpdateCommunities(string userId, string communityId);
 		Task UserBanngerChanged(string userId, string fileName);
