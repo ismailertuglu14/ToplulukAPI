@@ -73,6 +73,12 @@ namespace Topluluk.Services.PostAPI.Controllers
             return await _postService.GetComments(this.UserId, id);
         }
 
+        [HttpPost("comment/delete/{id}")]
+        public async Task<Response<string>> DeleteComment(string id)
+        {
+            return await _postService.DeleteComment(this.UserId, id);
+        }
+
 
     }
 }

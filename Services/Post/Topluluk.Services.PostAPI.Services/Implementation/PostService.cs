@@ -16,6 +16,7 @@ using Topluluk.Services.PostAPI.Model.Dto.Http;
 using RestSharp;
 using Topluluk.Services.POSTAPI.Model.Dto.Http;
 using Microsoft.AspNetCore.Mvc;
+using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.PostAPI.Services.Implementation
 {
@@ -55,7 +56,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             Post post = _mapper.Map<Post>(postDto);
 
             var getUserRequest = new RestRequest("https://localhost:7202/User/GetUserById").AddQueryParameter("userId", postDto.UserId);
-            var getUserResponse = await _client.ExecutePostAsync<Response<GetUserByIdDto>>(getUserRequest);
+            var getUserResponse = await _client.ExecuteGetAsync<Response<GetUserByIdDto>>(getUserRequest);
             post.FirstName = getUserResponse.Data.Data.FirstName;
             post.LastName = getUserResponse.Data.Data.LastName;
             post.ProfileImage = getUserResponse.Data.Data.ProfileImage;
@@ -128,9 +129,25 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
         }
 
-        public Task<Response<string>> DeleteComment(string userId, string commentId)
+        public async Task<Response<string>> DeleteComment(string userId, string commentId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                PostComment commemt = await _commentRepository.GetFirstAsync(c => c.Id == commentId);
+
+                if (commemt.UserId == userId)
+                {
+                    _commentRepository.DeleteById(commentId);
+                    return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
+                }
+                return await Task.FromResult(Response<string>.Fail("UnAauthorized", ResponseStatus.NotAuthenticated));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+
+            }
         }
 
         public async Task<Response<List<CommentGetDto>?>> GetComments(string userId, string postId, int take = 10, int skip = 0)

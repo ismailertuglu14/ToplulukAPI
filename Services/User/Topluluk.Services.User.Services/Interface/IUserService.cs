@@ -21,7 +21,9 @@ namespace Topluluk.Services.User.Services.Interface
 
 		Task<Response<string>> FollowUser(UserFollowDto userFollowInfo);
 		Task<Response<string>> UnFollowUser(UserFollowDto userUnFollowInfo);
-		Task<Response<string>> RemoveUserFromFollowers(UserFollowDto userInfo);
+		Task<Response<string>> AcceptFollowRequest(string id, string targetId);
+        Task<Response<string>> DeclineFollowRequest(string id, string targetId);
+        Task<Response<string>> RemoveUserFromFollowers(UserFollowDto userInfo);
 
 		Task<Response<string>> BlockUser(string sourceId, string targetId);
 

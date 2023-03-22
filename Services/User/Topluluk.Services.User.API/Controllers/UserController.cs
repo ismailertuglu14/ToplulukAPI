@@ -85,6 +85,14 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.UnFollowUser(userFollowInfo);
         }
 
+        [HttpPost("accept-request/{targetId}")]
+        public async Task<Response<string>> AcceptFollowRequest(string targetId)
+        {
+            return await _userService.AcceptFollowRequest(this.UserId, targetId);
+        }
+
+
+
         [HttpPost("Block")]
         public async Task<Response<string>> BlockUser( [FromForm] string targetId )
         {

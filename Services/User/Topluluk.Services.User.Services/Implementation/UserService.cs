@@ -105,6 +105,11 @@ namespace Topluluk.Services.User.Services.Implementation
             {
                 if (id == dto.userId)
                 {
+                    // Topluluğu var mı kontrol et, varsa fail dön
+
+                    // Post, PostComment, Event, EventComment leri deleted yap.
+
+                    // Kullanıcıyı sil.
                     DatabaseResponse response = _userRepository.DeleteById(id);
                     // http request to user credential
 
@@ -138,6 +143,11 @@ namespace Topluluk.Services.User.Services.Implementation
 
             _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.SourceId);
             _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
+
+            if (targetUser.Followers!.Contains(sourceUser.Id))
+            {
+                return await Task.FromResult(Response<string>.Success("Already following", ResponseStatus.Success));
+            }
 
             if (targetUser.IsPrivate == true)
             {
@@ -485,6 +495,43 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
 
             }
+        }
+
+        public async Task<Response<string>> AcceptFollowRequest(string id, string targetId)
+        {
+            try
+            {
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+
+                if (user != null)
+                {
+                    if (user.IncomingFollowRequests != null && user.IncomingFollowRequests.Contains(targetId))
+                    {
+                        _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == targetId);
+                        user.Followers!.Add(targetId);
+                        targetUser.OutgoingFollowRequests.Remove(targetId);
+                        targetUser.Followings!.Add(id);
+                        user.IncomingFollowRequests.Remove(targetId);
+                        
+                        _userRepository.Update(user);
+                        _userRepository.Update(targetUser);
+                        return await Task.FromResult(Response<string>.Success("Successfully", ResponseStatus.Success));
+
+                    }
+                }
+
+                return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotFound));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+            }
+        }
+
+        public Task<Response<string>> DeclineFollowRequest(string id, string targetId)
+        {
+            throw new NotImplementedException();
         }
     }
     
