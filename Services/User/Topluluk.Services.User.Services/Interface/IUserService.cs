@@ -17,7 +17,7 @@ namespace Topluluk.Services.User.Services.Interface
 		
         Task<Response<string>> InsertUser(UserInsertDto userInfo);
 
-		Task<Response<string>> DeleteUserById(string id);
+		Task<Response<string>> DeleteUserById(string id, string token, UserDeleteDto userInfo);
 
 		Task<Response<string>> FollowUser(UserFollowDto userFollowInfo);
 		Task<Response<string>> UnFollowUser(UserFollowDto userUnFollowInfo);

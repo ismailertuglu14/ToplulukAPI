@@ -103,8 +103,11 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.GetUserAfterLogin(this.UserId);
         }
 
-        
-
+        [HttpPost("delete")]
+        public async Task<Response<string>> DeleteUser(UserDeleteDto dto)
+        {
+            return await _userService.DeleteUserById(this.UserId, this.Token, dto);
+        }
 
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

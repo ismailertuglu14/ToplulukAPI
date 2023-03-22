@@ -19,12 +19,14 @@
     <None Remove="Validators\" />
     <None Remove="FluentValidation" />
     <None Remove="MongoDB.Bson" />
+    <None Remove="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
     <Folder Include="Dto\" />
     <Folder Include="Mapper\" />
     <Folder Include="Validators\" />
+    <Folder Include="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />

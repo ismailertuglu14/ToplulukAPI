@@ -11,6 +11,7 @@ using RestSharp;
 using Topluluk.Services.AuthenticationAPI.Data.Implementation;
 using Topluluk.Services.AuthenticationAPI.Data.Interface;
 using Topluluk.Services.AuthenticationAPI.Model.Dto;
+using Topluluk.Services.AuthenticationAPI.Model.Dto.Http;
 using Topluluk.Services.AuthenticationAPI.Model.Entity;
 using Topluluk.Services.AuthenticationAPI.Services.Interface;
 using Topluluk.Shared;
@@ -182,5 +183,26 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             }
         }
 
+        public async Task<Response<string>> DeleteUser(string id, UserDeleteDto userDto)
+        {
+            try
+            {
+                if (id == userDto.UserId)
+                {
+                    _repository.DeleteById(userDto.UserId);
+                    return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
+
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+            }
+        }
     }
 }

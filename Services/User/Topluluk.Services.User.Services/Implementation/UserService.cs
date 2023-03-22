@@ -7,6 +7,7 @@ using AutoMapper;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using RestSharp;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Model.Dto;
 using Topluluk.Services.User.Model.Dto.Http;
@@ -18,6 +19,7 @@ using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
 using ZstdSharp.Unsafe;
 using _User = Topluluk.Services.User.Model.Entity.User;
+using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.User.Services.Implementation
 {
@@ -26,12 +28,13 @@ namespace Topluluk.Services.User.Services.Implementation
         private readonly IUserRepository _userRepository;
         private readonly ICapPublisher _capPublisher;
         private readonly IMapper _mapper;
-
-		public UserService(IUserRepository userRepository,ICapPublisher capPublisher, IMapper mapper)
+        private readonly RestClient _client;
+        public UserService(IUserRepository userRepository,ICapPublisher capPublisher, IMapper mapper)
 		{
             _userRepository = userRepository;
             _capPublisher = capPublisher;
             _mapper = mapper;
+            _client = new RestClient();
 		}
 
         public async Task<Response<GetUserByIdDto>> GetUserById(string id)
@@ -94,9 +97,39 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<string>.Success(response.Data,ResponseStatus.Success));
         }
 
-        public Task<Response<string>> DeleteUserById(string id)
+        public async Task<Response<string>> DeleteUserById(string id, string token, UserDeleteDto dto)
         {
-            throw new NotImplementedException();
+            
+            try
+            {
+                if (id == dto.userId)
+                {
+                    DatabaseResponse response = _userRepository.DeleteById(id);
+                    // http request to user credential
+
+                    var userDeleteRequest = new RestRequest("https://localhost:7232/authentication/delete").AddBody(dto).AddHeader("Authorization",token);
+                    var userDeleteResponse = await _client.ExecutePostAsync<Response<string>>(userDeleteRequest);
+                    if (userDeleteResponse.Data.IsSuccess == true)
+                    {
+                        return await Task.FromResult(Response<string>.Success("Successfully Deleted", ResponseStatus.Success));
+
+                    }
+                    else
+                    {
+                        return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+
+                    }
+
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+            }
         }
 
         public async Task<Response<string>> FollowUser(UserFollowDto userFollowInfo)

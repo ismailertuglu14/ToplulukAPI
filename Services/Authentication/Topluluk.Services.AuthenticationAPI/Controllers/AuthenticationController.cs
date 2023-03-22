@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Topluluk.Services.AuthenticationAPI.Model.Dto;
+using Topluluk.Services.AuthenticationAPI.Model.Dto.Http;
 using Topluluk.Services.AuthenticationAPI.Services.Interface;
 using Topluluk.Shared.BaseModels;
 using Topluluk.Shared.Dtos;
@@ -33,6 +34,13 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
             return await _authenticationService.SignUp(userDto);
         }
 
+        // Delete user from http request
+        [HttpPost("delete")]
+        public async Task<Response<string>> Delete(UserDeleteDto dto)
+        {
+
+            return await _authenticationService.DeleteUser(this.UserId, dto);
+        }
 
     }
 }
