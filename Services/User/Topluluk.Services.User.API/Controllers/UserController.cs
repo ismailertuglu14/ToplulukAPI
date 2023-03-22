@@ -30,10 +30,10 @@ namespace Topluluk.Services.User.API.Controllers
 
         }
         
-        [HttpPost("[action]")]
+        [HttpGet("[action]")]
         public async Task<Response<GetUserByIdDto>> GetUserById(string userId)
         {
-            return await _userService.GetUserById(userId);
+            return await _userService.GetUserById(this.UserId,userId);
         }
 
         [HttpGet("{userName}")]

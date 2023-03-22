@@ -37,9 +37,9 @@ namespace Topluluk.Services.User.Services.Implementation
             _client = new RestClient();
 		}
 
-        public async Task<Response<GetUserByIdDto>> GetUserById(string id)
+        public async Task<Response<GetUserByIdDto>> GetUserById(string id,string userId)
         {
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
             
             if(user != null)
             {
@@ -51,9 +51,10 @@ namespace Topluluk.Services.User.Services.Implementation
                 dto.ProfileImage = user.ProfileImage;
                 dto.BannerImage = user.BannerImage;
                 dto.IsPrivate = user.IsPrivate;
+                dto.IsFollowing = user.Followers!.Contains(id);
                 dto.Gender = user.Gender ?? GenderEnum.Unspecified;
                 dto.FollowersCount = user.Followers.Count();
-                dto.FollowingCount = user.Followings.Count();
+                dto.FollowingCount = user.Followings!.Count();
 
 
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
@@ -462,12 +463,14 @@ namespace Topluluk.Services.User.Services.Implementation
                 if (userId == dto.UserId)
                 {
                     _User user = await _userRepository.GetFirstAsync(u => u.Id == dto.UserId);
+
                     if (user != null)
                     {
                         user.IsPrivate = dto.IsPrivate;
                         _userRepository.Update(user);
                         return await Task.FromResult(Response<string>.Success($"Privacy status Successfully updated to {user.IsPrivate}", ResponseStatus.Success));
                     }
+
                     return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotAuthenticated));
 
                 }
