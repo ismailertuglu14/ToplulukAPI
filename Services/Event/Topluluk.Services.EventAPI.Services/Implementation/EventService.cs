@@ -17,11 +17,31 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
         private readonly IMapper _mapper;
         private readonly RestClient _client;
         private readonly IEventRepository _eventRepository;
-        public EventService(IEventRepository eventRepository, IMapper mapper)
+        private readonly IEventCommentRepository _commentRepository;
+
+        public EventService(IEventRepository eventRepository, IMapper mapper, IEventCommentRepository commentRepository)
         {
             _mapper = mapper;
             _client = new RestClient();
             _eventRepository = eventRepository;
+            _commentRepository = commentRepository;
+        }
+
+        public async Task<Response<string>> CreateComment(string userId, CommentCreateDto dto)
+        {
+            try
+            {
+                EventComment comment = _mapper.Map<EventComment>(dto);
+                comment.UserId = userId;
+                comment.EventId = dto.EventId;
+                DatabaseResponse response = await _commentRepository.InsertAsync(comment);
+                return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
+
         }
 
         public async Task<Response<string>> CreateEvent(CreateEventDto dto)
@@ -73,7 +93,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
 
                 }
 
-                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+                return await Task.FromResult(Response<string>.Success(_event.Id, Shared.Enums.ResponseStatus.Success));
             }
             catch (Exception e)
             {
@@ -162,9 +182,26 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
         }
 
-        public Task<Response<string>> GetEventById(string userId, string id)
+        public async Task<Response<GetEventByIdDto>> GetEventById(string userId, string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
+
+                if (_event != null)
+                {
+                    GetEventByIdDto dto = _mapper.Map<GetEventByIdDto>(_event);
+                    dto.CommentCount = await _commentRepository.Count(c => c.EventId == id);
+                    return await Task.FromResult(Response<GetEventByIdDto>.Success(dto, Shared.Enums.ResponseStatus.Success));
+                }
+
+                return await Task.FromResult(Response<GetEventByIdDto>.Fail("Not Found", Shared.Enums.ResponseStatus.NotFound));               
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<GetEventByIdDto>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
         }
 
         public Task<Response<string>> GetEventSuggestions()

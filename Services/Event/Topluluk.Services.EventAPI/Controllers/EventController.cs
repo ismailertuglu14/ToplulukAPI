@@ -22,6 +22,11 @@ namespace Topluluk.Services.EventAPI.Controllers
             _eventService = eventService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<Response<GetEventByIdDto>> GetEventById(string id)
+        {
+            return await _eventService.GetEventById(this.UserId, id);
+        }
 
         // todo raw dan form-data ya geçir, resim entegrasyonunu yap.
         // https://localhost:xxxx/event/create
@@ -56,7 +61,11 @@ namespace Topluluk.Services.EventAPI.Controllers
             return await _eventService.ExpireEvent(this.UserId, id);
         }
 
-
+        [HttpPost("create-comment")]
+        public async Task<Response<string>> CreateComment(CommentCreateDto dto)
+        {
+            return await _eventService.CreateComment(this.UserId, dto);
+        }
     }
 }
 

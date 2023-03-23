@@ -209,6 +209,11 @@ namespace DBHelper.Repository.SQL
         {
             throw new NotImplementedException();
         }
+
+        public async Task<int> Count(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

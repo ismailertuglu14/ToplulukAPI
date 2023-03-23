@@ -375,6 +375,15 @@ namespace DBHelper.Repository.Mongo
             response.IsSuccess = true;
             return await Task.FromResult(response);
         }
+
+        public async Task<int> Count(Expression<Func<T, bool>> predicate)
+        {
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+            var response = await database.GetCollection<T>(collectionName).Find(predicate).ToListAsync();
+
+            return response.Count;
+        }
     }
 }
 

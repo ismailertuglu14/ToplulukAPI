@@ -27,7 +27,8 @@ namespace Topluluk.Services.EventAPI.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
             // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEventRepository, EventRepository>();
-           // services.AddScoped<IPostCommentRepository, PostCommentRepository>();
+            services.AddScoped<IEventCommentRepository, EventCommentRepository>();
+            // services.AddScoped<IPostCommentRepository, PostCommentRepository>();
             // services.AddTransient<IErrorRepository, ErrorRepository>();
             // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
         }

@@ -26,11 +26,12 @@ namespace Topluluk.Services.EventAPI.Model.Entity
         public DateTime? EndDate { get; set; } = DateTime.Now.AddYears(1);
 
         public ICollection<InteractionType> Interactions { get; set; }
-
+		public ICollection<string> Attendees { get; set; }
 		public Event()
 		{
 			Interactions = new HashSet<InteractionType>();
             Images = new List<string>();
+			Attendees = new HashSet<string>();
 		}
 	}
 }

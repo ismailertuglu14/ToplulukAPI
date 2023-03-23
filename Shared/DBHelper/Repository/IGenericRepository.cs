@@ -9,7 +9,7 @@ namespace DBHelper.Repository
     public interface IGenericRepository<T> where T : AbstractEntity
     {
         int Count();
-
+        Task<int> Count(Expression<Func<T, bool>> predicate);
         DatabaseResponse GetById(string id);
         Task<DatabaseResponse> GetListById(List<string> ids);
 
