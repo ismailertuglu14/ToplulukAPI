@@ -39,3 +39,4 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Ocelot.dll
+/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/configuration-production.json

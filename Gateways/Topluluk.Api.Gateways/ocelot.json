@@ -1,7 +1,34 @@
 ﻿{
   "Routes": [
+    {
+      "DownstreamPathTemplate": "/authentication/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7232"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/api/authentication/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/community/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7132"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/api/community/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    }
 
   ],
-  "GlobalConfiguration": {}
+  "GlobalConfiguration": {
+  }
 }
 
