@@ -38,7 +38,35 @@
       ],
       "UpstreamPathTemplate": "/api/event/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/post/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7101"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/user/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7202"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/api/user/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
     } 
+
+
 
   ],
   "GlobalConfiguration": {
