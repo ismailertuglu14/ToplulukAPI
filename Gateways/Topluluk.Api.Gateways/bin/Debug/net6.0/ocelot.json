@@ -25,7 +25,20 @@
       ],
       "UpstreamPathTemplate": "/api/community/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
-    }
+    },
+    {
+      "DownstreamPathTemplate": "/event/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7050"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/api/event/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    } 
 
   ],
   "GlobalConfiguration": {
