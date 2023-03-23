@@ -204,6 +204,36 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
         }
 
+        public async Task<Response<List<GetEventCommentDto>>> GetEventComments(string userId, string id, int skip = 0, int take = 10)
+        {
+            try
+            {
+                DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.EventId == id);
+                if (response.Data != null && response.Data.Count > 0)
+                {
+                    List<GetEventCommentDto> dtos = _mapper.Map<List<EventComment>, List<GetEventCommentDto>>(response.Data);
+                    
+                    foreach (var dto in dtos)
+                    {
+                        var userInfoRequest = new RestRequest("https://localhost:7202/User/user-info-comment").AddQueryParameter("id",dto.UserId);
+                        var userInfoResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userInfoRequest);
+                        dto.FirstName = userInfoResponse.Data.Data.FirstName;
+                        dto.LastName = userInfoResponse.Data.Data.LastName;
+                        dto.ProfileImage = userInfoResponse.Data.Data.ProfileImage;
+                        dto.Gender = userInfoResponse.Data.Data.Gender;
+                        
+                    }
+                    return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(dtos, Shared.Enums.ResponseStatus.Success));
+                }
+                return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(null, Shared.Enums.ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<GetEventCommentDto>>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
+        }
+
         public Task<Response<string>> GetEventSuggestions()
         {
             throw new NotImplementedException();

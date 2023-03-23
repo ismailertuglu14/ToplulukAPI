@@ -66,6 +66,12 @@ namespace Topluluk.Services.EventAPI.Controllers
         {
             return await _eventService.CreateComment(this.UserId, dto);
         }
+
+        [HttpGet("comments/{id}")]
+        public async Task<Response<List<GetEventCommentDto>>> GetComments(string id, int take = 10, int skip = 0)
+        {
+            return await _eventService.GetEventComments(this.UserId, id, skip, take);
+        }
     }
 }
 
