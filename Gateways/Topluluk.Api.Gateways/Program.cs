@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseCors("MyPolicy");
 
 app.UseHttpsRedirection();
 
@@ -39,6 +39,5 @@ app.MapControllers();
 
 await app.UseOcelot();
 
-app.UseCors("MyPolicy");
 app.Run();
 
