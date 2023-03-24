@@ -14,4 +14,8 @@
   <ItemGroup>
     <None Remove="Ocelot" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
+  </ItemGroup>
 </Project>

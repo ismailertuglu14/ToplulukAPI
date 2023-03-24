@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Topluluk.Shared.BaseModels;
 
 namespace Topluluk.Api.Gateways.Controllers;
 
-[EnableCors("MyPolicy")]
-public class GatewayController : ControllerBase
+public class GatewayController : BaseController
 {
     // GET
     [HttpGet("[action]")]
