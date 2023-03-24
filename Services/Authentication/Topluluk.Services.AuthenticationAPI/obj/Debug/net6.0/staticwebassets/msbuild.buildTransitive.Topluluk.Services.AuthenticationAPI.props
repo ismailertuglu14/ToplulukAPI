@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../buildMultiTargeting/Topluluk.Services.AuthenticationAPI.props" />
+  <Import Project="..\buildMultiTargeting\Topluluk.Services.AuthenticationAPI.props" />
 </Project>
