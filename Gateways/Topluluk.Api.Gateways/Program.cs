@@ -4,6 +4,13 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
+
 // Add services to the container.
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 builder.Services.AddOcelot(builder.Configuration);
@@ -29,6 +36,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
 await app.UseOcelot();
+
+app.UseCors();
 app.Run();
 
