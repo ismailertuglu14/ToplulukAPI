@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "QhJxHdA4pNiLUzuUgk4WdNCxHhSxKDCihAg6oGUw914p544S8eVUDNUuaWL8JeFmAthaahK3zAwyBzWuOsnhWw==",
+  "dgSpecHash": "g0MCFexcTUZL26J09EKzrFTtzWyEACybQynZHuLNbX1UOIVtmQBPnPsfZ7weVewqbitk+2bvJ5KFakaZb7zZ0w==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/File/Topluluk.Services.FileAPI.Model/Topluluk.Services.FileAPI.Model.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj",
   "expectedPackageFiles": [
-    "/Users/ismail/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512"
+    "C:\\Users\\ismai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\ismai\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

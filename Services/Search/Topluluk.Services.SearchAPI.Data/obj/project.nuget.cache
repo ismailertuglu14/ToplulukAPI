@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ok+8VzOWwq7Umvy1Iz7/sWj3elm8rtz0la3nKSCfPCrdbVy6cU1l6GW8DQoHWRfaVjuLe6jqtdKk+k0XFuju9A==",
+  "dgSpecHash": "RcaxxomjXtX6CwxH0SlZnD8uSePkdkq9kPxzNizM6+vbfWIYpMVjbo0zH/Mubzv8UHkpYZBS8MUCCF0GrxfU7g==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Search/Topluluk.Services.SearchAPI.Data/Topluluk.Services.SearchAPI.Data.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\Topluluk.Services.SearchAPI.Data.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZfARzq3rqszK3yVeRaOiC++OsBaZyJB+NFNCuF1aqrQ2KXcfSMCC8l9XTeF1F3CL7bzH/Tw445Gr3iSxcL1gkg==",
+  "dgSpecHash": "MbXSBgT0Cp2kxlC5azF1GlO2LpipsEuZCLUKBFtwm7FLv1dxvA9ed1ng4CWxyRk1xfF8on5OA3ydtxuGT8UeuQ==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
