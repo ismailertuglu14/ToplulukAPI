@@ -8,6 +8,7 @@ using RestSharp;
 using Topluluk.Services.EventAPI.Model.Dto.Http;
 using Topluluk.Services.EventAPI.Model.Entity;
 using Topluluk.Services.EventAPI.Data.Interface;
+using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.EventAPI.Services.Implementation
 {
@@ -150,6 +151,44 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
         }
 
+        public async Task<Response<string>> JoinEvent(string userId, string eventId)
+        {
+            try
+            {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == eventId);
+                if (_event == null) throw new Exception("Not Found");
+
+                if (_event.IsLimited == true && _event.Attendees.Count <= _event.ParticipiantLimit && !_event.Attendees.Contains(userId))
+                {
+                    _event.Attendees.Add(userId);
+                    _eventRepository.Update(_event);
+                    return await Task.FromResult(Response<string>.Success("Joined", Shared.Enums.ResponseStatus.Success));
+                }
+                else if (_event.IsLimited == false && !_event.Attendees.Contains(userId))
+                {
+                    _event.Attendees.Add(userId);
+                    _eventRepository.Update(_event);
+                    return await Task.FromResult(Response<string>.Success("Joined", Shared.Enums.ResponseStatus.Success));
+                }
+                else if(_event.IsLimited == true && _event.Attendees.Count >= _event.ParticipiantLimit)
+                {
+                    return await Task.FromResult(Response<string>.Fail("Event is full now!", Shared.Enums.ResponseStatus.BadRequest));
+                }
+                else if (_event.Attendees.Contains(userId))
+                {
+                    return await Task.FromResult(Response<string>.Success("Already joined", Shared.Enums.ResponseStatus.Success));
+
+                }
+                return await Task.FromResult(Response<string>.Fail("Error occured but why :)", Shared.Enums.ResponseStatus.InitialError));
+            }
+            catch (Exception e)
+            {
+                
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                
+            }
+        }
+
         public async Task<Response<string>> ExpireEvent(string userId, string id)
         {
             try
@@ -231,6 +270,35 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             catch (Exception e)
             {
                 return await Task.FromResult(Response<List<GetEventCommentDto>>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string userId, string eventId,
+            int skip = 0, int take = 10)
+        {
+            try
+            {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == eventId);
+                if (_event == null) throw new Exception("Event Not found");
+                List<GetEventAttendeesDto> dto = new();
+                foreach (var user in _event.Attendees)
+                {
+                    var userInfoRequest =
+                        new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id", user);
+                    var userInfoResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userInfoRequest);
+                    dto.Add(new()
+                        {Id = userInfoResponse.Data.Data.Id,FirstName = userInfoResponse.Data.Data.FirstName,
+                            LastName = userInfoResponse.Data.Data.LastName,ProfileImage = userInfoResponse.Data.Data.ProfileImage, Gender = userInfoResponse.Data.Data.Gender});
+                }
+
+
+                return await Task.FromResult(
+                    Response<List<GetEventAttendeesDto>>.Success(dto, ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<GetEventAttendeesDto>>.Fail($"Some error occured {e}",
+                    ResponseStatus.InitialError));
             }
         }
 

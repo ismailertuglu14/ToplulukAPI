@@ -37,11 +37,18 @@ namespace Topluluk.Services.EventAPI.Controllers
             return await _eventService.CreateEvent(dto);
         }
 
+
         // https://localhost:xxxx/event/user/1213123123
         [HttpGet("user/{id}")]
         public async Task<Response<List<FeedEventDto>>> GetUserEvents(string id)
         {
             return await _eventService.GetUserEvents(id);
+        }
+
+        [HttpPost("join/{id}")]
+        public async Task<Response<string>> JoinEvent(string id)
+        {
+            return await _eventService.JoinEvent(this.UserId , id);
         }
 
         [HttpPost("delete")]
@@ -65,6 +72,12 @@ namespace Topluluk.Services.EventAPI.Controllers
         public async Task<Response<string>> CreateComment(CommentCreateDto dto)
         {
             return await _eventService.CreateComment(this.UserId, dto);
+        }
+
+        [HttpGet("{id}/attendees")]
+        public async Task<Response<List<GetEventAttendeesDto>>> GetAttendees(string id,int skip, int take)
+        {
+            return await _eventService.GetEventAttendees(this.UserId, id,skip, take);
         }
 
         [HttpGet("comments/{id}")]

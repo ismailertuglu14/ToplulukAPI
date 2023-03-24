@@ -15,7 +15,8 @@ namespace Topluluk.Services.EventAPI.Model.Mapper
 			CreateMap<CommentCreateDto, EventComment>();
 			CreateMap<EventComment, GetEventCommentDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count));
 			CreateMap<GetUserInfoDto, GetEventCommentDto>().ReverseMap(); // ?
-		}
+            CreateMap<Event, GetEventAttendeesDto>();
+        }
 	}
 }
 
