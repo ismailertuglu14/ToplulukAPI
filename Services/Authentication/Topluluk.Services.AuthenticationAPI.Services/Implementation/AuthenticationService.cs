@@ -83,43 +83,51 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 
         public async Task<Response<TokenDto>> SignUp(CreateUserDto userDto)
         {
-            DatabaseResponse response = new();
-            TokenHelper _tokenHelper = new TokenHelper(_configuration);
-
-            UserCredential userCredential = new()
+            try
             {
-                UserName = userDto.UserName,
-                Email = userDto.Email,
-                HashedPassword = HashPassword(userDto.Password),
-            };
+                DatabaseResponse response = new();
+                TokenHelper _tokenHelper = new TokenHelper(_configuration);
 
-            var checkUniqueResult = await CheckUserNameAndEmailUnique(userCredential.UserName, userCredential.Email);
-
-            if(checkUniqueResult.IsSuccess == true)
-            {
-                response = await _repository.InsertAsync(userCredential);
-
-                UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
-                var userInsertRequest = new RestRequest("https://localhost:7202/user/insertuser").AddBody(content);
-                var userInsertResponse = await _client.ExecutePostAsync(userInsertRequest);
-
-                if (userInsertResponse.IsSuccessful == true)
+                UserCredential userCredential = new()
                 {
-                    TokenDto token = _tokenHelper.CreateAccessToken(response.Data, userDto.UserName, 2);
-                    UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
-                    UpdateRefreshToken(user, token, 2);
-                    return await Task.FromResult(Response<TokenDto>.Success(token, ResponseStatus.Success));
-                }
-                else
+                    UserName = userDto.UserName,
+                    Email = userDto.Email,
+                    HashedPassword = HashPassword(userDto.Password),
+                };
+
+                var checkUniqueResult = await CheckUserNameAndEmailUnique(userCredential.UserName, userCredential.Email);
+
+                if (checkUniqueResult.IsSuccess == true)
                 {
-                    _repository.DeleteCompletely(response.Data);
-                    return await Task.FromResult(Response<TokenDto>.Fail("Error occured while user inserting!", ResponseStatus.InitialError));
+                    response = await _repository.InsertAsync(userCredential);
+
+                    UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
+                    var userInsertRequest = new RestRequest("https://localhost:7202/user/insertuser").AddBody(content);
+                    var userInsertResponse = await _client.ExecutePostAsync(userInsertRequest);
+
+                    if (userInsertResponse.IsSuccessful)
+                    {
+                        TokenDto token = _tokenHelper.CreateAccessToken(response.Data, userDto.UserName, 2);
+                        UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
+                        UpdateRefreshToken(user, token, 2);
+                        return await Task.FromResult(Response<TokenDto>.Success(token, ResponseStatus.Success));
+                    }
+                    else
+                    {
+                        _repository.DeleteCompletely(response.Data);
+                        return await Task.FromResult(Response<TokenDto>.Fail("Error occured while user inserting!", ResponseStatus.InitialError));
+
+                    }
 
                 }
 
+                return await Task.FromResult(Response<TokenDto>.Fail(checkUniqueResult.Errors, ResponseStatus.InitialError));
             }
-
-            return await Task.FromResult(Response<TokenDto>.Fail(checkUniqueResult.Errors,ResponseStatus.InitialError));
+            catch (Exception e)
+            {
+                
+                return await Task.FromResult(Response<TokenDto>.Fail($"Some error occured {e}", ResponseStatus.InitialError));
+            }
         }
 
         // UserName and Email must be unique

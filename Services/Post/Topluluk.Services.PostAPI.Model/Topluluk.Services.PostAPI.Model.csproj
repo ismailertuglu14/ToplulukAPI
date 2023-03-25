@@ -13,7 +13,6 @@
     <None Remove="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
     <Folder Include="Mapper\" />
   </ItemGroup>
   <ItemGroup>

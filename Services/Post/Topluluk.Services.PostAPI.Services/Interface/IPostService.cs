@@ -23,6 +23,8 @@ namespace Topluluk.Services.PostAPI.Services.Interface
         Task<Response<string>> Delete(PostDeleteDto postDto);
 
 		Task<Response<string>> Interaction(string postId, InteractionType interactionType);
+        
+        Task<Response<string>> SavePost(string userId, string postId);
 
 		Task<Response<string>> Comment(CommentCreateDto commentDto);
         Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int take = 10, int skip = 0);

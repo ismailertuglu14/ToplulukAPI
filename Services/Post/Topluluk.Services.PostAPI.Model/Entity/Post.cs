@@ -22,15 +22,11 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 
         public string? EventLink { get; set; }
 
-		// For statistics 
-		public ICollection<string> SavedBy { get; set; }
-		//public Dictionary<string, int> Viewing { get; set; }
 
 		public Post()
 		{
 			Interactions = new HashSet<InteractionType>();
             SharedBy = new HashSet<string>();
-			SavedBy = new HashSet<string>();
 			Files = new HashSet<string>();
 			//Viewing = new Dictionary<string, int>();
 		}

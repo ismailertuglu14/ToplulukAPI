@@ -25,16 +25,52 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 	{
 
         private readonly IPostRepository _postRepository;
+        private readonly ISavedPostRepository _savedPostRepository;
         private readonly IPostCommentRepository _commentRepository;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
 
-        public PostService(IPostRepository postRepository, IPostCommentRepository commentRepository, IMapper mapper)
+        public PostService(IPostRepository postRepository,ISavedPostRepository savedPostRepository, IPostCommentRepository commentRepository, IMapper mapper)
         {
             _postRepository = postRepository;
+            _savedPostRepository = savedPostRepository;
             _mapper = mapper;
             _commentRepository = commentRepository;
             _client = new RestClient();
+        }
+
+        public async Task<Response<string>> SavePost(string userId, string postId)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty()) throw new Exception("User Not Found");
+                SavedPost? _savedPost = await _savedPostRepository.GetFirstAsync(sp => sp.PostId == postId);
+
+                if (_savedPost == null)
+                {
+                    SavedPost savedPost = new SavedPost
+                    {
+                        PostId = postId,
+                        UserId = userId
+                    };
+
+                    DatabaseResponse response = await _savedPostRepository.InsertAsync(savedPost);
+
+                    if (response.IsSuccess == false) throw new Exception("Some error occurred");
+
+                    return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
+                }
+                else
+                {
+                    _savedPostRepository.Delete(_savedPost.Id);
+                    return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
         }
 
         public async Task<Response<string>> Comment(CommentCreateDto commentDto)
