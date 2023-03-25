@@ -220,6 +220,14 @@ namespace DBHelper.Repository.Mongo
             throw new NotImplementedException();
         }
 
+        public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+
+            return database.GetCollection<T>(collectionName).Find(predicate).AnyAsync();
+        }
+
         public DatabaseResponse GetByIdWithDeleted(string id)
         {
             throw new NotImplementedException();

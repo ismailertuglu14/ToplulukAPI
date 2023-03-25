@@ -14,7 +14,7 @@ namespace DBHelper.Repository
         Task<DatabaseResponse> GetListById(List<string> ids);
 
         Task<DatabaseResponse> GetByIdAsync(string id);
-
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
         DatabaseResponse GetByIdWithDeleted(string id);
         Task<DatabaseResponse> GetByIdWithDeletedAsync(string id);
 

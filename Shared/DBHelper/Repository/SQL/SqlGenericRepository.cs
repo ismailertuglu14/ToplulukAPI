@@ -165,6 +165,11 @@ namespace DBHelper.Repository.SQL
             throw new NotImplementedException();
         }
 
+        public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public DatabaseResponse GetByIdWithDeleted(string id)
         {
             throw new NotImplementedException();

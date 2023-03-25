@@ -109,6 +109,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     {
                         dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(dto.UserId);
                         dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
+                        dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
                         if (!dto.CommunityLink.IsNullOrEmpty())
                         {
                             // Get-community-title and image request
