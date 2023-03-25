@@ -85,6 +85,12 @@ namespace Topluluk.Services.PostAPI.Controllers
             return await _postService.SavePost(this.UserId, postId);
         }
 
+        [HttpPost("interaction/{postId}")]
+        public async Task<Response<string>> Interaction(string postId,PostInteractionDto dto)
+        {
+            return await _postService.Interaction(this.UserId,postId, dto);
+        }
+
     }
 }
 

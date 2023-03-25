@@ -29,6 +29,7 @@ namespace Topluluk.Services.PostAPI.Services.Core
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IPostCommentRepository, PostCommentRepository>();
             services.AddScoped<ISavedPostRepository, SavedPostRepository>();
+            services.AddScoped<IPostInteractionRepository,PostInteractionRepository>();
             // services.AddTransient<IErrorRepository, ErrorRepository>();
             // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
         }
@@ -36,7 +37,6 @@ namespace Topluluk.Services.PostAPI.Services.Core
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IPostService, PostService>();
-            services.AddTransient<ISavedPostRepository, SavedPostRepository>();
 
         }
 

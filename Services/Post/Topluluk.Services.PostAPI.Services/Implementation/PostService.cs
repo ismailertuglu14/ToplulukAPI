@@ -26,14 +26,16 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
         private readonly IPostRepository _postRepository;
         private readonly ISavedPostRepository _savedPostRepository;
+        private readonly IPostInteractionRepository _postInteractionRepository;
         private readonly IPostCommentRepository _commentRepository;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
 
-        public PostService(IPostRepository postRepository,ISavedPostRepository savedPostRepository, IPostCommentRepository commentRepository, IMapper mapper)
+        public PostService(IPostRepository postRepository, IPostInteractionRepository postInteractionRepository, ISavedPostRepository savedPostRepository, IPostCommentRepository commentRepository, IMapper mapper)
         {
             _postRepository = postRepository;
             _savedPostRepository = savedPostRepository;
+            _postInteractionRepository = postInteractionRepository;
             _mapper = mapper;
             _commentRepository = commentRepository;
             _client = new RestClient();
@@ -390,7 +392,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> Interaction(string userId, string postId, InteractionType interactionType)
+        public async Task<Response<string>> Interaction(string userId,string postId, PostInteractionDto interaction)
         {
 
             try
@@ -398,12 +400,27 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 Post? post = await _postRepository.GetFirstAsync(p => p.Id == postId);
                 if (post == null) throw new Exception("Post not found");
 
-                PostInteraction interaction = new()
+                PostInteraction _interaction = new()
                 {
                     PostId = postId,
                     UserId = userId,
-                    InteractionType = interactionType
+                    InteractionType = interaction.InteractionType
                 };
+
+                PostInteraction? _interactionDb = await _postInteractionRepository.GetFirstAsync(i => i.PostId == postId && i.UserId == userId);
+                if (_interactionDb == null)
+                { 
+                    await _postInteractionRepository.InsertAsync(_interaction);
+                    return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+                }
+                else
+                {
+                    _postInteractionRepository.DeleteCompletely(_interactionDb.Id);
+                    await _postInteractionRepository.InsertAsync(_interaction);
+
+                    return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+                }
+
 
                 throw new Exception("");
 

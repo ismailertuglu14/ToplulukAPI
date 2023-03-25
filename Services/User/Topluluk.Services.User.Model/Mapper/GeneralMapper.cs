@@ -15,7 +15,10 @@ namespace Topluluk.Services.User.Model.Mapper
 			CreateMap<_User, GetUserByIdDto>();
 			CreateMap<_User, GetCommunityOwnerDto>();
 			CreateMap<_User, UserInfoForCommentDto>();
-		}
+            CreateMap<_User, GetUserAfterLoginDto>()
+                .ForMember(d => d.FollowersCount, s => s.MapFrom(s => s.Followers.Count))
+                .ForMember(d => d.FollowingsCount, s => s.MapFrom(s => s.Followings.Count));
+        }		
 	}
 }
 

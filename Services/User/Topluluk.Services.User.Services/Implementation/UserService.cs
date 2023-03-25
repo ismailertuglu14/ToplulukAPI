@@ -370,21 +370,13 @@ namespace Topluluk.Services.User.Services.Implementation
             try
             {
                 _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+                if (user == null) throw new Exception("User not found");
 
-                dto.Id = user.Id;
-                dto.FirstName = user.FirstName;
-                dto.LastName = user.LastName;
-                dto.UserName = user.UserName;
-                dto.Email = user.Email;
-                dto.BannerImage = user.BannerImage;
-                dto.ProfileImage = user.ProfileImage;
-                dto.FollowersCount = user.Followers!.Count;
-                dto.FollowingsCount = user.Followings!.Count;
-                //dto.FollowingRequests = new List<FollowingRequestDto>() {
-                //    new(){ }
-                //};
+                dto = _mapper.Map<GetUserAfterLoginDto>(user);
+
 
                 return await Task.FromResult(Response<GetUserAfterLoginDto>.Success(dto, ResponseStatus.Success));
+
             }
             catch
             {
