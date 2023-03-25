@@ -22,7 +22,7 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 
         Task<Response<string>> Delete(PostDeleteDto postDto);
 
-		Task<Response<string>> Interaction(string postId, InteractionType interactionType);
+		Task<Response<string>> Interaction(string userId, string postId, InteractionType interactionType);
         
         Task<Response<string>> SavePost(string userId, string postId);
 

@@ -39,6 +39,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             _client = new RestClient();
         }
 
+
         public async Task<Response<string>> SavePost(string userId, string postId)
         {
             try
@@ -100,7 +101,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                 if (getUserFollowingsResponse.IsSuccessful == true)
                 {
-                    DatabaseResponse response = await _postRepository.GetAllAsync(take,skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId));
+                    DatabaseResponse response = await _postRepository.GetAllAsync(take,skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
                    
                     List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
 
@@ -389,9 +390,29 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public Task<Response<string>> Interaction(string postId, InteractionType interactionType)
+        public async Task<Response<string>> Interaction(string userId, string postId, InteractionType interactionType)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                Post? post = await _postRepository.GetFirstAsync(p => p.Id == postId);
+                if (post == null) throw new Exception("Post not found");
+
+                PostInteraction interaction = new()
+                {
+                    PostId = postId,
+                    UserId = userId,
+                    InteractionType = interactionType
+                };
+
+                throw new Exception("");
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
         }
 
         public Task<Response<string>> Update()

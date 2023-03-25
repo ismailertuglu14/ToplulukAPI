@@ -375,6 +375,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 dto.FirstName = user.FirstName;
                 dto.LastName = user.LastName;
                 dto.UserName = user.UserName;
+                dto.Email = user.Email;
                 dto.BannerImage = user.BannerImage;
                 dto.ProfileImage = user.ProfileImage;
                 dto.FollowersCount = user.Followers!.Count;

@@ -101,7 +101,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 {
                     response = await _repository.InsertAsync(userCredential);
 
-                    UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
+                    UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, Email = userDto.Email, BirthdayDate = DateTime.Now, Gender = userDto.Gender };
                     var userInsertRequest = new RestRequest("https://localhost:7202/user/insertuser").AddBody(content);
                     var userInsertResponse = await _client.ExecutePostAsync(userInsertRequest);
 

@@ -13,6 +13,7 @@ namespace Topluluk.Services.AuthenticationAPI.Model.Entity
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
         public DateTime BirthdayDate { get; set; }
         public GenderEnum? Gender { get; set; }
     }
