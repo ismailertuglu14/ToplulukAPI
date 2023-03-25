@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj": {}
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj",
         "projectName": "Topluluk.Api.Gateways",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
-                "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj"
+              "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
+                "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj"
               }
             }
           }
@@ -76,14 +76,14 @@
         }
       }
     },
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
         "projectName": "Topluluk.Shared",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",

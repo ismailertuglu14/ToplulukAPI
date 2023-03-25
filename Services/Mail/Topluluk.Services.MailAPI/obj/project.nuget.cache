@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uDbO8kV2K1j1D4gUqM5R66DF9kI7+Gix8SbmXrW0XuHxwUzHkDhGc31duExhJcyllIA7bsLydWzfb2+uwTThnw==",
+  "dgSpecHash": "sLYL05ENUO+t7ssNPazyL8sA0e+7PHlIB80uQF3WvbCsocaL9I07xFM6fKJnwea+DGFGiThVJIznWYDxnpeyOg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Mail\\Topluluk.Services.MailAPI\\Topluluk.Services.MailAPI.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Mail\\Topluluk.Services.MailAPI\\Topluluk.Services.MailAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

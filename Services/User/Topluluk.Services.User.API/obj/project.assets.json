@@ -10344,11 +10344,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.API\\Topluluk.Services.User.API.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.API\\Topluluk.Services.User.API.csproj",
       "projectName": "Topluluk.Services.User.API",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.API\\Topluluk.Services.User.API.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.API\\Topluluk.Services.User.API.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.API\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10365,8 +10365,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.Services\\Topluluk.Services.User.Services.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.Services\\Topluluk.Services.User.Services.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.Services\\Topluluk.Services.User.Services.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.Services\\Topluluk.Services.User.Services.csproj"
             }
           }
         }

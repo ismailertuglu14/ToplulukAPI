@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vc2C+KcHj2iOsf0fjJrG2O/XVTq9cpfoWnBum8SgMFm4SyKrRTTqYWfeM0oZlHHrIkov3XH6S/k1e17UafpBIw==",
+  "dgSpecHash": "889w8ZYkgzGDsm6ub27AL7RJq7jhVRgU3Y8RQqwMHqZhs3S92cjLHEYa0AeJXV2Z9A/mHs9g24iscMxWVHPcQQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.Model\\Topluluk.Services.User.Model.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\User\\Topluluk.Services.User.Model\\Topluluk.Services.User.Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",

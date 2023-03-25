@@ -32,3 +32,20 @@ C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\DBHelper\obj\Deb
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\refint\DBHelper.dll
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.pdb
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\ref\DBHelper.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\DBHelper.deps.json
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\DBHelper.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\DBHelper.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\Topluluk.Shared.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\Topluluk.Shared.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.csproj.AssemblyReference.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.AssemblyInfoInputs.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.AssemblyInfo.cs
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.csproj.CoreCompileInputs.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.csproj.CopyComplete
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\refint\DBHelper.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\DBHelper.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\DBHelper\obj\Debug\net6.0\ref\DBHelper.dll

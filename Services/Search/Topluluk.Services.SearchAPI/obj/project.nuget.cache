@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oAF0jPK3mzzsklnGfFM82NE4isskv+9kBxPE7bD4jyyv/GEoJsC+iUXOWdwmvsC1YRGDIqMorTSnpn+Yuo0cnA==",
+  "dgSpecHash": "2jE/xGlYpEfpJWm2UGZUQv6FUrgTwmrXevTsF4k3Rvb/bUeikdEuU9HZxh4eUwf/BLv3zLS6o0ktTC7/HOtEQw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

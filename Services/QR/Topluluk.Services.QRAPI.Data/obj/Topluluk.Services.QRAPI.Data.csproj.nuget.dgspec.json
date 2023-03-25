@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj": {}
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj",
         "projectName": "Topluluk.Services.QRAPI.Data",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\Topluluk.Services.QRAPI.Data.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -9768,11 +9768,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Data\\Topluluk.Services.EventAPI.Data.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Data\\Topluluk.Services.EventAPI.Data.csproj",
       "projectName": "Topluluk.Services.EventAPI.Data",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Data\\Topluluk.Services.EventAPI.Data.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Data\\Topluluk.Services.EventAPI.Data.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Data\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9789,11 +9789,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Model\\Topluluk.Services.EventAPI.Model.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Model\\Topluluk.Services.EventAPI.Model.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Model\\Topluluk.Services.EventAPI.Model.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Model\\Topluluk.Services.EventAPI.Model.csproj"
             },
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj"
             }
           }
         }

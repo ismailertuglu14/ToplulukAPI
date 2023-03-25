@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QzGhjmJ0dCx0RdCN6u+aM8G6+igmmFL4nEed+9YetHxw8eqq2ANdjJQ74mGYlRbZwmXha4CUQglpjcsGXfMD6g==",
+  "dgSpecHash": "7D5tDS2+Yrh6reJOotNHgxOlR+SEqy22C7k/SEs/CRAZXd/gLKjLiCTt7do/gR7ZPaBejwciXcdC5GVCorFMDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\Topluluk.Services.CommunityAPI.Data.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\Topluluk.Services.CommunityAPI.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

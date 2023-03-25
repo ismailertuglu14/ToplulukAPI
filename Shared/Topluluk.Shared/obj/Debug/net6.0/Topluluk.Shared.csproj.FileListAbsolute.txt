@@ -22,3 +22,15 @@ C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\Topluluk.Shared\
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\refint\Topluluk.Shared.dll
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.pdb
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\ref\Topluluk.Shared.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\bin\Debug\net6.0\Topluluk.Shared.deps.json
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\bin\Debug\net6.0\Topluluk.Shared.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\bin\Debug\net6.0\Topluluk.Shared.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.csproj.AssemblyReference.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.AssemblyInfoInputs.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.AssemblyInfo.cs
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.csproj.CoreCompileInputs.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\refint\Topluluk.Shared.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\Topluluk.Shared.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Shared\Topluluk.Shared\obj\Debug\net6.0\ref\Topluluk.Shared.dll

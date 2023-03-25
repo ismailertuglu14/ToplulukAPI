@@ -125,7 +125,13 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.CheckCommunityExist(id);
         }
-     }
+
+        [HttpGet("community-info-post-link")]
+        public async Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id)
+        {
+            return await _communityService.GetCommunityInfoForPostLink(id);
+        }
+    }
     
 }
 

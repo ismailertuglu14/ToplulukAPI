@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UBhztM3IEid00gFRc1XFKtgiYOHMOrNFG5O3UUtt5o+qSR7gqMWDEZC83E2q5jXDF5r2j+YsknaFYqb9+SZbkw==",
+  "dgSpecHash": "2zcijErsZwzCeS9zmgyDAsxgJRundYxPZV34jGadJcCaeoGRVmr/VM0rQP5xDKOjfMqwSLUIZ5/KBxqWKUm7sQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Services\\Topluluk.Services.QRAPI.Services.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Services\\Topluluk.Services.QRAPI.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

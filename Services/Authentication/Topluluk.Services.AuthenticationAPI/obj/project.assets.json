@@ -10136,11 +10136,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\Topluluk.Services.AuthenticationAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\Topluluk.Services.AuthenticationAPI.csproj",
       "projectName": "Topluluk.Services.AuthenticationAPI",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\Topluluk.Services.AuthenticationAPI.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\Topluluk.Services.AuthenticationAPI.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10157,14 +10157,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Data\\Topluluk.Services.AuthenticationAPI.Data.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Data\\Topluluk.Services.AuthenticationAPI.Data.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Data\\Topluluk.Services.AuthenticationAPI.Data.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Data\\Topluluk.Services.AuthenticationAPI.Data.csproj"
             },
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Model\\Topluluk.Services.AuthenticationAPI.Model.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Model\\Topluluk.Services.AuthenticationAPI.Model.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Model\\Topluluk.Services.AuthenticationAPI.Model.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Model\\Topluluk.Services.AuthenticationAPI.Model.csproj"
             },
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Services\\Topluluk.Services.AuthenticationAPI.Services.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Services\\Topluluk.Services.AuthenticationAPI.Services.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Services\\Topluluk.Services.AuthenticationAPI.Services.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI.Services\\Topluluk.Services.AuthenticationAPI.Services.csproj"
             }
           }
         }

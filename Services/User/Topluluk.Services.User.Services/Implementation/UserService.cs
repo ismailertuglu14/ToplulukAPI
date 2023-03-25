@@ -466,6 +466,16 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<UserInfoForCommentDto>.Success(dto, ResponseStatus.Success));
         }
 
+        public async Task<Response<List<string>>> GetUserFollowings(string id)
+        {
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+            if (user == null)
+                return await Task.FromResult(Response<List<string>>.Fail("User Not found", ResponseStatus.BadRequest));
+
+            return await Task.FromResult(Response<List<string>>.Success(user.Followings.ToList(), ResponseStatus.Success));
+
+        }
+
         public async Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto)
         {
             try

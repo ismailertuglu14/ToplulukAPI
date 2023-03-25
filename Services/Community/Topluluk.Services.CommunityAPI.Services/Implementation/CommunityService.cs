@@ -365,6 +365,22 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 return await Task.FromResult(Response<bool>.Success(false, ResponseStatus.Success));
             }
         }
+
+        public async Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id)
+        {
+            try
+            {
+                Community community = await _communityRepository.GetFirstAsync(c => c.Id == id);
+                CommunityInfoPostLinkDto dto = _mapper.Map<CommunityInfoPostLinkDto>(community);
+                return await Task.FromResult(Response<CommunityInfoPostLinkDto>.Success(dto, ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<CommunityInfoPostLinkDto>.Fail($"Some error occured: {e}",
+                    ResponseStatus.InitialError));
+            }
+
+        }
     }
 }
 

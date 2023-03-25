@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj": {}
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj",
         "projectName": "Topluluk.Services.FileAPI.Model",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\Topluluk.Services.FileAPI.Model.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\File\\Topluluk.Services.FileAPI.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",

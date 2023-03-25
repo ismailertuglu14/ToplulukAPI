@@ -8399,11 +8399,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Post\\Topluluk.Services.PostAPI.Model\\Topluluk.Services.PostAPI.Model.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Post\\Topluluk.Services.PostAPI.Model\\Topluluk.Services.PostAPI.Model.csproj",
       "projectName": "Topluluk.Services.PostAPI.Model",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Post\\Topluluk.Services.PostAPI.Model\\Topluluk.Services.PostAPI.Model.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Post\\Topluluk.Services.PostAPI.Model\\Topluluk.Services.PostAPI.Model.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Post\\Topluluk.Services.PostAPI.Model\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Post\\Topluluk.Services.PostAPI.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8420,8 +8420,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj"
             }
           }
         }

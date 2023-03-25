@@ -8,6 +8,8 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 	{
 		public string? UserId { get; set; }
 		public string? CommunityId { get; set; }
+        public string? CommunityLink { get; set; }
+        public string? EventLink { get; set; }
 
 		[MaxLength(1024)]
 		public string Description { get; set; }

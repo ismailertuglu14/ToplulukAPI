@@ -9767,11 +9767,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\Topluluk.Services.CommunityAPI.Data.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\Topluluk.Services.CommunityAPI.Data.csproj",
       "projectName": "Topluluk.Services.CommunityAPI.Data",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\Topluluk.Services.CommunityAPI.Data.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\Topluluk.Services.CommunityAPI.Data.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9788,11 +9788,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Model\\Topluluk.Services.CommunityAPI.Model.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Model\\Topluluk.Services.CommunityAPI.Model.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Model\\Topluluk.Services.CommunityAPI.Model.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Community\\Topluluk.Services.CommunityAPI.Model\\Topluluk.Services.CommunityAPI.Model.csproj"
             },
-            "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj": {
-              "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj"
+            "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj": {
+              "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\DBHelper\\DBHelper.csproj"
             }
           }
         }

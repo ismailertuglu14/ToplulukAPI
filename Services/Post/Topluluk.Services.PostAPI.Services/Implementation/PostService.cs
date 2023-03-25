@@ -16,6 +16,7 @@ using Topluluk.Services.PostAPI.Model.Dto.Http;
 using RestSharp;
 using Topluluk.Services.POSTAPI.Model.Dto.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.PostAPI.Services.Implementation
@@ -49,6 +50,58 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
 
             return await Task.FromResult(Response<string>.Fail("Post not found", Shared.Enums.ResponseStatus.NotFound));
+        }
+
+        public async Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, int skip = 0, int take = 10)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty()) throw new Exception("User not found");
+
+                var getUserFollowingsRequest = new RestRequest("https://localhost:7149/api/user/user-followings").AddQueryParameter("id",userId);
+                var getUserFollowingsResponse =
+                    await _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
+
+                if (getUserFollowingsResponse.IsSuccessful == true)
+                {
+                    DatabaseResponse response = await _postRepository.GetAllAsync(take,skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId));
+                   
+                    List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
+
+                    int i = 0;
+                    foreach (var dto in response.Data as List<Post>)
+                    {
+                        dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
+                        if (!dto.CommunityLink.IsNullOrEmpty())
+                        {
+                            // Get-community-title and image request
+                            var communityInfoRequest =
+                                new RestRequest("https://localhost:7149/api/community/community-info-post-link")
+                                    .AddQueryParameter("id", dto.CommunityLink);
+                            var communityInfoResponse =
+                                await _client.ExecuteGetAsync<Response<CommunityInfoPostLinkDto>>(communityInfoRequest);
+
+                            dtos[i].Community = new() { Id = communityInfoResponse.Data.Data.Id, CoverImage = communityInfoResponse.Data.Data.CoverImage ?? "", Title = communityInfoResponse.Data.Data.Title};
+                        }else if (!dto.EventLink.IsNullOrEmpty())
+                        {
+                            // Get-event-title and image request
+                            dtos[i].Event = new() { Id = "test", CoverImage = "test", Title = "test" };
+                        }
+
+                        i++;
+                    }
+                    return await Task.FromResult(
+                        Response<List<GetPostForFeedDto>>.Success(dtos, ResponseStatus.Success));
+                }
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail($"Some error occured {e}",
+                    ResponseStatus.InitialError));
+
+            }
+            throw new NotImplementedException();
         }
 
         public async Task<Response<string>> Create(CreatePostDto postDto)

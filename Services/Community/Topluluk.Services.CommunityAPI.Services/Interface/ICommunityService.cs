@@ -29,6 +29,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> PostCreated(PostCreatedCommunityDto dto);
 		Task<Response<string>> GetCommunityTitle(string id);
 		Task<Response<bool>> CheckCommunityExist(string id);
+        Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id);
     }
 }
 

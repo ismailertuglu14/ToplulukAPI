@@ -28,3 +28,18 @@ C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topl
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\refint\Topluluk.Services.CommunityAPI.Model.dll
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.pdb
 C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\ref\Topluluk.Services.CommunityAPI.Model.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.deps.json
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\bin\Debug\net6.0\Topluluk.Shared.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\bin\Debug\net6.0\Topluluk.Shared.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.csproj.AssemblyReference.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.AssemblyInfoInputs.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.AssemblyInfo.cs
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.csproj.CoreCompileInputs.cache
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.csproj.CopyComplete
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\refint\Topluluk.Services.CommunityAPI.Model.dll
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.pdb
+C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI.Model\obj\Debug\net6.0\ref\Topluluk.Services.CommunityAPI.Model.dll

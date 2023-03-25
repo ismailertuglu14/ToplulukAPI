@@ -27,10 +27,10 @@ namespace Topluluk.Services.PostAPI.Controllers
         }
 
 
-        [HttpGet("[action]")]
-        public async Task<Response<List<GetPostDto>>> GetPostsForFeedScreen()
+        [HttpGet("feed")]
+        public async Task<Response<List<GetPostForFeedDto>>> GetPostsForFeedScreen(int take = 10, int skip = 0)
         {
-            return await _postService.GetPosts(this.UserId);
+            return await _postService.GetPostForFeedScreen(this.UserId,skip,take);
         }
 
         [HttpGet("user")]

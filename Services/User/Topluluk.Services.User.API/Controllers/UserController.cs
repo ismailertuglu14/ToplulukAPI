@@ -177,7 +177,12 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.GetCommunityOwner(id);
         }
-        
+
+        [HttpGet("user-followings")]
+        public async Task<Response<List<string>>> GetUserFollowings(string id)
+        {
+            return await _userService.GetUserFollowings(id);
+        }
 
     }
     public class UserBannerChangedDto

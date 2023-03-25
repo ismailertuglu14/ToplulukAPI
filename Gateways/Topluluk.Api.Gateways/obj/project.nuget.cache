@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lTSiv0cysp8whfizZiLjHOF+6n0hj2Z92x/TO8YzNX+wy5QXlROci7nHjm4qTLZJD0lXpJla3mayMlBxusSBaQ==",
+  "dgSpecHash": "MiTPTd/3tqHoLNHn3cCPXACQKzYH9lBxAs/uLgSS3p+h2I85l0Lj83BUj+WRd5ZuFUjcCm5ccmcCr6NS1jCK4A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Gateways\\Topluluk.Api.Gateways\\Topluluk.Api.Gateways.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",

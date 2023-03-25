@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Model\\Topluluk.Services.QRAPI.Model.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Model\\Topluluk.Services.QRAPI.Model.csproj",
       "projectName": "Topluluk.Services.QRAPI.Model",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Model\\Topluluk.Services.QRAPI.Model.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Model\\Topluluk.Services.QRAPI.Model.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Model\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\QR\\Topluluk.Services.QRAPI.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",

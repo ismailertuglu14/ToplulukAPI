@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZvmqRjzPAX0NMsSyK1YBI/GNSViUa4cZ6yNNKkeJJHrrpwcIRT9BUM/H/0G0d8ytJJcdAyEwyYPVx08jTQmAeA==",
+  "dgSpecHash": "yuMmcugxRskT8oc2pzomkhbtsMAicWYE8RyPmw2UB3V2EMHua3aoCa6CGm09lCO45LlzZnTJ7eTb68xa4fwEjQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\Topluluk.Services.AuthenticationAPI.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Authentication\\Topluluk.Services.AuthenticationAPI\\Topluluk.Services.AuthenticationAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

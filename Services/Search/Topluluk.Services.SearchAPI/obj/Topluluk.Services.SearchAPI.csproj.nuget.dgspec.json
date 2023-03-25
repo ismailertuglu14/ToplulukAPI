@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj": {}
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj",
         "projectName": "Topluluk.Services.SearchAPI.Model",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,14 +59,14 @@
         }
       }
     },
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj",
         "projectName": "Topluluk.Services.SearchAPI.Services",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -114,14 +114,14 @@
         }
       }
     },
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj",
         "projectName": "Topluluk.Services.SearchAPI",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\Topluluk.Services.SearchAPI.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -138,14 +138,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj": {
-                "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj"
+              "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj": {
+                "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Model\\Topluluk.Services.SearchAPI.Model.csproj"
               },
-              "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj": {
-                "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj"
+              "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj": {
+                "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj"
               },
-              "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
-                "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj"
+              "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
+                "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj"
               }
             }
           }
@@ -188,14 +188,14 @@
         }
       }
     },
-    "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
+    "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
         "projectName": "Topluluk.Shared",
-        "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
+        "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\Topluluk.Shared.csproj",
         "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Shared\\Topluluk.Shared\\obj\\",
+        "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Shared\\Topluluk.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",

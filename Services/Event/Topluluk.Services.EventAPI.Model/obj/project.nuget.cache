@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YuQewgbC1cInLfMEAtoi/5pwUKzWrc7qrbHr7snaDPqmNccD+Oi7KPogjv1qkjBKFsZUcZZqdcKPzH7mvJB00w==",
+  "dgSpecHash": "5NFlnXSF6ckA9SleQTixo/zMSUCEPQ64Y85ChyKWNdG0BTSXNOnh6YXSzhYMRFHxu254gmv23lYkDqF8wMOsuQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Model\\Topluluk.Services.EventAPI.Model.csproj",
+  "projectFilePath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Event\\Topluluk.Services.EventAPI.Model\\Topluluk.Services.EventAPI.Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ismai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ismai\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

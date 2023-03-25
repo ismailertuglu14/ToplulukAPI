@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\Topluluk.Services.SearchAPI.Data.csproj",
+      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\Topluluk.Services.SearchAPI.Data.csproj",
       "projectName": "Topluluk.Services.SearchAPI.Data",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\Topluluk.Services.SearchAPI.Data.csproj",
+      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\Topluluk.Services.SearchAPI.Data.csproj",
       "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\All Files\\Development\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\obj\\",
+      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",

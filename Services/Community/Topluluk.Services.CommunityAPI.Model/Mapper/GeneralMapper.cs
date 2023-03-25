@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Topluluk.Services.CommunityAPI.Model.Dto;
+using Topluluk.Services.CommunityAPI.Model.Dto.Http;
 using Topluluk.Services.CommunityAPI.Model.Entity;
 
 namespace Topluluk.Services.CommunityAPI.Model.Mapper
@@ -15,7 +16,9 @@ namespace Topluluk.Services.CommunityAPI.Model.Mapper
 			CreateMap<Community, CommunitySuggestionMobileDto>();
 			CreateMap<Community,CommunitySuggestionWebDto>().ForMember(x => x.ParticipiantCount, o => o.MapFrom(x => x.Participiants.Count));
 
-			CreateMap<Community, CommunityGetPreviewDto>().ForMember(x => x.ParticipiantsCount, o => o.MapFrom(x => x.Participiants.Count)); 
+			CreateMap<Community, CommunityGetPreviewDto>().ForMember(x => x.ParticipiantsCount, o => o.MapFrom(x => x.Participiants.Count));
+            CreateMap<Community, CommunityInfoPostLinkDto>();
+
         }
 	}
 }
