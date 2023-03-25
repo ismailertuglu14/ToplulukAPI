@@ -281,14 +281,16 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 Event _event = await _eventRepository.GetFirstAsync(e => e.Id == eventId);
                 if (_event == null) throw new Exception("Event Not found");
                 List<GetEventAttendeesDto> dto = new();
+                int i = 0;
                 foreach (var user in _event.Attendees)
                 {
                     var userInfoRequest =
                         new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id", user);
                     var userInfoResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userInfoRequest);
                     dto.Add(new()
-                        {Id = userInfoResponse.Data.Data.Id,FirstName = userInfoResponse.Data.Data.FirstName,
+                        {Id = _event.Attendees.ToList()[i],FirstName = userInfoResponse.Data.Data.FirstName,
                             LastName = userInfoResponse.Data.Data.LastName,ProfileImage = userInfoResponse.Data.Data.ProfileImage, Gender = userInfoResponse.Data.Data.Gender});
+                    i++;
                 }
 
 

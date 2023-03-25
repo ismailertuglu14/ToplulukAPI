@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1704.2
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{86DDE63F-F3BF-4708-AFAB-3ECB8993DA33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Api.Gateways", "Gateways\Topluluk.Api.Gateways\Topluluk.Api.Gateways.csproj", "{A71A15E7-49BC-4016-B708-9215F2345C57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Api.Gateways", "Gateways\Topluluk.Api.Gateways\Topluluk.Api.Gateways.csproj", "{A71A15E7-49BC-4016-B708-9215F2345C57}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{53EDB656-A2ED-456E-9B3D-0B892CE6B0F3}"
 EndProject
@@ -13,19 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{AEC80315-AD56-4EAB-A617-29AD09D690E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.AuthenticationAPI", "Services\Authentication\Topluluk.Services.AuthenticationAPI\Topluluk.Services.AuthenticationAPI.csproj", "{39001941-D332-4154-9230-69BC316E0A70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.AuthenticationAPI", "Services\Authentication\Topluluk.Services.AuthenticationAPI\Topluluk.Services.AuthenticationAPI.csproj", "{39001941-D332-4154-9230-69BC316E0A70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.AuthenticationAPI.Data", "Services\Authentication\Topluluk.Services.AuthenticationAPI.Data\Topluluk.Services.AuthenticationAPI.Data.csproj", "{7469B799-3541-4E81-AB28-BD9AE6170063}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.AuthenticationAPI.Data", "Services\Authentication\Topluluk.Services.AuthenticationAPI.Data\Topluluk.Services.AuthenticationAPI.Data.csproj", "{7469B799-3541-4E81-AB28-BD9AE6170063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.AuthenticationAPI.Model", "Services\Authentication\Topluluk.Services.AuthenticationAPI.Model\Topluluk.Services.AuthenticationAPI.Model.csproj", "{0AAFD1DF-6CC0-4832-B371-5B5BCDEB7059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.AuthenticationAPI.Model", "Services\Authentication\Topluluk.Services.AuthenticationAPI.Model\Topluluk.Services.AuthenticationAPI.Model.csproj", "{0AAFD1DF-6CC0-4832-B371-5B5BCDEB7059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.AuthenticationAPI.Services", "Services\Authentication\Topluluk.Services.AuthenticationAPI.Services\Topluluk.Services.AuthenticationAPI.Services.csproj", "{47F40DEC-DBA3-4B5F-8151-ADF098B04206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.AuthenticationAPI.Services", "Services\Authentication\Topluluk.Services.AuthenticationAPI.Services\Topluluk.Services.AuthenticationAPI.Services.csproj", "{47F40DEC-DBA3-4B5F-8151-ADF098B04206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBHelper", "Shared\DBHelper\DBHelper.csproj", "{B8597EA5-565E-4F8A-B3C9-706F700670DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBHelper", "Shared\DBHelper\DBHelper.csproj", "{B8597EA5-565E-4F8A-B3C9-706F700670DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{8C8EDA5C-1EB5-4CCC-A735-044A82B4434C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Shared", "Shared\Topluluk.Shared\Topluluk.Shared.csproj", "{E94A1930-9AA6-484B-9B2A-2A8A997E26EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Shared", "Shared\Topluluk.Shared\Topluluk.Shared.csproj", "{E94A1930-9AA6-484B-9B2A-2A8A997E26EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mail", "Mail", "{B4A0D484-1A80-4D49-9C1F-7E23DA5675F0}"
 EndProject
@@ -35,73 +35,93 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Event", "Event", "{BAB830EE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Post", "Post", "{A6408CF5-D4E2-4489-A92C-464BC2161777}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.User.API", "Services\User\Topluluk.Services.User.API\Topluluk.Services.User.API.csproj", "{4C25E0DA-2827-4135-A21D-2519204FFAD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.User.API", "Services\User\Topluluk.Services.User.API\Topluluk.Services.User.API.csproj", "{4C25E0DA-2827-4135-A21D-2519204FFAD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.User.Data", "Services\User\Topluluk.Services.User.Data\Topluluk.Services.User.Data.csproj", "{3C3D98C2-2790-40AE-B730-D62778BEDFF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.User.Data", "Services\User\Topluluk.Services.User.Data\Topluluk.Services.User.Data.csproj", "{3C3D98C2-2790-40AE-B730-D62778BEDFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.User.Model", "Services\User\Topluluk.Services.User.Model\Topluluk.Services.User.Model.csproj", "{8F92F2C6-4F84-442A-9AC1-C5CC274FACD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.User.Model", "Services\User\Topluluk.Services.User.Model\Topluluk.Services.User.Model.csproj", "{8F92F2C6-4F84-442A-9AC1-C5CC274FACD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.User.Services", "Services\User\Topluluk.Services.User.Services\Topluluk.Services.User.Services.csproj", "{A5436C27-B65A-4111-83F5-573DD604B24D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.User.Services", "Services\User\Topluluk.Services.User.Services\Topluluk.Services.User.Services.csproj", "{A5436C27-B65A-4111-83F5-573DD604B24D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File", "File", "{DD3AD1DC-C2AC-4A42-BF86-9979A07638A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.CommunityAPI", "Services\Community\Topluluk.Services.CommunityAPI\Topluluk.Services.CommunityAPI.csproj", "{124F85AE-4BD8-4052-938A-3B05595DA956}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.CommunityAPI", "Services\Community\Topluluk.Services.CommunityAPI\Topluluk.Services.CommunityAPI.csproj", "{124F85AE-4BD8-4052-938A-3B05595DA956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.CommunityAPI.Data", "Services\Community\Topluluk.Services.CommunityAPI.Data\Topluluk.Services.CommunityAPI.Data.csproj", "{4D712D9E-4D03-46FE-BF6B-8FE0AA7ADAD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.CommunityAPI.Data", "Services\Community\Topluluk.Services.CommunityAPI.Data\Topluluk.Services.CommunityAPI.Data.csproj", "{4D712D9E-4D03-46FE-BF6B-8FE0AA7ADAD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.CommunityAPI.Model", "Services\Community\Topluluk.Services.CommunityAPI.Model\Topluluk.Services.CommunityAPI.Model.csproj", "{1E13BE37-9EF6-42E2-A685-EC11CA6B8D3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.CommunityAPI.Model", "Services\Community\Topluluk.Services.CommunityAPI.Model\Topluluk.Services.CommunityAPI.Model.csproj", "{1E13BE37-9EF6-42E2-A685-EC11CA6B8D3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.CommunityAPI.Services", "Services\Community\Topluluk.Services.CommunityAPI.Services\Topluluk.Services.CommunityAPI.Services.csproj", "{AD05D799-0EB9-4609-8D0B-476A26D16702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.CommunityAPI.Services", "Services\Community\Topluluk.Services.CommunityAPI.Services\Topluluk.Services.CommunityAPI.Services.csproj", "{AD05D799-0EB9-4609-8D0B-476A26D16702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FileAPI", "Services\File\Topluluk.Services.FileAPI\Topluluk.Services.FileAPI.csproj", "{10D25C32-1D8F-4B8F-BF28-EBCA6EC64DFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.FileAPI", "Services\File\Topluluk.Services.FileAPI\Topluluk.Services.FileAPI.csproj", "{10D25C32-1D8F-4B8F-BF28-EBCA6EC64DFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FileAPI.Data", "Services\File\Topluluk.Services.FileAPI.Data\Topluluk.Services.FileAPI.Data.csproj", "{C06AA2D9-E9CC-4C08-BBDA-4526EFB1460F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.FileAPI.Data", "Services\File\Topluluk.Services.FileAPI.Data\Topluluk.Services.FileAPI.Data.csproj", "{C06AA2D9-E9CC-4C08-BBDA-4526EFB1460F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FileAPI.Model", "Services\File\Topluluk.Services.FileAPI.Model\Topluluk.Services.FileAPI.Model.csproj", "{ED1064ED-8D66-4BAB-AB4D-3789172744A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.FileAPI.Model", "Services\File\Topluluk.Services.FileAPI.Model\Topluluk.Services.FileAPI.Model.csproj", "{ED1064ED-8D66-4BAB-AB4D-3789172744A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FileAPI.Services", "Services\File\Topluluk.Services.FileAPI.Services\Topluluk.Services.FileAPI.Services.csproj", "{E5C26A03-2FF8-4F20-9642-43D3365100AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.FileAPI.Services", "Services\File\Topluluk.Services.FileAPI.Services\Topluluk.Services.FileAPI.Services.csproj", "{E5C26A03-2FF8-4F20-9642-43D3365100AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QR", "QR", "{D6BD2EB3-95DB-490E-A40F-7BE163FF0666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.QRAPI", "Services\QR\Topluluk.Services.QRAPI\Topluluk.Services.QRAPI.csproj", "{9145A6DE-CFA0-4596-973A-AF0C3E074BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.QRAPI", "Services\QR\Topluluk.Services.QRAPI\Topluluk.Services.QRAPI.csproj", "{9145A6DE-CFA0-4596-973A-AF0C3E074BDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.QRAPI.Data", "Services\QR\Topluluk.Services.QRAPI.Data\Topluluk.Services.QRAPI.Data.csproj", "{38BE18AE-8ABC-4A15-A546-0ED76B121452}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.QRAPI.Data", "Services\QR\Topluluk.Services.QRAPI.Data\Topluluk.Services.QRAPI.Data.csproj", "{38BE18AE-8ABC-4A15-A546-0ED76B121452}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.QRAPI.Model", "Services\QR\Topluluk.Services.QRAPI.Model\Topluluk.Services.QRAPI.Model.csproj", "{804D3C46-B4AB-4594-B34D-90E42F8A30E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.QRAPI.Model", "Services\QR\Topluluk.Services.QRAPI.Model\Topluluk.Services.QRAPI.Model.csproj", "{804D3C46-B4AB-4594-B34D-90E42F8A30E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.QRAPI.Services", "Services\QR\Topluluk.Services.QRAPI.Services\Topluluk.Services.QRAPI.Services.csproj", "{04401C3E-C154-40C4-A9DB-C7C755AE74E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.QRAPI.Services", "Services\QR\Topluluk.Services.QRAPI.Services\Topluluk.Services.QRAPI.Services.csproj", "{04401C3E-C154-40C4-A9DB-C7C755AE74E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{78837069-B2E5-40CF-A97C-42703931A8BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ReportAPI", "Services\Report\Topluluk.Services.ReportAPI\Topluluk.Services.ReportAPI.csproj", "{55E30A70-E610-4191-8062-21DDDB982BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.ReportAPI", "Services\Report\Topluluk.Services.ReportAPI\Topluluk.Services.ReportAPI.csproj", "{55E30A70-E610-4191-8062-21DDDB982BFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.MailAPI", "Services\Mail\Topluluk.Services.MailAPI\Topluluk.Services.MailAPI.csproj", "{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.MailAPI", "Services\Mail\Topluluk.Services.MailAPI\Topluluk.Services.MailAPI.csproj", "{D7DB024B-6430-4332-B3FC-1B1E38BA4A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI", "Services\Post\Topluluk.Services.PostAPI\Topluluk.Services.PostAPI.csproj", "{770279CA-C088-4EA9-8863-AE8A68B6EF32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.PostAPI", "Services\Post\Topluluk.Services.PostAPI\Topluluk.Services.PostAPI.csproj", "{770279CA-C088-4EA9-8863-AE8A68B6EF32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Data", "Services\Post\Topluluk.Services.PostAPI.Data\Topluluk.Services.PostAPI.Data.csproj", "{E3087A54-2D00-4F93-8E41-8DC39EF43568}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.PostAPI.Data", "Services\Post\Topluluk.Services.PostAPI.Data\Topluluk.Services.PostAPI.Data.csproj", "{E3087A54-2D00-4F93-8E41-8DC39EF43568}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Model", "Services\Post\Topluluk.Services.PostAPI.Model\Topluluk.Services.PostAPI.Model.csproj", "{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.PostAPI.Model", "Services\Post\Topluluk.Services.PostAPI.Model\Topluluk.Services.PostAPI.Model.csproj", "{B6BAB3FD-5CDD-4BD8-8651-2BD57E03771B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Services", "Services\Post\Topluluk.Services.PostAPI.Services\Topluluk.Services.PostAPI.Services.csproj", "{9F7A90A8-0636-4884-B841-1139F8158C5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.PostAPI.Services", "Services\Post\Topluluk.Services.PostAPI.Services\Topluluk.Services.PostAPI.Services.csproj", "{9F7A90A8-0636-4884-B841-1139F8158C5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{AD9B04B4-D540-4A17-B5F9-D6F04D3244FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI", "Services\Search\Topluluk.Services.SearchAPI\Topluluk.Services.SearchAPI.csproj", "{5801BFAD-3333-4D57-A078-C99179E45513}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.SearchAPI", "Services\Search\Topluluk.Services.SearchAPI\Topluluk.Services.SearchAPI.csproj", "{5801BFAD-3333-4D57-A078-C99179E45513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Data", "Services\Search\Topluluk.Services.SearchAPI.Data\Topluluk.Services.SearchAPI.Data.csproj", "{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.SearchAPI.Data", "Services\Search\Topluluk.Services.SearchAPI.Data\Topluluk.Services.SearchAPI.Data.csproj", "{E56F01A1-3A4E-4483-84FC-2624E46CCB6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Model", "Services\Search\Topluluk.Services.SearchAPI.Model\Topluluk.Services.SearchAPI.Model.csproj", "{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.SearchAPI.Model", "Services\Search\Topluluk.Services.SearchAPI.Model\Topluluk.Services.SearchAPI.Model.csproj", "{A93C7BE7-D2EB-4FD4-89E5-9288974E454C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.SearchAPI.Services", "Services\Search\Topluluk.Services.SearchAPI.Services\Topluluk.Services.SearchAPI.Services.csproj", "{13C4CD64-CEF9-487E-93DE-F4847398900C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.SearchAPI.Services", "Services\Search\Topluluk.Services.SearchAPI.Services\Topluluk.Services.SearchAPI.Services.csproj", "{13C4CD64-CEF9-487E-93DE-F4847398900C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI", "Services\Event\Topluluk.Services.EventAPI\Topluluk.Services.EventAPI.csproj", "{F7368149-68D4-4BAF-9B6F-3480B9960884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.EventAPI", "Services\Event\Topluluk.Services.EventAPI\Topluluk.Services.EventAPI.csproj", "{F7368149-68D4-4BAF-9B6F-3480B9960884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI.Data", "Services\Event\Topluluk.Services.EventAPI.Data\Topluluk.Services.EventAPI.Data.csproj", "{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.EventAPI.Data", "Services\Event\Topluluk.Services.EventAPI.Data\Topluluk.Services.EventAPI.Data.csproj", "{16F02A88-8E29-4FAB-98C8-52424A5F5F4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI.Model", "Services\Event\Topluluk.Services.EventAPI.Model\Topluluk.Services.EventAPI.Model.csproj", "{DB79D25B-0B97-4B33-98B6-AAF520D42F59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.EventAPI.Model", "Services\Event\Topluluk.Services.EventAPI.Model\Topluluk.Services.EventAPI.Model.csproj", "{DB79D25B-0B97-4B33-98B6-AAF520D42F59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.EventAPI.Services", "Services\Event\Topluluk.Services.EventAPI.Services\Topluluk.Services.EventAPI.Services.csproj", "{305C531F-25ED-47A6-AFC5-4E73996CF291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topluluk.Services.EventAPI.Services", "Services\Event\Topluluk.Services.EventAPI.Services\Topluluk.Services.EventAPI.Services.csproj", "{305C531F-25ED-47A6-AFC5-4E73996CF291}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feed", "Feed", "{9A425FB0-4D5E-4D79-9D55-3848D055DFB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FeedAPI", "Services\Feed\Topluluk.Services.FeedAPI\Topluluk.Services.FeedAPI.csproj", "{0F7F2865-91AA-4F97-83E7-AFE52B07E107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FeedAPI.Data", "Services\Feed\Topluluk.Services.FeedAPI.Data\Topluluk.Services.FeedAPI.Data.csproj", "{5AB5D64B-7450-4ADB-BE11-8A82C41C2D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FeedAPI.Model", "Services\Feed\Topluluk.Services.FeedAPI.Model\Topluluk.Services.FeedAPI.Model.csproj", "{18F858D8-1122-416F-976F-F7D71C79118F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.FeedAPI.Services", "Services\Feed\Topluluk.Services.FeedAPI.Services\Topluluk.Services.FeedAPI.Services.csproj", "{6A1F8D85-43A1-405E-A6AE-E7766081AEC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chat", "Chat", "{2B75DDA5-FBCE-4E87-B15D-831D116928C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ChatAPI", "Services\Chat\Topluluk.Services.ChatAPI\Topluluk.Services.ChatAPI.csproj", "{557CA77C-0738-4C22-AB93-3EFCFCC505F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ChatAPI.Data", "Services\Chat\Topluluk.Services.ChatAPI.Data\Topluluk.Services.ChatAPI.Data.csproj", "{330F8352-9149-48FD-BFB6-722FB7C34073}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ChatAPI.Model", "Services\Chat\Topluluk.Services.ChatAPI.Model\Topluluk.Services.ChatAPI.Model.csproj", "{90D94B68-90A5-402D-A2FD-E10D2662B700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.ChatAPI.Services", "Services\Chat\Topluluk.Services.ChatAPI.Services\Topluluk.Services.ChatAPI.Services.csproj", "{E149C828-613C-43ED-AD3F-D9668E73AC78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -257,12 +277,41 @@ Global
 		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{305C531F-25ED-47A6-AFC5-4E73996CF291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F7F2865-91AA-4F97-83E7-AFE52B07E107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F7F2865-91AA-4F97-83E7-AFE52B07E107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F7F2865-91AA-4F97-83E7-AFE52B07E107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F7F2865-91AA-4F97-83E7-AFE52B07E107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB5D64B-7450-4ADB-BE11-8A82C41C2D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB5D64B-7450-4ADB-BE11-8A82C41C2D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB5D64B-7450-4ADB-BE11-8A82C41C2D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB5D64B-7450-4ADB-BE11-8A82C41C2D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F858D8-1122-416F-976F-F7D71C79118F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F858D8-1122-416F-976F-F7D71C79118F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F858D8-1122-416F-976F-F7D71C79118F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F858D8-1122-416F-976F-F7D71C79118F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1F8D85-43A1-405E-A6AE-E7766081AEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1F8D85-43A1-405E-A6AE-E7766081AEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1F8D85-43A1-405E-A6AE-E7766081AEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1F8D85-43A1-405E-A6AE-E7766081AEC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{557CA77C-0738-4C22-AB93-3EFCFCC505F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{557CA77C-0738-4C22-AB93-3EFCFCC505F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{557CA77C-0738-4C22-AB93-3EFCFCC505F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{557CA77C-0738-4C22-AB93-3EFCFCC505F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330F8352-9149-48FD-BFB6-722FB7C34073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330F8352-9149-48FD-BFB6-722FB7C34073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330F8352-9149-48FD-BFB6-722FB7C34073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330F8352-9149-48FD-BFB6-722FB7C34073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D94B68-90A5-402D-A2FD-E10D2662B700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D94B68-90A5-402D-A2FD-E10D2662B700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D94B68-90A5-402D-A2FD-E10D2662B700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D94B68-90A5-402D-A2FD-E10D2662B700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E149C828-613C-43ED-AD3F-D9668E73AC78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E149C828-613C-43ED-AD3F-D9668E73AC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E149C828-613C-43ED-AD3F-D9668E73AC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E149C828-613C-43ED-AD3F-D9668E73AC78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {10EA4274-58F2-4046-97AB-649E4E28F089}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A71A15E7-49BC-4016-B708-9215F2345C57} = {86DDE63F-F3BF-4708-AFAB-3ECB8993DA33}
@@ -312,5 +361,18 @@ Global
 		{16F02A88-8E29-4FAB-98C8-52424A5F5F4F} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
 		{DB79D25B-0B97-4B33-98B6-AAF520D42F59} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
 		{305C531F-25ED-47A6-AFC5-4E73996CF291} = {BAB830EE-DD14-4342-BB57-48BC69FFF98A}
+		{9A425FB0-4D5E-4D79-9D55-3848D055DFB9} = {B2E286F5-5793-4097-BB38-F9E049159374}
+		{0F7F2865-91AA-4F97-83E7-AFE52B07E107} = {9A425FB0-4D5E-4D79-9D55-3848D055DFB9}
+		{5AB5D64B-7450-4ADB-BE11-8A82C41C2D9E} = {9A425FB0-4D5E-4D79-9D55-3848D055DFB9}
+		{18F858D8-1122-416F-976F-F7D71C79118F} = {9A425FB0-4D5E-4D79-9D55-3848D055DFB9}
+		{6A1F8D85-43A1-405E-A6AE-E7766081AEC8} = {9A425FB0-4D5E-4D79-9D55-3848D055DFB9}
+		{2B75DDA5-FBCE-4E87-B15D-831D116928C3} = {B2E286F5-5793-4097-BB38-F9E049159374}
+		{557CA77C-0738-4C22-AB93-3EFCFCC505F7} = {2B75DDA5-FBCE-4E87-B15D-831D116928C3}
+		{330F8352-9149-48FD-BFB6-722FB7C34073} = {2B75DDA5-FBCE-4E87-B15D-831D116928C3}
+		{90D94B68-90A5-402D-A2FD-E10D2662B700} = {2B75DDA5-FBCE-4E87-B15D-831D116928C3}
+		{E149C828-613C-43ED-AD3F-D9668E73AC78} = {2B75DDA5-FBCE-4E87-B15D-831D116928C3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10EA4274-58F2-4046-97AB-649E4E28F089}
 	EndGlobalSection
 EndGlobal

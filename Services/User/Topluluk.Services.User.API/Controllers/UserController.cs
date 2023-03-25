@@ -99,7 +99,7 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.BlockUser(UserId, targetId);
         }
 
-        [HttpPost("Search")]
+        [HttpGet("Search")]
         public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery]string text)
         {
             return await _userService.SearchUser(text,UserId);
