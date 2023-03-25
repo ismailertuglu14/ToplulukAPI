@@ -11,9 +11,7 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 		public string LastName { get; set; }
 		public string? ProfileImage { get; set; }
 		public string? CommunityId { get; set; }
-		public string? SharedById { get; set; }
 		public ICollection<string> Files { get; set; }
-		public ICollection<string> SharedBy { get; set; }
 		public string Description { get; set; }
 		public ICollection<InteractionType> Interactions { get; set; }
 		public bool IsShownOnProfile { get; set; } = true;
@@ -26,9 +24,7 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 		public Post()
 		{
 			Interactions = new HashSet<InteractionType>();
-            SharedBy = new HashSet<string>();
 			Files = new HashSet<string>();
-			//Viewing = new Dictionary<string, int>();
 		}
 	}
 }
