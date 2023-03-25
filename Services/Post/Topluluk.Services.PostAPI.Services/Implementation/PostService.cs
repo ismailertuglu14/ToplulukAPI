@@ -71,6 +71,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     int i = 0;
                     foreach (var dto in response.Data as List<Post>)
                     {
+                        dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(dto.UserId);
                         dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
                         if (!dto.CommunityLink.IsNullOrEmpty())
                         {
