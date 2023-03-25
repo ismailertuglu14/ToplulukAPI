@@ -90,7 +90,11 @@ namespace Topluluk.Services.PostAPI.Controllers
         {
             return await _postService.Interaction(this.UserId,postId, dto);
         }
-
+        [HttpPost("remove-interaction/{postId}")]
+        public async Task<Response<string>> RemoveInteraction(string postId)
+        {
+            return await _postService.RemoveInteraction(this.UserId, postId);
+        }
     }
 }
 
