@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using RestSharp;
 using Topluluk.Services.AuthenticationAPI.Data.Implementation;
@@ -127,6 +128,34 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             {
                 
                 return await Task.FromResult(Response<TokenDto>.Fail($"Some error occured {e}", ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<string>> SignOut(string userId,SignOutUserDto userDto)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty() || userDto.RefreshToken.IsNullOrEmpty())
+                    throw new Exception("User Not Found");
+
+                UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
+
+                if (user != null)
+                {
+                    user.RefreshToken = null;
+                    _repository.Update(user);
+                    return await Task.FromResult(Response<string>.Success("Signout successfully!",
+                        ResponseStatus.Success));
+                }
+
+                return await Task.FromResult(Response<string>.Fail("User not found!", ResponseStatus.NotFound));
+
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
             }
         }
 

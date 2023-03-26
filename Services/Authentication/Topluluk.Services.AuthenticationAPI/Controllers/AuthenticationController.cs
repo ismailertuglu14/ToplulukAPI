@@ -34,6 +34,12 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
             return await _authenticationService.SignUp(userDto);
         }
 
+        [HttpPost("[action]")]
+        public async Task<Response<string>> SignOut(SignOutUserDto userDto)
+        {
+            return await _authenticationService.SignOut(this.UserId, userDto);
+        }
+
         // Delete user from http request
         [HttpPost("delete")]
         public async Task<Response<string>> Delete(UserDeleteDto dto)
