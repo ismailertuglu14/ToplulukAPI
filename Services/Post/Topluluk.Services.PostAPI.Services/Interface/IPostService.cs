@@ -10,13 +10,13 @@ namespace Topluluk.Services.PostAPI.Services.Interface
         Task<Response<List<GetPostDto>>> GetPosts(string userId, int take = 10, int skip = 0 );
         Task<Response<GetPostByIdDto>> GetPostById(string postId, string sourceUserId, bool isDeleted = false);
         Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10);
-        Task<Response<List<GetPostDto>>> GetUserPosts(string userId, int take = 10, int skip = 0);
+        Task<Response<List<GetPostForFeedDto>>> GetUserPosts(string userId, string id, int take = 10, int skip = 0);
 
 
         Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, int skip = 0, int take = 10);
 
 
-        Task<Response<string>> Create(CreatePostDto postDto);
+        Task<Response<string>> Create(string userId, CreatePostDto postDto);
 
 		Task<Response<string>> Update();
 

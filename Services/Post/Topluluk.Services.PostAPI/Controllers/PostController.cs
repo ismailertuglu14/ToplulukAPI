@@ -33,10 +33,10 @@ namespace Topluluk.Services.PostAPI.Controllers
             return await _postService.GetPostForFeedScreen(this.UserId,skip,take);
         }
 
-        [HttpGet("user")]
-        public async Task<Response<List<GetPostDto>>> GetPostsForUserScreen(int take,int skip)
+        [HttpGet("user/{id}")]
+        public async Task<Response<List<GetPostForFeedDto>>> GetUserPosts(string id, int take,int skip)
         {
-            return await _postService.GetUserPosts(this.UserId,take,skip);
+            return await _postService.GetUserPosts(this.UserId,id,take,skip);
         }
 
         [HttpGet("GetPost")]
@@ -49,7 +49,7 @@ namespace Topluluk.Services.PostAPI.Controllers
         public async Task<Response<string>> Create(CreatePostDto postDto)
         {
             postDto.UserId = UserId;
-            return await _postService.Create(postDto);
+            return await _postService.Create(this.UserId, postDto);
         }
 
         [HttpPost("[action]")]

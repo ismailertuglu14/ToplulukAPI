@@ -137,6 +137,15 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     int i = 0;
                     foreach (var dto in response.Data as List<Post>)
                     {
+                        var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
+                            .AddQueryParameter("id", dto.UserId).AddQueryParameter("sourceUserId", userId);
+                        var getUserInfoResponse =
+                            await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
+                        dtos[i].UserId = getUserInfoResponse.Data.Data.UserId;
+                        dtos[i].FirstName = getUserInfoResponse.Data.Data.FirstName;
+                        dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
+                        dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
+
                         dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(dto.UserId);
                         dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
                         dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
@@ -161,7 +170,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     return await Task.FromResult(
                         Response<List<GetPostForFeedDto>>.Success(dtos, ResponseStatus.Success));
                 }
-
+                return await Task.FromResult(
+                    Response<List<GetPostForFeedDto>>.Fail("Error", ResponseStatus.Success));
             }
             catch (Exception e)
             {
@@ -169,75 +179,68 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     ResponseStatus.InitialError));
 
             }
-            throw new NotImplementedException();
         }
 
-        public async Task<Response<string>> Create(CreatePostDto postDto)
+        public async Task<Response<string>> Create(string userId,CreatePostDto postDto)
         {
-            Post post = _mapper.Map<Post>(postDto);
 
-            var getUserRequest = new RestRequest("https://localhost:7202/User/GetUserById").AddQueryParameter("userId", postDto.UserId);
-            var getUserResponse = await _client.ExecuteGetAsync<Response<GetUserByIdDto>>(getUserRequest);
-            post.FirstName = getUserResponse.Data.Data.FirstName;
-            post.LastName = getUserResponse.Data.Data.LastName;
-            post.ProfileImage = getUserResponse.Data.Data.ProfileImage;
-            
-                
-            DatabaseResponse response = await _postRepository.InsertAsync(post);
-
-            // Post topluluk da paylaşılacak
-            if (post.CommunityId != null)
+            try
             {
-                // todo RestRequest rewrite
-                var _community = HttpRequestHelper.handle<string>(post.CommunityId, $"https://localhost:7132/Community/Participiants/{post.CommunityId}", HttpType.GET).Result;
-                var _participiants = _community.Content.ReadAsStringAsync().Result;
-                List<string>? participiants = JsonSerializer.Deserialize<List<string>>(_participiants);
+                if (userId.IsNullOrEmpty()) throw new Exception("User not found");
 
 
-                // Kullanıcı topluluk içinde değilse paylaşamasın.
-                if (!participiants!.Contains(postDto.UserId))
+                Post post = _mapper.Map<Post>(postDto);
+
+                post.UserId = userId;
+
+                DatabaseResponse response = await _postRepository.InsertAsync(post);
+
+                // Post topluluk da paylaşılacak
+                if (post.CommunityId != null)
                 {
+                    // todo RestRequest rewrite
+                    var _community = HttpRequestHelper.handle<string>(post.CommunityId, $"https://localhost:7132/Community/Participiants/{post.CommunityId}", HttpType.GET).Result;
+                    var _participiants = _community.Content.ReadAsStringAsync().Result;
+                    List<string>? participiants = JsonSerializer.Deserialize<List<string>>(_participiants);
 
-                    // Post silindi ve fonksiyon bitirildi.
-                    _postRepository.Delete(post);
-                    return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotAuthenticated));
-                }
-                // Toplulukda da bu post paylaşılabilsin.
-                else
-                {
-                    PostCreatedCommunityDto body = new() { Id = response.Data, CommunityId = postDto.CommunityId };
-                    var communityCreateRequest = new RestRequest("https://localhost:7132/community/postcreated").AddBody(body);
-                    var communityCreateResponse = await _client.ExecutePostAsync(communityCreateRequest);
-                    
 
-                    if (communityCreateResponse.IsSuccessStatusCode == false)
+                    // Kullanıcı topluluk içinde değilse paylaşamasın.
+                    if (!participiants!.Contains(postDto.UserId))
                     {
 
                         // Post silindi ve fonksiyon bitirildi.
                         _postRepository.Delete(post);
                         return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotAuthenticated));
                     }
+                    // Toplulukda da bu post paylaşılabilsin.
+                    else
+                    {
+                        PostCreatedCommunityDto body = new() { Id = response.Data, CommunityId = postDto.CommunityId };
+                        var communityCreateRequest = new RestRequest("https://localhost:7132/community/postcreated").AddBody(body);
+                        var communityCreateResponse = await _client.ExecutePostAsync(communityCreateRequest);
 
+
+                        if (communityCreateResponse.IsSuccessStatusCode == false)
+                        {
+
+                            // Post silindi ve fonksiyon bitirildi.
+                            _postRepository.Delete(post);
+                            return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotAuthenticated));
+                        }
+
+
+                    }
 
                 }
+                return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
 
             }
-            return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
-
-            //PostCreatedUserDto postCreatedUserDto = new() { PostId = response.Data, UserId = postDto.UserId};
-            //var userCreateRequest = new RestRequest("https://localhost:7202/User/PostCreated").AddBody(postCreatedUserDto);
-            //var userCreateResponse = await _client.ExecutePostAsync(userCreateRequest);
-
-            //if (userCreateResponse.IsSuccessStatusCode == true)
-            //{
-            //    return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
-            //}
-            //else
-            //{
-            //    // Post silindi ve fonksiyon bitirildi.
-            //    _postRepository.Delete(post);
-            //    return await Task.FromResult(Response<string>.Fail("Failed",Shared.Enums.ResponseStatus.InitialError));
-            //}
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
+           
         }
 
         public async Task<Response<string>> Delete(PostDeleteDto postDto)
@@ -401,23 +404,64 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         }
 
         // Kullanıcı ekranında kullanıcının paylaşımlarını listelemek için kullanılacak action
-        // https://localhost:xxxx/post/suer
-        public async Task<Response<List<GetPostDto>>> GetUserPosts(string userId, int take = 10, int skip = 0)
+        public async Task<Response<List<GetPostForFeedDto>>> GetUserPosts(string userId, string id, int take = 10,
+            int skip = 0)
         {
             try
             {
+                
+                if (userId.IsNullOrEmpty()) throw new Exception("User not found");
 
-                DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == userId);
-                List<GetPostDto> dto = _mapper.Map<List<Post>, List<GetPostDto>>(response.Data);
-                return await Task.FromResult(Response<List<GetPostDto>>.Success(dto, Shared.Enums.ResponseStatus.Success));
+                    DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == id);
+                    var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
+                        .AddQueryParameter("id", id).AddQueryParameter("sourceUserId", userId);
+                    var getUserInfoResponse =
+                        await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
+
+                    List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
+
+                    int i = 0;
+                    foreach (var dto in response.Data as List<Post>)
+                    {
+                        dtos[i].UserId = getUserInfoResponse.Data.Data.UserId;
+                        dtos[i].FirstName = getUserInfoResponse.Data.Data.FirstName;
+                        dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
+                        dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
+
+                        dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
+                        dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
+
+                        if (!dto.CommunityLink.IsNullOrEmpty())
+                        {
+                            var communityInfoRequest =
+                                new RestRequest("https://localhost:7149/api/community/community-info-post-link")
+                                    .AddQueryParameter("id", dto.CommunityLink);
+                            var communityInfoResponse =
+                                await _client.ExecuteGetAsync<Response<CommunityInfoPostLinkDto>>(communityInfoRequest);
+
+                            dtos[i].Community = new() { Id = communityInfoResponse.Data.Data.Id, CoverImage = communityInfoResponse.Data.Data.CoverImage ?? "", Title = communityInfoResponse.Data.Data.Title };
+                        }
+                        else if (!dto.EventLink.IsNullOrEmpty())
+                        {
+                            // Get-event-title and image request
+                            dtos[i].Event = new() { Id = "test", CoverImage = "test", Title = "test" };
+                        }
+
+                        i++;
+                    }
+                    return await Task.FromResult(
+                        Response<List<GetPostForFeedDto>>.Success(dtos, ResponseStatus.Success));
+                
+
             }
-            catch
-            (Exception e)
+            catch (Exception e)
             {
-                return await Task.FromResult(Response<List<GetPostDto>>.Fail($"Error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail($"Some error occured {e}",
+                    ResponseStatus.InitialError));
 
             }
         }
+
 
         public async Task<Response<string>> Interaction(string userId,string postId, PostInteractionDto interaction)
         {

@@ -38,7 +38,6 @@ namespace Topluluk.Services.User.Services.Interface
         Task<Response<string>> UpdateCommunities(string userId, string communityId);
 		Task UserBanngerChanged(string userId, string fileName);
 		Task<Response<string>> PostCreated(string userId,string id);
-		Task<Response<string>> DeletePost(PostDeleteDto dto);
 		Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId);
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
 		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);
