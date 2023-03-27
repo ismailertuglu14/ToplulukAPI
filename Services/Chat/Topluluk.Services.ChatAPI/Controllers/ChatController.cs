@@ -15,10 +15,6 @@ public class ChatController : BaseController
         _chatService = chatService;
     }
 
-    [HttpPost("send")]
-    public async Task<Response<string>> SendMessage(MessageCreateDto message)
-    {
-        return await _chatService.SendMessage(this.UserId, message);
-    }
+   
     
 }

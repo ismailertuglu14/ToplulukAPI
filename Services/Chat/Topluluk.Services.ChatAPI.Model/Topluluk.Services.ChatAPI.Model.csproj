@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Dto\" />
+    <Folder Include="Entity\" />
     <Folder Include="Mapper\" />
   </ItemGroup>
 

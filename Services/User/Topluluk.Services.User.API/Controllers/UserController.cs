@@ -42,14 +42,10 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.GetUserByUserName(userName);
         }
 
-        /// <summary>
-        /// https://topluluk.com/user?suggestions=5
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions([FromQuery]int suggestions)
+        [HttpGet("suggestions")]
+        public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions([FromQuery]int limit)
         {
-            return await _userService.GetUserSuggestions( UserId  ,suggestions);
+            return await _userService.GetUserSuggestions( this.UserId  ,limit);
         }
 
         [HttpPost("[action]")]
