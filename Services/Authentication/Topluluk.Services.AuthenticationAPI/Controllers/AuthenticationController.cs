@@ -48,6 +48,12 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
             return await _authenticationService.DeleteUser(this.UserId, dto);
         }
 
+        [HttpPost("change-password")]
+        public async Task<Response<string>> ChangePassword(PasswordChangeDto passwordDto)
+        {
+            return await _authenticationService.ChangePassword(this.UserId, passwordDto);
+        }
+
     }
 }
 

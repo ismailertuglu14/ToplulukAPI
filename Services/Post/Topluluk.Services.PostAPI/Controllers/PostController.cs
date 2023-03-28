@@ -8,8 +8,6 @@ using Topluluk.Services.PostAPI.Services.Interface;
 using Topluluk.Shared.BaseModels;
 using Topluluk.Shared.Dtos;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Topluluk.Services.PostAPI.Controllers
 {
 

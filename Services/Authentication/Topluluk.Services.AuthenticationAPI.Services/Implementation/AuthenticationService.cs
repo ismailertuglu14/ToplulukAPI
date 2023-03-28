@@ -159,6 +159,44 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             }
         }
 
+        public async Task<Response<string>> ResetPassowrd()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Response<string>> ChangePassword(string userId, PasswordChangeDto passwordDto)
+        {
+            try
+            {
+                UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
+                
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<string>.Fail("Not Found",
+                        ResponseStatus.NotFound));
+                }
+
+                var verifiedPassword = VerifyPassword(passwordDto.OldPassword, user.HashedPassword);
+
+                if (verifiedPassword == false)
+                {
+                    return await Task.FromResult(Response<string>.Fail("Not authenticated",
+                        ResponseStatus.NotAuthenticated));
+                }
+
+                user.HashedPassword = HashPassword(passwordDto.NewPassword);
+                _repository.Update(user);
+
+                return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred {e}",
+                    ResponseStatus.InitialError));
+            }
+        }
+
         // UserName and Email must be unique
         private async Task<Response<string>> CheckUserNameAndEmailUnique(string userName, string email)
         {

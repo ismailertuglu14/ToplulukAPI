@@ -11,7 +11,9 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Interface
 		Task<Response<TokenDto>> SignIn(SignInUserDto userDto);
 		Task<Response<TokenDto>> SignUp(CreateUserDto userDto);
         Task<Response<string>> SignOut(string userId, SignOutUserDto userDto);
-		Task<Response<string>> DeleteUser(string id, UserDeleteDto userDto);
+        Task<Response<string>> ResetPassowrd();
+        Task<Response<string>> ChangePassword(string userId, PasswordChangeDto passwordDto);
+        Task<Response<string>> DeleteUser(string id, UserDeleteDto userDto);
 	}
 }
 
