@@ -19,7 +19,7 @@ namespace Topluluk.Services.User.Model.Mapper
                 .ForMember(d => d.FollowersCount, s => s.MapFrom(s => s.Followers.Count))
                 .ForMember(d => d.FollowingsCount, s => s.MapFrom(s => s.Followings.Count));
 
-			CreateMap<_User, UserFollowerRequestDto>();
+			CreateMap<_User, FollowingRequestDto>();
         }		
 	}
 }
