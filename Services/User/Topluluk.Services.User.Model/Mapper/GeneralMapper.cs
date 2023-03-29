@@ -12,7 +12,10 @@ namespace Topluluk.Services.User.Model.Mapper
 			CreateMap<UserInsertDto, _User>().ReverseMap();
 			CreateMap<_User, UserSuggestionsDto>();
 			CreateMap<_User, UserSearchResponseDto>().ReverseMap();
-			CreateMap<_User, GetUserByIdDto>();
+
+			CreateMap<_User, GetUserByIdDto>().ForMember(d => d.FollowersCount, s => s.MapFrom(s => s.Followers.Count))
+											.ForMember(d => d.FollowingCount, s => s.MapFrom(s => s.Followings.Count));
+
 			CreateMap<_User, GetCommunityOwnerDto>();
 			CreateMap<_User, UserInfoForCommentDto>();
             CreateMap<_User, GetUserAfterLoginDto>()
