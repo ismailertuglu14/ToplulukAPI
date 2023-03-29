@@ -576,6 +576,39 @@ namespace Topluluk.Services.User.Services.Implementation
             }
 
         }
+
+        public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string userId, int skip = 0, int take = 10)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("Bad Request",ResponseStatus.BadRequest));
+                }
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                List<string> followingIds = user.Followings.ToList();
+                DatabaseResponse followingUsers = await _userRepository.GetAllAsync(take, skip, fu => followingIds.Contains(fu.Id));
+                List<FollowingUserDto> dtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(followingUsers.Data);
+
+                byte i = 0;
+
+                foreach (var _user in followingUsers.Data as List<_User>)
+                {
+                    dtos[i].IsFollowing = _user.Followers.Contains(userId);
+                }
+
+                return await Task.FromResult(Response<List<FollowingUserDto>>.Success(dtos, ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<FollowingUserDto>>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
+            }
+        }
+
+        public Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string userId, int skip = 0, int take = 10)
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }

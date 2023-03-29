@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Topluluk.Services.User.Model.Dto
 {
-	public class FollowersUserDto
+	public class FollowerUserDto
 	{
 		public string Id { get; set; }
 		public string FirstName { get; set; }
@@ -10,9 +10,7 @@ namespace Topluluk.Services.User.Model.Dto
 		public string? ProfileImage { get; set; }
 		public bool IsFollowing { get; set; }
 
-		public FollowersUserDto()
-		{
-		}
+		
 	}
 }
 
