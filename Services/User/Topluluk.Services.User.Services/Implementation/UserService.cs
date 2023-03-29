@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using RestSharp;
 using Topluluk.Services.User.Data.Interface;
@@ -544,6 +545,36 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<List<GetUserByIdDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError));
 
             }
+        }
+
+        public async Task<Response<List<UserFollowerRequestDto>>> GetFollowerRequests(string userId, int skip = 0, int take = 10)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<List<UserFollowerRequestDto>>.Fail("User Not Found", ResponseStatus.BadRequest));
+                }
+
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                if (user != null)
+                {
+                    List<string> incomingRequests = user.IncomingFollowRequests?.ToList() ?? new List<string>();
+                    DatabaseResponse incomingRequstUsers = await _userRepository.GetAllAsync(take, skip, u => incomingRequests.Contains(u.Id));
+
+                    List<UserFollowerRequestDto> dtos = _mapper.Map<List<_User>, List<UserFollowerRequestDto>>(incomingRequstUsers.Data);
+
+                    return await Task.FromResult(Response<List<UserFollowerRequestDto>>.Success(dtos, ResponseStatus.Success));
+                }
+
+                return await Task.FromResult(Response<List<UserFollowerRequestDto>>.Fail("User Not Found", ResponseStatus.NotFound));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<UserFollowerRequestDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+            }
+
         }
     }
     
