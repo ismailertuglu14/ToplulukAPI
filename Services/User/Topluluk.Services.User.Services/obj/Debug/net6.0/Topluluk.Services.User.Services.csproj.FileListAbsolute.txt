@@ -21,49 +21,72 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/refint/Topluluk.Services.User.Services.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.pdb
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/ref/Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Services.deps.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Services.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\DBHelper.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Data.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Model.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Shared.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Shared.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\DBHelper.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Data.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Model.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.csproj.AssemblyReference.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.AssemblyInfoInputs.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.AssemblyInfo.cs
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.csproj.CoreCompileInputs.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.csproj.CopyComplete
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\refint\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\ref\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Services.deps.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Services.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\DBHelper.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Data.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Model.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Shared.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Shared.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\DBHelper.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Data.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.User.Model.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.csproj.AssemblyReference.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.AssemblyInfoInputs.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.AssemblyInfo.cs
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.csproj.CoreCompileInputs.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.csproj.CopyComplete
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\refint\Topluluk.Services.User.Services.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\Topluluk.Services.User.Services.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\User\Topluluk.Services.User.Services\obj\Debug\net6.0\ref\Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.deps.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/DBHelper.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Data.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Model.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Shared.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Shared.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/DBHelper.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Data.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Model.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.AssemblyReference.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.AssemblyInfoInputs.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.AssemblyInfo.cs
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.CoreCompileInputs.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.CopyComplete
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/refint/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/ref/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.deps.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/DBHelper.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Data.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Model.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Shared.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Shared.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/DBHelper.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Data.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Model.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.AssemblyReference.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.AssemblyInfoInputs.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.AssemblyInfo.cs
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.CoreCompileInputs.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.CopyComplete
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/refint/Topluluk.Services.User.Services.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/ref/Topluluk.Services.User.Services.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.deps.json
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Services.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/DBHelper.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Data.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Model.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/DBHelper.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Data.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.User.Model.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.AssemblyInfo.cs
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.csproj.CopyComplete
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/refint/Topluluk.Services.User.Services.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/Topluluk.Services.User.Services.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.Services/obj/Debug/net6.0/ref/Topluluk.Services.User.Services.dll

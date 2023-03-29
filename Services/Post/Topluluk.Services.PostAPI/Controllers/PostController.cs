@@ -76,7 +76,11 @@ namespace Topluluk.Services.PostAPI.Controllers
         {
             return await _postService.DeleteComment(this.UserId, id);
         }
-
+        [HttpGet("saved-posts")]
+        public async Task<Response<List<GetPostForFeedDto>>> GetSavedPosts()
+        {
+            return await _postService.GetSavedPosts(this.UserId);
+        }
         [HttpPost("save/{postId}")]
         public async Task<Response<string>> SavePost(string postId)
         {

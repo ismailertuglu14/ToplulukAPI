@@ -42,6 +42,7 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
 		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);
         Task<Response<List<string>>> GetUserFollowings(string id);
+		Task<Response<List<GetUserByIdDto>>> GetUserList(UserIdListDto dto, int skip = 0, int take = 10);
     }
 
 }

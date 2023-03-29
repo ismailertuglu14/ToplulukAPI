@@ -24,7 +24,8 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 
 		Task<Response<string>> Interaction(string userId, string postId, PostInteractionDto interaction);
 		Task<Response<string>> RemoveInteraction(string userId, string postId);
-        
+
+        Task<Response<List<GetPostForFeedDto>>> GetSavedPosts(string userId, int take = 10, int skip = 0);
         Task<Response<string>> SavePost(string userId, string postId);
 
 		Task<Response<string>> Comment(CommentCreateDto commentDto);

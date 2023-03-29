@@ -8,26 +8,24 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ismai\\.nuget\\packages\\": {}
+    "/Users/ismail/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj",
+      "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
       "projectName": "Topluluk.Services.SearchAPI.Services",
-      "projectPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\Topluluk.Services.SearchAPI.Services.csproj",
-      "packagesPath": "C:\\Users\\ismai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ismai\\Desktop\\ToplulukAPI\\Services\\Search\\Topluluk.Services.SearchAPI.Services\\obj\\",
+      "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
+      "packagesPath": "/Users/ismail/.nuget/packages/",
+      "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ismai\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/ismail/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -61,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
       }
     }
   }

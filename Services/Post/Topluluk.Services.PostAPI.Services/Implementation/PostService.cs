@@ -513,6 +513,61 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
+        public async Task<Response<List<GetPostForFeedDto>>> GetSavedPosts(string userId, int take = 10, int skip = 0)
+        {
+            try
+            {
+                if (userId != null)
+                {
+                    DatabaseResponse response = await _savedPostRepository.GetAllAsync(take, skip, sp => sp.UserId == userId);
+                    List<GetPostForFeedDto> dtos = new();
+                    UserIdListDto userIds = new();
+                    List<string> PostIds = new List<string>();
+                    foreach (var r in response.Data as List<SavedPost>)
+                    {
+                        PostIds.Add(r.PostId);
+                    }
+
+                    DatabaseResponse response2 = await _postRepository.GetAllAsync(take, skip, p => PostIds.Contains(p.Id));
+                    
+                    foreach (var r in response2.Data as List<Post>)
+                    {
+                        userIds.Ids.Add(r.UserId);
+                    }
+                    var getUserListRequest = new RestRequest($"https://localhost:7149/api/user/get-user-info-list")
+                                                .AddQueryParameter("skip", skip)
+                                                .AddQueryParameter("take", take)
+                                                .AddBody(userIds);
+
+                    var getUserListResponse = await _client.ExecutePostAsync<Response<List<GetUserByIdDto>>>(getUserListRequest);
+                    
+                    byte i = 0;
+                    foreach (var dto in response.Data as List<SavedPost>)
+                    {
+                        Post post = await _postRepository.GetFirstAsync(p => p.Id == dto.PostId);
+                        dtos.Add(_mapper.Map<GetPostForFeedDto>(post));
+                       
+                        dtos[i].FirstName = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().FirstName;
+                        dtos[i].LastName = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().LastName;
+                        dtos[i].ProfileImage = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().ProfileImage;
+                        //dtos[i].IsFollowing = getUserListResponse.Data[i].;
+                        i++;
+                    }
+
+                    return await Task.FromResult(Response<List<GetPostForFeedDto>>.Success(dtos,ResponseStatus.Success));
+                }
+                else
+                {
+                    return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail("User Not Found",ResponseStatus.NotFound));
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
+
+         }
     }
 }
 

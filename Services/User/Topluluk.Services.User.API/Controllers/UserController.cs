@@ -180,6 +180,11 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.GetUserFollowings(id);
         }
 
+        [HttpPost("get-user-info-list")]
+        public async Task<Response<List<GetUserByIdDto>>> GetUserInfoList(UserIdListDto idList, int skip, int take)
+        {
+            return await _userService.GetUserList(idList, skip, take);
+        }
     }
     public class UserBannerChangedDto
     {

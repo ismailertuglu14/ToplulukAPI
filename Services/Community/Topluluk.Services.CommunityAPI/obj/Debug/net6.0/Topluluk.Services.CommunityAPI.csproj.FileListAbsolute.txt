@@ -111,229 +111,342 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RestSharp.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\appsettings.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.exe
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.deps.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.runtimeconfig.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AutoMapper.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AWSSDK.Core.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DnsClient.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DotNetCore.CAP.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DotNetCore.CAP.MongoDB.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DotNetCore.CAP.RabbitMQ.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\FluentValidation.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Bson.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Driver.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Driver.Core.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\RabbitMQ.Client.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\RestSharp.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\SharpCompress.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Snappier.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Drawing.Common.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Security.Permissions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\ZstdSharp.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DBHelper.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Data.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Services.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Shared.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Services.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Data.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Shared.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DBHelper.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.csproj.AssemblyReference.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.AssemblyInfoInputs.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.AssemblyInfo.cs
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.csproj.CoreCompileInputs.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.Topluluk.Services.CommunityAPI.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.Topluluk.Services.CommunityAPI.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Topluluk.Services.CommunityAPI.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Topluluk.Services.CommunityAPI.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets.pack.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets.build.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\scopedcss\bundle\Topluluk.Services.CommunityAPI.styles.css
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.csproj.CopyComplete
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\refint\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.genruntimeconfig.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\ref\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\appsettings.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.exe
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.deps.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.runtimeconfig.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AutoMapper.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AWSSDK.Core.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DnsClient.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DotNetCore.CAP.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DotNetCore.CAP.MongoDB.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DotNetCore.CAP.RabbitMQ.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\FluentValidation.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Bson.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Driver.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Driver.Core.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\RabbitMQ.Client.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\RestSharp.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\SharpCompress.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Snappier.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Drawing.Common.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Security.Permissions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\ZstdSharp.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DBHelper.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Data.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Services.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Shared.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Services.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Data.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Shared.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\DBHelper.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.AuthenticationAPI.Model.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\bin\Debug\net6.0\Topluluk.Services.CommunityAPI.Model.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.csproj.AssemblyReference.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.AssemblyInfoInputs.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.AssemblyInfo.cs
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.csproj.CoreCompileInputs.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.Topluluk.Services.CommunityAPI.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.Topluluk.Services.CommunityAPI.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Topluluk.Services.CommunityAPI.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Topluluk.Services.CommunityAPI.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets.pack.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets.build.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\scopedcss\bundle\Topluluk.Services.CommunityAPI.styles.css
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.csproj.CopyComplete
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\refint\Topluluk.Services.CommunityAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\Topluluk.Services.CommunityAPI.genruntimeconfig.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Community\Topluluk.Services.CommunityAPI\obj\Debug\net6.0\ref\Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/appsettings.Development.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/appsettings.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.exe
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.deps.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.runtimeconfig.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AutoMapper.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.Core.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.SecurityToken.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DnsClient.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/FluentValidation.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.CSharp.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.Razor.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.DotNet.PlatformAbstractions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Caching.Memory.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Configuration.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyModel.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Primitives.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Identity.Client.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.OpenApi.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Win32.SystemEvents.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Bson.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Driver.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Driver.Core.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Libmongocrypt.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Newtonsoft.Json.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RabbitMQ.Client.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RestSharp.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/SharpCompress.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Snappier.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Configuration.ConfigurationManager.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Drawing.Common.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Runtime.Caching.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Security.Cryptography.ProtectedData.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Security.Permissions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Windows.Extensions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/ZstdSharp.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/linux/native/libmongocrypt.so
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/osx/native/libmongocrypt.dylib
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/native/mongocrypt.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DBHelper.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Services.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Shared.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Services.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Shared.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DBHelper.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.AssemblyReference.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.AssemblyInfoInputs.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.AssemblyInfo.cs
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.CoreCompileInputs.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.Topluluk.Services.CommunityAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.build.Topluluk.Services.CommunityAPI.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Topluluk.Services.CommunityAPI.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Topluluk.Services.CommunityAPI.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.pack.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.build.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.development.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/scopedcss/bundle/Topluluk.Services.CommunityAPI.styles.css
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.CopyComplete
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/refint/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.genruntimeconfig.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/ref/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/appsettings.Development.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/appsettings.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.exe
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.deps.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.runtimeconfig.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AutoMapper.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.Core.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.SecurityToken.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DnsClient.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/FluentValidation.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.CSharp.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.Razor.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.DotNet.PlatformAbstractions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Caching.Memory.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Configuration.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyModel.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Primitives.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Identity.Client.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.OpenApi.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Win32.SystemEvents.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Bson.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Driver.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Driver.Core.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Libmongocrypt.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Newtonsoft.Json.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RabbitMQ.Client.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RestSharp.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/SharpCompress.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Snappier.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Configuration.ConfigurationManager.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Drawing.Common.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Runtime.Caching.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Security.Cryptography.ProtectedData.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Security.Permissions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Windows.Extensions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/ZstdSharp.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/linux/native/libmongocrypt.so
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/osx/native/libmongocrypt.dylib
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/native/mongocrypt.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DBHelper.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Services.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Shared.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Services.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Shared.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DBHelper.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.AssemblyReference.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.AssemblyInfoInputs.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.AssemblyInfo.cs
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.CoreCompileInputs.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.Topluluk.Services.CommunityAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.build.Topluluk.Services.CommunityAPI.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Topluluk.Services.CommunityAPI.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Topluluk.Services.CommunityAPI.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.pack.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.build.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.development.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/scopedcss/bundle/Topluluk.Services.CommunityAPI.styles.css
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.CopyComplete
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/refint/Topluluk.Services.CommunityAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.genruntimeconfig.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/ref/Topluluk.Services.CommunityAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/appsettings.Development.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/appsettings.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.deps.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.runtimeconfig.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AutoMapper.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.Core.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.SecurityToken.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DnsClient.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/FluentValidation.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.CSharp.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.Razor.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.DotNet.PlatformAbstractions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Caching.Memory.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Configuration.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.DependencyModel.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Extensions.Primitives.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Identity.Client.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.OpenApi.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.Win32.SystemEvents.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Bson.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Driver.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Driver.Core.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/MongoDB.Libmongocrypt.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RabbitMQ.Client.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/RestSharp.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/SharpCompress.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Snappier.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Configuration.ConfigurationManager.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Drawing.Common.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Runtime.Caching.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Security.Cryptography.ProtectedData.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Security.Permissions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/System.Windows.Extensions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/ZstdSharp.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/linux/native/libmongocrypt.so
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/osx/native/libmongocrypt.dylib
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/native/mongocrypt.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DBHelper.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Services.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Services.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DBHelper.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.AssemblyInfo.cs
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cs
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.MvcApplicationPartsAssemblyInfo.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.Topluluk.Services.CommunityAPI.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.build.Topluluk.Services.CommunityAPI.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Topluluk.Services.CommunityAPI.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Topluluk.Services.CommunityAPI.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.pack.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.build.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/staticwebassets.development.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/scopedcss/bundle/Topluluk.Services.CommunityAPI.styles.css
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.csproj.CopyComplete
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/refint/Topluluk.Services.CommunityAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.genruntimeconfig.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/ref/Topluluk.Services.CommunityAPI.dll
