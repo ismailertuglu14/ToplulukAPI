@@ -28,7 +28,10 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId);
 		Task<Response<string>> PostCreated(PostCreatedCommunityDto dto);
 		Task<Response<string>> GetCommunityTitle(string id);
+
 		Task<Response<bool>> CheckCommunityExist(string id);
+		Task<Response<bool>> CheckIsUserAdminOwner(string userId);
+
         Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id);
     }
 }

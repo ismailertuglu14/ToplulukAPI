@@ -381,6 +381,20 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
 
         }
+
+        public async Task<Response<bool>> CheckIsUserAdminOwner(string userId)
+        {
+            try
+            {
+                bool result = await _communityRepository.AnyAsync(c => c.AdminId == userId);
+                return await Task.FromResult(Response<bool>.Success(result, ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<bool>.Fail($"Some error occured: {e}",
+                    ResponseStatus.InitialError));
+            }
+        }
     }
 }
 

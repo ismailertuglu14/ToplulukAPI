@@ -550,6 +550,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         dtos[i].FirstName = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().FirstName;
                         dtos[i].LastName = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().LastName;
                         dtos[i].ProfileImage = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().ProfileImage;
+                        dtos[i].IsSaved = true;
                         //dtos[i].IsFollowing = getUserListResponse.Data[i].;
                         i++;
                     }
@@ -568,6 +569,33 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
 
          }
+
+        public async Task<Response<bool>> DeletePosts(string userId)
+        {
+            try
+            {
+                if (!userId.IsNullOrEmpty())
+                {
+                    bool result = await _postRepository.DeletePosts(userId);
+
+                    if (result == true)
+                    {
+                        bool result2 = await _commentRepository.DeletePostsComments(userId);
+                    }
+
+                    return await Task.FromResult(Response<bool>.Success(result, ResponseStatus.Success));
+                }
+                else
+                {
+                    return await Task.FromResult(Response<bool>.Fail("Not authorized", ResponseStatus.BadRequest));
+                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<bool>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
+        }
     }
 }
 

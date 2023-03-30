@@ -126,6 +126,14 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.CheckCommunityExist(id);
         }
 
+        [HttpGet("check-is-user-community-owner")]
+        public async Task<Response<bool>> CheckIsUserCommunityOwner()
+        {
+            return await _communityService.CheckIsUserAdminOwner(this.UserId);
+        }
+
+
+
         [HttpGet("community-info-post-link")]
         public async Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id)
         {

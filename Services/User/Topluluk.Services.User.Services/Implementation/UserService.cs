@@ -82,29 +82,47 @@ namespace Topluluk.Services.User.Services.Implementation
             
             try
             {
-                if (id == dto.userId)
+                
+                if (!id.IsNullOrEmpty())
                 {
                     // Topluluğu var mı kontrol et, varsa fail dön
+                    var checkCommunitiesRequest = new RestRequest("https://localhost:7149/api/community/check-is-user-community-owner")
+                                                      .AddHeader("Authorization",token);
+                    var checkCommunitiesResponse = await _client.ExecuteGetAsync<Response<bool>>(checkCommunitiesRequest);
 
-                    // Post, PostComment, Event, EventComment leri deleted yap.
-
-                    // Kullanıcıyı sil.
-                    DatabaseResponse response = _userRepository.DeleteById(id);
-                    // http request to user credential
-
-                    var userDeleteRequest = new RestRequest("https://localhost:7232/authentication/delete").AddBody(dto).AddHeader("Authorization",token);
-                    var userDeleteResponse = await _client.ExecutePostAsync<Response<string>>(userDeleteRequest);
-                    if (userDeleteResponse.Data.IsSuccess == true)
+                    if (checkCommunitiesResponse.Data!.Data == true)
                     {
-                        return await Task.FromResult(Response<string>.Success("Successfully Deleted", ResponseStatus.Success));
+                        return await Task.FromResult(Response<string>.Fail("You have to delete your community first", ResponseStatus.CommunityOwnerExist));
 
+                        // Sahibi olduğu topluluk yoksa
                     }
                     else
                     {
-                        return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+
+                        // Post, PostComment, 
+
+                        var deletePostsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/post/delete-posts").AddHeader("Authorization",token);
+                        var deletePostsResponse = await _client.ExecutePostAsync<Response<bool>>(deletePostsRequest);
+
+                        if (deletePostsResponse.Data.IsSuccess == false) throw new Exception();
+
+                        // Event, EventComment leri deleted yap.
+
+                        // Kullanıcıyı sil.
+                        DatabaseResponse response = _userRepository.DeleteById(id);
+                        var userDeleteRequest = new RestRequest("https://localhost:7232/authentication/delete").AddBody(dto).AddHeader("Authorization", token);
+                        var userDeleteResponse = await _client.ExecutePostAsync<Response<string>>(userDeleteRequest);
+                        if (userDeleteResponse.Data.IsSuccess == true)
+                        {
+                            return await Task.FromResult(Response<string>.Success("Successfully Deleted", ResponseStatus.Success));
+
+                        }
+                        else
+                        {
+                            return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+                        }
 
                     }
-
                 }
                 else
                 {

@@ -262,9 +262,9 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
         {
             try
             {
-                if (id == userDto.UserId)
+                if (!id.IsNullOrEmpty())
                 {
-                    _repository.DeleteById(userDto.UserId);
+                    _repository.DeleteById(id);
                     return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
 
                 }

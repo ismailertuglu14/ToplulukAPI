@@ -97,6 +97,15 @@ namespace Topluluk.Services.PostAPI.Controllers
         {
             return await _postService.RemoveInteraction(this.UserId, postId);
         }
+
+
+        // Http Calls
+
+        [HttpPost("delete-posts")]
+        public async Task<Response<bool>> DeletePosts()
+        {
+            return await _postService.DeletePosts(this.UserId);
+        }
     }
 }
 

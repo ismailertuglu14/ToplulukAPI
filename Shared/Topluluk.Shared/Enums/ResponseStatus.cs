@@ -9,6 +9,9 @@ namespace Topluluk.Shared.Enums
 
         UsernameInUse = 10001,
         EmailInUse = 10002,
+
+        CommunityOwnerExist = 10300,
+
         NotAuthenticated = 10401,
 
         InitialError = 500,

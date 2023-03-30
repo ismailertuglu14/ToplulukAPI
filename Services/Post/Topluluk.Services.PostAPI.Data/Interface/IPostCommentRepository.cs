@@ -6,6 +6,7 @@ namespace Topluluk.Services.PostAPI.Data.Interface
 {
 	public interface IPostCommentRepository : IGenericRepository<PostComment>
 	{
+		Task<bool> DeletePostsComments(string userId);
 	}
 }
 

@@ -35,6 +35,11 @@ namespace Topluluk.Services.PostAPI.Services.Interface
         Task<Response<string>> DeleteComment(string userId, string commentId);
 		Task<Response<string>> UpdateComment(string userId, string commentId, string newComment);
 
-    }
+
+
+        // Http Calls
+
+        Task<Response<bool>> DeletePosts(string userId);
+     }
 }
 
