@@ -581,6 +581,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     if (result == true)
                     {
                         bool result2 = await _commentRepository.DeletePostsComments(userId);
+                        bool result3 = await _savedPostRepository.DeleteSavedPostsByUserId(userId);
                     }
 
                     return await Task.FromResult(Response<bool>.Success(result, ResponseStatus.Success));

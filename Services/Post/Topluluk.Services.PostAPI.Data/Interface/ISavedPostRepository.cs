@@ -5,5 +5,5 @@ namespace Topluluk.Services.PostAPI.Data.Interface;
 
 public interface ISavedPostRepository : IGenericRepository<SavedPost>
 {
-    
+    Task<bool> DeleteSavedPostsByUserId(string userId);
 }

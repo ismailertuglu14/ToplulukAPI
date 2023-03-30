@@ -99,18 +99,18 @@ namespace Topluluk.Services.User.Services.Implementation
                     else
                     {
 
-                        // Post, PostComment, 
-
+                        
+                        // Posts and PostComments will be deleted.
                         var deletePostsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/post/delete-posts").AddHeader("Authorization",token);
                         var deletePostsResponse = await _client.ExecutePostAsync<Response<bool>>(deletePostsRequest);
 
                         if (deletePostsResponse.Data.IsSuccess == false) throw new Exception();
 
-                        // Event, EventComment leri deleted yap.
+                        // Event, EventComments will be deleted.
 
-                        // Kullanıcıyı sil.
+                        // Delete User.
                         DatabaseResponse response = _userRepository.DeleteById(id);
-                        var userDeleteRequest = new RestRequest("https://localhost:7232/authentication/delete").AddBody(dto).AddHeader("Authorization", token);
+                        var userDeleteRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/delete").AddBody(dto).AddHeader("Authorization", token);
                         var userDeleteResponse = await _client.ExecutePostAsync<Response<string>>(userDeleteRequest);
                         if (userDeleteResponse.Data.IsSuccess == true)
                         {
