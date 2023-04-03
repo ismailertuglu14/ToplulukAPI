@@ -28,6 +28,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>(); 
             // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddScoped<ILoginLogRepository, LoginLogRepository>();
             // services.AddTransient<IErrorRepository, ErrorRepository>();
             // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
         }

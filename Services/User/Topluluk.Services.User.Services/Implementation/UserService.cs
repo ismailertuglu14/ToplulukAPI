@@ -635,9 +635,12 @@ namespace Topluluk.Services.User.Services.Implementation
                                     return await Task.FromResult(Response<NoContent>.Fail("Email already taken!", ResponseStatus.EmailInUse));
                                 }
                             }
+                            // Http request to auth service for change username and email
+
 
                             user.FirstName = userDto.FirstName;
                             user.LastName = userDto.LastName;
+                            user.UserName = userDto.UserName;
                             user.Email = userDto.Email;
                             user.Gender = userDto.Gender;
                             user.Bio = userDto.Bio;

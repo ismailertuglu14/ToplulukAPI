@@ -25,7 +25,9 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto)
         {
-            return await _authenticationService.SignIn(userDto);
+            string ipAdress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            string deviceId = Request.Headers["User-Agent"];
+            return await _authenticationService.SignIn(userDto,ipAdress,deviceId);
         }
 
         [HttpPost("[action]")]

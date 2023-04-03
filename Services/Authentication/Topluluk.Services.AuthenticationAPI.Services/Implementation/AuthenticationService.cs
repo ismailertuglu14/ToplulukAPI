@@ -26,22 +26,24 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 	public class AuthenticationService : IAuthenticationService
 	{
         private readonly IAuthenticationRepository _repository;
+        private readonly ILoginLogRepository _loginLogRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly RestClient _client;
 
-        public AuthenticationService(IAuthenticationRepository repository, IMapper mapper, IConfiguration configuration)
+        public AuthenticationService(IAuthenticationRepository repository, IMapper mapper, IConfiguration configuration, ILoginLogRepository loginLogRepository)
 		{
             _repository = repository;
             _mapper = mapper;
             _configuration = configuration;
+            _loginLogRepository = loginLogRepository;
             _client = new RestClient();
 		}
 
-        public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto)
+        public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto, string ipAdress, string deviceId)
         {
             TokenHelper _tokenHelper = new TokenHelper(_configuration);
-
+            
             UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
             
             if(user != null)
@@ -57,6 +59,8 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 
                     TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, 2);
                     UpdateRefreshToken(user,token,2);
+                    LoginLog loginLog = new() { UserId = user.Id, IpAdress = ipAdress, DeviceId = deviceId };
+                    await _loginLogRepository.InsertAsync(loginLog);
                     return await Task.FromResult(Response<TokenDto>.Success(token, ResponseStatus.Success));
                 }
                 // User found but password wrong.
