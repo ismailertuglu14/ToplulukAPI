@@ -616,7 +616,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
                     if (user != null)
                     {
-                        if (user.Id != userId)
+                        if (user.Id == userId)
                         {
                             if (user.UserName != userDto.UserName)
                             {
