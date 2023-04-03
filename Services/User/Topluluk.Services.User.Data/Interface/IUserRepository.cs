@@ -6,6 +6,8 @@ namespace Topluluk.Services.User.Data.Interface
 {
 	public interface IUserRepository : IGenericRepository<_User>
 	{
-	}
+        Task<bool> CheckIsUsernameUnique(string userName);
+        Task<bool> CheckIsEmailUnique(string email);
+    }
 }
 

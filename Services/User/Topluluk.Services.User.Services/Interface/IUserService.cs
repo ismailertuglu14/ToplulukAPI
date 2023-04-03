@@ -38,7 +38,9 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto);
 
 		Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto);
-		
+
+		Task<Response<NoContent>> UpdateProfile(string userId, UserUpdateProfileDto userDto);
+
         // Http calls services
         Task<Response<string>> UpdateCommunities(string userId, string communityId);
 		Task UserBanngerChanged(string userId, string fileName);

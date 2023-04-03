@@ -128,6 +128,11 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.PrivacyChange(this.UserId, dto);
         }
+        [HttpPost("update-profile")]
+        public async Task<Response<NoContent>> UpdateProfile(UserUpdateProfileDto dto)
+        {
+            return await _userService.UpdateProfile(this.UserId, dto);
+        }
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 

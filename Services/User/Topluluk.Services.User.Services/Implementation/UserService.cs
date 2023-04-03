@@ -604,6 +604,70 @@ namespace Topluluk.Services.User.Services.Implementation
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Response<NoContent>> UpdateProfile(string userId, UserUpdateProfileDto userDto)
+        {
+
+            try
+            {
+                if (!userId.IsNullOrEmpty())
+                {
+                    _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                    if (user != null)
+                    {
+                        if (user.Id != userId)
+                        {
+                            if (user.UserName != userDto.UserName)
+                            {
+                                var result = await _userRepository.CheckIsUsernameUnique(userDto.UserName);
+                                if (result == true)
+                                {
+                                    return await Task.FromResult(Response<NoContent>.Fail("UserName already taken!", ResponseStatus.UsernameInUse));
+                                }
+                            }
+
+                            if (user.Email != userDto.Email)
+                            {
+                                var result = await _userRepository.CheckIsUsernameUnique(userDto.Email);
+                                if (result == true)
+                                {
+                                    return await Task.FromResult(Response<NoContent>.Fail("Email already taken!", ResponseStatus.EmailInUse));
+                                }
+                            }
+
+                            user.FirstName = userDto.FirstName;
+                            user.LastName = userDto.LastName;
+                            user.Email = userDto.Email;
+                            user.Gender = userDto.Gender;
+                            user.Bio = userDto.Bio;
+                            user.BirthdayDate = userDto.BirthdayDate;
+
+                            DatabaseResponse response = _userRepository.Update(user);
+
+                            if (response.IsSuccess == true)
+                            {
+                                return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
+                            }
+
+                            return await Task.FromResult(Response<NoContent>.Fail("Update Failed", ResponseStatus.EmailInUse));
+
+                        }
+
+                        return await Task.FromResult(Response<NoContent>.Fail("Not Authorized", ResponseStatus.Unauthorized));
+                    }
+
+
+                    return await Task.FromResult(Response<NoContent>.Fail("User not found", ResponseStatus.InitialError));
+
+                }
+                return await Task.FromResult(Response<NoContent>.Success(null,ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
+            }
+        }
     }
     
 }

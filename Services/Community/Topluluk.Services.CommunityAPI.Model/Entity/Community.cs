@@ -33,8 +33,8 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 
 		//public ICollection<string> Posts { get; set; }
 
-		public bool HasPrice { get; set; } = false;
-		public int Price { get; set; } = 0;
+		//public bool HasPrice { get; set; } = false;
+		//public int Price { get; set; } = 0;
 
 		public Community()
 		{

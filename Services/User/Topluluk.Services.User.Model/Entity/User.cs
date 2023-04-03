@@ -30,8 +30,6 @@ namespace Topluluk.Services.User.Model.Entity
 
 		public ICollection<string>? Communities { get; set; }
 		public ICollection<string>? CommunityRequests { get; set; }
-		//public ICollection<string>? Comments { get; set; }
-		//public ICollection<string>? Posts { get; set; }
 
 		public User()
 		{
