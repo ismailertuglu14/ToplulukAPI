@@ -24,8 +24,10 @@ namespace Topluluk.Services.CommunityAPI.Model.Dto
 
         public int ParticipiantsCount { get; set; }
 
-        public bool? IsOwner { get; set; }
+        public bool IsOwner { get; set; }
 
+        public bool IsParticipiant { get; set; }
+        
         public CommunityGetByIdDto()
 		{
 		}

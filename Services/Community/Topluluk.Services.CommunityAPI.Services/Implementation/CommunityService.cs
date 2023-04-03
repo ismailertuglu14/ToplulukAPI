@@ -101,6 +101,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             _community.CoverImage = community.CoverImage;
             _community.BannerImage = community.BannerImage;
             _community.ParticipiantsCount = community.Participiants.Count;
+            _community.IsParticipiant = community.Participiants.Contains(userId);
 
             return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
