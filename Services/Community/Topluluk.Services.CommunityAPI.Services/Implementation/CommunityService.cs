@@ -249,7 +249,10 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 {
                     return await Task.FromResult(Response<NoContent>.Fail("Community Not Found", ResponseStatus.NotFound));
                 }
-
+                if (community.AdminId == userId)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("You are the owner of this community!", ResponseStatus.CommunityOwnerExist));
+                }
                 if (community.Participiants.Contains(userId))
                 {
                     var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/community/leave").AddHeader("Authorization", token).AddQueryParameter("communityId", communityId);

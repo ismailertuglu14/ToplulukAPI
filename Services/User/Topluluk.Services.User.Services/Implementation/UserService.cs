@@ -610,7 +610,9 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("Bad Request",ResponseStatus.BadRequest));
                 }
+
                 _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
                 List<string> followingIds = user.Followings.ToList();
                 DatabaseResponse followingUsers = await _userRepository.GetAllAsync(take, skip, fu => followingIds.Contains(fu.Id));
                 List<FollowingUserDto> dtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(followingUsers.Data);
