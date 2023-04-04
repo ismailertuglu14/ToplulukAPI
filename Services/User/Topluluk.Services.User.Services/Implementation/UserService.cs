@@ -401,7 +401,36 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
 
                 user.IsPrivate = dto.IsPrivate;
-                _userRepository.Update(user);
+                DatabaseResponse response = _userRepository.Update(user);
+
+                if (response.IsSuccess == false)
+                {
+                    return await Task.FromResult(Response<string>.Fail("Update failed", ResponseStatus.BadRequest));
+                }
+
+                // Kullanıcı profilini açığa çekmişse incomingFollowRequestleri kabulet. Usera followings olarak ekle
+                // incomingRequestlerdeki id lere sahip userların outgoingFollowRequestleri sil, usera followers olarak ekle.
+                if (user.IsPrivate == false)
+                {
+                    if (user.IncomingFollowRequests != null && user.IncomingFollowRequests.Count > 0)
+                    {
+
+                        foreach (var _userId in user.IncomingFollowRequests.ToList())
+                        {
+                            user.Followers!.Add(_userId);
+                            user.IncomingFollowRequests.Remove(_userId);
+                            _User _user = await _userRepository.GetFirstAsync(u => u.Id == _userId);
+                            _user.Followings!.Add(user.Id);
+                            _user.OutgoingFollowRequests.Remove(userId);
+                            var list = new List<_User>();
+                            list.Add(user);
+                            list.Add(_user);
+
+                            _userRepository.BulkUpdate(list);
+                        }
+                    }
+                }
+
 
                 return await Task.FromResult(Response<string>.Success($"Privacy status Successfully updated to {user.IsPrivate}", ResponseStatus.Success));
 
