@@ -19,6 +19,7 @@ using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
 using ZstdSharp.Unsafe;
+using static System.Net.Mime.MediaTypeNames;
 using _User = Topluluk.Services.User.Model.Entity.User;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
@@ -711,7 +712,7 @@ namespace Topluluk.Services.User.Services.Implementation
         public async Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10)
         {
             try
-            {
+            { 
                 if (userId.IsNullOrEmpty())
                 {
                     return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User Not Found", ResponseStatus.BadRequest));
@@ -732,6 +733,64 @@ namespace Topluluk.Services.User.Services.Implementation
             catch (Exception e)
             {
                 return await Task.FromResult(Response<List<FollowingUserDto>>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<NoContent>> LeaveCommunity(string userId, string communityId)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("User Id cant be null",ResponseStatus.BadRequest));
+                }
+
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found",ResponseStatus.NotFound));
+                }
+
+                user.Communities.Remove(communityId);
+
+                _userRepository.Update(user);
+                return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
+            }
+        }
+        public async Task<Response<NoContent>> JoinCommunity(string userId, string communityId)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("User Id cant be null", ResponseStatus.BadRequest));
+                }
+
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
+                }
+
+                if (!user.Communities.Contains(userId))
+                {
+                    user.Communities.Add(communityId);
+                    _userRepository.Update(user);
+                }
+
+                return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
             }
         }
     }

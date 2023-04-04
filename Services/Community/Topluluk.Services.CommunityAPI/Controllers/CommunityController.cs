@@ -44,8 +44,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<string>> Join(CommunityJoinDto communityInfo)
         {
-            communityInfo.UserId = UserId;
-            return await _communityService.Join(communityInfo);
+            return await _communityService.Join(this.UserId, this.Token, communityInfo);
         }
 
         [HttpGet("{id}")]
@@ -57,8 +56,14 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<string>> Create([FromForm] CommunityCreateDto communityInfo)
         {
-            communityInfo.CreatedById = UserId;
-            return await _communityService.Create(communityInfo);
+
+            return await _communityService.Create(this.UserId, this.Token, communityInfo);
+        }
+
+        [HttpPost("{communityId}/leave")]
+        public async Task<Response<NoContent>> Leave(string communityId)
+        {
+            return await _communityService.Leave(this.UserId, this.Token, communityId);
         }
 
         [HttpPost("[action]")]

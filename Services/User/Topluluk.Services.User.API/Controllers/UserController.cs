@@ -29,11 +29,11 @@ namespace Topluluk.Services.User.API.Controllers
             _userService = userService;
 
         }
-        
+
         [HttpGet("[action]")]
         public async Task<Response<GetUserByIdDto>> GetUserById(string userId)
         {
-            return await _userService.GetUserById(this.UserId,userId);
+            return await _userService.GetUserById(this.UserId, userId);
         }
 
         [HttpGet("{userName}")]
@@ -43,32 +43,32 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpGet("suggestions")]
-        public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions([FromQuery]int limit)
+        public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions([FromQuery] int limit)
         {
-            return await _userService.GetUserSuggestions( this.UserId  ,limit);
+            return await _userService.GetUserSuggestions(this.UserId, limit);
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> InsertUser( [FromBody] UserInsertDto userInfo)
+        public async Task<Response<string>> InsertUser([FromBody] UserInsertDto userInfo)
         {
             return await _userService.InsertUser(userInfo);
         }
 
         [HttpPost("[action]")]
         public async Task<Response<string>> ChangeProfileImage(IFormFileCollection files)
-        { 
+        {
             return await _userService.ChangeProfileImage(UserName, files);
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> ChangeBannerImage([FromForm]UserChangeBannerDto changeBannerDto)
+        public async Task<Response<string>> ChangeBannerImage([FromForm] UserChangeBannerDto changeBannerDto)
         {
             changeBannerDto.UserId = UserId;
             return await _userService.ChangeBannerImage(changeBannerDto);
         }
 
         [HttpPost("Follow")]
-        public async Task<Response<string>> FollowUser( [FromBody] UserFollowDto userFollowInfo)
+        public async Task<Response<string>> FollowUser([FromBody] UserFollowDto userFollowInfo)
         {
             userFollowInfo.SourceId = UserId;
             return await _userService.FollowUser(userFollowInfo);
@@ -100,21 +100,21 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpPost("Block")]
-        public async Task<Response<string>> BlockUser( [FromForm] string targetId )
+        public async Task<Response<string>> BlockUser([FromForm] string targetId)
         {
             return await _userService.BlockUser(UserId, targetId);
         }
 
         [HttpGet("Search")]
-        public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery]string text)
+        public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery] string text)
         {
-            return await _userService.SearchUser(text,UserId);
+            return await _userService.SearchUser(text, UserId);
         }
 
         [HttpGet("search-in-followings")]
-        public async Task<Response<List<FollowingUserDto>>?> SearchUser(string id, string text,int skip = 0, int take = 10)
+        public async Task<Response<List<FollowingUserDto>>?> SearchUser(string id, string text, int skip = 0, int take = 10)
         {
-            return await _userService.SearchInFollowings(this.UserId, id, text,skip,take);
+            return await _userService.SearchInFollowings(this.UserId, id, text, skip, take);
         }
 
         [HttpGet("[action]")]
@@ -141,42 +141,19 @@ namespace Topluluk.Services.User.API.Controllers
         }
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
-
-        // When the User joins the community
-        [NonAction]
-        [CapSubscribe("community.user.communityjoin")]
-        public async Task<Response<string>> UpdateCommunities( [FromBody] UserUpdateCommunitiesDto userInfo)
+        [HttpPost("community/join")]
+        public async Task<Response<NoContent>> JoinCommunity(string communityId)
         {
-            Console.WriteLine(userInfo);
-            return await _userService.UpdateCommunities(userInfo.UserId, userInfo.CommunityId);
+            return await _userService.JoinCommunity(this.UserId, communityId);
         }
 
-        // If the community the user is requesting to join is private
-        [NonAction]
-        [CapSubscribe("community.user.communityjoinrequest")]
-        public async Task<Response<string>> UpdateCommunitiesRequest([FromBody] UserUpdateCommunitiesDto userInfo)
+        [HttpPost("community/leave")]
+        public async Task<Response<NoContent>> LeaveCommunity( string communityId)
         {
-            Console.WriteLine(userInfo);
-            return await _userService.UpdateCommunities(userInfo.UserId, userInfo.CommunityId);
+            return await _userService.LeaveCommunity(this.UserId, communityId);
         }
 
-        // Update User communities property after user create a new community
-        [NonAction]
-        [CapSubscribe(QueueConstants.COMMUNITY_CREATE_USER_UPDATE)]
-        public async Task<Response<string>> UpdateUserCommunitiesAfterCreate([FromBody] UserUpdateCommunitiesDto userInfo)
-        {
-            return await _userService.UpdateCommunities(userInfo.UserId, userInfo.CommunityId);
-        }
-
-        [NonAction]
-        [CapSubscribe(QueueConstants.USER_BANNER_CHANGED)]
-        public async Task UserBannerChanged(UserBannerChangedDto userBannerChangedDto)
-        {
-            await _userService.UserBanngerChanged(userBannerChangedDto.UserId, userBannerChangedDto.FileName);
-        }
-
-  
+        // User information is received to be displayed on the post cards returned from the post service.
         [HttpGet("GetUserInfoForPost")]
         public async Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId)
         {

@@ -6,7 +6,6 @@ namespace Topluluk.Services.CommunityAPI.Model.Dto
 {
 	public class CommunityCreateDto
 	{
-        public string? CreatedById { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string? Location { get; set; }

@@ -12,9 +12,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<List<Community>>> GetCommunities();
 		Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5 );
 		Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string id);
-		Task<Response<string>> Join(CommunityJoinDto communityInfo);
-		Task<Response<string>> Create(CommunityCreateDto communityInfo);
-		Task<Response<string>> Leave();
+		Task<Response<string>> Join(string userId, string token, CommunityJoinDto communityInfo);
+		Task<Response<string>> Create(string userId, string token, CommunityCreateDto communityInfo);
+		Task<Response<NoContent>> Leave(string userId, string token, string communityId);
 		Task<Response<string>> Delete(string ownerId, string communityId);
         Task<Response<string>> DeletePermanently(string ownerId, string communityId);
 		Task<Response<List<string>>> GetParticipiants(string id);
