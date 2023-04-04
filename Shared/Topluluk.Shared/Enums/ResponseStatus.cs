@@ -14,6 +14,7 @@ namespace Topluluk.Shared.Enums
         CommunityOwnerExist = 10300,
 
         NotAuthenticated = 10401,
+        AccountLocked = 10402,
 
         InitialError = 500,
 

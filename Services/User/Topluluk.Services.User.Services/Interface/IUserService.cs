@@ -39,7 +39,7 @@ namespace Topluluk.Services.User.Services.Interface
 
 		Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto);
 
-		Task<Response<NoContent>> UpdateProfile(string userId, UserUpdateProfileDto userDto);
+		Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto);
 
         // Http calls services
         Task<Response<string>> UpdateCommunities(string userId, string communityId);

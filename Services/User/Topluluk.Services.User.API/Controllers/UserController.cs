@@ -131,7 +131,7 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpPost("update-profile")]
         public async Task<Response<NoContent>> UpdateProfile(UserUpdateProfileDto dto)
         {
-            return await _userService.UpdateProfile(this.UserId, dto);
+            return await _userService.UpdateProfile(this.UserId, this.Token, dto);
         }
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

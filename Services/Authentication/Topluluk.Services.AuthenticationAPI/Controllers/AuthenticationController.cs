@@ -46,7 +46,8 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
             return await _authenticationService.SignOut(this.UserId, userDto);
         }
 
-        // Delete user from http request
+        // @@@@@@@@@@@ Http Requests @@@@@@@@@@@@@@@
+
         [HttpPost("delete")]
         public async Task<Response<string>> Delete(UserDeleteDto dto)
         {
@@ -58,6 +59,12 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         public async Task<Response<string>> ChangePassword(PasswordChangeDto passwordDto)
         {
             return await _authenticationService.ChangePassword(this.UserId, passwordDto);
+        }
+
+        [HttpPost("update-profile")]
+        public async Task<Response<NoContent>> UpdateProfile(UserUpdateDto userDto)
+        {
+            return await _authenticationService.UpdateProfile(this.UserId, userDto);
         }
 
     }

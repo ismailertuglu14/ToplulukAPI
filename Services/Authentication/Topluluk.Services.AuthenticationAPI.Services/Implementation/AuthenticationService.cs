@@ -52,15 +52,17 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 if(verifiedPassword == true)
                 {
 
-                    if (user.Locked == true)
+                    if (DateTime.Now < user.LockoutEnd)
                     {
-                        return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.NotAuthenticated));
+                        return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked));
                     }
 
                     TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, 2);
                     UpdateRefreshToken(user,token,2);
+
                     LoginLog loginLog = new() { UserId = user.Id, IpAdress = ipAdress, DeviceId = deviceId };
                     await _loginLogRepository.InsertAsync(loginLog);
+
                     return await Task.FromResult(Response<TokenDto>.Success(token, ResponseStatus.Success));
                 }
                 // User found but password wrong.
@@ -281,6 +283,45 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             catch (Exception e)
             {
                 return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<NoContent>> UpdateProfile(string userId, UserUpdateDto userDto)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("", ResponseStatus.Unauthorized));
+                }
+
+                UserCredential user = await _repository.GetFirstAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("User not found", ResponseStatus.NotFound));
+                }
+
+                if (user.Id != userId)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("UnAuthorized",ResponseStatus.Unauthorized));
+                }
+
+                user.UserName = userDto.UserName;
+                user.Email = userDto.Email;
+
+                DatabaseResponse response = _repository.Update(user);
+
+                if (response.IsSuccess == true)
+                {
+                    return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
+                }
+
+                return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.InitialError));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"Error occured {e}", ResponseStatus.InitialError));
             }
         }
     }
