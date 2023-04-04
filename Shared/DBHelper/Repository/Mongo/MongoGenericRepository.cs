@@ -371,7 +371,7 @@ namespace DBHelper.Repository.Mongo
             return dbResponse;
         }
 
-        public async Task<DatabaseResponse> GetListById(List<string> ids)
+        public async Task<DatabaseResponse> GetListByIdAsync(List<string> ids)
         {
             DatabaseResponse response = new();
             var database = GetConnection();

@@ -210,7 +210,7 @@ namespace DBHelper.Repository.SQL
             throw new NotImplementedException();
         }
 
-        public Task<DatabaseResponse> GetListById(List<string> ids)
+        public Task<DatabaseResponse> GetListByIdAsync(List<string> ids)
         {
             throw new NotImplementedException();
         }
@@ -219,6 +219,8 @@ namespace DBHelper.Repository.SQL
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }
 

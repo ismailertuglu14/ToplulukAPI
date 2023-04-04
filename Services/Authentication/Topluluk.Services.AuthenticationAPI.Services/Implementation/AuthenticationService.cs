@@ -40,7 +40,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             _client = new RestClient();
 		}
 
-        public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto, string ipAdress, string deviceId)
+        public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto, string? ipAdress, string? deviceId)
         {
             TokenHelper _tokenHelper = new TokenHelper(_configuration);
             
@@ -52,12 +52,19 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 if(verifiedPassword == true)
                 {
 
+                    // Dead code fix later.
+
                     if (DateTime.Now < user.LockoutEnd)
                     {
                         return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked));
                     }
 
                     TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, 2);
+
+                    user.AccessFailedCount = 0;
+                    user.LockoutEnd = DateTime.MinValue;
+                    user.Locked = false;
+
                     UpdateRefreshToken(user,token,2);
 
                     LoginLog loginLog = new() { UserId = user.Id, IpAdress = ipAdress, DeviceId = deviceId };

@@ -707,6 +707,33 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
             }
         }
+
+        public async Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10)
+        {
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User Not Found", ResponseStatus.BadRequest));
+                }
+
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User not found", ResponseStatus.NotFound));
+                }
+
+                DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => user.Followings.Contains(u.Id)
+                && ((u.FirstName.ToLower() + " " + u.LastName.ToLower()).Contains(text.ToLower()) || u.UserName.Contains(text.ToLower())));
+                List<FollowingUserDto> followingUserDtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(response.Data);
+                return await Task.FromResult(Response<List<FollowingUserDto>>.Success(followingUserDtos, ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<FollowingUserDto>>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
+            }
+        }
     }
     
 }

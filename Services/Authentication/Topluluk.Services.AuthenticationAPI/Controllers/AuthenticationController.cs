@@ -25,12 +25,12 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto)
         {
-            var ipAddress = HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+            string? ipAddress = HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
             if (string.IsNullOrEmpty(ipAddress))
             {
                 ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
             }
-            string deviceId = Request.Headers["User-Agent"];
+            string? deviceId = Request.Headers["User-Agent"];
             return await _authenticationService.SignIn(userDto,ipAddress,deviceId);
         }
 

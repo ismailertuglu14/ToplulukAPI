@@ -8,7 +8,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Interface
 {
 	public interface IAuthenticationService
 	{
-		Task<Response<TokenDto>> SignIn(SignInUserDto userDto, string ipAdress, string deviceId);
+		Task<Response<TokenDto>> SignIn(SignInUserDto userDto, string? ipAdress, string? deviceId);
 		Task<Response<TokenDto>> SignUp(CreateUserDto userDto);
         Task<Response<string>> SignOut(string userId, SignOutUserDto userDto);
         Task<Response<string>> ResetPassowrd();

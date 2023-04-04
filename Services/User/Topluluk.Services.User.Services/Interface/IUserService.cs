@@ -33,6 +33,7 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<string>> BlockUser(string sourceId, string targetId);
 
 		Task<Response<List<UserSearchResponseDto>>?> SearchUser(string text, string userId, int skip = 0, int take = 5);
+		Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10);
 
 		Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files);
 		Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto);

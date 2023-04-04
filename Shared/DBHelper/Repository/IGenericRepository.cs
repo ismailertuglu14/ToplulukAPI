@@ -11,9 +11,11 @@ namespace DBHelper.Repository
         int Count();
         Task<int> Count(Expression<Func<T, bool>> predicate);
         DatabaseResponse GetById(string id);
-        Task<DatabaseResponse> GetListById(List<string> ids);
 
         Task<DatabaseResponse> GetByIdAsync(string id);
+
+        Task<DatabaseResponse> GetListByIdAsync(List<string> id);
+
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
         DatabaseResponse GetByIdWithDeleted(string id);
         Task<DatabaseResponse> GetByIdWithDeletedAsync(string id);
