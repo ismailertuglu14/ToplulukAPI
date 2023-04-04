@@ -209,26 +209,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     {
 
                         // Post silindi ve fonksiyon bitirildi.
-                        _postRepository.Delete(post);
-                        return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotAuthenticated));
-                    }
-                    // Toplulukda da bu post paylaşılabilsin.
-                    else
-                    {
-                        PostCreatedCommunityDto body = new() { Id = response.Data, CommunityId = postDto.CommunityId };
-                        var communityCreateRequest = new RestRequest("https://localhost:7132/community/postcreated").AddBody(body);
-                        var communityCreateResponse = await _client.ExecutePostAsync(communityCreateRequest);
-
-
-                        if (communityCreateResponse.IsSuccessStatusCode == false)
-                        {
-
-                            // Post silindi ve fonksiyon bitirildi.
-                            _postRepository.Delete(post);
-                            return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotAuthenticated));
-                        }
-
-
+                        _postRepository.DeleteCompletely(post.Id);
+                        return await Task.FromResult(Response<string>.Fail("Failed You are not the participiant of this community", Shared.Enums.ResponseStatus.Failed));
                     }
 
                 }

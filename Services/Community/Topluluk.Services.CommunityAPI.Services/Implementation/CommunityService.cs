@@ -393,16 +393,6 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<List<string>>.Success(community.Participiants.ToList(), ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> PostCreated(PostCreatedCommunityDto dto)
-        {
-            var community = await _communityRepository.GetFirstAsync(c => c.Id == dto.CommunityId);
-            // post Id
-
-             //todocommunity.Posts.Add(dto.Id);
-            _communityRepository.Update(community);
-            return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
-
-        }
 
         public async Task<Response<string>> GetCommunityTitle(string id)
         {
