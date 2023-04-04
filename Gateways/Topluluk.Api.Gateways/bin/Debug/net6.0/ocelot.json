@@ -64,6 +64,19 @@
       ],
       "UpstreamPathTemplate": "/api/user/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/file/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7165"
+
+        }
+      ],
+      "UpstreamPathTemplate": "/api/file/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
     } 
 
 

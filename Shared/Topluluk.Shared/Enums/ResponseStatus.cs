@@ -8,6 +8,8 @@ namespace Topluluk.Shared.Enums
         Unauthorized = 401,
         NotFound = 404,
 
+        Failed = 10000,
+
         UsernameInUse = 10001,
         EmailInUse = 10002,
 

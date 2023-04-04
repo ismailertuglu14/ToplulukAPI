@@ -124,6 +124,11 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 return await Task.FromResult(Response<string>.Fail("Not found community", ResponseStatus.NotFound));
             }
 
+            if ( community.Participiants.Count  >= community.ParticipiantLimit)
+            {
+                return await Task.FromResult(Response<string>.Fail("Community full now!", ResponseStatus.Failed));
+            }
+
             if (!community.IsPublic)
             {
                 if (!community.JoinRequestWaitings.Contains(userId))
@@ -192,7 +197,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                     var imageContent = new ByteArrayContent(imageBytes);
                     imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); // Resim formatına uygun mediatype belirleme
                     content.Add(imageContent, "file", communityInfo.CoverImage.FileName); // "files": paramtere adı "files[0].FileName": Resimin adı
-                    var imageResponse = await client.PostAsync("https://localhost:7165/file/upload-community-cover", content);
+                    var imageResponse = await client.PostAsync(ServiceConstants.API_GATEWAY + "/file/upload-community-cover", content);
 
                     if (imageResponse.IsSuccessStatusCode)
                     {
