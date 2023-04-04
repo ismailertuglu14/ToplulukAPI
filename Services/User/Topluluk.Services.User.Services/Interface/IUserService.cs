@@ -52,6 +52,8 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
 		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);
         Task<Response<List<string>>> GetUserFollowings(string id);
+
+		// If you have a list of user id's and u need to get user by id, Then use this function
 		Task<Response<List<GetUserByIdDto>>> GetUserList(UserIdListDto dto, int skip = 0, int take = 10);
     }
 

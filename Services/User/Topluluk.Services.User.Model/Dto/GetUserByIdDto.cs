@@ -21,15 +21,11 @@ namespace Topluluk.Services.User.Model.Dto
 
         public ICollection<string>? Communities { get; set; }
 
-        // Kullanıcı profilinde eğer senin admin olduğun topluluklara istek atmışsa
-        // Bir row area da kabul et / reddet gibi aksiyon için dönüyoruz.
-        public ICollection<string>? CommunityRequests { get; set; }
         public ICollection<string>? Posts { get; set; }
 
         public GetUserByIdDto()
         {
             Communities = new HashSet<string>();
-            CommunityRequests = new HashSet<string>();
             Posts = new HashSet<string>();
         }
     }

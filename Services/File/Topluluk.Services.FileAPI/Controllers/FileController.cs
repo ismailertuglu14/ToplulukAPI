@@ -35,18 +35,11 @@ namespace Topluluk.Services.FileAPI.Controllers
             return Ok("Çalışıyor");
         }
         // POST:
-        [HttpPost("[action]")]
-        public async Task<Response<string>> UploadCommunityCoverImage([FromBody] CommunityCoverImageDto CoverImage)
+        [HttpPost("upload-community-cover")]
+        public async Task<Response<string>> UploadCommunityCoverImage(IFormFile file)
         {
-            var byteArrayContent = Encoding.UTF8.GetBytes(CoverImage.CoverImage);
-            using (var stream = new MemoryStream(byteArrayContent))
-            {
-                var file = new FormFile(stream, 0, byteArrayContent.Length, "CoverImage", "filename.jpg");
-                // replace "filename" and "filename.ext" with your desired file name and extension
-                // you can now use the "file" instance as an IFormFile
-                var result = await _storageService.UploadOneAsync("community-images", file);
-                return await Task.FromResult(Response<string>.Success(result.Data, ResponseStatus.Success));
-            }    
+            var result = await _storageService.UploadOneAsync("community-cover-images", file);
+            return await Task.FromResult(Response<string>.Success(result.Data, ResponseStatus.Success));
         }
         // POST:
         [HttpPost("[action]")]

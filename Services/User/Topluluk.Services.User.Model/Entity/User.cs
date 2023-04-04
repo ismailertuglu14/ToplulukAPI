@@ -29,12 +29,12 @@ namespace Topluluk.Services.User.Model.Entity
 		public ICollection<string>? OutgoingFollowRequests { get; set; }
 
 		public ICollection<string>? Communities { get; set; }
-		public ICollection<string>? CommunityRequests { get; set; }
+//		public ICollection<string>? CommunityRequests { get; set; }
 
 		public User()
 		{
 			Communities = new HashSet<string>();
-			CommunityRequests = new HashSet<string>();
+	//		CommunityRequests = new HashSet<string>();
 			IncomingFollowRequests = new HashSet<string>();
 			OutgoingFollowRequests = new HashSet<string>();
 			Followings = new HashSet<string>();

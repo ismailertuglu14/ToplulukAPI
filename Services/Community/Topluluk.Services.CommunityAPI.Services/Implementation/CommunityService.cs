@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
 using AutoMapper;
@@ -127,9 +130,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 {
                     community.JoinRequestWaitings.Add(userId);
                     _communityRepository.Update(community);
-                    //await _capPublisher.PublishAsync<CommunityUserJoinDto>("community.user.communityjoinrequest",
-                    //    new() { UserId = communityInfo.UserId, CommunityId = communityInfo.CommunityId });
-                    return await Task.FromResult(Response<string>.Success("Send request", ResponseStatus.Success));
+                   return await Task.FromResult(Response<string>.Success("Send request", ResponseStatus.Success));
                 }
                 else
                 {
@@ -174,16 +175,40 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             community.Slug = slug;
             community.AdminId = userId;
             community.Participiants.Add(userId);
-            DatabaseResponse response = await _communityRepository.InsertAsync(community);
 
             if (communityInfo.CoverImage != null)
             {
-                using var stream = new MemoryStream();
-                await communityInfo.CoverImage.CopyToAsync(stream);
-                var imageData = stream.ToArray();
+                ///file/upload-community-cover
+                byte[] imageBytes;
 
-               // await _capPublisher.PublishAsync(QueueConstants.COMMUNITY_IMAGE_UPLOAD, new { CommunityId = response.Data, CoverImage = imageData , FileName = communityInfo.CoverImage.FileName });
+                using (var stream = new MemoryStream())
+                {
+                    communityInfo.CoverImage.CopyTo(stream);
+                    imageBytes = stream.ToArray();
+                }
+                using (var client = new HttpClient())
+                {
+                    var content = new MultipartFormDataContent();
+                    var imageContent = new ByteArrayContent(imageBytes);
+                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); // Resim formatına uygun mediatype belirleme
+                    content.Add(imageContent, "file", communityInfo.CoverImage.FileName); // "files": paramtere adı "files[0].FileName": Resimin adı
+                    var imageResponse = await client.PostAsync("https://localhost:7165/file/upload-community-cover", content);
+
+                    if (imageResponse.IsSuccessStatusCode)
+                    {
+                        var responseData = await imageResponse.Content.ReadFromJsonAsync<Response<string>>();
+
+                        if (responseData.Data != null)
+                        {
+                            community.CoverImage = responseData.Data;
+                        }
+                    }
+                }
+
             }
+
+            DatabaseResponse response = await _communityRepository.InsertAsync(community);
+
             var serviceRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/community/join").AddHeader("Authorization", token).AddQueryParameter("communityId",(string)response.Data);
             var serviceResponse = await _client.ExecutePostAsync<Response<NoContent>>(serviceRequest);
 
