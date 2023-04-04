@@ -284,7 +284,10 @@ namespace Topluluk.Services.User.Services.Implementation
             if (text == null)
                 return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(null, ResponseStatus.Success));
 
-            DatabaseResponse response = await _userRepository.GetAllAsync(take,skip, u => u.Id != userId && u.UserName.Contains(text) || u.FirstName.Contains(text) || u.LastName.Contains(text) );
+            DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => u.Id != userId && ((u.FirstName.ToLower() + " " +
+                                                                                     u.LastName.ToLower()).Contains(text.ToLower()) ||
+                                                                                     u.UserName.ToLower().Contains(text.ToLower()))
+                                                                                     );
 
 
 

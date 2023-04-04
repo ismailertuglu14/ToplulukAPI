@@ -106,9 +106,9 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery] string text)
+        public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery] string text, int skip = 0, int take = 5)
         {
-            return await _userService.SearchUser(text, UserId);
+            return await _userService.SearchUser(text, this.UserId, skip, take);
         }
 
         [HttpGet("search-in-followings")]
