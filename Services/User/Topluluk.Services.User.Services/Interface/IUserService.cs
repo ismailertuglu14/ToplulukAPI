@@ -43,11 +43,9 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto);
 
         // Http calls services
-        Task<Response<string>> UpdateCommunities(string userId, string communityId);
 		Task<Response<NoContent>> JoinCommunity(string userId, string communityId);
 		Task<Response<NoContent>> LeaveCommunity(string userId, string communityId);
         Task UserBanngerChanged(string userId, string fileName);
-		Task<Response<string>> PostCreated(string userId,string id);
 		Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId);
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
 		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);

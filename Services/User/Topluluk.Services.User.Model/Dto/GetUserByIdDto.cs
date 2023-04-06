@@ -20,6 +20,7 @@ namespace Topluluk.Services.User.Model.Dto
         public int FollowersCount { get; set; }
 
         public ICollection<string>? Communities { get; set; }
+        public int CommunityCount { get; set; }
 
         public ICollection<string>? Posts { get; set; }
 

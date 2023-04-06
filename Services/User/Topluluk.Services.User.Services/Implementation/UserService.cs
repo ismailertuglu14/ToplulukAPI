@@ -83,52 +83,60 @@ namespace Topluluk.Services.User.Services.Implementation
             
             try
             {
-                
-                if (!id.IsNullOrEmpty())
+                if (id.IsNullOrEmpty())
                 {
-                    // Topluluğu var mı kontrol et, varsa fail dön
-                    var checkCommunitiesRequest = new RestRequest("https://localhost:7149/api/community/check-is-user-community-owner")
-                                                      .AddHeader("Authorization",token);
-                    var checkCommunitiesResponse = await _client.ExecuteGetAsync<Response<bool>>(checkCommunitiesRequest);
+                    return await Task.FromResult(Response<string>.Fail("Bad Request", ResponseStatus.BadRequest));
+                }
 
-                    if (checkCommunitiesResponse.Data!.Data == true)
-                    {
-                        return await Task.FromResult(Response<string>.Fail("You have to delete your community first", ResponseStatus.CommunityOwnerExist));
 
+                bool isUserExist = await _userRepository.AnyAsync(u => u.Id == id);
+
+                if (isUserExist == false)
+                {
+                    return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
+                }
+
+
+                // Topluluğu var mı kontrol et, varsa fail dön
+                var checkCommunitiesRequest = new RestRequest("https://localhost:7149/api/community/check-is-user-community-owner")
+                                                  .AddHeader("Authorization", token);
+                var checkCommunitiesResponse = await _client.ExecuteGetAsync<Response<bool>>(checkCommunitiesRequest);
+
+                if (checkCommunitiesResponse.Data!.Data == true)
+                {
+                    return await Task.FromResult(Response<string>.Fail("You have to delete your community first", ResponseStatus.CommunityOwnerExist));
+
+                }
                         // Sahibi olduğu topluluk yoksa
+                else
+                {
+
+
+                    // Posts and PostComments will be deleted.
+                    var deletePostsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/post/delete-posts").AddHeader("Authorization", token);
+                    var deletePostsResponse = await _client.ExecutePostAsync<Response<bool>>(deletePostsRequest);
+
+                    if (deletePostsResponse.Data.IsSuccess == false) throw new Exception();
+
+                    // Event, EventComments will be deleted.
+
+                    // Delete User.
+                    DatabaseResponse response = _userRepository.DeleteById(id);
+                    var userDeleteRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/delete").AddBody(dto).AddHeader("Authorization", token);
+                    var userDeleteResponse = await _client.ExecutePostAsync<Response<string>>(userDeleteRequest);
+                    if (userDeleteResponse.Data.IsSuccess == true)
+                    {
+                        return await Task.FromResult(Response<string>.Success("Successfully Deleted", ResponseStatus.Success));
+
                     }
                     else
                     {
-
-                        
-                        // Posts and PostComments will be deleted.
-                        var deletePostsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/post/delete-posts").AddHeader("Authorization",token);
-                        var deletePostsResponse = await _client.ExecutePostAsync<Response<bool>>(deletePostsRequest);
-
-                        if (deletePostsResponse.Data.IsSuccess == false) throw new Exception();
-
-                        // Event, EventComments will be deleted.
-
-                        // Delete User.
-                        DatabaseResponse response = _userRepository.DeleteById(id);
-                        var userDeleteRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/delete").AddBody(dto).AddHeader("Authorization", token);
-                        var userDeleteResponse = await _client.ExecutePostAsync<Response<string>>(userDeleteRequest);
-                        if (userDeleteResponse.Data.IsSuccess == true)
-                        {
-                            return await Task.FromResult(Response<string>.Success("Successfully Deleted", ResponseStatus.Success));
-
-                        }
-                        else
-                        {
-                            return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
-                        }
-
+                        return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
                     }
+
                 }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
-                }
+
+
             }
             catch (Exception e)
             {
