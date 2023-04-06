@@ -9,8 +9,11 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 {
 	public interface ICommunityService
 	{
+
 		Task<Response<List<Community>>> GetCommunities();
 		Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5 );
+
+		// Community Detail Page
 		Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string id);
 		Task<Response<string>> Join(string userId, string token, CommunityJoinDto communityInfo);
 		Task<Response<string>> Create(string userId, string token, CommunityCreateDto communityInfo);
@@ -21,8 +24,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
         Task<Response<string>> KickUser();
 		Task<Response<string>> AcceptUserJoinRequest();
 		Task<Response<string>> DeclineUserJoinRequest();
-		Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo);
+		Task<Response<string>> AssignUserAsAdmin(string userId, AssignUserAsAdminDto dtoInfo);
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
+
         Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
 		//http
 		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId);
@@ -32,6 +36,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<bool>> CheckIsUserAdminOwner(string userId);
 
         Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id);
+
+		Task<Response<bool>> LeaveUserDelete(string id, IdList list);
     }
 }
 

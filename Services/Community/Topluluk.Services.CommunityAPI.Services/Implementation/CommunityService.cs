@@ -301,17 +301,30 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo)
+        public async Task<Response<string>> AssignUserAsAdmin(string userId, AssignUserAsAdminDto dtoInfo)
         {
+            try
+            {
+                if (userId.IsNullOrEmpty() || dtoInfo.CommunityId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<string>.Fail("Bad Request", ResponseStatus.BadRequest));
+                }
 
-            Community community = await _communityRepository.GetFirstAsync(c => c.Id == dtoInfo.CommunityId);
+                Community community = await _communityRepository.GetFirstAsync(c => c.Id == dtoInfo.CommunityId);
 
-            if(!community.Participiants.Contains(dtoInfo.UserId) || community.AdminId != dtoInfo.AdminId)
-                return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.NotAuthenticated));
+                //   Admin yapılacak kişi participiant mı ?            Isteği atan kişi admin mi ?
+                if (!community.Participiants.Contains(dtoInfo.UserId) || userId != community.AdminId)
+                    return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.NotAuthenticated));
 
-            community.AdminId = dtoInfo.UserId;
-            _communityRepository.Update(community);
-            return await Task.FromResult(Response<string>.Success("Successfully updated new admin.", ResponseStatus.Success));
+                community.AdminId = dtoInfo.UserId;
+                _communityRepository.Update(community);
+                return await Task.FromResult(Response<string>.Success("Successfully updated new admin.", ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred : {e}", ResponseStatus.InitialError));
+            }
         }
 
         public async Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo)
@@ -445,6 +458,24 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             {
                 bool result = await _communityRepository.AnyAsync(c => c.AdminId == userId);
                 return await Task.FromResult(Response<bool>.Success(result, ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<bool>.Fail($"Some error occured: {e}",
+                    ResponseStatus.InitialError));
+            }
+        }
+        // todo
+        public async Task<Response<bool>> LeaveUserDelete(string id, IdList list)
+        {
+            try
+            {
+                if (id.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<bool>.Fail("Bad Request", ResponseStatus.BadRequest));
+                }
+
+                return await Task.FromResult(Response<bool>.Success(true, ResponseStatus.Success));
             }
             catch (Exception e)
             {

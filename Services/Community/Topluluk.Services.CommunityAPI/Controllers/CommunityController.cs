@@ -81,8 +81,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpPost("[action]")]
         public async Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo)
         {
-            dtoInfo.AdminId = UserId;
-            return await _communityService.AssignUserAsAdmin(dtoInfo);
+            return await _communityService.AssignUserAsAdmin(this.UserId, dtoInfo);
         }
         [HttpPost("[action]")]
         public async Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo)
