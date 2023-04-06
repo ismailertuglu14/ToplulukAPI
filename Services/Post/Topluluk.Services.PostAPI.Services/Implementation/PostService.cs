@@ -268,7 +268,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
                 else if (response.Data.Count > 0)
                 {
-                    int i = 0;
+                    byte i = 0;
                     List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
                     
                        
@@ -278,7 +278,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
                         comments[i].UserName = userInfoResponse.Data.Data.UserName;
                         comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
-                     //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);        
+                        //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);
+                        i++;
                     }
                     return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
 
