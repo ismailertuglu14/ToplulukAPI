@@ -11,7 +11,7 @@ namespace Topluluk.Services.User.Services.Interface
 	{
 		Task<Response<GetUserByIdDto>> GetUserById(string id, string userId);
 		Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin(string id);
-		Task<Response<GetUserByIdDto>> GetUserByUserName(string userName);
+		Task<Response<GetUserByIdDto>> GetUserByUserName(string id, string userName);
         Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5);
 		Task<Response<List<UserSuggestionsDto>>> GetUserSuggestionsMore(int skip = 0, int take = 5);
 		
@@ -46,6 +46,10 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<NoContent>> JoinCommunity(string userId, string communityId);
 		Task<Response<NoContent>> LeaveCommunity(string userId, string communityId);
         Task UserBanngerChanged(string userId, string fileName);
+        
+        /**
+         * I'm using for get UserId, UserName, firstName, lastName, ProfileImage  
+         */
 		Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId);
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
 		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);

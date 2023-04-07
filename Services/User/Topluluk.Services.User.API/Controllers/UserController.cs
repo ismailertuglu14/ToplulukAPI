@@ -39,7 +39,7 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpGet("{userName}")]
         public async Task<Response<GetUserByIdDto>> GetUserByUserName([FromRoute] string userName)
         {
-            return await _userService.GetUserByUserName(userName);
+            return await _userService.GetUserByUserName(this.UserId, userName);
         }
 
         [HttpGet("suggestions")]

@@ -14,8 +14,14 @@ namespace Topluluk.Services.User.Model.Dto
         public string? BannerImage { get; set; }
         public GenderEnum Gender { get; set; }
         public bool IsPrivate { get; set; } = false;
-        public bool IsFollowing { get; set; }
 
+        public bool IsFollowing { get; set; }
+        
+        ///  Is target user sent to follow request to source user
+        public bool IsFollowRequested { get; set; }
+        
+        /// Is source user sent to follow request to target user 
+        public bool IsFollowRequestSent { get; set; }
         public int FollowingCount { get; set; }
         public int FollowersCount { get; set; }
 

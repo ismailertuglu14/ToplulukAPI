@@ -41,33 +41,55 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<GetUserByIdDto>> GetUserById(string id,string userId)
         {
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-            if(user != null)
+            try
             {
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<GetUserByIdDto>.Fail("User Not Found",
+                        ResponseStatus.NotFound));
+                }
+
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
-
+                dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
+                dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
+                
                 dto.IsFollowing = user.Followers!.Contains(id);
-
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
             }
-            return await Task.FromResult(Response<GetUserByIdDto>.Fail("", ResponseStatus.NotFound));
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<GetUserByIdDto>.Fail($"Some error occured: {e}",
+                    ResponseStatus.InitialError));
+            }
 
         }
 
-        public async Task<Response<GetUserByIdDto>> GetUserByUserName(string userName)
+        public async Task<Response<GetUserByIdDto>> GetUserByUserName(string id, string userName)
         {
-            _User? user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
-
-            if (user != null)
+            try
             {
+                _User? user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<GetUserByIdDto>.Fail("User Not Found",
+                        ResponseStatus.NotFound));
+                }
+                
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
                 dto.IsFollowing = user.Followers!.Contains(user.Id);
+                dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
+                dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
 
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
+                
             }
-
-            return await Task.FromResult(Response<GetUserByIdDto>.Fail("User not found!", ResponseStatus.NotFound));
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<GetUserByIdDto>.Fail($"Some error occured: {e}",
+                    ResponseStatus.InitialError));
+            }
         }
 
         public async Task<Response<string>> InsertUser(UserInsertDto userInfo)
@@ -456,15 +478,6 @@ namespace Topluluk.Services.User.Services.Implementation
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\
 
-
-
-        public async Task<Response<string>> UpdateCommunities(string userId, string communityId)
-        {
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-            user.Communities?.Add(communityId);
-            _userRepository.Update(user);
-            return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
-        }
 
         public async Task UserBanngerChanged(string userId, string fileName)
         {
