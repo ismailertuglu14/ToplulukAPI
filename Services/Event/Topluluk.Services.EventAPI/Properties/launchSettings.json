@@ -11,7 +11,7 @@
   "profiles": {
     "Topluluk.Services.EventAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7050;http://localhost:5204",
       "environmentVariables": {

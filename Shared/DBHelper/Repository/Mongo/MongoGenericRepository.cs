@@ -285,7 +285,7 @@ namespace DBHelper.Repository.Mongo
             throw new NotImplementedException();
         }
 
-        public DatabaseResponse GetListByExpression(Expression<Func<T, bool>>? predicate = null)
+        public List<T> GetListByExpression(Expression<Func<T, bool>>? predicate = null)
         {
             var defaultFilter = Builders<T>.Filter.Eq(x => x.IsDeleted, false);
             var finalFilter = Builders<T>.Filter.And(defaultFilter, predicate);
@@ -294,24 +294,18 @@ namespace DBHelper.Repository.Mongo
             var collectionName = GetCollectionName();
 
             var data = database.GetCollection<T>(collectionName).Find(finalFilter).ToList();
-            DatabaseResponse response = new();
-            response.Data = data;
-            response.IsSuccess = true;
 
-            return response;
+            return data;
         }
 
-        public DatabaseResponse GetListByExpressionWithDeleted(Expression<Func<T, bool>>? predicate = null)
+        public List<T>  GetListByExpressionWithDeleted(Expression<Func<T, bool>>? predicate = null)
         {
             var database = GetConnection();
             var collectionName = GetCollectionName();
 
             var data = database.GetCollection<T>(collectionName).Find(predicate).ToList();
-            DatabaseResponse response = new();
-            response.Data = data;
-            response.IsSuccess = true;
-
-            return response;
+            
+            return data;
         }
 
         public dynamic GetMultipleQuery(string query)

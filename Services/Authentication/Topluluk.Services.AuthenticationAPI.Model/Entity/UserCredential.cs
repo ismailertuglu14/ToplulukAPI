@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.AuthenticationAPI.Model.Entity
 {
@@ -21,7 +22,9 @@ namespace Topluluk.Services.AuthenticationAPI.Model.Entity
 		public string? RefreshToken { get; set; }
 		public DateTime? RefreshTokenEndDate { get; set; }
 
-		// Lock at 3rd attempt.
+		// Specifies the user's registration method.
+		public LoginProvider Provider { get; set; } = 0;
+
 		public int? AccessFailedCount { get; set; } = 0;
 		public bool? Locked { get; set; } = false;
 		public DateTime LockoutEnd { get; set; }

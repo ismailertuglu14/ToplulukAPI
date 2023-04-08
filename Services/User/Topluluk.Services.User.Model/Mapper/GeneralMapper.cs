@@ -13,21 +13,19 @@ namespace Topluluk.Services.User.Model.Mapper
 			CreateMap<_User, UserSuggestionsDto>();
 			CreateMap<_User, UserSearchResponseDto>().ReverseMap();
 
-			CreateMap<_User, GetUserByIdDto>().ForMember(d => d.FollowersCount, s => s.MapFrom(s => s.Followers.Count))
-											.ForMember(d => d.FollowingCount, s => s.MapFrom(s => s.Followings.Count))
-											.ForMember(d => d.CommunityCount, s => s.MapFrom(s => s.Communities.Count))
+			CreateMap<_User, GetUserByIdDto>().ForMember(d => d.CommunityCount, s => s.MapFrom(s => s.Communities.Count))
 											.ForMember(d => d.Communities, s => s.Ignore());
 											
 
             CreateMap<_User, GetCommunityOwnerDto>();
 			CreateMap<_User, UserInfoForCommentDto>();
-            CreateMap<_User, GetUserAfterLoginDto>()
-                .ForMember(d => d.FollowersCount, s => s.MapFrom(s => s.Followers.Count))
-                .ForMember(d => d.FollowingsCount, s => s.MapFrom(s => s.Followings.Count));
-
+			CreateMap<_User, GetUserAfterLoginDto>();
+               
 			CreateMap<_User, FollowingRequestDto>();
 			CreateMap<_User, FollowingUserDto>();
 			CreateMap<_User, FollowerUserDto>();
+			
+			
         }		
 	}
 }

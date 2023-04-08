@@ -12,8 +12,6 @@
     <None Remove="Settings\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Implementation\" />
     <Folder Include="Settings\" />
   </ItemGroup>
   <ItemGroup>

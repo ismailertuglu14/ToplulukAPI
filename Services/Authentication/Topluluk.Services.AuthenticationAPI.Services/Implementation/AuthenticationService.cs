@@ -43,28 +43,33 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
         public async Task<Response<TokenDto>> SignIn(SignInUserDto userDto, string? ipAdress, string? deviceId)
         {
             TokenHelper _tokenHelper = new TokenHelper(_configuration);
-            
-            UserCredential? user = _repository.GetFirst(u => u.UserName == userDto.UserName);
-            
+
+            UserCredential? user = new();
+        
+            if (!userDto.UserName.IsNullOrEmpty())
+            {
+                user = await _repository.GetFirstAsync(u => u.UserName == userDto.UserName && u.Provider == userDto.Provider);
+            }
+            else if (!userDto.Email.IsNullOrEmpty())
+            {
+                user = await _repository.GetFirstAsync(u => u.Email == userDto.Email && u.Provider == userDto.Provider);
+            }
+
             if(user != null)
             {
                 var verifiedPassword = VerifyPassword(userDto.Password, user.HashedPassword);
                 if(verifiedPassword == true)
                 {
-
                     // Dead code fix later.
-
                     if (DateTime.Now < user.LockoutEnd)
                     {
                         return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked));
                     }
-
                     TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, 2);
-
                     user.AccessFailedCount = 0;
                     user.LockoutEnd = DateTime.MinValue;
                     user.Locked = false;
-
+                    
                     UpdateRefreshToken(user,token,2);
 
                     LoginLog loginLog = new() { UserId = user.Id, IpAdress = ipAdress, DeviceId = deviceId };
@@ -86,12 +91,9 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 
                         // todo We have to send a mail to user about someone wants to login without permission him/her account.
                     }
-
                     _repository.Update(user);
                 }
-
             }
-
             return await Task.FromResult(Response<TokenDto>.Fail("Username or password wrong!", ResponseStatus.NotAuthenticated));
         }
 
@@ -99,20 +101,21 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
         {
             try
             {
-                DatabaseResponse response = new();
-                TokenHelper _tokenHelper = new TokenHelper(_configuration);
-
-                UserCredential userCredential = new()
-                {
-                    UserName = userDto.UserName,
-                    Email = userDto.Email,
-                    HashedPassword = HashPassword(userDto.Password),
-                };
-
-                var checkUniqueResult = await CheckUserNameAndEmailUnique(userCredential.UserName, userCredential.Email);
+                var checkUniqueResult = await CheckUserNameAndEmailUnique(userDto.UserName, userDto.Email);
 
                 if (checkUniqueResult.IsSuccess == true)
                 {
+                    DatabaseResponse response = new();
+                    TokenHelper _tokenHelper = new TokenHelper(_configuration);
+
+                    UserCredential userCredential = new()
+                    {
+                        UserName = userDto.UserName,
+                        Email = userDto.Email,
+                        Provider = userDto.Provider,
+                        HashedPassword = HashPassword(userDto.Password),
+                    };
+
                     response = await _repository.InsertAsync(userCredential);
 
                     UserInsertDto content = new() { Id = response.Data, FirstName = userDto.FirstName, LastName = userDto.LastName, UserName = userDto.UserName, Email = userDto.Email, BirthdayDate = DateTime.Now, Gender = userDto.Gender };

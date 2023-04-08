@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Topluluk.Services.User.Model.Dto.Http
 {
-	public class UserInfoGetResponse
+	public class UserInfoForPostDto
 	{
 		public string UserId { get; set; }
 		public string FirstName { get; set; }

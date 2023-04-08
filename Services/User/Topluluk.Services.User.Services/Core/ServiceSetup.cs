@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Topluluk.Services.User.Data.Implementation;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Data.Settings;
+using Topluluk.Services.User.Model.Entity;
 using Topluluk.Services.User.Services.Implementation;
 using Topluluk.Services.User.Services.Interface;
 
@@ -26,6 +27,8 @@ namespace Topluluk.Services.User.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
             // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserFollowRepository, UserFollowRepository>();
+            services.AddScoped<IBlockedUserRepository, BlockedUserRepository>();
             // services.AddTransient<IErrorRepository, ErrorRepository>();
             // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
         }

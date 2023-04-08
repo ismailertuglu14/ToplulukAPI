@@ -61,8 +61,8 @@ namespace DBHelper.Repository
         void ExecuteScript(string script);
         T GetByLangId(int langId, int id);
 
-        DatabaseResponse GetListByExpression(Expression<Func<T, bool>> predicate = null);
-        DatabaseResponse GetListByExpressionWithDeleted(Expression<Func<T, bool>> predicate = null);
+        List<T> GetListByExpression(Expression<Func<T, bool>> predicate = null);
+        List<T> GetListByExpressionWithDeleted(Expression<Func<T, bool>> predicate = null);
 
     }
 }

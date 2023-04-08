@@ -11,7 +11,7 @@
   "profiles": {
     "Topluluk.Services.AuthenticationAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7232;http://localhost:7233",
       "environmentVariables": {

@@ -11,7 +11,7 @@
   "profiles": {
     "Topluluk.Services.FeedAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7069;http://localhost:5001",
       "environmentVariables": {

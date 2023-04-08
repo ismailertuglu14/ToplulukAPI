@@ -55,9 +55,9 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> ChangeProfileImage(IFormFileCollection files)
+        public async Task<Response<string>> ChangeProfileImage(IFormFileCollection files, CancellationToken cancellationToken)
         {
-            return await _userService.ChangeProfileImage(UserName, files);
+            return await _userService.ChangeProfileImage(UserName, files,cancellationToken);
         }
 
         [HttpPost("[action]")]
@@ -70,17 +70,19 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpPost("Follow")]
         public async Task<Response<string>> FollowUser([FromBody] UserFollowDto userFollowInfo)
         {
-            userFollowInfo.SourceId = UserId;
-            return await _userService.FollowUser(userFollowInfo);
+            return await _userService.FollowUser(this.UserId, userFollowInfo);
         }
 
         [HttpPost("UnFollow")]
         public async Task<Response<string>> UnFollowUser([FromBody] UserFollowDto userFollowInfo)
         {
-            userFollowInfo.SourceId = UserId;
-            return await _userService.UnFollowUser(userFollowInfo);
+            return await _userService.UnFollowUser(this.UserId, userFollowInfo);
         }
-
+        [HttpPost("remove-follower")]
+        public async Task<Response<string>> RemoveUserFromFollower([FromBody] UserFollowDto userFollowInfo)
+        {
+            return await _userService.RemoveUserFromFollowers(this.UserId, userFollowInfo);
+        }
         [HttpPost("accept-request/{targetId}")]
         public async Task<Response<string>> AcceptFollowRequest(string targetId)
         {
@@ -155,7 +157,7 @@ namespace Topluluk.Services.User.API.Controllers
 
         // User information is received to be displayed on the post cards returned from the post service.
         [HttpGet("GetUserInfoForPost")]
-        public async Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId)
+        public async Task<Response<UserInfoForPostDto>> GetUserInfoForPost(string id, string sourceUserId)
         {
             return await _userService.GetUserInfoForPost(id, sourceUserId);
         }

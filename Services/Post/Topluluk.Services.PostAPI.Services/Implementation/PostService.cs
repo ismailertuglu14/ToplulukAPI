@@ -17,6 +17,7 @@ using RestSharp;
 using Topluluk.Services.POSTAPI.Model.Dto.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Topluluk.Shared.Constants;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.PostAPI.Services.Implementation
@@ -124,54 +125,58 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             {
                 if (userId.IsNullOrEmpty()) throw new Exception("User not found");
 
-                var getUserFollowingsRequest = new RestRequest("https://localhost:7149/api/user/user-followings").AddQueryParameter("id",userId);
+                var getUserFollowingsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id",userId);
                 var getUserFollowingsResponse =
                     await _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
 
-                if (getUserFollowingsResponse.IsSuccessful == true)
+                if (getUserFollowingsResponse.IsSuccessful == false)
                 {
-                    DatabaseResponse response = await _postRepository.GetAllAsync(take,skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
-                   
-                    List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
-
-                    int i = 0;
-                    foreach (var dto in response.Data as List<Post>)
-                    {
-                        var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
-                            .AddQueryParameter("id", dto.UserId).AddQueryParameter("sourceUserId", userId);
-                        var getUserInfoResponse =
-                            await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
-                        dtos[i].UserId = getUserInfoResponse.Data.Data.UserId;
-                        dtos[i].FirstName = getUserInfoResponse.Data.Data.FirstName;
-                        dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
-                        dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
-
-                        dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(dto.UserId);
-                        dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
-                        dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
-                        if (!dto.CommunityLink.IsNullOrEmpty())
-                        {
-                            // Get-community-title and image request
-                            var communityInfoRequest =
-                                new RestRequest("https://localhost:7149/api/community/community-info-post-link")
-                                    .AddQueryParameter("id", dto.CommunityLink);
-                            var communityInfoResponse =
-                                await _client.ExecuteGetAsync<Response<CommunityInfoPostLinkDto>>(communityInfoRequest);
-
-                            dtos[i].Community = new() { Id = communityInfoResponse.Data.Data.Id, CoverImage = communityInfoResponse.Data.Data.CoverImage ?? "", Title = communityInfoResponse.Data.Data.Title};
-                        }else if (!dto.EventLink.IsNullOrEmpty())
-                        {
-                            // Get-event-title and image request
-                            dtos[i].Event = new() { Id = "test", CoverImage = "test", Title = "test" };
-                        }
-
-                        i++;
-                    }
-                    return await Task.FromResult(
-                        Response<List<GetPostForFeedDto>>.Success(dtos, ResponseStatus.Success));
+                    return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail("Failed", ResponseStatus.Failed));
                 }
+                DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
+
+                List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
+
+                int i = 0;
+                foreach (var dto in response.Data as List<Post>)
+                {
+                    var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
+                        .AddQueryParameter("id", dto.UserId).AddQueryParameter("sourceUserId", userId);
+                    var getUserInfoResponse =
+                        await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
+                    dtos[i].UserId = getUserInfoResponse.Data.Data.UserId;
+                    dtos[i].FirstName = getUserInfoResponse.Data.Data.FirstName;
+                    dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
+                    dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
+
+                    dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(dto.UserId);
+                    dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
+                    dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
+                    if (!dto.CommunityLink.IsNullOrEmpty())
+                    {
+                        // Get-community-title and image request
+                        var communityInfoRequest =
+                            new RestRequest("https://localhost:7149/api/community/community-info-post-link")
+                                .AddQueryParameter("id", dto.CommunityLink);
+                        var communityInfoResponse =
+                            await _client.ExecuteGetAsync<Response<CommunityInfoPostLinkDto>>(communityInfoRequest);
+
+                        dtos[i].Community = new() { Id = communityInfoResponse.Data.Data.Id, CoverImage = communityInfoResponse.Data.Data.CoverImage ?? "", Title = communityInfoResponse.Data.Data.Title };
+
+                    }
+                    else if (!dto.EventLink.IsNullOrEmpty())
+                    {
+                        // Get-event-title and image request
+                        dtos[i].Event = new() { Id = "test", CoverImage = "test", Title = "test" };
+                    }
+
+                    i++;
+                }
+
                 return await Task.FromResult(
-                    Response<List<GetPostForFeedDto>>.Fail("Error", ResponseStatus.Success));
+                    Response<List<GetPostForFeedDto>>.Success(dtos, ResponseStatus.Success));
+
+
             }
             catch (Exception e)
             {
@@ -276,7 +281,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     {
                         var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id",comment.UserId);
                         var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
-                        comments[i].UserName = userInfoResponse.Data.Data.UserName;
+                        comments[i].FirstName = userInfoResponse.Data.Data.FirstName;
+                        comments[i].LastName = userInfoResponse.Data.Data.LastName;
                         comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
                         //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);
                         i++;
@@ -297,67 +303,87 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10)
+        public async Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception e)
+            {
+             return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+            }
+
         }
 
         public async Task<Response<GetPostByIdDto>> GetPostById(string postId, string sourceUserId, bool isDeleted = false)
         {
-            GetPostByIdDto postDto = new();
 
-            Post post = await _postRepository.GetFirstAsync(p => p.Id == postId);
-
-            postDto.Id = postId;
-            postDto.Description = post.Description;
-            postDto.CreatedAt = post.CreatedAt ?? DateTime.Now;
-            postDto.Files = post.Files;
-            postDto.InteractionCount = post.Interactions.Count;
-
-           var _comments = await _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId);
-            if (_comments.Data != null && _comments.Data.Count > 0)
+            try
             {
-                postDto.CommentCount = _comments.Data?.Count;
+                Post post = await _postRepository.GetFirstAsync(p => p.Id == postId);
 
-                CommentGetDto commentDto = new();
+                GetPostByIdDto postDto = _mapper.Map<GetPostByIdDto>(post);
 
-                foreach (PostComment c in _comments.Data)
+                postDto.InteractionCount = post.Interactions.Count;
+
+                var _comments = await _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId);
+                if (_comments.Data != null && _comments.Data.Count > 0)
                 {
-                    commentDto.Id = c.Id;
-                    //commentDto.
+                    postDto.CommentCount = _comments.Data?.Count;
+                    CommentGetDto commentDto = new();
+
+                    List<CommentGetDto> commentDtos = _mapper.Map<List<PostComment>, List<CommentGetDto>>(_comments.Data);
+
+                    var ids = commentDtos.Select(comment => comment.UserId).ToList();
+                    var idList = new IdList { ids = ids };
+
+                    var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
+                    var response = await _client.ExecutePostAsync<Response<List<UserInfoForCommentDto>>>(request);
+
+                    for (int i = 0; i < _comments.Data.Count; i++)
+                    {
+                        commentDtos[i].ProfileImage = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId).FirstOrDefault().ProfileImage;
+                        commentDtos[i].FirstName = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId).FirstOrDefault().FirstName;
+                        commentDtos[i].LastName = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId).FirstOrDefault().LastName;
+                        commentDtos[i].Gender = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId).FirstOrDefault().Gender;
+                        postDto.Comments.Add(commentDtos[i]);
+                    }
+
                 }
 
 
-                postDto.Comments = _comments.Data;
+                if (post.CommunityId != null)
+                {
+                    // Get community title request
+                    var communityGetTitleRequest = new RestRequest("https://localhost:7132/Community/getCommunityTitle").AddParameter("id", post.CommunityId);
+                    var communityGetTitleResponse = await _client.ExecuteGetAsync<Response<string>>(communityGetTitleRequest);
+                    var communityResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<string>>(communityGetTitleResponse.Content);
+                    postDto.CommunityTitle = communityResponse?.Data;
+                }
+
+                var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
+                    .AddParameter("id", post.UserId)
+                    .AddParameter("sourceUserId", sourceUserId);
+                var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userInfoRequest);
+                var userResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<UserInfoGetResponse>>(userInfoResponse.Content);
+
+                postDto.UserId = userResponse.Data.UserId;
+                postDto.FirstName = userResponse.Data.FirstName;
+                postDto.LastName = userResponse.Data.LastName;
+                postDto.IsUserFollowing = userResponse.Data.IsUserFollowing;
+                postDto.ProfileImage = userResponse.Data.ProfileImage;
+                postDto.UserName = userResponse.Data.UserName;
+
+
+
+
+                return await Task.FromResult(Response<GetPostByIdDto>.Success(postDto, Shared.Enums.ResponseStatus.Success));
             }
-
-
-            if (post.CommunityId != null)
+            catch (Exception e)
             {
-                // Get community title request
-                var communityGetTitleRequest = new RestRequest("https://localhost:7132/Community/getCommunityTitle").AddParameter("id", post.CommunityId);
-                var communityGetTitleResponse = await _client.ExecuteGetAsync<Response<string>>(communityGetTitleRequest);
-                var communityResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<string>>(communityGetTitleResponse.Content);
-                postDto.CommunityTitle = communityResponse?.Data;
+                return await Task.FromResult(Response<GetPostByIdDto>.Fail($"Some error occurred: {e} ", ResponseStatus.InitialError));
             }
-
-            var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
-                .AddParameter("id", post.UserId)
-                .AddParameter("sourceUserId", sourceUserId);
-            var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userInfoRequest);
-            var userResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<UserInfoGetResponse>>(userInfoResponse.Content);
-
-            postDto.UserId = userResponse.Data.UserId;
-            postDto.FirstName = userResponse.Data.FirstName;
-            postDto.LastName = userResponse.Data.LastName;
-            postDto.IsUserFollowing = userResponse.Data.IsUserFollowing;
-            postDto.ProfileImage = userResponse.Data.ProfileImage;
-            postDto.UserName = userResponse.Data.UserName;
-
-
-            
-
-            return await Task.FromResult(Response<GetPostByIdDto>.Success(postDto, Shared.Enums.ResponseStatus.Success));
         }
 
         // Feed ekranındaki postlar için hazırlanmış metod.
@@ -400,6 +426,11 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         .AddQueryParameter("id", id).AddQueryParameter("sourceUserId", userId);
                     var getUserInfoResponse =
                         await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
+
+                if (getUserInfoResponse.Data.Data == null)
+                {
+                    return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail("User Not Found", ResponseStatus.NotFound));
+                }
 
                     List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
 

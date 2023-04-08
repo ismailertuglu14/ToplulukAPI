@@ -30,14 +30,16 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public ICollection<string>? Files { get; set; }
 
 		public int CommentCount { get; set; }
-
-		public ICollection<PostComment>? Comments { get; set; }
+		
+		
+		// todo Change PostComment to CommendtDto.
+		public ICollection<CommentGetDto>? Comments { get; set; }
 
 		public GetPostByIdDto()
 		{
 			InteractedByIds = new HashSet<InteractionType>();
             Files = new HashSet<string>();
-			Comments = new HashSet<PostComment>();
+			Comments = new HashSet<CommentGetDto>();
 		}
 	}
 }

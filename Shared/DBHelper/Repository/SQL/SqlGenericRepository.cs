@@ -111,12 +111,12 @@ namespace DBHelper.Repository.SQL
             throw new NotImplementedException();
         }
 
-        public DatabaseResponse GetListByExpression(Expression<Func<T, bool>> predicate = null)
+        public List<T>  GetListByExpression(Expression<Func<T, bool>> predicate = null)
         {
             throw new NotImplementedException();
         }
 
-        public DatabaseResponse GetListByExpressionWithDeleted(Expression<Func<T, bool>> predicate = null)
+        public List<T>  GetListByExpressionWithDeleted(Expression<Func<T, bool>> predicate = null)
         {
             throw new NotImplementedException();
         }

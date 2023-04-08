@@ -11,7 +11,7 @@
   "profiles": {
     "Topluluk.Services.FileAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7165;http://localhost:5100",
       "environmentVariables": {

@@ -11,7 +11,7 @@
   "profiles": {
     "Topluluk.Services.PostAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7101;http://localhost:5131",
       "environmentVariables": {

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
 using AutoMapper;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using RestSharp;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Model.Dto;
@@ -18,8 +14,6 @@ using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 using Topluluk.Shared.Helper;
-using ZstdSharp.Unsafe;
-using static System.Net.Mime.MediaTypeNames;
 using _User = Topluluk.Services.User.Model.Entity.User;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
@@ -28,12 +22,16 @@ namespace Topluluk.Services.User.Services.Implementation
 	public class UserService : IUserService
 	{
         private readonly IUserRepository _userRepository;
+        private readonly IUserFollowRepository _followRepository;
+        private readonly IBlockedUserRepository _blockedUserRepository;
         private readonly ICapPublisher _capPublisher;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
-        public UserService(IUserRepository userRepository,ICapPublisher capPublisher, IMapper mapper)
+        public UserService(IUserRepository userRepository, IBlockedUserRepository blockedUserRepository , IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper)
 		{
             _userRepository = userRepository;
+            _followRepository = followRepository;
+            _blockedUserRepository = blockedUserRepository;
             _capPublisher = capPublisher;
             _mapper = mapper;
             _client = new RestClient();
@@ -53,8 +51,10 @@ namespace Topluluk.Services.User.Services.Implementation
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
                 dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
                 dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
-                
-                dto.IsFollowing = user.Followers!.Contains(id);
+
+                dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == userId);
+                dto.FollowingCount = await _followRepository.Count(f => f.SourceId == userId);
+                dto.FollowersCount = await _followRepository.Count(f => f.TargetId == userId);
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
                 
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
-                dto.IsFollowing = user.Followers!.Contains(user.Id);
+                dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == user.Id);
                 dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
                 dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
 
@@ -102,23 +102,20 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<string>> DeleteUserById(string id, string token, UserDeleteDto dto)
         {
-            
             try
             {
                 if (id.IsNullOrEmpty())
                 {
                     return await Task.FromResult(Response<string>.Fail("Bad Request", ResponseStatus.BadRequest));
                 }
-
-
+                
                 bool isUserExist = await _userRepository.AnyAsync(u => u.Id == id);
 
                 if (isUserExist == false)
                 {
                     return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
                 }
-
-
+                
                 // Topluluğu var mı kontrol et, varsa fail dön
                 var checkCommunitiesRequest = new RestRequest("https://localhost:7149/api/community/check-is-user-community-owner")
                                                   .AddHeader("Authorization", token);
@@ -132,8 +129,7 @@ namespace Topluluk.Services.User.Services.Implementation
                         // Sahibi olduğu topluluk yoksa
                 else
                 {
-
-
+                    
                     // Posts and PostComments will be deleted.
                     var deletePostsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/post/delete-posts").AddHeader("Authorization", token);
                     var deletePostsResponse = await _client.ExecutePostAsync<Response<bool>>(deletePostsRequest);
@@ -155,10 +151,7 @@ namespace Topluluk.Services.User.Services.Implementation
                     {
                         return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
                     }
-
                 }
-
-
             }
             catch (Exception e)
             {
@@ -166,19 +159,22 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> FollowUser(UserFollowDto userFollowInfo)
+        public async Task<Response<string>> FollowUser(string userId, UserFollowDto userFollowInfo)
         {
 
-            _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.SourceId);
+            _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userId);
             _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
-
-            if (targetUser.Followers!.Contains(sourceUser.Id))
+            bool isFollowing =
+                await _followRepository.AnyAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
+            
+            if (isFollowing == true)
             {
                 return await Task.FromResult(Response<string>.Success("Already following", ResponseStatus.Success));
             }
 
             if (targetUser.IsPrivate == true)
             {
+                // todo: Refactor here.
                 bool isContainSourceId = targetUser.IncomingFollowRequests!.Contains(sourceUser.Id);
 
                 if (isContainSourceId != true)
@@ -192,60 +188,43 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
             }
             else
-            {
-                bool isContainSourceId = targetUser.Followers!.Contains(sourceUser.Id);
-
-                if (isContainSourceId != true)
-                {
-                    targetUser.Followers!.Add(sourceUser.Id);
-                    sourceUser.Followings!.Add(targetUser.Id);
-                    List<_User> usersUpdate = new() { sourceUser, targetUser };
-                    _userRepository.BulkUpdate(usersUpdate);
-                }
+            { 
+                UserFollow userFollow = new() { SourceId = userId, TargetId = userFollowInfo.TargetId };
+                await _followRepository.InsertAsync(userFollow);
 
                 return await Task.FromResult(Response<string>.Success("Successfully followed!", ResponseStatus.Success));
             }
 
         }
 
-        public async Task<Response<string>> UnFollowUser(UserFollowDto userFollowInfo)
+        public async Task<Response<string>> UnFollowUser(string userId, UserFollowDto userFollowInfo)
         {
-            _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.SourceId);
-            _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
-
-            bool isSourceFollowingTarget = targetUser.Followers!.Contains(sourceUser.Id);
-
-            if (isSourceFollowingTarget)
+            UserFollow? isSourceFollowingTarget =
+                await _followRepository.GetFirstAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
+            
+            if (isSourceFollowingTarget == null)
             {
-                targetUser.Followers.Remove(sourceUser.Id);
-                sourceUser.Followings!.Remove(targetUser.Id);
-
-                List<_User> usersUpdate = new() { sourceUser, targetUser };
-                _userRepository.BulkUpdate(usersUpdate);
+                return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
             }
+
+            _followRepository.DeleteCompletely(isSourceFollowingTarget.Id);
 
             return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> RemoveUserFromFollowers(UserFollowDto userInfo)
+        public async Task<Response<string>> RemoveUserFromFollowers(string userId, UserFollowDto userFollowInfo)
         {
             try
             {
-                _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userInfo.SourceId);
-                _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userInfo.TargetId);
+              UserFollow? userFollow = await _followRepository.GetFirstAsync(f => f.SourceId == userFollowInfo.TargetId && f.TargetId == userId);
 
-                bool isTargetFollowingSource = sourceUser.Followers!.Contains(targetUser.Id);
-
-                if (isTargetFollowingSource)
-                {
-                    sourceUser.Followers.Remove(targetUser.Id);
-                    targetUser.Followings!.Remove(sourceUser.Id);
-
-                    List<_User> usersUpdate = new() { sourceUser, targetUser };
-                    _userRepository.BulkUpdate(usersUpdate);
-                }
-
-                return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
+              if (userFollow == null)
+              {
+                  return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
+              }
+              
+              _followRepository.DeleteCompletely(userFollow.Id); 
+              return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
             }
             catch
             {
@@ -260,28 +239,29 @@ namespace Topluluk.Services.User.Services.Implementation
             // Sadece sourceUser' ın blockedAccount listesine targetUser' ın Id bilgisi verilmeli.
             _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == sourceId);
             _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == targetId);
-            if (sourceUser.BlockedUsers == null)
-                sourceUser.BlockedUsers = new List<string>();
 
-            if (sourceUser.BlockedUsers!.Contains(targetId))
-                return await Task.FromResult(Response<string>.Success("This user already blocked.", ResponseStatus.Success));
-
-            sourceUser.BlockedUsers!.Add(targetId);
-
-            if (sourceUser.Followings!.Contains(targetId))
+            if (sourceUser == null || targetUser == null)
             {
-                sourceUser.Followings.Remove(targetId);
-                targetUser.Followers!.Remove(sourceId);
+                return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
             }
 
-            if (sourceUser.Followers!.Contains(targetId))
+            await _blockedUserRepository.InsertAsync(new(){SourceId = sourceId, TargetId = targetId});
+            
+            UserFollow? isSourceUserFollowsTarget =
+                await _followRepository.GetFirstAsync(f => f.SourceId == sourceId && f.TargetId == targetId);
+            UserFollow? isTargetUserFollowsSource =
+                await _followRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == sourceId);
+            
+            if (isSourceUserFollowsTarget != null)
             {
-                sourceUser.Followers.Remove(targetId);
-                targetUser.Followings!.Remove(sourceId);
+                _followRepository.DeleteCompletely(isSourceUserFollowsTarget.Id);
             }
 
-            // todo Update both users
-            _userRepository.BulkUpdate(new() { sourceUser,targetUser });
+            if (isTargetUserFollowsSource != null)
+            {
+                _followRepository.DeleteCompletely(isTargetUserFollowsSource.Id);
+            }
+            
             return await Task.FromResult(Response<string>.Success("User blocked successfully.", ResponseStatus.Success));
         }
 
@@ -326,7 +306,7 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(users, ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files)
+        public async Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files, CancellationToken cancellationToken)
         {
             _User user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
             Response<List<string>>? responseData = new();
@@ -451,16 +431,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
                         foreach (var _userId in user.IncomingFollowRequests.ToList())
                         {
-                            user.Followers!.Add(_userId);
-                            user.IncomingFollowRequests.Remove(_userId);
-                            _User _user = await _userRepository.GetFirstAsync(u => u.Id == _userId);
-                            _user.Followings!.Add(user.Id);
-                            _user.OutgoingFollowRequests.Remove(userId);
-                            var list = new List<_User>();
-                            list.Add(user);
-                            list.Add(_user);
-
-                            _userRepository.BulkUpdate(list);
+                            await _followRepository.InsertAsync(new() { SourceId = _userId, TargetId = userId });
                         }
                     }
                 }
@@ -479,13 +450,7 @@ namespace Topluluk.Services.User.Services.Implementation
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\
 
 
-        public async Task UserBanngerChanged(string userId, string fileName)
-        {
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
 
-            user.BannerImage = fileName;
-            _userRepository.Update(user);
-        }
         public async Task<Response<string>> PostCreated(string userId,string id)
         {
             var user = await _userRepository.GetFirstAsync(u => u.Id == userId);
@@ -495,9 +460,9 @@ namespace Topluluk.Services.User.Services.Implementation
         }
 
 
-        public async Task<Response<UserInfoGetResponse>> GetUserInfoForPost(string id, string sourceUserId)
+        public async Task<Response<UserInfoForPostDto>> GetUserInfoForPost(string id, string sourceUserId)
         {
-            UserInfoGetResponse dto = new();
+            UserInfoForPostDto dto = new();
             _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
 
             dto.UserId = user.Id;
@@ -505,9 +470,8 @@ namespace Topluluk.Services.User.Services.Implementation
             dto.LastName = user.LastName;
             dto.UserName = user.UserName;
             dto.ProfileImage = user.ProfileImage;
-            dto.IsUserFollowing = user.Followers.Contains(sourceUserId);
-
-            return await Task.FromResult(Response<UserInfoGetResponse>.Success(dto,ResponseStatus.Success));
+            dto.IsUserFollowing = await _followRepository.AnyAsync(f => f.SourceId == sourceUserId && f.TargetId == id);
+            return await Task.FromResult(Response<UserInfoForPostDto>.Success(dto,ResponseStatus.Success));
         }
 
         public async Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id)
@@ -537,8 +501,13 @@ namespace Topluluk.Services.User.Services.Implementation
             _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
             if (user == null)
                 return await Task.FromResult(Response<List<string>>.Fail("User Not found", ResponseStatus.BadRequest));
-
-            return await Task.FromResult(Response<List<string>>.Success(user.Followings.ToList(), ResponseStatus.Success));
+            List<string> followingIds = new();
+            var followings =  _followRepository.GetListByExpression(f => f.SourceId == id);
+            foreach (var follow in followings)
+            {
+                followingIds.Add(follow.TargetId);
+            }
+            return await Task.FromResult(Response<List<string>>.Success(followingIds, ResponseStatus.Success));
 
         }
 
@@ -554,9 +523,9 @@ namespace Topluluk.Services.User.Services.Implementation
                     if (user.IncomingFollowRequests != null && user.IncomingFollowRequests.Contains(targetId))
                     {
                         _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == targetId);
-                        user.Followers!.Add(targetId);
+                    //    user.Followers!.Add(targetId);
                         targetUser.OutgoingFollowRequests.Remove(targetId);
-                        targetUser.Followings!.Add(id);
+                 //       targetUser.Followings!.Add(id);
                         user.IncomingFollowRequests.Remove(targetId);
                         
                         _userRepository.Update(user);
@@ -625,7 +594,8 @@ namespace Topluluk.Services.User.Services.Implementation
             }
 
         }
-
+            
+        // Takip edilen kullanıcıları ve o kullanıcıların bilgilerini getireceğiz
         public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string userId, int skip = 0, int take = 10)
         {
             try
@@ -636,18 +606,12 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
 
                 _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-                List<string> followingIds = user.Followings.ToList();
-                DatabaseResponse followingUsers = await _userRepository.GetAllAsync(take, skip, fu => followingIds.Contains(fu.Id));
+                // Target Id leri elimde. Bu target id ler ile kullanıcı bilgilerini alıcaz.
+                DatabaseResponse followingsResponse = await _followRepository.GetAllAsync(take, skip, f => f.SourceId == userId);
+                List<string> x = followingsResponse.Data.Id;
+                DatabaseResponse followingUsers = await _userRepository.GetAllAsync(take, skip, fu => x.Contains(fu.Id));
                 List<FollowingUserDto> dtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(followingUsers.Data);
-
-                byte i = 0;
-
-                foreach (var _user in followingUsers.Data as List<_User>)
-                {
-                    dtos[i].IsFollowing = _user.Followers.Contains(userId);
-                }
-
+                
                 return await Task.FromResult(Response<List<FollowingUserDto>>.Success(dtos, ResponseStatus.Success));
             }
             catch (Exception e)
@@ -750,8 +714,8 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User not found", ResponseStatus.NotFound));
                 }
-
-                DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => user.Followings.Contains(u.Id)
+// fixle true kısmını
+                DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => true
                 && ((u.FirstName.ToLower() + " " + u.LastName.ToLower()).Contains(text.ToLower()) || u.UserName.Contains(text.ToLower())));
                 List<FollowingUserDto> followingUserDtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(response.Data);
                 return await Task.FromResult(Response<List<FollowingUserDto>>.Success(followingUserDtos, ResponseStatus.Success));

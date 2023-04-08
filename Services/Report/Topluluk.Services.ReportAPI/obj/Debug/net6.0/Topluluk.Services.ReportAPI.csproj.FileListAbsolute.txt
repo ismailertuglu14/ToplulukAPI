@@ -30,67 +30,99 @@
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/All Files/Development/Topluluk/Topluluk.Backend/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/ref/Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\appsettings.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.exe
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.deps.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.runtimeconfig.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.csproj.AssemblyReference.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.AssemblyInfoInputs.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.AssemblyInfo.cs
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.csproj.CoreCompileInputs.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.Topluluk.Services.ReportAPI.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.Topluluk.Services.ReportAPI.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Topluluk.Services.ReportAPI.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Topluluk.Services.ReportAPI.props
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets.pack.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets.build.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\scopedcss\bundle\Topluluk.Services.ReportAPI.styles.css
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.csproj.CopyComplete
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\refint\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.pdb
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.genruntimeconfig.cache
-C:\Users\ismai\Desktop\All Files\Development\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\ref\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\appsettings.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.exe
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.deps.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.runtimeconfig.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Topluluk.Services.ReportAPI.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.csproj.AssemblyReference.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.AssemblyInfoInputs.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.AssemblyInfo.cs
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.csproj.CoreCompileInputs.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.Topluluk.Services.ReportAPI.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.Topluluk.Services.ReportAPI.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Topluluk.Services.ReportAPI.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Topluluk.Services.ReportAPI.props
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets.pack.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets.build.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\scopedcss\bundle\Topluluk.Services.ReportAPI.styles.css
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.csproj.CopyComplete
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\refint\Topluluk.Services.ReportAPI.dll
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.pdb
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\Topluluk.Services.ReportAPI.genruntimeconfig.cache
-C:\Users\ismai\Desktop\ToplulukAPI\Services\Report\Topluluk.Services.ReportAPI\obj\Debug\net6.0\ref\Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/appsettings.Development.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/appsettings.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.exe
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.deps.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.runtimeconfig.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Microsoft.OpenApi.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.AssemblyReference.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.AssemblyInfoInputs.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.AssemblyInfo.cs
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.CoreCompileInputs.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.Topluluk.Services.ReportAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.build.Topluluk.Services.ReportAPI.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Topluluk.Services.ReportAPI.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Topluluk.Services.ReportAPI.props
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.pack.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.build.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.development.json
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/scopedcss/bundle/Topluluk.Services.ReportAPI.styles.css
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.CopyComplete
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/refint/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.genruntimeconfig.cache
+C:/Users/ismai/Desktop/All Files/Development/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/ref/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/appsettings.Development.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/appsettings.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.exe
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.deps.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.runtimeconfig.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Microsoft.OpenApi.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.AssemblyReference.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.AssemblyInfoInputs.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.AssemblyInfo.cs
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.CoreCompileInputs.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.Topluluk.Services.ReportAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.build.Topluluk.Services.ReportAPI.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Topluluk.Services.ReportAPI.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Topluluk.Services.ReportAPI.props
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.pack.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.build.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.development.json
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/scopedcss/bundle/Topluluk.Services.ReportAPI.styles.css
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.CopyComplete
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/refint/Topluluk.Services.ReportAPI.dll
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.genruntimeconfig.cache
+C:/Users/ismai/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/ref/Topluluk.Services.ReportAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/appsettings.Development.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/appsettings.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.deps.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.runtimeconfig.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Microsoft.OpenApi.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.AssemblyInfo.cs
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cs
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.MvcApplicationPartsAssemblyInfo.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.Topluluk.Services.ReportAPI.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.build.Topluluk.Services.ReportAPI.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Topluluk.Services.ReportAPI.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Topluluk.Services.ReportAPI.props
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.pack.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.build.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/staticwebassets.development.json
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/scopedcss/bundle/Topluluk.Services.ReportAPI.styles.css
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.csproj.CopyComplete
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/refint/Topluluk.Services.ReportAPI.dll
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.pdb
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/Topluluk.Services.ReportAPI.genruntimeconfig.cache
+/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/Debug/net6.0/ref/Topluluk.Services.ReportAPI.dll

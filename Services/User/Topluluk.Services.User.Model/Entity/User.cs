@@ -11,6 +11,8 @@ namespace Topluluk.Services.User.Model.Entity
 		public string LastName { get; set; }
 		public string UserName { get; set; }
         public string Email { get; set; }
+        
+        public string? Title { get; set; }
         public string? Bio { get; set; }
 		public string? ProfileImage { get; set; }
 		public string? BannerImage { get; set; }
@@ -22,9 +24,6 @@ namespace Topluluk.Services.User.Model.Entity
 		public bool IsPrivate { get; set; } = false;
 
 		public ICollection<string>? BlockedUsers { get; set; }
-
-		public ICollection<string>? Followings { get; set; }
-		public ICollection<string>? Followers { get; set; }
 		public ICollection<string>? IncomingFollowRequests { get; set; }
 		public ICollection<string>? OutgoingFollowRequests { get; set; }
 
@@ -37,8 +36,6 @@ namespace Topluluk.Services.User.Model.Entity
 	//		CommunityRequests = new HashSet<string>();
 			IncomingFollowRequests = new HashSet<string>();
 			OutgoingFollowRequests = new HashSet<string>();
-			Followings = new HashSet<string>();
-			Followers = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();
 			Gender = GenderEnum.Unspecified;
         }
