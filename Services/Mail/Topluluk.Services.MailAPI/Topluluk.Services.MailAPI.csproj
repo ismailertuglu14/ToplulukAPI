@@ -20,5 +20,6 @@
     <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Topluluk.Services.MailAPI.Services\Topluluk.Services.MailAPI.Services.csproj" />
   </ItemGroup>
 </Project>

@@ -6,4 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
+    <ProjectReference Include="..\Topluluk.Services.MailAPI.Model\Topluluk.Services.MailAPI.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.1.7" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Consumers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Consumers\" />
+  </ItemGroup>
 </Project>

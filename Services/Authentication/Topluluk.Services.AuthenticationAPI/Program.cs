@@ -1,19 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Topluluk.Services.AuthenticationAPI.Data.Settings;
-using Topluluk.Services.AuthenticationAPI.Model.Entity;
+using MassTransit;
 using Topluluk.Services.AuthenticationAPI.Model.Mapper;
 using Topluluk.Services.AuthenticationAPI.Model.Validators;
 using Topluluk.Services.AuthenticationAPI.Services.Core;
 using Topluluk.Shared.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 
@@ -25,6 +18,18 @@ var mapperConfig = new MapperConfiguration(cfg =>
 });
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost","/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+    });
+});
+builder.Services.AddMassTransitHostedService();
 
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {

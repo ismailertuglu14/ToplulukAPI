@@ -8,6 +8,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 	public class Community : AbstractEntity
 	{
 		public string? AdminId { get; set; }
+
 		public ICollection<Moderator> ModeratorIds { get; set; }
 		public string Title { get; set; }
 		public string Slug { get; set; }

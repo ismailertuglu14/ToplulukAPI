@@ -77,9 +77,7 @@
       ],
       "UpstreamPathTemplate": "/api/file/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
-    } 
-
-
+    }
 
   ],
   "GlobalConfiguration": {
