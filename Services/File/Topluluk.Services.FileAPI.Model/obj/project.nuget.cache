@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H3JFRGRI3izRKMlIGU1lSp1lYIA3EbPMKMzCWDgc79U01tycLxFFIW4hHgdY6NwbSoVx6P+olcbwuYhEkVcD5A==",
+  "dgSpecHash": "jqg1ExRijszKXLAukekwc5NUhBM2qmRpbyHh5RzfM9oEOJ0Aeu238GQmoJjqU1aLmYFRwYn9T/nMQsmBWAZjfw==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Model/Topluluk.Services.FileAPI.Model.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Model/Topluluk.Services.FileAPI.Model.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512"

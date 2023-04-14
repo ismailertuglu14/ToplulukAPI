@@ -92,7 +92,12 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpGet("followings")]
         public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string id, int take, int skip)
         {
-            return await _userService.GetFollowingUsers(id, skip, take);
+            return await _userService.GetFollowingUsers(this.UserId, id, skip, take);
+        }
+        [HttpGet("followers")]
+        public async Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string id, int take, int skip)
+        {
+            return await _userService.GetFollowerUsers(this.UserId, id, skip, take);
         }
 
         [HttpGet("follower-requests")]

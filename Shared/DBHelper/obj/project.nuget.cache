@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Vr8H5T0q7dgcpWFY/JWrIVWyJips9koQW5A5x8Xo0dR01HfYAfcs3QCpVDk4REJ9gernQc6Ms6teMDAIxddN4w==",
+  "dgSpecHash": "6TIIFsGnBx7/L7j4Om1+cCBVg72ie7uyXRmzr7zTA/1mXphzHDYgGUNeNeavOA7S6HLeyi2W7GFe5BjusSf7NQ==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

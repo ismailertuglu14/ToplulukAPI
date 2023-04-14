@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RestSharp;
@@ -14,6 +15,7 @@ using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Helper;
 using Topluluk.Shared.Messages;
+using Topluluk.Shared.Messages.Authentication;
 using _MassTransit = MassTransit;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
@@ -57,7 +59,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 var verifiedPassword = VerifyPassword(userDto.Password, user.HashedPassword);
                 if(verifiedPassword)
                 {
-                    // Dead code fix later.
+                    // Dead code fix later.b
                     if (DateTime.Now < user.LockoutEnd)
                     {
                         return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked));
@@ -134,15 +136,15 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 var token = new TokenHelper(_configuration).CreateAccessToken(response.Data, userDto.UserName, 2);
                 var user = _repository.GetFirst(u => u.UserName == userDto.UserName);
                 UpdateRefreshToken(user, token, 2);
-                
+                /*
                 var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri(QueueConstants.SUCCESSFULLY_REGISTERED_MAIL));
                 var registerMessage = new SuccessfullyRegisteredCommand
                 {
                     To = userDto.Email,
                     FullName = $"{userDto.FirstName} {userDto.LastName}"
                 };
-                await sendEndpoint.Send<SuccessfullyRegisteredCommand>(registerMessage);
-
+                sendEndpoint.Send<SuccessfullyRegisteredCommand>(registerMessage);
+*/
                 return Response<TokenDto>.Success(token, ResponseStatus.Success);
             }
             catch (Exception e)
@@ -179,10 +181,78 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                     ResponseStatus.InitialError));
             }
         }
-
-        public async Task<Response<string>> ResetPassowrd()
+        public async Task<Response<string>> ResetPasswordRequest(string email)
         {
-            throw new NotImplementedException();
+            UserCredential? user = await _repository.GetFirstAsync(u => u.Email == email);
+            if (user != null)
+            {
+                string resetToken = GenerateResetPasswordToken(email);
+                byte[] tokenBytes = Encoding.UTF8.GetBytes(resetToken);
+                resetToken = WebEncoders.Base64UrlEncode(tokenBytes);
+
+                user.ResetPasswordToken = resetToken.UrlEncode();
+                user.ResetPasswordTokenEndDate = DateTime.Now.AddHours(5);
+
+                _repository.Update(user);
+
+                var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri("queue:reset-password"));
+                var registerMessage = new ResetPasswordCommand()
+                {
+                    To = email,
+                    UserId = user.Id,
+                    ResetToken = resetToken
+                };
+                sendEndpoint.Send<ResetPasswordCommand>(registerMessage);
+                return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
+            }
+            return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
+        }
+
+        public async Task<Response<bool>> VerifyResetToken(string userId, string resetToken)
+        {
+            UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
+            if (user != null)
+            {
+                if (user.ResetPasswordTokenEndDate < DateTime.Now)
+                {
+                    return await Task.FromResult(Response<bool>.Fail("Token expired", ResponseStatus.NotAuthenticated));
+                }
+
+                if (user.ResetPasswordToken == resetToken.UrlEncode())
+                {
+                    return await Task.FromResult(Response<bool>.Success(true, ResponseStatus.Success));
+                }
+            }
+
+            return await Task.FromResult(Response<bool>.Fail("Failed", ResponseStatus.Failed));
+        }
+        public async Task<Response<NoContent>> ResetPassword(string userId, string resetToken, ResetPasswordDto passwordDto)
+        {
+            UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
+
+            if (passwordDto.NewPassword != passwordDto.NewPasswordAgain)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail("Passwords does not match!", ResponseStatus.BadRequest));
+            }
+            if (user != null)
+            {
+                if (user.ResetPasswordTokenEndDate < DateTime.Now)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("Token expired", ResponseStatus.NotAuthenticated));
+                }
+
+                if (user.ResetPasswordToken == resetToken.UrlEncode())
+                {
+                    user.HashedPassword = HashPassword(passwordDto.NewPassword);
+                    user.ResetPasswordToken = null;
+                    user.ResetPasswordTokenEndDate = null;
+                    _repository.Update(user);
+                    return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+                }
+
+            }
+
+            return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.Failed));
         }
 
         public async Task<Response<string>> ChangePassword(string userId, PasswordChangeDto passwordDto)
@@ -335,6 +405,18 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             {
                 return await Task.FromResult(Response<NoContent>.Fail($"Error occured {e}", ResponseStatus.InitialError));
             }
+        }
+        public string GenerateResetPasswordToken(string email)
+        {
+            byte[] tokenBytes = new byte[32];
+            using (var rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(tokenBytes);
+            }
+
+            string token = Convert.ToBase64String(tokenBytes);
+
+            return token;
         }
     }
 }

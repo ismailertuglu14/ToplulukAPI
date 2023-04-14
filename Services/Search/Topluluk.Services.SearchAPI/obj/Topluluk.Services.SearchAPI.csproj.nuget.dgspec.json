@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj": {}
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj": {}
   },
   "projects": {
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj",
         "projectName": "Topluluk.Services.SearchAPI.Model",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -57,14 +57,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
         "projectName": "Topluluk.Services.SearchAPI.Services",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -110,14 +110,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj",
         "projectName": "Topluluk.Services.SearchAPI",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/Topluluk.Services.SearchAPI.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -132,14 +132,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Model/Topluluk.Services.SearchAPI.Model.csproj"
               },
-              "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Search/Topluluk.Services.SearchAPI.Services/Topluluk.Services.SearchAPI.Services.csproj"
               },
-              "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }
             }
           }
@@ -182,14 +182,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
         "projectName": "Topluluk.Shared",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"

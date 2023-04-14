@@ -17,6 +17,8 @@
     <None Remove="MongoDB.Bson" />
     <None Remove="BaseModels\" />
     <None Remove="Constants\" />
+    <None Remove="Messages\Authentication\" />
+    <None Remove="Messages\User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
@@ -24,6 +26,8 @@
     <Folder Include="Enums\" />
     <Folder Include="BaseModels\" />
     <Folder Include="Constants\" />
+    <Folder Include="Messages\Authentication\" />
+    <Folder Include="Messages\User\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />

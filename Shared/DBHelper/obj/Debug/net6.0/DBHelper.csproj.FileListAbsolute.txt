@@ -66,3 +66,20 @@ C:/Users/ismai/Desktop/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/ref/DBHelper
 /Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/refint/DBHelper.dll
 /Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.pdb
 /Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/ref/DBHelper.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/DBHelper.deps.json
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/DBHelper.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/DBHelper.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.AssemblyInfo.cs
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.csproj.CopyComplete
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/refint/DBHelper.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/DBHelper.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/Debug/net6.0/ref/DBHelper.dll

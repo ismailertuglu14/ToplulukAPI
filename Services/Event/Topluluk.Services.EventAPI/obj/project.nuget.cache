@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PjDCkHatV+W93znf5giyvrWLe8I+oBbIITBO+ufN3VdU8a1Ke9U4p2b5Yn3mSoh9tix5tayUYLpcRpAd05z0Jg==",
+  "dgSpecHash": "YNlqZyk2Re/USRW0FOQC0QS5ggxsN3iOM0nb4+sueL6O+nLWIvbjH4Eb2omDPoL0ms673A1tm9wo1ItxFANWvg==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/Topluluk.Services.EventAPI.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/Topluluk.Services.EventAPI.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

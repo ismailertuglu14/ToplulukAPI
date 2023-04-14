@@ -9747,11 +9747,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Data/Topluluk.Services.FileAPI.Data.csproj",
+      "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Data/Topluluk.Services.FileAPI.Data.csproj",
       "projectName": "Topluluk.Services.FileAPI.Data",
-      "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Data/Topluluk.Services.FileAPI.Data.csproj",
+      "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Data/Topluluk.Services.FileAPI.Data.csproj",
       "packagesPath": "/Users/ismail/.nuget/packages/",
-      "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Data/obj/",
+      "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Data/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -9766,8 +9766,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
-              "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
+            "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
+              "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
             }
           }
         }

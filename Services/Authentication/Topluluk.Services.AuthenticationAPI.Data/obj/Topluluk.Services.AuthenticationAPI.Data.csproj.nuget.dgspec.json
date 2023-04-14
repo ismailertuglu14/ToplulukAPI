@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj": {}
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj": {}
   },
   "projects": {
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj",
         "projectName": "Topluluk.Services.AuthenticationAPI.Data",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/Topluluk.Services.AuthenticationAPI.Data.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -26,17 +26,17 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
               },
-              "/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj"
               },
-              "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
               },
-              "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }
             }
           }
@@ -70,14 +70,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj",
         "projectName": "Topluluk.Services.AuthenticationAPI.Model",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -92,8 +92,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }
             }
           }
@@ -163,14 +163,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj",
         "projectName": "Topluluk.Services.CommunityAPI.Model",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -185,8 +185,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }
             }
           }
@@ -226,14 +226,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj",
         "projectName": "DBHelper",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -248,11 +248,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
               },
-              "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
-                "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }
             }
           }
@@ -304,14 +304,14 @@
         }
       }
     },
-    "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
         "projectName": "Topluluk.Shared",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"

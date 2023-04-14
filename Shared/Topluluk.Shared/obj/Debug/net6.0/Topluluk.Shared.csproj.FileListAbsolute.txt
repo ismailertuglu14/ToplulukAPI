@@ -46,3 +46,15 @@ C:/Users/ismai/Desktop/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/ref/T
 /Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/refint/Topluluk.Shared.dll
 /Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.pdb
 /Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/ref/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/bin/Debug/net6.0/Topluluk.Shared.deps.json
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.AssemblyInfo.cs
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/refint/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/obj/Debug/net6.0/ref/Topluluk.Shared.dll

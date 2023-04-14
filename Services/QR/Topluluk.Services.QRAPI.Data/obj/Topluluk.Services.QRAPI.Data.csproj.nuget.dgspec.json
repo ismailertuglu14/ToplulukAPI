@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj": {}
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj": {}
   },
   "projects": {
-    "/Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj": {
+    "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj",
+        "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj",
         "projectName": "Topluluk.Services.QRAPI.Data",
-        "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj",
+        "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/Topluluk.Services.QRAPI.Data.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/obj/",
+        "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"

@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/Topluluk.Services.ReportAPI.csproj",
+      "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/Topluluk.Services.ReportAPI.csproj",
       "projectName": "Topluluk.Services.ReportAPI",
-      "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/Topluluk.Services.ReportAPI.csproj",
+      "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/Topluluk.Services.ReportAPI.csproj",
       "packagesPath": "/Users/ismail/.nuget/packages/",
-      "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/",
+      "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ismail/.nuget/NuGet/NuGet.Config"

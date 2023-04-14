@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YMDp0Sz04gmybRNjGRLUgdpBloJnOb6OGNmd3zl5wa5ZhJqaoU8uXROVbv+AZOUQfJ684ChABv2x1jN78UmGNQ==",
+  "dgSpecHash": "modjAk74iKYCDtWRWT0p7hklfYyGnQQwU3oVltYSun51GYhwjq2Y18Vy1beRcx2Mt2ewxaW9JWbhjg8CRFisUg==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/Topluluk.Services.QRAPI.Services.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/Topluluk.Services.QRAPI.Services.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

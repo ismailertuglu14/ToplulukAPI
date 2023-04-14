@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using AutoMapper;
 using DotNetCore.CAP;
@@ -19,25 +20,25 @@ using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.User.Services.Implementation
 {
-	public class UserService : IUserService
-	{
+    public class UserService : IUserService
+    {
         private readonly IUserRepository _userRepository;
         private readonly IUserFollowRepository _followRepository;
         private readonly IBlockedUserRepository _blockedUserRepository;
         private readonly ICapPublisher _capPublisher;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
-        public UserService(IUserRepository userRepository, IBlockedUserRepository blockedUserRepository , IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper)
-		{
+        public UserService(IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper)
+        {
             _userRepository = userRepository;
             _followRepository = followRepository;
             _blockedUserRepository = blockedUserRepository;
             _capPublisher = capPublisher;
             _mapper = mapper;
             _client = new RestClient();
-		}
+        }
 
-        public async Task<Response<GetUserByIdDto>> GetUserById(string id,string userId)
+        public async Task<Response<GetUserByIdDto>> GetUserById(string id, string userId)
         {
             try
             {
@@ -76,14 +77,14 @@ namespace Topluluk.Services.User.Services.Implementation
                     return await Task.FromResult(Response<GetUserByIdDto>.Fail("User Not Found",
                         ResponseStatus.NotFound));
                 }
-                
+
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
                 dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == user.Id);
                 dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
                 dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
 
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
-                
+
             }
             catch (Exception e)
             {
@@ -97,7 +98,7 @@ namespace Topluluk.Services.User.Services.Implementation
             _User user = _mapper.Map<_User>(userInfo);
             DatabaseResponse response = await _userRepository.InsertAsync(user);
 
-            return await Task.FromResult(Response<string>.Success(response.Data,ResponseStatus.Success));
+            return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
         }
 
         public async Task<Response<string>> DeleteUserById(string id, string token, UserDeleteDto dto)
@@ -108,14 +109,14 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     return await Task.FromResult(Response<string>.Fail("Bad Request", ResponseStatus.BadRequest));
                 }
-                
+
                 bool isUserExist = await _userRepository.AnyAsync(u => u.Id == id);
 
                 if (isUserExist == false)
                 {
                     return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
                 }
-                
+
                 // Topluluğu var mı kontrol et, varsa fail dön
                 var checkCommunitiesRequest = new RestRequest("https://localhost:7149/api/community/check-is-user-community-owner")
                                                   .AddHeader("Authorization", token);
@@ -126,10 +127,10 @@ namespace Topluluk.Services.User.Services.Implementation
                     return await Task.FromResult(Response<string>.Fail("You have to delete your community first", ResponseStatus.CommunityOwnerExist));
 
                 }
-                        // Sahibi olduğu topluluk yoksa
+                // Sahibi olduğu topluluk yoksa
                 else
                 {
-                    
+
                     // Posts and PostComments will be deleted.
                     var deletePostsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/post/delete-posts").AddHeader("Authorization", token);
                     var deletePostsResponse = await _client.ExecutePostAsync<Response<bool>>(deletePostsRequest);
@@ -166,7 +167,7 @@ namespace Topluluk.Services.User.Services.Implementation
             _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
             bool isFollowing =
                 await _followRepository.AnyAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
-            
+
             if (isFollowing == true)
             {
                 return await Task.FromResult(Response<string>.Success("Already following", ResponseStatus.Success));
@@ -188,7 +189,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
             }
             else
-            { 
+            {
                 UserFollow userFollow = new() { SourceId = userId, TargetId = userFollowInfo.TargetId };
                 await _followRepository.InsertAsync(userFollow);
 
@@ -201,7 +202,7 @@ namespace Topluluk.Services.User.Services.Implementation
         {
             UserFollow? isSourceFollowingTarget =
                 await _followRepository.GetFirstAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
-            
+
             if (isSourceFollowingTarget == null)
             {
                 return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
@@ -216,15 +217,15 @@ namespace Topluluk.Services.User.Services.Implementation
         {
             try
             {
-              UserFollow? userFollow = await _followRepository.GetFirstAsync(f => f.SourceId == userFollowInfo.TargetId && f.TargetId == userId);
+                UserFollow? userFollow = await _followRepository.GetFirstAsync(f => f.SourceId == userFollowInfo.TargetId && f.TargetId == userId);
 
-              if (userFollow == null)
-              {
-                  return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
-              }
-              
-              _followRepository.DeleteCompletely(userFollow.Id); 
-              return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
+                if (userFollow == null)
+                {
+                    return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
+                }
+
+                _followRepository.DeleteCompletely(userFollow.Id);
+                return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
             }
             catch
             {
@@ -245,13 +246,13 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
             }
 
-            await _blockedUserRepository.InsertAsync(new(){SourceId = sourceId, TargetId = targetId});
-            
+            await _blockedUserRepository.InsertAsync(new() { SourceId = sourceId, TargetId = targetId });
+
             UserFollow? isSourceUserFollowsTarget =
                 await _followRepository.GetFirstAsync(f => f.SourceId == sourceId && f.TargetId == targetId);
             UserFollow? isTargetUserFollowsSource =
                 await _followRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == sourceId);
-            
+
             if (isSourceUserFollowsTarget != null)
             {
                 _followRepository.DeleteCompletely(isSourceUserFollowsTarget.Id);
@@ -261,7 +262,7 @@ namespace Topluluk.Services.User.Services.Implementation
             {
                 _followRepository.DeleteCompletely(isTargetUserFollowsSource.Id);
             }
-            
+
             return await Task.FromResult(Response<string>.Success("User blocked successfully.", ResponseStatus.Success));
         }
 
@@ -274,7 +275,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
             // Sorgulanan kullanıcı bizi bloklamamış olmalı
             // Bizim sorguladığımız kullanıcıyı bloklamamış olmamız lazım.
-            DatabaseResponse response = await _userRepository.GetAllAsync(limit,0, u => u.IsDeleted == false);
+            DatabaseResponse response = await _userRepository.GetAllAsync(limit, 0, u => u.IsDeleted == false);
             //u.BlockedUsers!.Contains("") == false
             //&& currentUser.BlockedUsers!.Contains(u.Id) == false
             List<UserSuggestionsDto> userSuggestions = _mapper.Map<List<UserSuggestionsDto>>(response.Data);
@@ -302,7 +303,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
 
             List<UserSearchResponseDto> users = _mapper.Map<List<_User>, List<UserSearchResponseDto>>(response.Data);
-            
+
             return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(users, ResponseStatus.Success));
         }
 
@@ -333,7 +334,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
 
                 var response = await client.PostAsync("https://localhost:7165/file/uploaduserimage", content);
-                
+
                 if (response.IsSuccessStatusCode)
                 {
                     responseData = await response.Content.ReadFromJsonAsync<Response<List<string>>>();
@@ -346,7 +347,7 @@ namespace Topluluk.Services.User.Services.Implementation
                         return await Task.FromResult(Response<string>.Success($"Image changed with {imageUrl}", ResponseStatus.Success));
                     }
 
-                     throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
+                    throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
                 }
                 else
                 {
@@ -358,7 +359,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto)
         {
-            
+
             _User user = await _userRepository.GetFirstAsync(u => u.Id == changeBannerDto.UserId);
             using var stream = new MemoryStream();
             await changeBannerDto.File.CopyToAsync(stream);
@@ -366,7 +367,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
             if (user.BannerImage != null)
             {
-                await _capPublisher.PublishAsync<UserChangeBannerDto>(QueueConstants.USER_DELETE_BANNER, new(){ UserId = changeBannerDto.UserId, File = changeBannerDto.File });
+                await _capPublisher.PublishAsync<UserChangeBannerDto>(QueueConstants.USER_DELETE_BANNER, new() { UserId = changeBannerDto.UserId, File = changeBannerDto.File });
             }
 
             await _capPublisher.PublishAsync(QueueConstants.USER_CHANGE_BANNER, new { UserId = changeBannerDto.UserId, FileName = changeBannerDto.File.FileName, BannerImage = imageData });
@@ -451,7 +452,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
 
 
-        public async Task<Response<string>> PostCreated(string userId,string id)
+        public async Task<Response<string>> PostCreated(string userId, string id)
         {
             var user = await _userRepository.GetFirstAsync(u => u.Id == userId);
             //user.Posts!.Add(id);
@@ -471,7 +472,7 @@ namespace Topluluk.Services.User.Services.Implementation
             dto.UserName = user.UserName;
             dto.ProfileImage = user.ProfileImage;
             dto.IsUserFollowing = await _followRepository.AnyAsync(f => f.SourceId == sourceUserId && f.TargetId == id);
-            return await Task.FromResult(Response<UserInfoForPostDto>.Success(dto,ResponseStatus.Success));
+            return await Task.FromResult(Response<UserInfoForPostDto>.Success(dto, ResponseStatus.Success));
         }
 
         public async Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id)
@@ -502,7 +503,7 @@ namespace Topluluk.Services.User.Services.Implementation
             if (user == null)
                 return await Task.FromResult(Response<List<string>>.Fail("User Not found", ResponseStatus.BadRequest));
             List<string> followingIds = new();
-            var followings =  _followRepository.GetListByExpression(f => f.SourceId == id);
+            var followings = _followRepository.GetListByExpression(f => f.SourceId == id);
             foreach (var follow in followings)
             {
                 followingIds.Add(follow.TargetId);
@@ -523,11 +524,11 @@ namespace Topluluk.Services.User.Services.Implementation
                     if (user.IncomingFollowRequests != null && user.IncomingFollowRequests.Contains(targetId))
                     {
                         _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == targetId);
-                    //    user.Followers!.Add(targetId);
+                        //    user.Followers!.Add(targetId);
                         targetUser.OutgoingFollowRequests.Remove(targetId);
-                 //       targetUser.Followings!.Add(id);
+                        //       targetUser.Followings!.Add(id);
                         user.IncomingFollowRequests.Remove(targetId);
-                        
+
                         _userRepository.Update(user);
                         _userRepository.Update(targetUser);
                         return await Task.FromResult(Response<string>.Success("Successfully", ResponseStatus.Success));
@@ -582,7 +583,7 @@ namespace Topluluk.Services.User.Services.Implementation
                     DatabaseResponse incomingRequstUsers = await _userRepository.GetAllAsync(take, skip, u => incomingRequests.Contains(u.Id));
 
                     List<FollowingRequestDto> dtos = _mapper.Map<List<_User>, List<FollowingRequestDto>>(incomingRequstUsers.Data);
-                  
+
                     return await Task.FromResult(Response<List<FollowingRequestDto>>.Success(dtos, ResponseStatus.Success));
                 }
 
@@ -594,24 +595,32 @@ namespace Topluluk.Services.User.Services.Implementation
             }
 
         }
-            
+
         // Takip edilen kullanıcıları ve o kullanıcıların bilgilerini getireceğiz
-        public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string userId, int skip = 0, int take = 10)
+        public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string id, string userId, int skip = 0, int take = 10)
         {
             try
             {
                 if (userId.IsNullOrEmpty())
                 {
-                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("Bad Request",ResponseStatus.BadRequest));
+                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("Bad Request", ResponseStatus.BadRequest));
                 }
 
                 _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("", ResponseStatus.NotFound));
+                }
                 // Target Id leri elimde. Bu target id ler ile kullanıcı bilgilerini alıcaz.
                 DatabaseResponse followingsResponse = await _followRepository.GetAllAsync(take, skip, f => f.SourceId == userId);
-                List<string> x = followingsResponse.Data.Id;
+                List<string> x = new();
+                foreach (var y in followingsResponse.Data)
+                {
+                    x.Add(y.TargetId);
+                }
                 DatabaseResponse followingUsers = await _userRepository.GetAllAsync(take, skip, fu => x.Contains(fu.Id));
                 List<FollowingUserDto> dtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(followingUsers.Data);
-                
+
                 return await Task.FromResult(Response<List<FollowingUserDto>>.Success(dtos, ResponseStatus.Success));
             }
             catch (Exception e)
@@ -620,9 +629,35 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
-        public Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string userId, int skip = 0, int take = 10)
+        public async Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string id, string userId, int skip = 0, int take = 10)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (id.IsNullOrEmpty() || userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<List<FollowerUserDto>>.Fail("", ResponseStatus.BadRequest));
+                }
+
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<List<FollowerUserDto>>.Fail($"User Not Found!", ResponseStatus.NotFound));
+                }
+
+                List<UserFollow> followers = _followRepository.GetListByExpressionPaginated(skip,take,f => f.TargetId == userId);
+
+                List<_User> users = _userRepository.GetListByExpressionPaginated(skip,take, u => followers.Any(f => f.SourceId == u.Id));
+                List<FollowerUserDto> followersDto = _mapper.Map<List<_User>, List<FollowerUserDto>>(users);
+
+                return await Task.FromResult(Response<List<FollowerUserDto>>.Success(followersDto, ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<FollowerUserDto>>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
+
+            }
         }
 
         public async Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto)
@@ -672,7 +707,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 credentialDto.UserName = userDto.UserName;
                 credentialDto.Email = userDto.Email;
 
-                var _request = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/update-profile").AddHeader("Authorization",token).AddBody(credentialDto);
+                var _request = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/update-profile").AddHeader("Authorization", token).AddBody(credentialDto);
                 var _response = await _client.ExecutePostAsync<Response<NoContent>>(_request);
 
                 user.FirstName = userDto.FirstName;
@@ -691,7 +726,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
 
 
-                return await Task.FromResult(Response<NoContent>.Fail("Update failed",ResponseStatus.InitialError));
+                return await Task.FromResult(Response<NoContent>.Fail("Update failed", ResponseStatus.InitialError));
             }
             catch (Exception e)
             {
@@ -702,7 +737,7 @@ namespace Topluluk.Services.User.Services.Implementation
         public async Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10)
         {
             try
-            { 
+            {
                 if (userId.IsNullOrEmpty())
                 {
                     return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User Not Found", ResponseStatus.BadRequest));
@@ -714,7 +749,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User not found", ResponseStatus.NotFound));
                 }
-// fixle true kısmını
+                // fixle true kısmını
                 DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => true
                 && ((u.FirstName.ToLower() + " " + u.LastName.ToLower()).Contains(text.ToLower()) || u.UserName.Contains(text.ToLower())));
                 List<FollowingUserDto> followingUserDtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(response.Data);
@@ -732,14 +767,14 @@ namespace Topluluk.Services.User.Services.Implementation
             {
                 if (userId.IsNullOrEmpty())
                 {
-                    return await Task.FromResult(Response<NoContent>.Fail("User Id cant be null",ResponseStatus.BadRequest));
+                    return await Task.FromResult(Response<NoContent>.Fail("User Id cant be null", ResponseStatus.BadRequest));
                 }
 
                 _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
 
                 if (user == null)
                 {
-                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found",ResponseStatus.NotFound));
+                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
                 }
 
                 user.Communities.Remove(communityId);
@@ -784,6 +819,6 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
     }
-    
+
 }
 

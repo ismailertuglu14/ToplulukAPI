@@ -9823,11 +9823,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/Topluluk.Services.EventAPI.Services.csproj",
+      "projectUniqueName": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/Topluluk.Services.EventAPI.Services.csproj",
       "projectName": "Topluluk.Services.EventAPI.Services",
-      "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/Topluluk.Services.EventAPI.Services.csproj",
+      "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/Topluluk.Services.EventAPI.Services.csproj",
       "packagesPath": "/Users/ismail/.nuget/packages/",
-      "outputPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/",
+      "outputPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -9842,17 +9842,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/Topluluk.Services.EventAPI.Data.csproj": {
-              "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/Topluluk.Services.EventAPI.Data.csproj"
+            "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/Topluluk.Services.EventAPI.Data.csproj": {
+              "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/Topluluk.Services.EventAPI.Data.csproj"
             },
-            "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Model/Topluluk.Services.EventAPI.Model.csproj": {
-              "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Model/Topluluk.Services.EventAPI.Model.csproj"
+            "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Model/Topluluk.Services.EventAPI.Model.csproj": {
+              "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Model/Topluluk.Services.EventAPI.Model.csproj"
             },
-            "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
-              "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
+            "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
+              "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
             },
-            "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
-              "projectPath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
+            "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
+              "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
             }
           }
         }

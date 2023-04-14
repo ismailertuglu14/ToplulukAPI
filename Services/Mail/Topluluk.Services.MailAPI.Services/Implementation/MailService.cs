@@ -24,24 +24,24 @@ public class MailService : IMailService
                 mail.To.Add(new MailAddress(to));
             }
             mail.From = new MailAddress("toplulukapp@gmail.com", "Topluluk");
-            
+
             mail.Subject = subject;
             mail.Body = body;
-            
+
             mail.IsBodyHtml = true;
-            
+
             SmtpClient smtp = new SmtpClient();
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(_configuration["Mail:Email"],_configuration["Mail:Password"]);
+            smtp.Credentials = new NetworkCredential(_configuration["Mail:Email"], _configuration["Mail:Password"]);
             smtp.Port = 587;
             smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
-            
+
             await smtp.SendMailAsync(mail);
         }
         catch (Exception e)
         {
-            
+
         }
     }
 
@@ -61,11 +61,11 @@ public class MailService : IMailService
                           "<p>İyi günler dileriz,<br/>Topluluk Ekibi</p>" +
                           "<p><a href='mailto:iletisim@topluluk.com'>İletişime Geç</a></p></body></html>";
             body = String.Format(body, mailDto.FullName);
-            await SendMailAsync(new List<string>(){mailDto.To}, subject, body);
+            await SendMailAsync(new List<string>() { mailDto.To }, subject, body);
         }
         catch (Exception e)
         {
-          
+
         }
     }
 
@@ -94,7 +94,7 @@ public class MailService : IMailService
         }
         catch (Exception e)
         {
-            
+
         }
     }
 }

@@ -90,3 +90,26 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Ser
 /Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/refint/Topluluk.Services.EventAPI.Services.dll
 /Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.pdb
 /Users/ismail/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/ref/Topluluk.Services.EventAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Services.deps.json
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Services.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/DBHelper.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Data.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/DBHelper.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.EventAPI.Data.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.AssemblyInfo.cs
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.csproj.CopyComplete
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/refint/Topluluk.Services.EventAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/Topluluk.Services.EventAPI.Services.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/obj/Debug/net6.0/ref/Topluluk.Services.EventAPI.Services.dll

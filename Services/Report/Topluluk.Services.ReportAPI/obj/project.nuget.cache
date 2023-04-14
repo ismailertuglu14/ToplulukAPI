@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BjnozeWnqYNfMoDXJmFSYh7xwDDA9W93EA45kkYoTCrIV40yP7NFvsTTvk+qfxGBpxZOWJzEdYD/JaMfme29XA==",
+  "dgSpecHash": "AAAGBqpz/0pcZs3kKOK8NOVBhJ5sKoDdBg1plR8m5YGvrdwDNGvIPURAiHAo70QPx63ymq0jzR7F7wdt+tl7YQ==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/Topluluk.Services.ReportAPI.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Report/Topluluk.Services.ReportAPI/Topluluk.Services.ReportAPI.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",

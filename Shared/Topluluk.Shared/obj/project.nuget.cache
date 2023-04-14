@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cNshkFXQfpMGeDpmPoaC0LhnS/PKXMjlHSOkCVcn4Dw3z9Oc8kmIcjrVrWLwqk3GcG4/Cp26TvjFtUuMMD0hAg==",
+  "dgSpecHash": "lGOb0aau9SFag8k9pqggFxua2IcVn5Sw3CTvEbaTru9YMEcCmP7jg8aZTFbJvru8bVo6txg0sfD57E51GTnACw==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

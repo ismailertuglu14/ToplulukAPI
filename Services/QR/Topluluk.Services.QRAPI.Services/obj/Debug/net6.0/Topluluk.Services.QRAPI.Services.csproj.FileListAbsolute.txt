@@ -90,3 +90,26 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/
 /Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/refint/Topluluk.Services.QRAPI.Services.dll
 /Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.pdb
 /Users/ismail/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/ref/Topluluk.Services.QRAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Services.deps.json
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Services.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/DBHelper.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Data.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.QRAPI.Data.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/DBHelper.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.AssemblyInfo.cs
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.csproj.CopyComplete
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/refint/Topluluk.Services.QRAPI.Services.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/Topluluk.Services.QRAPI.Services.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI.Services/obj/Debug/net6.0/ref/Topluluk.Services.QRAPI.Services.dll

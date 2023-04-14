@@ -62,6 +62,7 @@ namespace DBHelper.Repository
         T GetByLangId(int langId, int id);
 
         List<T> GetListByExpression(Expression<Func<T, bool>> predicate = null);
+        List<T> GetListByExpressionPaginated(int skip, int take, Expression<Func<T, bool>> predicate = null);
         List<T> GetListByExpressionWithDeleted(Expression<Func<T, bool>> predicate = null);
 
     }

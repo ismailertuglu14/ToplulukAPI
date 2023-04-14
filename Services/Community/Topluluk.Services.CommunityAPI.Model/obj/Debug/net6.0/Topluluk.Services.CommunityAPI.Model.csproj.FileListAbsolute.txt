@@ -58,3 +58,18 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.Communit
 /Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/refint/Topluluk.Services.CommunityAPI.Model.dll
 /Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
 /Users/ismail/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/ref/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.deps.json
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.AssemblyInfo.cs
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.csproj.CopyComplete
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/refint/Topluluk.Services.CommunityAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Model/obj/Debug/net6.0/ref/Topluluk.Services.CommunityAPI.Model.dll

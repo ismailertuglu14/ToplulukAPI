@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "N9KuDH7FF4vsVHhwtdYhhY3y06EVXCZM4Vy3yK7pNPmX/eJLBjZgjPxSxSKciTcu7qREooVMAOgTpEVXRqDcBw==",
+  "dgSpecHash": "8D0bQdR2jx5SuRWbIyaM9T+eG3fa0AurGD94Z6J6WKV7zwOtVoAwqLZU+Mu55lIZ54DOGQxMCO+o2oC7YP0u1A==",
   "success": true,
-  "projectFilePath": "/Users/ismail/Desktop/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Services/Topluluk.Services.MailAPI.Services.csproj",
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Services/Topluluk.Services.MailAPI.Services.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/automatonymous/5.1.1/automatonymous.5.1.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/greenpipes/4.0.0/greenpipes.4.0.0.nupkg.sha512",

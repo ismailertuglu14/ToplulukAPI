@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Topluluk.Services.MailAPI.Services.Consumers;
+using Topluluk.Services.MailAPI.Services.Consumers.Authentication;
 using Topluluk.Services.MailAPI.Services.Implementation;
 using Topluluk.Services.MailAPI.Services.Interface;
 using Topluluk.Shared.Constants;
@@ -24,7 +25,7 @@ builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<SuccessfullyRegisteredConsumer>();
-
+    x.AddConsumer<ResetPasswordConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", host =>
@@ -36,6 +37,10 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("successfully-registered", e =>
         {
             e.ConfigureConsumer<SuccessfullyRegisteredConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("reset-password", e =>
+        {
+            e.ConfigureConsumer<ResetPasswordConsumer>(context);
         });
     });
 });
