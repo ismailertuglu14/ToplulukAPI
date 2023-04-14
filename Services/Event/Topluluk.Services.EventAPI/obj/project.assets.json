@@ -3678,6 +3678,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "DBHelper": "1.0.0",
+          "Newtonsoft.Json": "13.0.2",
           "RestSharp": "109.0.1",
           "Topluluk.Services.EventAPI.Data": "1.0.0",
           "Topluluk.Services.EventAPI.Model": "1.0.0",

@@ -48,7 +48,12 @@ namespace Topluluk.Services.FileAPI.Controllers
             var result =  await _storageService.UploadAsync("user-images", files);
             return await Task.FromResult(Response<List<string>>.Success(result, ResponseStatus.Success));
         }
-
+        [HttpPost("event-images")]
+        public async Task<Response<List<string>>> UploadEventImages(IFormFileCollection files)
+        {
+            var result =  await _storageService.UploadAsync("event-images", files);
+            return await Task.FromResult(Response<List<string>>.Success(result, ResponseStatus.Success));
+        }
         [HttpPost("[action]")]
         public async Task<Response<string>> DeleteUserImage( [FromBody] string fileName)
         {

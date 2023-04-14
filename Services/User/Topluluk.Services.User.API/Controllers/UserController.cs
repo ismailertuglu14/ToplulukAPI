@@ -68,7 +68,7 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpPost("Follow")]
-        public async Task<Response<string>> FollowUser([FromBody] UserFollowDto userFollowInfo)
+        public async Task<Response<string>> FollowUser( [FromBody] UserFollowDto userFollowInfo)
         {
             return await _userService.FollowUser(this.UserId, userFollowInfo);
         }

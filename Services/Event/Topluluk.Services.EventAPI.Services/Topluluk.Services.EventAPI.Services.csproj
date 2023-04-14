@@ -23,6 +23,7 @@
     <ProjectReference Include="..\Topluluk.Services.EventAPI.Data\Topluluk.Services.EventAPI.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="RestSharp" Version="109.0.1" />
   </ItemGroup>
 </Project>

@@ -31,10 +31,9 @@ namespace Topluluk.Services.EventAPI.Controllers
         // todo raw dan form-data ya geçir, resim entegrasyonunu yap.
         // https://localhost:xxxx/event/create
         [HttpPost("create")]
-        public async Task<Response<string>> CreateEvent(CreateEventDto dto)
+        public async Task<Response<string>> CreateEvent([FromForm]CreateEventDto dto)
         {
-            dto.UserId = this.UserId;
-            return await _eventService.CreateEvent(dto);
+            return await _eventService.CreateEvent(this.UserId, this.Token, dto);
         }
 
 

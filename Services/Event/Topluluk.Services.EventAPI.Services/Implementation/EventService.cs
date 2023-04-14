@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net.Http.Headers;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Topluluk.Services.EventAPI.Model.Dto;
 using Topluluk.Services.EventAPI.Services.Interface;
 using Topluluk.Shared.Dtos;
@@ -8,6 +11,7 @@ using RestSharp;
 using Topluluk.Services.EventAPI.Model.Dto.Http;
 using Topluluk.Services.EventAPI.Model.Entity;
 using Topluluk.Services.EventAPI.Data.Interface;
+using Topluluk.Shared.Constants;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.EventAPI.Services.Implementation
@@ -19,13 +23,15 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
         private readonly RestClient _client;
         private readonly IEventRepository _eventRepository;
         private readonly IEventCommentRepository _commentRepository;
+        private readonly IEventAttendeesRepository _attendeesRepository;
 
-        public EventService(IEventRepository eventRepository, IMapper mapper, IEventCommentRepository commentRepository)
+        public EventService(IEventRepository eventRepository, IMapper mapper, IEventCommentRepository commentRepository, IEventAttendeesRepository attendeesRepository)
         {
             _mapper = mapper;
             _client = new RestClient();
             _eventRepository = eventRepository;
             _commentRepository = commentRepository;
+            _attendeesRepository = attendeesRepository;
         }
 
         public async Task<Response<string>> CreateComment(string userId, CommentCreateDto dto)
@@ -45,56 +51,93 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
 
         }
 
-        public async Task<Response<string>> CreateEvent(CreateEventDto dto)
+        public async Task<Response<string>> CreateEvent(string userId, string token, CreateEventDto dto)
         {
-            Event _event = new();
-
-            if (dto.UserId == null || dto.UserId == String.Empty)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Error occured: User ID cant be null", Shared.Enums.ResponseStatus.InitialError));
-
-            }
-            // check community is exist ;
-            // check is user is participiant of community
-            if (dto.CommunityId != null && dto.CommunityId != String.Empty)
-            {
-                
-                var getParticipiantsRequest = new RestRequest($"https://localhost:7132/Community/Participiants/{dto.CommunityId}");
-                var getParticipiantsResponse = await _client.ExecuteGetAsync<List<string>>(getParticipiantsRequest);
-
-                if (getParticipiantsResponse.IsSuccessful == false || !getParticipiantsResponse.Data.Contains(dto.UserId))
-                {
-                    return await Task.FromResult(Response<string>.Fail($"Not participiant of {dto.CommunityId} Community", Shared.Enums.ResponseStatus.BadRequest));
-                }
-
-            }
-
-
-
             try
             {
-                // Get User's FirstName lastname and UserImage
-                //var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserById").AddQueryParameter("userId", dto.UserId);
-                //var userInfoResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userInfoRequest);
-                _event.CommunityId = dto.CommunityId;
-                _event.UserId = dto.UserId!;
-                _event.IsLimited = dto.IsLimited ?? false;
-                _event.Location = dto.Location ?? "";
-                _event.ParticipiantLimit = dto.AttendeesLimit ?? 0;
-                _event.Title = dto.Title;
-                _event.StartDate = dto.StartDate;
-                _event.EndDate = dto.EndDate;
-                _event.Description = dto.Description;
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<string>.Fail("Error occured: User ID cant be null", ResponseStatus.InitialError));
 
+                }
+
+                var userExistRequest =
+                    new RestRequest(ServiceConstants.API_GATEWAY + "/User/GetUserById")
+                        .AddHeader("Authorization",token).AddQueryParameter("userid", userId);
+                var userExistResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userExistRequest);
+                
+                if (userExistResponse.Data?.Data == null)
+                {
+                    return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.Unauthorized));
+                }
+                
+                
+                // check community is exist ;
+                if (!dto.CommunityId.IsNullOrEmpty())
+                {
+                
+                    var getParticipiantsRequest = new RestRequest($"https://localhost:7132/Community/Participiants/{dto.CommunityId}");
+                    var getParticipiantsResponse = await _client.ExecuteGetAsync<List<string>>(getParticipiantsRequest);
+
+                    if (getParticipiantsResponse.IsSuccessful == false || !getParticipiantsResponse.Data.Contains(userId))
+                    {
+                        return await Task.FromResult(Response<string>.Fail($"Not participiant of {dto.CommunityId} Community", ResponseStatus.BadRequest));
+                    }
+
+                }
+
+                var client = new HttpClient();
+                var formDataContent = new MultipartFormDataContent();
+                foreach (var i in dto.Files)
+                {
+                    formDataContent.Add(new StreamContent(i.OpenReadStream())
+                    {
+                        Headers =
+                        {
+                            ContentLength = i.Length,
+                            ContentType = new MediaTypeHeaderValue(i.ContentType)
+                        }
+                    },"files",i.FileName);
+                }
+
+                var responseFiles =
+                    await client.PostAsync(ServiceConstants.API_GATEWAY + "/file/event-images", formDataContent);
+                var responseUrls = new Response<List<string>>();
+                if (responseFiles.IsSuccessStatusCode)
+                {
+                    string responseString = await responseFiles.Content.ReadAsStringAsync();
+
+                    responseUrls = JsonConvert.DeserializeObject<Response<List<string>>>(responseString);
+                }
+                
+                Event _event = _mapper.Map<Event>(dto);
+                _event.Images!.AddRange(responseUrls.Data);
+                if (_event.IsLocationOnline)
+                {
+                    _event.LocationURL = dto.Location;
+                    _event.LocationPlace = null;
+                }
+                else
+                {
+                    _event.LocationURL = null;
+                    _event.LocationPlace = dto.Location;
+                }
+
+               
                 DatabaseResponse response = await _eventRepository.InsertAsync(_event);
 
                 if (response.IsSuccess != true)
                 {
-                    return await Task.FromResult(Response<string>.Fail("Failed while insterting entity of event", Shared.Enums.ResponseStatus.InitialError));
+                    return await Task.FromResult(Response<string>.Fail("Failed while insterting entity of event", ResponseStatus.InitialError));
 
                 }
 
-                return await Task.FromResult(Response<string>.Success(_event.Id, Shared.Enums.ResponseStatus.Success));
+                EventAttendee attendee = new();
+                attendee.UserId = userId;
+                attendee.EventId = response.Data;
+                await _attendeesRepository.InsertAsync(attendee);
+                return await Task.FromResult(Response<string>.Success(_event.Id, ResponseStatus.Success));
+
             }
             catch (Exception e)
             {
@@ -157,35 +200,33 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             {
                 Event _event = await _eventRepository.GetFirstAsync(e => e.Id == eventId);
                 if (_event == null) throw new Exception("Not Found");
+                
+                int attendeesCount = await _attendeesRepository.Count(e => e.EventId == _event.Id);
+                bool isParticipiant =
+                    await _attendeesRepository.AnyAsync(e => e.EventId == _event.Id && e.UserId == userId);
+                
+                if (_event.IsLimited && attendeesCount >= _event.ParticipiantLimit)
+                {
+                    return Response<string>.Fail("Event is full now!", ResponseStatus.BadRequest);
+                }
 
-                if (_event.IsLimited == true && _event.Attendees.Count <= _event.ParticipiantLimit && !_event.Attendees.Contains(userId))
+                if (isParticipiant)
                 {
-                    _event.Attendees.Add(userId);
-                    _eventRepository.Update(_event);
-                    return await Task.FromResult(Response<string>.Success("Joined", Shared.Enums.ResponseStatus.Success));
+                    return Response<string>.Success("Already joined", ResponseStatus.Success);
                 }
-                else if (_event.IsLimited == false && !_event.Attendees.Contains(userId))
-                {
-                    _event.Attendees.Add(userId);
-                    _eventRepository.Update(_event);
-                    return await Task.FromResult(Response<string>.Success("Joined", Shared.Enums.ResponseStatus.Success));
-                }
-                else if(_event.IsLimited == true && _event.Attendees.Count >= _event.ParticipiantLimit)
-                {
-                    return await Task.FromResult(Response<string>.Fail("Event is full now!", Shared.Enums.ResponseStatus.BadRequest));
-                }
-                else if (_event.Attendees.Contains(userId))
-                {
-                    return await Task.FromResult(Response<string>.Success("Already joined", Shared.Enums.ResponseStatus.Success));
 
-                }
-                return await Task.FromResult(Response<string>.Fail("Error occured but why :)", Shared.Enums.ResponseStatus.InitialError));
+                EventAttendee attendee = new();
+                attendee.UserId = userId;
+                attendee.EventId = eventId;
+                await _attendeesRepository.InsertAsync(attendee);
+
+                return Response<string>.Success("Joined", ResponseStatus.Success);
+
             }
             catch (Exception e)
             {
                 
                 return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
-                
             }
         }
 
@@ -335,7 +376,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 return await Task.FromResult(Response<List<FeedEventDto>>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
             }
 
-            }
         }
+    }
 }
 

@@ -15,7 +15,9 @@ namespace Topluluk.Services.EventAPI.Model.Entity
 
 		public string? CommunityId { get; set; }
 
-		public string? Location { get; set; }
+		public bool IsLocationOnline { get; set; }
+		public string? LocationPlace { get; set; }
+		public string? LocationURL { get; set; }
 
 		public int ParticipiantLimit { get; set; }
         public bool IsLimited { get; set; }
@@ -23,13 +25,17 @@ namespace Topluluk.Services.EventAPI.Model.Entity
         public bool IsExpired { get; set; } = false;
 
 		public DateTime? StartDate { get; set; } = DateTime.Now;
-        public DateTime? EndDate { get; set; } = DateTime.Now.AddYears(1);
+        public DateTime? EndDate { get; set; } = DateTime.Now.AddHours(1);
 
-        public ICollection<InteractionType> Interactions { get; set; }
 		public ICollection<string> Attendees { get; set; }
+
+		// Everyone can see or only those with link
+		public bool IsVisible { get; set; }
+		
+		public bool IsPaid { get; set; }
+		public double Price { get; set; }
 		public Event()
 		{
-			Interactions = new HashSet<InteractionType>();
             Images = new List<string>();
 			Attendees = new HashSet<string>();
 		}

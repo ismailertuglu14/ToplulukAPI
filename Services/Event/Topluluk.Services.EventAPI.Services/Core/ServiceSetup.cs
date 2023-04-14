@@ -17,7 +17,6 @@ namespace Topluluk.Services.EventAPI.Services.Core
         {
             AddServicesForRepository(services);
             AddServicesForServices(services);
-            AddServicesForLangServices(services);
         }
 
         public static void AddServicesForRepository(this IServiceCollection services)
@@ -25,22 +24,14 @@ namespace Topluluk.Services.EventAPI.Services.Core
             services.AddSingleton<IDbConfiguration, EventAPIDbSettings>();
             services.AddSingleton<IConnectionFactory, MongoConnectionFactory>();
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
-            // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IEventCommentRepository, EventCommentRepository>();
-            // services.AddScoped<IPostCommentRepository, PostCommentRepository>();
-            // services.AddTransient<IErrorRepository, ErrorRepository>();
-            // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
+            services.AddScoped<IEventAttendeesRepository,EventAttendeesRepository>();
         }
 
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IEventService, EventService>();
-        }
-
-        public static void AddServicesForLangServices(this IServiceCollection services)
-        {
-
         }
     }
 }

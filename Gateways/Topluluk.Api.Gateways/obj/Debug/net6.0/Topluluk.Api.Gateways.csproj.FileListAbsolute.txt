@@ -272,3 +272,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/Topluluk.Api.Gateways.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/Topluluk.Api.Gateways.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/ref/Topluluk.Api.Gateways.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

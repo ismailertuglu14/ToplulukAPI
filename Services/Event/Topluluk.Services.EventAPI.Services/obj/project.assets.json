@@ -9811,6 +9811,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "DBHelper >= 1.0.0",
+      "Newtonsoft.Json >= 13.0.2",
       "RestSharp >= 109.0.1",
       "Topluluk.Services.EventAPI.Data >= 1.0.0",
       "Topluluk.Services.EventAPI.Model >= 1.0.0",
@@ -9867,6 +9868,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.2, )"
+          },
           "RestSharp": {
             "target": "Package",
             "version": "[109.0.1, )"

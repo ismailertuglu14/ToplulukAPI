@@ -6,7 +6,7 @@ namespace Topluluk.Services.EventAPI.Services.Interface
 {
 	public interface IEventService
 	{
-		Task<Response<string>> CreateEvent(CreateEventDto dto);
+		Task<Response<string>> CreateEvent(string userId, string token, CreateEventDto dto);
 		Task<Response<List<FeedEventDto>>> GetUserEvents(string id);
 		Task<Response<string>> GetEventSuggestions();
 		Task<Response<GetEventByIdDto>> GetEventById(string userId, string id);
