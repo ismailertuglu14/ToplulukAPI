@@ -1,17 +1,15 @@
-﻿using System;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using Topluluk.Services.EventAPI.Model.Dto;
-using Topluluk.Services.EventAPI.Services.Interface;
-using Topluluk.Shared.Dtos;
-
 using RestSharp;
+using Topluluk.Services.EventAPI.Data.Interface;
+using Topluluk.Services.EventAPI.Model.Dto;
 using Topluluk.Services.EventAPI.Model.Dto.Http;
 using Topluluk.Services.EventAPI.Model.Entity;
-using Topluluk.Services.EventAPI.Data.Interface;
+using Topluluk.Services.EventAPI.Services.Interface;
 using Topluluk.Shared.Constants;
+using Topluluk.Shared.Dtos;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.EventAPI.Services.Implementation
@@ -42,11 +40,11 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 comment.UserId = userId;
                 comment.EventId = dto.EventId;
                 DatabaseResponse response = await _commentRepository.InsertAsync(comment);
-                return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
+                return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
             }
 
         }
@@ -85,30 +83,34 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     }
 
                 }
-
-                var client = new HttpClient();
-                var formDataContent = new MultipartFormDataContent();
-                foreach (var i in dto.Files)
-                {
-                    formDataContent.Add(new StreamContent(i.OpenReadStream())
-                    {
-                        Headers =
-                        {
-                            ContentLength = i.Length,
-                            ContentType = new MediaTypeHeaderValue(i.ContentType)
-                        }
-                    },"files",i.FileName);
-                }
-
-                var responseFiles =
-                    await client.PostAsync(ServiceConstants.API_GATEWAY + "/file/event-images", formDataContent);
                 var responseUrls = new Response<List<string>>();
-                if (responseFiles.IsSuccessStatusCode)
-                {
-                    string responseString = await responseFiles.Content.ReadAsStringAsync();
 
-                    responseUrls = JsonConvert.DeserializeObject<Response<List<string>>>(responseString);
+                if (dto.Files != null && dto.Files.Count > 0)
+                {
+                    var client = new HttpClient();
+                    var formDataContent = new MultipartFormDataContent();
+                    
+                    foreach (var i in dto.Files)
+                    {
+                        formDataContent.Add(new StreamContent(i.OpenReadStream())
+                        {
+                            Headers =
+                            {
+                                ContentLength = i.Length,
+                                ContentType = new MediaTypeHeaderValue(i.ContentType)
+                            }
+                        },"files",i.FileName);
+                    }
+                    var responseFiles =
+                        await client.PostAsync(ServiceConstants.API_GATEWAY + "/file/event-images", formDataContent);
+                    if (responseFiles.IsSuccessStatusCode)
+                    {
+                        string responseString = await responseFiles.Content.ReadAsStringAsync();
+
+                        responseUrls = JsonConvert.DeserializeObject<Response<List<string>>>(responseString);
+                    }
                 }
+
                 
                 Event _event = _mapper.Map<Event>(dto);
                 _event.Images!.AddRange(responseUrls.Data);
@@ -141,7 +143,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
 
             }
             
@@ -157,17 +159,14 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 if (_event.UserId == userId)
                 {
                     _eventRepository.DeleteCompletely(id);
-                    return await Task.FromResult(Response<string>.Success("Deleted Completely", Shared.Enums.ResponseStatus.Success));
+                    return await Task.FromResult(Response<string>.Success("Deleted Completely", ResponseStatus.Success));
                 }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", Shared.Enums.ResponseStatus.NotAuthenticated));
 
-                }
+                return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", ResponseStatus.NotAuthenticated));
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
         }
 
@@ -180,17 +179,14 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 if (_event.UserId == userId)
                 {
                     _eventRepository.DeleteById(id);
-                    return await Task.FromResult(Response<string>.Success("Deleted", Shared.Enums.ResponseStatus.Success));
+                    return await Task.FromResult(Response<string>.Success("Deleted", ResponseStatus.Success));
                 }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", Shared.Enums.ResponseStatus.NotAuthenticated));
 
-                }
+                return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", ResponseStatus.NotAuthenticated));
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
         }
 
@@ -226,7 +222,26 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             catch (Exception e)
             {
                 
-                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<NoContent>> LeaveEvent(string userId, string eventId)
+        {
+            try
+            {
+                EventAttendee? attendee = await _attendeesRepository.GetFirstAsync(e => e.EventId == eventId && e.UserId == userId);
+                if (attendee == null)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("Event Not found", ResponseStatus.NotFound));
+                }
+
+                _attendeesRepository.DeleteById(attendee);
+                return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"Some Error occurred: {e}", ResponseStatus.InitialError));
             }
         }
 
@@ -240,25 +255,20 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 {
                     _event.IsExpired = true;
                     DatabaseResponse response = _eventRepository.Update(_event);
-                    if (response.IsSuccess == true)
+                    if (response.IsSuccess)
                     {
-                        return await Task.FromResult(Response<string>.Success("Event expired", Shared.Enums.ResponseStatus.Success));
+                        return await Task.FromResult(Response<string>.Success("Event expired", ResponseStatus.Success));
                     }
-                    else
-                    {
-                        return await Task.FromResult(Response<string>.Fail("Failed event expire", Shared.Enums.ResponseStatus.InitialError));
 
-                    }
+                    return await Task.FromResult(Response<string>.Fail("Failed event expire", ResponseStatus.InitialError));
                 }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", Shared.Enums.ResponseStatus.NotAuthenticated));
-                }
+
+                return await Task.FromResult(Response<string>.Fail("This event not belongs to you!", ResponseStatus.NotAuthenticated));
 
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
         }
 
@@ -272,15 +282,15 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 {
                     GetEventByIdDto dto = _mapper.Map<GetEventByIdDto>(_event);
                     dto.CommentCount = await _commentRepository.Count(c => c.EventId == id);
-                    return await Task.FromResult(Response<GetEventByIdDto>.Success(dto, Shared.Enums.ResponseStatus.Success));
+                    return await Task.FromResult(Response<GetEventByIdDto>.Success(dto, ResponseStatus.Success));
                 }
 
-                return await Task.FromResult(Response<GetEventByIdDto>.Fail("Not Found", Shared.Enums.ResponseStatus.NotFound));               
+                return await Task.FromResult(Response<GetEventByIdDto>.Fail("Not Found", ResponseStatus.NotFound));               
 
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<GetEventByIdDto>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<GetEventByIdDto>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
         }
 
@@ -303,14 +313,14 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                         dto.Gender = userInfoResponse.Data.Data.Gender;
                         
                     }
-                    return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(dtos, Shared.Enums.ResponseStatus.Success));
+                    return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(dtos, ResponseStatus.Success));
                 }
-                return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(null, Shared.Enums.ResponseStatus.Success));
+                return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(null, ResponseStatus.Success));
 
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<GetEventCommentDto>>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<List<GetEventCommentDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
         }
 
@@ -356,7 +366,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             try
             {
                 DatabaseResponse response = await _eventRepository.GetAllAsync(5, 0, e => e.UserId == id);
-                if (response.IsSuccess == true)
+                if (response.IsSuccess)
                 {
                     List<FeedEventDto> dto = _mapper.Map<List<Event>, List<FeedEventDto>>(response.Data);
                     
@@ -365,15 +375,15 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     {
                         e.EventId = response.Data[i].Id;
                     }
-                    return await Task.FromResult(Response<List<FeedEventDto>>.Success(dto, Shared.Enums.ResponseStatus.Success));
+                    return await Task.FromResult(Response<List<FeedEventDto>>.Success(dto, ResponseStatus.Success));
 
                 }
-                return await Task.FromResult(Response<List<FeedEventDto>>.Fail("Some error occured", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<List<FeedEventDto>>.Fail("Some error occured", ResponseStatus.InitialError));
 
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<FeedEventDto>>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+                return await Task.FromResult(Response<List<FeedEventDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
 
         }

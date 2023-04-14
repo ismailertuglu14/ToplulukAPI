@@ -84,8 +84,16 @@ namespace DBHelper.Repository.Mongo
         // Find by entity's id and update with new entity
         public DatabaseResponse DeleteById(T entity)
         {
-            throw new NotImplementedException();
-        }
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+
+            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(entity.Id));
+            var update = Builders<T>.Update.Set(x => x.IsDeleted, true);
+            var deleteResponse = database.GetCollection<T>(collectionName).UpdateOne(filter,update);
+            DatabaseResponse response = new();
+            response.IsSuccess = true;
+            response.Data = deleteResponse.ToString();
+            return response;        }
 
         // Find by id and update IsDeleted to true
         public DatabaseResponse DeleteById(string id)

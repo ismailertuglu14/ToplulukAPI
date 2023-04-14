@@ -12,6 +12,7 @@ namespace Topluluk.Services.EventAPI.Services.Interface
 		Task<Response<GetEventByIdDto>> GetEventById(string userId, string id);
 
         Task<Response<string>> JoinEvent(string userId, string eventId);
+        Task<Response<NoContent>> LeaveEvent(string userId, string eventId);
 
 		Task<Response<string>> ExpireEvent(string userId, string id);
         Task<Response<string>> DeleteEvent(string userId, string id);
