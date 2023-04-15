@@ -221,6 +221,10 @@
             "RestSharp": {
               "target": "Package",
               "version": "[109.0.1, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.6.104, )"
             }
           },
           "imports": [
@@ -458,6 +462,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.19.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.6.104, )"
             }
           },
           "imports": [

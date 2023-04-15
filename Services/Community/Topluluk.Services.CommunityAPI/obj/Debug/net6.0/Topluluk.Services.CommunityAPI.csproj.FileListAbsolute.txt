@@ -563,3 +563,5 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.Communit
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/obj/Debug/net6.0/ref/Topluluk.Services.CommunityAPI.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/StackExchange.Redis.dll

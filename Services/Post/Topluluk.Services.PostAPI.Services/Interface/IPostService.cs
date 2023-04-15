@@ -13,7 +13,7 @@ namespace Topluluk.Services.PostAPI.Services.Interface
         Task<Response<List<GetPostForFeedDto>>> GetUserPosts(string userId, string id, int take = 10, int skip = 0);
 
 
-        Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, int skip = 0, int take = 10);
+        Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, string token, int skip = 0, int take = 10);
 
 
         Task<Response<string>> Create(string userId, CreatePostDto postDto);

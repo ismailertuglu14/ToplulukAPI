@@ -1,5 +1,6 @@
 ﻿using System;
 using Topluluk.Services.PostAPI.Model.Entity;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.PostAPI.Model.Dto
 {
@@ -12,6 +13,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public string LastName { get; set; }
 		public string UserName { get; set; }
 		public string? ProfileImage { get; set; }
+		public GenderEnum Gender { get; set; }
 
 		public string? CommunityTitle { get; set; }
 

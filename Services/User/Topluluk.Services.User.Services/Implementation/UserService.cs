@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using AutoMapper;
+using DBHelper.Repository;
+using DBHelper.Repository.Redis;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
@@ -28,8 +30,10 @@ namespace Topluluk.Services.User.Services.Implementation
         private readonly ICapPublisher _capPublisher;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
-        public UserService(IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper)
+        private readonly IRedisRepository _redisRepository;
+        public UserService(IRedisRepository redisRepository, IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper)
         {
+            _redisRepository = redisRepository;
             _userRepository = userRepository;
             _followRepository = followRepository;
             _blockedUserRepository = blockedUserRepository;
@@ -49,6 +53,16 @@ namespace Topluluk.Services.User.Services.Implementation
                         ResponseStatus.NotFound));
                 }
 
+                if (_redisRepository.IsConnected)
+                {
+                    string key = $"user_{user.Id}";
+                    var userObject = new 
+                        { Id = user.Id,FirstName=user.FirstName,LastName=user.LastName,UserName = user.UserName,
+                            ProfileImage=user.ProfileImage,Gender=user.Gender};
+                    
+                    var userJson = JsonSerializer.Serialize(userObject);
+                    await _redisRepository.SetValueAsync(key, userJson);
+                }
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
                 dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
                 dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
@@ -71,20 +85,24 @@ namespace Topluluk.Services.User.Services.Implementation
             try
             {
                 _User? user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
-
                 if (user == null)
                 {
                     return await Task.FromResult(Response<GetUserByIdDto>.Fail("User Not Found",
                         ResponseStatus.NotFound));
                 }
 
+                string key = $"user_{user.Id}";
+                var userObject = new { Id = user.Id,FirstName=user.FirstName,LastName=user.LastName,ProfileImage=user.ProfileImage,Gender=user.Gender};
+                var userJson = JsonSerializer.Serialize(userObject);
+                await _redisRepository.SetValueAsync(key, userJson);
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
-                dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == user.Id);
                 dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
                 dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
 
+                dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == id);
+                dto.FollowingCount = await _followRepository.Count(f => f.SourceId == id);
+                dto.FollowersCount = await _followRepository.Count(f => f.TargetId == id);
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
-
             }
             catch (Exception e)
             {
@@ -463,16 +481,31 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<UserInfoForPostDto>> GetUserInfoForPost(string id, string sourceUserId)
         {
-            UserInfoForPostDto dto = new();
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
+            try
+            {
+                UserInfoForPostDto dto = new();
+                _User user = new();
+                if (_redisRepository.IsConnected)
+                {
+                    user = await _redisRepository.GetOrNullAsync<_User>($"user_{id}") 
+                                 ?? await _userRepository.GetFirstAsync(u => u.Id == id);
+                }
+                else
+                {
+                    user = await _userRepository.GetFirstAsync(u => u.Id == id);
+                }
 
-            dto.UserId = user.Id;
-            dto.FirstName = user.FirstName;
-            dto.LastName = user.LastName;
-            dto.UserName = user.UserName;
-            dto.ProfileImage = user.ProfileImage;
-            dto.IsUserFollowing = await _followRepository.AnyAsync(f => f.SourceId == sourceUserId && f.TargetId == id);
-            return await Task.FromResult(Response<UserInfoForPostDto>.Success(dto, ResponseStatus.Success));
+                dto = _mapper.Map<UserInfoForPostDto>(user);
+                dto.UserId = user.Id;
+                dto.IsUserFollowing = await _followRepository.AnyAsync(f => f.SourceId == sourceUserId && f.TargetId == id);
+                return await Task.FromResult(Response<UserInfoForPostDto>.Success(dto, ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<UserInfoForPostDto>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+
+            }
         }
 
         public async Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id)
@@ -761,63 +794,7 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
-        public async Task<Response<NoContent>> LeaveCommunity(string userId, string communityId)
-        {
-            try
-            {
-                if (userId.IsNullOrEmpty())
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("User Id cant be null", ResponseStatus.BadRequest));
-                }
-
-                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
-                }
-
-                user.Communities.Remove(communityId);
-
-                _userRepository.Update(user);
-                return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
-            }
-        }
-        public async Task<Response<NoContent>> JoinCommunity(string userId, string communityId)
-        {
-            try
-            {
-                if (userId.IsNullOrEmpty())
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("User Id cant be null", ResponseStatus.BadRequest));
-                }
-
-                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
-                }
-
-                if (!user.Communities.Contains(userId))
-                {
-                    user.Communities.Add(communityId);
-                    _userRepository.Update(user);
-                }
-
-                return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
-            }
-        }
+        
     }
 
 }

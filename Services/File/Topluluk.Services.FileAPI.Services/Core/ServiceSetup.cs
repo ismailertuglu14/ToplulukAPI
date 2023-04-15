@@ -22,10 +22,6 @@ namespace Topluluk.Services.FileAPI.Services.Core
             services.AddScoped<IStorageService, StorageService>();
             services.AddSingleton<IConnectionFactory, MongoConnectionFactory>();
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
-            // services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
-            // services.AddTransient<IErrorRepository, ErrorRepository>();
-            // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
         }
 
         public static void AddStorage<T>(this IServiceCollection services) where T : Storage, IStorage

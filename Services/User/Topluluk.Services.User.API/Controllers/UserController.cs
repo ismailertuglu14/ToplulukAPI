@@ -148,17 +148,6 @@ namespace Topluluk.Services.User.API.Controllers
         }
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http Calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        [HttpPost("community/join")]
-        public async Task<Response<NoContent>> JoinCommunity(string communityId)
-        {
-            return await _userService.JoinCommunity(this.UserId, communityId);
-        }
-
-        [HttpPost("community/leave")]
-        public async Task<Response<NoContent>> LeaveCommunity( string communityId)
-        {
-            return await _userService.LeaveCommunity(this.UserId, communityId);
-        }
 
         // User information is received to be displayed on the post cards returned from the post service.
         [HttpGet("GetUserInfoForPost")]

@@ -18,7 +18,8 @@ namespace Topluluk.Services.User.Model.Mapper
 											
 
             CreateMap<_User, GetCommunityOwnerDto>();
-			CreateMap<_User, UserInfoForCommentDto>();
+            CreateMap<_User, UserInfoForCommentDto>();
+            CreateMap<_User, UserInfoForPostDto>();
 			CreateMap<_User, GetUserAfterLoginDto>();
                
 			CreateMap<_User, FollowingRequestDto>();

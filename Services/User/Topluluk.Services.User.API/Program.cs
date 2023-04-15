@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
+using StackExchange.Redis;
 using Topluluk.Services.User.Data.Settings;
 using Topluluk.Services.User.Model.Mapper;
 using Topluluk.Services.User.Services.Core;
+using Topluluk.Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,8 +47,12 @@ var mapperConfig = new MapperConfiguration(cfg =>
 });
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
-builder.Services.AddInfrastructure();
+IConfiguration configuration = builder.Configuration;
+var multiplexer = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
+builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
 
+
+builder.Services.AddInfrastructure();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,7 +63,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

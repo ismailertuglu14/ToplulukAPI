@@ -2,7 +2,10 @@
 using DBHelper.BaseDto;
 using DBHelper.Connection;
 using DBHelper.Connection.Mongo;
+using DBHelper.Repository;
+using DBHelper.Repository.Redis;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using Topluluk.Services.User.Data.Implementation;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Data.Settings;
@@ -25,19 +28,36 @@ namespace Topluluk.Services.User.Services.Core
             services.AddSingleton<IDbConfiguration, UserAPIDbSettings>();
             services.AddSingleton<IConnectionFactory, MongoConnectionFactory>();
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
-            // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserFollowRepository, UserFollowRepository>();
             services.AddScoped<IBlockedUserRepository, BlockedUserRepository>();
-            // services.AddTransient<IErrorRepository, ErrorRepository>();
-            // services.AddTransient<IRequestResponseLogRepository, RequestResponseLogRepository>();
+            if (CheckRedisConnection())
+            {
+                services.AddSingleton<IRedisRepository, RedisCacheRepository>();
+            }
+            else
+            {
+                Console.WriteLine("Error redis not started");
+            }
+        }
+        private static bool CheckRedisConnection()
+        {
+            try
+            {
+                var redis = ConnectionMultiplexer.Connect("localhost");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
         }
-
+    
 
     }
 }

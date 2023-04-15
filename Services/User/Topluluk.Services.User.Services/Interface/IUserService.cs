@@ -43,10 +43,8 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto);
 
         // Http calls services
-		Task<Response<NoContent>> JoinCommunity(string userId, string communityId);
-		Task<Response<NoContent>> LeaveCommunity(string userId, string communityId);
-		
-         // I'm using for get UserId, UserName, firstName, lastName, ProfileImage
+
+        // I'm using for get UserId, UserName, firstName, lastName, ProfileImage
          Task<Response<UserInfoForPostDto>> GetUserInfoForPost(string id, string sourceUserId);
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);
 		Task<Response<UserInfoForCommentDto>> GetUserInfoForComment(string id);

@@ -563,3 +563,5 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/obj/D
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/obj/Debug/net6.0/Topluluk.Services.PostAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/obj/Debug/net6.0/Topluluk.Services.PostAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/obj/Debug/net6.0/ref/Topluluk.Services.PostAPI.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/StackExchange.Redis.dll

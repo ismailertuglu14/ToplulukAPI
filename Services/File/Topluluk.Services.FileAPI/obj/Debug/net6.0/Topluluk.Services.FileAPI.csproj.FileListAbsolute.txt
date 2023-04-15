@@ -588,3 +588,5 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/obj/D
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/obj/Debug/net6.0/Topluluk.Services.FileAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/obj/Debug/net6.0/Topluluk.Services.FileAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/obj/Debug/net6.0/ref/Topluluk.Services.FileAPI.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/StackExchange.Redis.dll

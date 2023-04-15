@@ -1,4 +1,6 @@
 ﻿using System;
+using Topluluk.Shared.Enums;
+
 namespace Topluluk.Services.User.Model.Dto.Http
 {
 	public class UserInfoForPostDto
@@ -8,6 +10,7 @@ namespace Topluluk.Services.User.Model.Dto.Http
 		public string LastName { get; set; }
 		public string UserName { get; set; }
 		public string? ProfileImage { get; set; }
+		public GenderEnum Gender { get; set; }
 
 		public bool IsUserFollowing { get; set; }
     }

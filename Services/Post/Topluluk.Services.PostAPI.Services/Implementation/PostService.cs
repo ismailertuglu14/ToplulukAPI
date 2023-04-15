@@ -119,12 +119,21 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             return await Task.FromResult(Response<string>.Fail("Post not found", Shared.Enums.ResponseStatus.NotFound));
         }
 
-        public async Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, int skip = 0, int take = 10)
+        public async Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, string token, int skip = 0, int take = 10)
         {
             try
             {
                 if (userId.IsNullOrEmpty()) throw new Exception("User not found");
-
+                var userExistRequest =
+                    new RestRequest(ServiceConstants.API_GATEWAY + "/user/getuserbyid")
+                        .AddHeader("Authorization",token).AddQueryParameter("userid", userId);
+                var userExistResponse = await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userExistRequest);
+                if (userExistResponse.Data.Data == null)
+                {
+                    return await Task.FromResult(
+                        Response<List<GetPostForFeedDto>>.Fail("Not Authorized", ResponseStatus.BadRequest));
+                }
+                
                 var getUserFollowingsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id",userId);
                 var getUserFollowingsResponse =
                     await _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
@@ -366,14 +375,14 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     .AddParameter("id", post.UserId)
                     .AddParameter("sourceUserId", sourceUserId);
                 var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userInfoRequest);
-                var userResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<UserInfoGetResponse>>(userInfoResponse.Content);
 
-                postDto.UserId = userResponse.Data.UserId;
-                postDto.FirstName = userResponse.Data.FirstName;
-                postDto.LastName = userResponse.Data.LastName;
-                postDto.IsUserFollowing = userResponse.Data.IsUserFollowing;
-                postDto.ProfileImage = userResponse.Data.ProfileImage;
-                postDto.UserName = userResponse.Data.UserName;
+                postDto.UserId = userInfoResponse.Data.Data.UserId;
+                postDto.FirstName = userInfoResponse.Data.Data.FirstName;
+                postDto.LastName = userInfoResponse.Data.Data.LastName;
+                postDto.IsUserFollowing = userInfoResponse.Data.Data.IsUserFollowing;
+                postDto.ProfileImage = userInfoResponse.Data.Data.ProfileImage;
+                postDto.Gender = userInfoResponse.Data.Data.Gender;
+                postDto.UserName = userInfoResponse.Data.Data.UserName;
 
 
 

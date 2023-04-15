@@ -28,7 +28,7 @@ namespace Topluluk.Services.PostAPI.Controllers
         [HttpGet("feed")]
         public async Task<Response<List<GetPostForFeedDto>>> GetPostsForFeedScreen(int take = 10, int skip = 0)
         {
-            return await _postService.GetPostForFeedScreen(this.UserId,skip,take);
+            return await _postService.GetPostForFeedScreen(this.UserId,this.Token,skip,take);
         }
 
         [HttpGet("user/{id}")]

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
 using MassTransit;
+using StackExchange.Redis;
 using Topluluk.Services.AuthenticationAPI.Model.Mapper;
 using Topluluk.Services.AuthenticationAPI.Model.Validators;
 using Topluluk.Services.AuthenticationAPI.Services.Core;
@@ -43,7 +44,6 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 builder.Services.AddInfrastructure();
 
 
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -51,6 +51,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(options => options.Filters.Add<ValidationHelper>())
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>())
     .ConfigureApiBehaviorOptions(options => options.SuppressConsumesConstraintForFormFileParameters = true);
+
 
 
 var app = builder.Build();
@@ -63,7 +64,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

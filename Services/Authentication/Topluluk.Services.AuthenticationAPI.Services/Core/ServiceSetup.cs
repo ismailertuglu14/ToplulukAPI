@@ -5,6 +5,7 @@ using DBHelper.Connection.Mongo;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using Topluluk.Services.AuthenticationAPI.Data.Implementation;
 using Topluluk.Services.AuthenticationAPI.Data.Interface;
 using Topluluk.Services.AuthenticationAPI.Data.Settings;
@@ -28,14 +29,14 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>(); 
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<ILoginLogRepository, LoginLogRepository>();
-         }
+        }
 
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IAuthenticationService, AuthenticationService>();
-            
         }
 
+   
     }
 }
 

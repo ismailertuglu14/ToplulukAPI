@@ -543,3 +543,5 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/obj
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/obj/Debug/net6.0/Topluluk.Services.EventAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/obj/Debug/net6.0/Topluluk.Services.EventAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/obj/Debug/net6.0/ref/Topluluk.Services.EventAPI.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/StackExchange.Redis.dll
