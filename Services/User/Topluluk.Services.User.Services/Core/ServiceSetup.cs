@@ -31,28 +31,8 @@ namespace Topluluk.Services.User.Services.Core
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserFollowRepository, UserFollowRepository>();
             services.AddScoped<IBlockedUserRepository, BlockedUserRepository>();
-            if (CheckRedisConnection())
-            {
-                services.AddSingleton<IRedisRepository, RedisCacheRepository>();
-            }
-            else
-            {
-                Console.WriteLine("Error redis not started");
-            }
+            services.AddSingleton<IRedisRepository, RedisCacheRepository>();
         }
-        private static bool CheckRedisConnection()
-        {
-            try
-            {
-                var redis = ConnectionMultiplexer.Connect("localhost");
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();

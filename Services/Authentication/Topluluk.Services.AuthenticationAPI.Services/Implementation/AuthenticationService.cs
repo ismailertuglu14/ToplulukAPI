@@ -64,7 +64,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                     {
                         return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked));
                     }
-                    TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, 2);
+                    TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, user.Role, 2);
                     user.AccessFailedCount = 0;
                     user.LockoutEnd = DateTime.MinValue;
                     user.Locked = false;
@@ -133,7 +133,8 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                     return Response<TokenDto>.Fail("Error occurred while user inserting!", ResponseStatus.InitialError);
                 }
 
-                var token = new TokenHelper(_configuration).CreateAccessToken(response.Data, userDto.UserName, 2);
+                var role = new List<string>() { UserRoles.USER };
+                var token = new TokenHelper(_configuration).CreateAccessToken(response.Data, userDto.UserName, role ,2);
                 var user = _repository.GetFirst(u => u.UserName == userDto.UserName);
                 UpdateRefreshToken(user, token, 2);
                 /*

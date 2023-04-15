@@ -14,8 +14,6 @@
     <None Remove="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dto\" />
-    <Folder Include="Entity\" />
     <Folder Include="Mapper\" />
     <Folder Include="Validators\" />
     <Folder Include="Dto\Http\" />

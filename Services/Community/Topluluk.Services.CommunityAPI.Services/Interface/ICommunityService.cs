@@ -12,7 +12,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 
 		Task<Response<List<Community>>> GetCommunities();
 		Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5 );
-
+	
 		// Community Detail Page
 		Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string id);
 		Task<Response<string>> Join(string userId, string token, CommunityJoinDto communityInfo);
@@ -28,6 +28,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
 
         Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
+        // Use this function for select community while createing a new post.
+        Task<Response<List<CommunityInfoPostLinkDto>>> GetParticpiantsCommunities(string userId, string token);
 		//http
 		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId);
 		Task<Response<string>> GetCommunityTitle(string id);

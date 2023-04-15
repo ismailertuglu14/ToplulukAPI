@@ -26,6 +26,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
             // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICommunityRepository, CommunityRepository>();
+            services.AddScoped<ICommunityParticipiantRepository, CommunityParticipiantRepository>();
             
         }
 

@@ -1,5 +1,6 @@
 ﻿namespace Topluluk.Services.CommunityAPI.Model.Dto.Http;
 
+// We use this dto for select community in dropdown.
 public class CommunityInfoPostLinkDto
 {
     public string Id { get; set; }

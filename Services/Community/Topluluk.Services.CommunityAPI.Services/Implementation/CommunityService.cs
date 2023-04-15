@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Text.RegularExpressions;
 using AutoMapper;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
 using RestSharp;
 using Topluluk.Services.CommunityAPI.Data.Interface;
 using Topluluk.Services.CommunityAPI.Model.Dto;
@@ -20,9 +14,6 @@ using Topluluk.Services.CommunityAPI.Model.Entity;
 using Topluluk.Services.CommunityAPI.Services.Interface;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
-using Topluluk.Shared.Enums;
-using Topluluk.Shared.Helper;
-using static System.Net.Mime.MediaTypeNames;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.CommunityAPI.Services.Implementation
@@ -31,14 +22,14 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
     {
         private readonly ICommunityRepository _communityRepository;
         private readonly IMapper _mapper;
-        private readonly ICapPublisher _capPublisher;
+        private readonly ICommunityParticipiantRepository _participiantRepository;
         private readonly RestClient _client;
 
-        public CommunityService(ICommunityRepository communityRepository, IMapper mapper, ICapPublisher capPublisher)
+        public CommunityService(ICommunityRepository communityRepository, IMapper mapper, ICommunityParticipiantRepository participiantRepository)
         {
             _communityRepository = communityRepository;
+            _participiantRepository = participiantRepository;
             _mapper = mapper;
-            _capPublisher = capPublisher;
             _client = new RestClient();
         }
         public async Task<Response<List<Community>>> GetCommunities()
@@ -63,14 +54,23 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
             }
         }
+        public async Task<Response<List<CommunityInfoPostLinkDto>>> GetParticpiantsCommunities(string userId, string token)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<CommunityInfoPostLinkDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
 
+            }
+        }
 
         public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string communityId)
         {
             Community? community = await _communityRepository.GetFirstCommunity(c => c.Id == communityId && c.IsVisible == true && c.IsRestricted == false);
             CommunityGetByIdDto _community = new();
-            CommunityGetAdminDto adminDto = new();
-
             if (community == null )
             {
                 return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Not found",ResponseStatus.NotFound));
@@ -112,48 +112,58 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<string>> Join(string userId, string token, CommunityJoinDto communityInfo)
         {
-            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityInfo.CommunityId );
-
-            if (community.Participiants.Contains(userId))
+            try
             {
-                return await Task.FromResult(Response<string>.Success("You have already participiants this community", ResponseStatus.Success));
-            }
-
-            if (community.IsRestricted && !community.IsVisible && community.BlockedUsers.Contains(userId) )
-            {
-                return await Task.FromResult(Response<string>.Fail("Not found community", ResponseStatus.NotFound));
-            }
-
-            if ( community.Participiants.Count  >= community.ParticipiantLimit)
-            {
-                return await Task.FromResult(Response<string>.Fail("Community full now!", ResponseStatus.Failed));
-            }
-
-            if (!community.IsPublic)
-            {
-                if (!community.JoinRequestWaitings.Contains(userId))
+                 Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityInfo.CommunityId );
+                var participiants =
+                    _participiantRepository.GetListByExpression(p => p.UserId == userId && p.CommunityId == community.Id);
+                
+                if (participiants.Any(p => p.UserId == userId))
                 {
-                    community.JoinRequestWaitings.Add(userId);
-                    _communityRepository.Update(community);
-                   return await Task.FromResult(Response<string>.Success("Send request", ResponseStatus.Success));
+                    return await Task.FromResult(Response<string>.Success("You have already participiants this community", ResponseStatus.Success));
+                }
+
+                if (community.IsRestricted && !community.IsVisible && community.BlockedUsers.Contains(userId) )
+                {
+                    return await Task.FromResult(Response<string>.Fail("Not found community", ResponseStatus.NotFound));
+                }
+
+                if ( participiants.Count  >= community.ParticipiantLimit)
+                {
+                    return await Task.FromResult(Response<string>.Fail("Community full now!", ResponseStatus.Failed));
+                }
+
+                if (!community.IsPublic)
+                {
+                    if (!community.JoinRequestWaitings.Contains(userId))
+                    {
+                        community.JoinRequestWaitings.Add(userId);
+                        _communityRepository.Update(community);
+                        return await Task.FromResult(Response<string>.Success("Send request", ResponseStatus.Success));
+                    }
+                    else
+                    {
+                        return await Task.FromResult(Response<string>.Success("You already send request this community", ResponseStatus.Success));
+                    }
                 }
                 else
                 {
-                    return await Task.FromResult(Response<string>.Success("You already send request this community", ResponseStatus.Success));
+
+                    CommunityParticipiant participiant = new()
+                    {   
+                        UserId = userId,
+                        CommunityId = communityInfo.CommunityId,
+                    };
+                
+                    await _participiantRepository.InsertAsync(participiant);
+
+                    return await Task.FromResult(Response<string>.Success("Joined", ResponseStatus.Success));
                 }
             }
-            else if (community.IsPublic)
+            catch (Exception e)
             {
-                community.Participiants.Add(userId);
-                _communityRepository.Update(community);
-
-                var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/community/join").AddHeader("Authorization", token).AddQueryParameter("communityId", communityInfo.CommunityId);
-                var response = await _client.ExecutePostAsync<Response<NoContent>>(request);
-
-                return await Task.FromResult(Response<string>.Success("Joined", ResponseStatus.Success));
-            }
-
-            throw new Exception($"{nameof(CommunityService)} exception: Katılma issteği esnasında bir hata meydana geldi");
+                return await Task.FromResult(Response<string>.Fail($"Error occured: {e}", ResponseStatus.NotAuthenticated));
+            }            
         }
 
         public async Task<Response<string>> Create(string userId,string token, CommunityCreateDto communityInfo)
@@ -283,17 +293,16 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 {
                     return await Task.FromResult(Response<NoContent>.Fail("You are the owner of this community!", ResponseStatus.CommunityOwnerExist));
                 }
-                if (community.Participiants.Contains(userId))
+
+                CommunityParticipiant? participiant= await _participiantRepository.GetFirstAsync(p => p.UserId == userId && p.CommunityId == communityId);
+                if (participiant != null)
                 {
-                    var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/community/leave").AddHeader("Authorization", token).AddQueryParameter("communityId", communityId);
-                    var response = await _client.ExecutePostAsync<Response<NoContent>>(request);
-
-                    community.Participiants.Remove(userId);
-                    _communityRepository.Update(community);
+                    _participiantRepository.DeleteCompletely(participiant.Id);
+                    return await Task.FromResult(Response<NoContent>.Success( ResponseStatus.Success));
                 }
-   
 
-                return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
+                return await Task.FromResult(
+                    Response<NoContent>.Fail("You are not participiant", ResponseStatus.Failed));
             }
             catch (Exception e)
             {
@@ -354,6 +363,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<string>.Success($"Success ${community.CoverImage}", ResponseStatus.Success));
 
         }
+
+
 
         private string StringToSlugConvert(string phrase)
         {

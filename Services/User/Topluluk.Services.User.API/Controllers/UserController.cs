@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DotNetCore.CAP;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -31,6 +32,7 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpGet("[action]")]
+        [Authorize] 
         public async Task<Response<GetUserByIdDto>> GetUserById(string userId)
         {
             return await _userService.GetUserById(this.UserId, userId);
@@ -89,6 +91,11 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.AcceptFollowRequest(this.UserId, targetId);
         }
 
+        [HttpGet("incoming-requests/{id}")]
+        public async Task<Response<List<UserFollowRequestDto>>> IncomingRequests(string id,int take, int skip)
+        {
+            return await _userService.GetFollowerRequests(this.UserId, id,skip,take);
+        }
         [HttpGet("followings")]
         public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string id, int take, int skip)
         {
@@ -99,12 +106,7 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.GetFollowerUsers(this.UserId, id, skip, take);
         }
-
-        [HttpGet("follower-requests")]
-        public async Task<Response<List<FollowingRequestDto>>> FollowerRequests(int take, int skip)
-        {
-            return await _userService.GetFollowerRequests(this.UserId, skip, take);
-        }
+        
 
         [HttpPost("Block")]
         public async Task<Response<string>> BlockUser([FromForm] string targetId)
@@ -141,6 +143,7 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.PrivacyChange(this.UserId, dto);
         }
+        
         [HttpPost("update-profile")]
         public async Task<Response<NoContent>> UpdateProfile(UserUpdateProfileDto dto)
         {
@@ -180,11 +183,7 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.GetUserList(idList, skip, take);
         }
     }
-    public class UserBannerChangedDto
-    {
-        public string UserId { get; set; }
-        public string FileName { get; set; }
-    }
+
  
 }
 

@@ -14,28 +14,11 @@ public class RedisCacheRepository : IRedisRepository
     public RedisCacheRepository(IConnectionMultiplexer redisCon,IConfiguration configuration)
     {
         _configuration = configuration;
-        try
-        {
-            _redisCon = redisCon;
-        }
-        catch (Exception e)
-        {
-            throw new Exception("Redis bağlantısı başarısız oldu.");
-        }
+        _redisCon = redisCon;
         _cache = redisCon.GetDatabase();
+        
     }
-    public bool CheckRedisConnection()
-    {
-        try
-        {
-            var redis = ConnectionMultiplexer.Connect(_configuration.GetConnectionString("Redis"));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
+
 
     public bool IsConnected => _redisCon.IsConnected;
 

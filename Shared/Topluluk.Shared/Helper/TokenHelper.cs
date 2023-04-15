@@ -20,21 +20,7 @@ namespace Topluluk.Shared.Helper
 		{
 			_configuration = configuration;
 		}
-        //public static string GetUserNameByToken(HttpRequest request)
-        //{
-        //    if (request == null || request.Headers == null || !request.Headers.ContainsKey("Authorization") || request.Headers["Authorization"].Count == 0)
-        //    {
-        //        return String.Empty;
-        //    }
-        //    var token = request.Headers["Authorization"][0];
-        //    token = token.Split("Bearer ")[1];
-        //    var handler = new JwtSecurityTokenHandler();
-        //    var jwtSecurityToken = handler.ReadJwtToken(token).Subject.ToString().Replace('"', ' ').Replace('[', ' ').Replace(']', ' ');
-        //    var jwtSecurityTokenArray = jwtSecurityToken.Split(',');
-        //    var username = jwtSecurityTokenArray[0].Trim();
 
-        //    return username;
-        //}
         public static string GetUserNameByToken(HttpRequest request)
         {
             if (request == null || request.Headers == null || !request.Headers.ContainsKey("Authorization") || request.Headers["Authorization"].Count == 0)
@@ -82,24 +68,32 @@ namespace Topluluk.Shared.Helper
                 return true;
         }
 
-        public TokenDto CreateAccessToken( string userId, string userName, int month)
+        public TokenDto CreateAccessToken( string userId, string userName, List<string> roles ,int month)
 		{
 			TokenDto token = new();
-            SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["Token:SecurityKey"]));
+            SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
             // Şifrlenmiş kimliği oluşturuyoruz.
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
-
+            var authClaims = new List<Claim>()
+            {
+                new(ClaimTypes.NameIdentifier, userId),
+                new(ClaimTypes.Name, userName),
+            };
+            foreach (var userRole in roles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
             // Oluşturulacak token ayarlarını veriyoruz.
             token.ExpiredAt = DateTime.UtcNow.AddMonths(month);
 
             JwtSecurityToken securityToken = new(
-                audience: _configuration["Token:Audience"],
-                issuer: _configuration["Token:Issuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                issuer: _configuration["JWT:ValidIssuer"],
                 expires: token.ExpiredAt,
                 notBefore: DateTime.UtcNow, // Bu token üretildiği anda devreye girecek
                 signingCredentials: signingCredentials, // Security key buradaki bilgiler doğrultusunda olacak.
-                claims: new List<Claim>() { new(ClaimTypes.NameIdentifier, userId), new(ClaimTypes.Name, userName) }
+                claims: authClaims
             );
 
             // Token oluşturucu sınıfından bir örnek alalım.

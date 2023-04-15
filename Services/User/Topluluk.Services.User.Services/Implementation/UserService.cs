@@ -577,6 +577,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
             }
         }
+        
 
         public Task<Response<string>> DeclineFollowRequest(string id, string targetId)
         {
@@ -599,32 +600,29 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
-        public async Task<Response<List<FollowingRequestDto>>> GetFollowerRequests(string userId, int skip = 0, int take = 10)
+        public async Task<Response<List<UserFollowRequestDto>>> GetFollowerRequests(string id, string userId, int skip = 0, int take = 10)
         {
             try
             {
-                if (userId.IsNullOrEmpty())
+                if (!id.Equals(userId))
                 {
-                    return await Task.FromResult(Response<List<FollowingRequestDto>>.Fail("User Not Found", ResponseStatus.BadRequest));
+                    return await Task.FromResult(Response<List<UserFollowRequestDto>>.Fail("",
+                        ResponseStatus.Unauthorized));
                 }
 
-                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
 
-                if (user != null)
-                {
-                    List<string> incomingRequests = user.IncomingFollowRequests?.ToList() ?? new List<string>();
-                    DatabaseResponse incomingRequstUsers = await _userRepository.GetAllAsync(take, skip, u => incomingRequests.Contains(u.Id));
+                List<string> requestIds = user.IncomingFollowRequests.ToList();
 
-                    List<FollowingRequestDto> dtos = _mapper.Map<List<_User>, List<FollowingRequestDto>>(incomingRequstUsers.Data);
+                List<_User> users = _userRepository.GetListByExpression(u => requestIds.Contains(u.Id));
+                var dto = _mapper.Map<List<_User>, List<UserFollowRequestDto>>(users);
 
-                    return await Task.FromResult(Response<List<FollowingRequestDto>>.Success(dtos, ResponseStatus.Success));
-                }
-
-                return await Task.FromResult(Response<List<FollowingRequestDto>>.Fail("User Not Found", ResponseStatus.NotFound));
+                return await Task.FromResult(Response<List<UserFollowRequestDto>>.Success(dto, ResponseStatus.Success));
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<FollowingRequestDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+                return await Task.FromResult(Response<List<UserFollowRequestDto>>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
             }
 
         }

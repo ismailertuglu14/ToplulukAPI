@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fLnnGKZmK14x2zPgDvuEYrTbP+RPXTlL6PfknM72f1Y3QwOiRsuCeSSmTgf55M1c06Td4rhQlK/e0sT5Jab+fw==",
+  "dgSpecHash": "vSd2iIIcRd+yHacz7s0yA0bfiTXyrCo0nf9vNMygvMxlxEElvFIjpkJy3F8wuO24Zd/i74Dgwa8rfJQ1hqNnFQ==",
   "success": true,
   "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/User/Topluluk.Services.User.API/Topluluk.Services.User.API.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.2/microsoft.aspnetcore.authentication.jwtbearer.6.0.2.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authorization/2.2.0/microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authorization.policy/2.2.0/microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.cors/2.2.0/microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
@@ -91,8 +92,8 @@
     "/Users/ismail/.nuget/packages/microsoft.identitymodel.abstractions/6.27.0/microsoft.identitymodel.abstractions.6.27.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.27.0/microsoft.identitymodel.jsonwebtokens.6.27.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.identitymodel.logging/6.27.0/microsoft.identitymodel.logging.6.27.0.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/microsoft.identitymodel.protocols/6.8.0/microsoft.identitymodel.protocols.6.8.0.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.8.0/microsoft.identitymodel.protocols.openidconnect.6.8.0.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/microsoft.identitymodel.protocols/6.10.0/microsoft.identitymodel.protocols.6.10.0.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.10.0/microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.identitymodel.tokens/6.27.0/microsoft.identitymodel.tokens.6.27.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg.sha512",

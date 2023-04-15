@@ -565,3 +565,4 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/User/Topluluk.Services.User.API/obj/
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/User/Topluluk.Services.User.API/obj/Debug/net6.0/ref/Topluluk.Services.User.API.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/User/Topluluk.Services.User.API/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/User/Topluluk.Services.User.API/bin/Debug/net6.0/StackExchange.Redis.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/User/Topluluk.Services.User.API/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

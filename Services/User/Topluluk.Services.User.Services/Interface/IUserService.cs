@@ -22,12 +22,14 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<string>> FollowUser(string userId, UserFollowDto userFollowInfo);
 		Task<Response<string>> UnFollowUser(string userId, UserFollowDto userUnFollowInfo);
 		Task<Response<string>> AcceptFollowRequest(string id, string targetId);
+		
         Task<Response<string>> DeclineFollowRequest(string id, string targetId);
         Task<Response<string>> RemoveUserFromFollowers(string userId, UserFollowDto userInfo);
 
 		Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string id, string userId, int skip = 0, int take = 10);
 		Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string id, string userId, int skip = 0, int take = 10);
-		Task<Response<List<FollowingRequestDto>>> GetFollowerRequests(string userId, int skip = 0, int take = 10);
+		// Use for show Incoming follow requests
+		Task<Response<List<UserFollowRequestDto>>> GetFollowerRequests(string id, string userId, int skip = 0, int take = 10);
 
 
 		Task<Response<string>> BlockUser(string sourceId, string targetId);

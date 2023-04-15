@@ -21,22 +21,7 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
            .AllowAnyHeader();
 }));
 
-builder.Services.AddCap(options =>
-{
-    options.UseMongoDB("mongodb+srv://ismail:ismail@cluster0.psznbcu.mongodb.net/?retryWrites=true&w=majority");
-    options.UseRabbitMQ(options =>
-    {
-       
-        options.ConnectionFactoryOptions = options =>
-        {
-            options.Ssl.Enabled = false;
-            options.HostName = "localhost";
-            options.UserName = "guest";
-            options.Password = "guest";
-            options.Port = 5672;
-        };
-    });
-});
+
 
 builder.Services.AddControllers();
 builder.Services.Configure<FormOptions>(o =>  // currently all set to max, configure it to your needs!
