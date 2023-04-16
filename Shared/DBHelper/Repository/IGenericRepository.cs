@@ -54,6 +54,7 @@ namespace DBHelper.Repository
         void DeleteCompletely(string id);
         int Delete(T entity);
         void Delete(string id);
+        void DeleteByExpression(Expression<Func<T,bool>> predicate);
         int Delete(string[] id);
         bool Delete(List<T> entities);
         bool Delete(params T[] entities);

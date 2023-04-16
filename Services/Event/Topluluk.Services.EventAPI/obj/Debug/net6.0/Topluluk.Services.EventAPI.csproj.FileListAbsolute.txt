@@ -545,3 +545,13 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/obj
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/obj/Debug/net6.0/ref/Topluluk.Services.EventAPI.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/StackExchange.Redis.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/Automatonymous.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/GreenPipes.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/MassTransit.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/MassTransit.AspNetCoreIntegration.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/MassTransit.ExtensionsDependencyInjectionIntegration.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/MassTransit.RabbitMqTransport.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/NewId.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI/bin/Debug/net6.0/RabbitMQ.Client.dll

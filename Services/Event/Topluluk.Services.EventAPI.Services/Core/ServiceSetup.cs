@@ -32,6 +32,8 @@ namespace Topluluk.Services.EventAPI.Services.Core
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IEventService, EventService>();
+            services.AddScoped<IEventCommentService, EventCommentService>();
+
         }
     }
 }

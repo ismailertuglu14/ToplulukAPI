@@ -59,6 +59,16 @@ namespace DBHelper.Repository.Mongo
             database.GetCollection<T>(collectionName).DeleteOne(x=>x.Id == id);
         }
 
+        public void DeleteByExpression(Expression<Func<T, bool>> predicate)
+        {
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+
+            var filter = Builders<T>.Filter.Where(predicate);
+            var update = Builders<T>.Update.Set(x => x.IsDeleted, true);
+            database.GetCollection<T>(collectionName).UpdateMany(filter, update);
+        }
+
         public int Delete(string[] id)
         {
             var database = GetConnection();
@@ -93,7 +103,9 @@ namespace DBHelper.Repository.Mongo
             DatabaseResponse response = new();
             response.IsSuccess = true;
             response.Data = deleteResponse.ToString();
-            return response;        }
+            return response;
+            
+        }
 
         // Find by id and update IsDeleted to true
         public DatabaseResponse DeleteById(string id)

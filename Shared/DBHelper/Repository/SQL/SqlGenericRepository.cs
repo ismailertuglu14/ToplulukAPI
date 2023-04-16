@@ -41,6 +41,11 @@ namespace DBHelper.Repository.SQL
             throw new NotImplementedException();
         }
 
+        public void DeleteByExpression(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Delete(string[] id)
         {
             throw new NotImplementedException();

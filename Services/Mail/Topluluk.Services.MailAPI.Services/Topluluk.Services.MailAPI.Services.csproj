@@ -20,7 +20,6 @@
     <None Remove="Consumers\Authentication\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Consumers\" />
     <Folder Include="Consumers\Authentication\" />
   </ItemGroup>
 </Project>
