@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Topluluk.Services.MailAPI.Model.Dtos;
+using Topluluk.Services.MailAPI.Model.Dtos.Event;
 using Topluluk.Services.MailAPI.Services.Interface;
 using Topluluk.Shared;
 using Topluluk.Shared.BaseModels;
@@ -33,6 +34,12 @@ namespace Topluluk.Services.MailAPI.Controllers
         public async Task SendRegisteredMail(ResetPasswordDto resetDto)
         {
              await _mailService.SendResetPasswordMail(resetDto);
+        }
+
+        [HttpPost("event-deleted")]
+        public async Task EventDeleted(EventDeletedDto dto)
+        {
+            await _mailService.EventDeletedMail(dto);
         }
     }
 }

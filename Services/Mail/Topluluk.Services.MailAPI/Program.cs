@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Topluluk.Services.MailAPI.Services.Consumers;
 using Topluluk.Services.MailAPI.Services.Consumers.Authentication;
+using Topluluk.Services.MailAPI.Services.Consumers.Event;
 using Topluluk.Services.MailAPI.Services.Implementation;
 using Topluluk.Services.MailAPI.Services.Interface;
 using Topluluk.Shared.Constants;
@@ -26,6 +27,7 @@ builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<SuccessfullyRegisteredConsumer>();
     x.AddConsumer<ResetPasswordConsumer>();
+    x.AddConsumer<EventDeletedCosumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", host =>
@@ -41,6 +43,10 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("reset-password", e =>
         {
             e.ConfigureConsumer<ResetPasswordConsumer>(context);
+        });
+        cfg.ReceiveEndpoint("event-deleted", e =>
+        {
+            e.ConfigureConsumer<EventDeletedCosumer>(context);
         });
     });
 });
