@@ -18,9 +18,7 @@ namespace Topluluk.Services.EventAPI.Services.Interface
         Task<Response<string>> DeleteEvent(string userId, string id);
 		Task<Response<string>> DeleteCompletelyEvent(string userId, string id);
 
-		Task<Response<string>> CreateComment(string userId, CommentCreateDto dto);
-		Task<Response<List<GetEventCommentDto>>> GetEventComments(string userId, string id, int skip = 0, int take = 10);
-
+		
         Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string userId, string eventId, int skip = 0,
             int take = 10);
     }

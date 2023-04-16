@@ -10,7 +10,9 @@ using Topluluk.Services.EventAPI.Model.Entity;
 using Topluluk.Services.EventAPI.Services.Interface;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Messages.Event;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
+using _MassTransit = MassTransit;
 
 namespace Topluluk.Services.EventAPI.Services.Implementation
 {
@@ -22,9 +24,10 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
         private readonly IEventRepository _eventRepository;
         private readonly IEventCommentRepository _commentRepository;
         private readonly IEventAttendeesRepository _attendeesRepository;
-
-        public EventService(IEventRepository eventRepository, IMapper mapper, IEventCommentRepository commentRepository, IEventAttendeesRepository attendeesRepository)
+        private readonly _MassTransit.ISendEndpointProvider _endpointProvider;
+        public EventService(_MassTransit.ISendEndpointProvider endpointProvider, IEventRepository eventRepository, IMapper mapper, IEventCommentRepository commentRepository, IEventAttendeesRepository attendeesRepository)
         {
+            _endpointProvider = endpointProvider;
             _mapper = mapper;
             _client = new RestClient();
             _eventRepository = eventRepository;
@@ -32,27 +35,16 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             _attendeesRepository = attendeesRepository;
         }
 
-        public async Task<Response<string>> CreateComment(string userId, CommentCreateDto dto)
-        {
-            try
-            {
-                EventComment comment = _mapper.Map<EventComment>(dto);
-                comment.UserId = userId;
-                comment.EventId = dto.EventId;
-                DatabaseResponse response = await _commentRepository.InsertAsync(comment);
-                return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
-            }
-
-        }
+       
 
         public async Task<Response<string>> CreateEvent(string userId, string token, CreateEventDto dto)
         {
             try
             {
+                Event _event = _mapper.Map<Event>(dto);
+                _event.UserId = userId;
+                var responseUrls = new Response<List<string>>();
+                
                 if (userId.IsNullOrEmpty())
                 {
                     return await Task.FromResult(Response<string>.Fail("Error occured: User ID cant be null", ResponseStatus.InitialError));
@@ -83,7 +75,8 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     }
 
                 }
-                var responseUrls = new Response<List<string>>();
+                
+
 
                 if (dto.Files != null && dto.Files.Count > 0)
                 {
@@ -108,12 +101,12 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                         string responseString = await responseFiles.Content.ReadAsStringAsync();
 
                         responseUrls = JsonConvert.DeserializeObject<Response<List<string>>>(responseString);
+                        _event.Images!.AddRange(responseUrls.Data);
+
                     }
                 }
 
                 
-                Event _event = _mapper.Map<Event>(dto);
-                _event.Images!.AddRange(responseUrls.Data);
                 if (_event.IsLocationOnline)
                 {
                     _event.LocationURL = dto.Location;
@@ -175,10 +168,38 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             try
             {
                 Event _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
+               
                 if (_event == null) throw new Exception("Not Found"); 
                 if (_event.UserId == userId)
                 {
+                    List<string> usernames = new List<string>();
+                    List<string> emails = new List<string>();
+                    IdList list = new();
+
+                    var attendees = _attendeesRepository.GetListByExpression(a => a.EventId == id);
+                    foreach (var attendee in attendees)
+                    {
+                        list.ids.Add(attendee.UserId);
+                    }
+                
+                    var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(list);
+                    var response = await _client.ExecutePostAsync<Response<List<UserEventDeletedDto>>>(request);
+                    foreach (var user in response.Data.Data)
+                    {
+                        usernames.Add(user.FirstName+" "+user.LastName);
+                        emails.Add(user.Email);
+                    }
                     _eventRepository.DeleteById(id);
+                    /*
+                    var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri("queue:event-deleted"));
+                    var registerMessage = new EventDeletedCommand()
+                    {
+                        EventName = _event.Title,
+                        UserNames = usernames,
+                        UserMails = emails,
+                    }; 
+                     await sendEndpoint.Send<EventDeletedCommand>(registerMessage);
+                    */
                     return await Task.FromResult(Response<string>.Success("Deleted", ResponseStatus.Success));
                 }
 
@@ -230,12 +251,20 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
         {
             try
             {
+                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == eventId);
+                // If user owner the event
+                if (_event.UserId == userId)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("Owner cant left event",
+                        ResponseStatus.Failed));
+                }
+                
                 EventAttendee? attendee = await _attendeesRepository.GetFirstAsync(e => e.EventId == eventId && e.UserId == userId);
                 if (attendee == null)
                 {
                     return await Task.FromResult(Response<NoContent>.Fail("Event Not found", ResponseStatus.NotFound));
                 }
-
+                
                 _attendeesRepository.DeleteById(attendee);
                 return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
             }
@@ -281,7 +310,10 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                 if (_event != null)
                 {
                     GetEventByIdDto dto = _mapper.Map<GetEventByIdDto>(_event);
-                    dto.CommentCount = await _commentRepository.Count(c => c.EventId == id);
+                    dto.CommentCount = await _commentRepository.Count(c => c.IsDeleted == false && c.EventId == id );
+                    dto.IsAttendeed =
+                        await _attendeesRepository.AnyAsync(c => c.IsDeleted == false && c.UserId == userId && c.EventId == _event.Id);
+                    dto.AttendeesCount = await _attendeesRepository.Count(a => a.IsDeleted == false && a.EventId == id);
                     return await Task.FromResult(Response<GetEventByIdDto>.Success(dto, ResponseStatus.Success));
                 }
 
@@ -294,35 +326,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<List<GetEventCommentDto>>> GetEventComments(string userId, string id, int skip = 0, int take = 10)
-        {
-            try
-            {
-                DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.EventId == id);
-                if (response.Data != null && response.Data.Count > 0)
-                {
-                    List<GetEventCommentDto> dtos = _mapper.Map<List<EventComment>, List<GetEventCommentDto>>(response.Data);
-                    
-                    foreach (var dto in dtos)
-                    {
-                        var userInfoRequest = new RestRequest("https://localhost:7202/User/user-info-comment").AddQueryParameter("id",dto.UserId);
-                        var userInfoResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userInfoRequest);
-                        dto.FirstName = userInfoResponse.Data.Data.FirstName;
-                        dto.LastName = userInfoResponse.Data.Data.LastName;
-                        dto.ProfileImage = userInfoResponse.Data.Data.ProfileImage;
-                        dto.Gender = userInfoResponse.Data.Data.Gender;
-                        
-                    }
-                    return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(dtos, ResponseStatus.Success));
-                }
-                return await Task.FromResult(Response<List<GetEventCommentDto>>.Success(null, ResponseStatus.Success));
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<List<GetEventCommentDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
-            }
-        }
+        
 
         public async Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string userId, string eventId,
             int skip = 0, int take = 10)
