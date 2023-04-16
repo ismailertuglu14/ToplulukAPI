@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Mail;
 using Microsoft.Extensions.Configuration;
 using Topluluk.Services.MailAPI.Model.Dtos;
+using Topluluk.Services.MailAPI.Model.Dtos.Event;
 using Topluluk.Services.MailAPI.Services.Interface;
 
 namespace Topluluk.Services.MailAPI.Services.Implementation;
@@ -91,6 +92,34 @@ public class MailService : IMailService
                     </html>
                     ", resetPasswordLink);
             await SendMailAsync(new List<string>() { resetDto.To }, subject, body);
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+    public async Task EventDeletedMail(EventDeletedDto dto)
+    {
+        try
+        {
+            var subject = $"{dto.EventName} iptal oldu.";
+            for (int i = 0; i < dto.UserMails.Count; i++)
+            {
+                string body = string.Format(@"
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <title>Merhaba {0}</title>
+                        </head>
+                        <body>
+                            <h3>{1} adlı etkinliğin iptal olduğunu bildirmek isteriz.</h3>
+                            <p>İyi günler dileriz.</p>
+                        </body>
+                    </html>
+                    ",dto.UserNames[i], dto.EventName);
+                await SendMailAsync(new List<string>(){dto.UserMails[i]}, subject, body);
+            }
         }
         catch (Exception e)
         {
