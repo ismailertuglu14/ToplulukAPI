@@ -563,3 +563,5 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI/obj/Debug
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI/obj/Debug/net6.0/Topluluk.Services.QRAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI/obj/Debug/net6.0/Topluluk.Services.QRAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI/obj/Debug/net6.0/ref/Topluluk.Services.QRAPI.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/QR/Topluluk.Services.QRAPI/bin/Debug/net6.0/StackExchange.Redis.dll
