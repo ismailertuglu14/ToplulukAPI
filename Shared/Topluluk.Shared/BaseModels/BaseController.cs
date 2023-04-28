@@ -13,6 +13,17 @@ namespace Topluluk.Shared.BaseModels
 		public string UserName { get { return GetUserName(); } }
 		public string Token { get { return GetRequestToken(); } }
         public string UserId { get { return GetUserId(); } }
+
+        public List<string> Roles
+        {
+            get { return GetRoles(); }
+        }
+
+        [NonAction]
+        private List<string> GetRoles()
+        {
+            return TokenHelper.GetUserRolesByToken(Request);
+        }
         
         [NonAction]
         private string GetUserName()

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
+      <ProjectReference Include="..\..\Authentication\Topluluk.Services.AuthenticationAPI.Data\Topluluk.Services.AuthenticationAPI.Data.csproj" />
+      <ProjectReference Include="..\Topluluk.Services.UpdateAPI.Data\Topluluk.Services.UpdateAPI.Data.csproj" />
+      <ProjectReference Include="..\Topluluk.Services.UpdateAPI.Model\Topluluk.Services.UpdateAPI.Model.csproj" />
+    </ItemGroup>
+
+</Project>
