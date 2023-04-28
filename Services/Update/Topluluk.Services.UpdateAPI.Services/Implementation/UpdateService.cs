@@ -3,6 +3,7 @@ using Topluluk.Services.UpdateAPI.Data.Interface;
 using Topluluk.Services.UpdateAPI.Model.Dtos;
 using Topluluk.Services.UpdateAPI.Model.Entity;
 using Topluluk.Services.UpdateAPI.Services.Interface;
+using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Enums;
 
@@ -22,6 +23,10 @@ public class UpdateService : IUpdateService
     {
         try
         {
+            if (roles.Count == 0 || !roles.Contains(UserRoles.ADMIN))
+            {
+                return await Task.FromResult(Response<NoContent>.Fail("UnAuthorized", ResponseStatus.Unauthorized));
+            }
 
             AppVersion appVersion = _mapper.Map<AppVersion>(dto);
             await _updateRepository.InsertAsync(appVersion);
