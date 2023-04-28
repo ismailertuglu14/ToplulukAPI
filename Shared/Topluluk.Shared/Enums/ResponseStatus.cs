@@ -21,8 +21,8 @@ namespace Topluluk.Shared.Enums
 
         InitialError = 500,
 
-        SMSServiceError = 101,
-        EmailServiceError = 102
+        SMSServiceError = 10501,
+        EmailServiceError = 10502
     }
 }
 
