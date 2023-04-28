@@ -396,23 +396,24 @@ namespace Topluluk.Services.User.Services.Implementation
         // todo FollowingRequest leri kullanıcı adı, ad, soyad, id, kullanıcı resmi ve istek attığı tarih ile dön.
         public async Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin(string id)
         {
-            GetUserAfterLoginDto dto = new();
-
             try
             {
                 _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
-                if (user == null) throw new Exception("User not found");
-
+                if (user == null)
+                {
+                    return await Task.FromResult(
+                        Response<GetUserAfterLoginDto>.Fail("User Not Found", ResponseStatus.NotFound));
+                }
+                
+                GetUserAfterLoginDto dto = new();
                 dto = _mapper.Map<GetUserAfterLoginDto>(user);
-
-
+                dto.FollowingsCount = await _followRepository.Count(u => u.SourceId == id);
+                dto.FollowersCount = await _followRepository.Count(u => u.TargetId == id);
                 return await Task.FromResult(Response<GetUserAfterLoginDto>.Success(dto, ResponseStatus.Success));
-
             }
-            catch
+            catch(Exception e)
             {
-                return await Task.FromResult(Response<GetUserAfterLoginDto>.Fail("Failed", ResponseStatus.NotAuthenticated));
-
+                return await Task.FromResult(Response<GetUserAfterLoginDto>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
             }
         }
 
