@@ -275,35 +275,19 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             try
             {
                 DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
-
-                if (response.Data.Count == 0)
+                byte i = 0;
+                List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
+                foreach (var comment in comments)
                 {
-                    return await Task.FromResult(Response<List<CommentGetDto>?>.Success(null, Shared.Enums.ResponseStatus.Success));
+                    var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id",comment.UserId);
+                    var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
+                    comments[i].FirstName = userInfoResponse.Data.Data.FirstName;
+                    comments[i].LastName = userInfoResponse.Data.Data.LastName;
+                    comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
+                    //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);
+                    i++;
                 }
-                else if (response.Data.Count > 0)
-                {
-                    byte i = 0;
-                    List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
-                    
-                       
-                    foreach (var comment in comments)
-                    {
-                        var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id",comment.UserId);
-                        var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
-                        comments[i].FirstName = userInfoResponse.Data.Data.FirstName;
-                        comments[i].LastName = userInfoResponse.Data.Data.LastName;
-                        comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
-                        //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);
-                        i++;
-                    }
-                    return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
-
-                }
-
-
-
-                return await Task.FromResult(Response<List<CommentGetDto>?>.Success(null, Shared.Enums.ResponseStatus.Success));
-
+                return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
             }
             catch (Exception e)
             {
