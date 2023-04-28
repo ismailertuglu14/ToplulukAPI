@@ -277,15 +277,22 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
                 byte i = 0;
                 List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
+                IdList userIdList = new IdList() { };
                 foreach (var comment in comments)
                 {
-                    var userInfoRequest = new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id",comment.UserId);
-                    var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoForCommentDto>>(userInfoRequest);
-                    comments[i].FirstName = userInfoResponse.Data.Data.FirstName;
-                    comments[i].LastName = userInfoResponse.Data.Data.LastName;
-                    comments[i].ProfileImage = userInfoResponse.Data.Data.ProfileImage;
-                    //   comment.IsLiked = response.Data[i].Interactions.Contains(userId);
-                    i++;
+                    userIdList.ids.Add(comment.UserId);
+                }
+                var userInfoRequest = new RestRequest(ServiceConstants.API_GATEWAY+"/user/get-user-info-list").AddBody(userIdList);
+                var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoForCommentDto>>>(userInfoRequest);
+                
+                
+                foreach (var comment in comments)
+                {
+                    comment.UserId = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().Id;
+                    comment.Gender = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().Gender;
+                    comment.FirstName = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().FirstName;
+                    comment.LastName = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().LastName;
+                    comment.ProfileImage = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().ProfileImage;
                 }
                 return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
             }
