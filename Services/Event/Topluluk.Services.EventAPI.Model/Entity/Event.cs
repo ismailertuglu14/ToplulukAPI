@@ -5,7 +5,6 @@ namespace Topluluk.Services.EventAPI.Model.Entity
 {
 	public class Event : AbstractEntity
 	{
-
 		public string UserId { get; set; }
 		
 		public string Title { get; set; }
