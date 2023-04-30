@@ -38,7 +38,7 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10);
 
 		Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files, CancellationToken cancellationToken);
-		Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto);
+		Task<Response<string>> ChangeBannerImage(string userId, UserChangeBannerDto changeBannerDto);
 
 		Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto);
 

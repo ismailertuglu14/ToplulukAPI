@@ -1,4 +1,6 @@
-﻿namespace Topluluk.Services.PostAPI.Model.Dto;
+﻿using Topluluk.Shared.Enums;
+
+namespace Topluluk.Services.PostAPI.Model.Dto;
 
 public class GetPostForFeedDto
 {
@@ -8,6 +10,7 @@ public class GetPostForFeedDto
     public string LastName { get; set; }
     public string? ProfileImage { get; set; }
     public DateTime CreatedAt { get; set; }
+    public GenderEnum Gender { get; set; }
     public bool IsFollowing { get; set; }
 
     public string Description { get; set; }

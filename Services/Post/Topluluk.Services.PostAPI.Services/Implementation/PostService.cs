@@ -157,7 +157,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     dtos[i].FirstName = getUserInfoResponse.Data.Data.FirstName;
                     dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
                     dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
-
+                    dtos[i].Gender = getUserInfoResponse.Data.Data.Gender;
                     dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(dto.UserId);
                     dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id && c.IsDeleted == false);
                     dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);

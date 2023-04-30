@@ -375,22 +375,57 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> ChangeBannerImage(UserChangeBannerDto changeBannerDto)
+        public async Task<Response<string>> ChangeBannerImage(string userId, UserChangeBannerDto changeBannerDto)
         {
 
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == changeBannerDto.UserId);
-            using var stream = new MemoryStream();
-            await changeBannerDto.File.CopyToAsync(stream);
-            var imageData = stream.ToArray();
-
-            if (user.BannerImage != null)
+            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+            
+            if (user == null)
             {
-                await _capPublisher.PublishAsync<UserChangeBannerDto>(QueueConstants.USER_DELETE_BANNER, new() { UserId = changeBannerDto.UserId, File = changeBannerDto.File });
+                return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotFound));
+            }
+            
+            Response<string>? responseData = new();
+            byte[] imageBytes;
+
+            using (var stream = new MemoryStream())
+            {
+                changeBannerDto.File.CopyTo(stream);
+                imageBytes = stream.ToArray();
             }
 
-            await _capPublisher.PublishAsync(QueueConstants.USER_CHANGE_BANNER, new { UserId = changeBannerDto.UserId, FileName = changeBannerDto.File.FileName, BannerImage = imageData });
+            using (var client = new HttpClient())
+            {
+                var content = new MultipartFormDataContent();
+                var imageContent = new ByteArrayContent(imageBytes);
+                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); 
+                content.Add(imageContent, "File", changeBannerDto.File.FileName); 
 
-            return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
+                if (user.BannerImage != null)
+                {
+
+                    HttpResponseMessage responseMessage = await HttpRequestHelper.handle(user.ProfileImage, "https://localhost:7165/file/delete-user-banner", HttpType.POST);
+                }
+
+                var response = await client.PostAsync("https://localhost:7165/file/upload-user-banner", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    responseData = await response.Content.ReadFromJsonAsync<Response<string>>();
+                    if (responseData != null)
+                    {
+                        user.BannerImage = responseData.Data;
+                        _userRepository.Update(user);
+                        return await Task.FromResult(Response<string>.Success($"Image changed with {user.BannerImage}", ResponseStatus.Success));
+                    }
+
+                    throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
+                }
+                else
+                {
+                    return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
+                }
+            }
         }
 
         // todo FollowingRequest leri kullanıcı adı, ad, soyad, id, kullanıcı resmi ve istek attığı tarih ile dön.

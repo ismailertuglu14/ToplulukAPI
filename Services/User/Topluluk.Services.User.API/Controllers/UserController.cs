@@ -65,8 +65,7 @@ namespace Topluluk.Services.User.API.Controllers
         [HttpPost("[action]")]
         public async Task<Response<string>> ChangeBannerImage([FromForm] UserChangeBannerDto changeBannerDto)
         {
-            changeBannerDto.UserId = UserId;
-            return await _userService.ChangeBannerImage(changeBannerDto);
+            return await _userService.ChangeBannerImage(this.UserId, changeBannerDto);
         }
 
         [HttpPost("Follow")]
