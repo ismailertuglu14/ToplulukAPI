@@ -9,7 +9,7 @@ namespace Topluluk.Services.PostAPI.Model.Mapper
 	{
 		public GeneralMapper()
 		{
-			CreateMap<CreatePostDto, Post>();
+			CreateMap<CreatePostDto, Post>().ForMember(d => d.Files, opt => opt.Ignore());
 			CreateMap<CommentCreateDto, PostComment>();
 			CreateMap<Post, GetPostDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count))
 										.ForMember(d => d.SharedAt, s => s.MapFrom(s => s.CreatedAt));

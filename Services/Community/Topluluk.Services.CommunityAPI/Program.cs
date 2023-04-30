@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Topluluk.Services.CommunityAPI.Data.Settings;
 using Topluluk.Services.CommunityAPI.Model.Mapper;
 using Topluluk.Services.CommunityAPI.Services.Core;
-using MongoDB.Driver;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);

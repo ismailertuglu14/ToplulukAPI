@@ -44,7 +44,7 @@ namespace Topluluk.Services.PostAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> Create(CreatePostDto postDto)
+        public async Task<Response<string>> Create( [FromForm] CreatePostDto postDto)
         {
             postDto.UserId = UserId;
             return await _postService.Create(this.UserId, postDto);

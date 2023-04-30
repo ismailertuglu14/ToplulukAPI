@@ -5,20 +5,18 @@ using Topluluk.Services.PostAPI.Model.Dto;
 using Topluluk.Services.PostAPI.Model.Entity;
 using Topluluk.Services.PostAPI.Services.Interface;
 using Topluluk.Shared.Dtos;
-using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using Topluluk.Shared.Helper;
 using Topluluk.Shared.Enums;
-using MongoDB.Bson.IO;
-using System.Text;
 using System.Text.Json;
-using DotNetCore.CAP;
 using Topluluk.Services.PostAPI.Model.Dto.Http;
 using RestSharp;
 using Topluluk.Services.POSTAPI.Model.Dto.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Topluluk.Shared.Constants;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Topluluk.Services.PostAPI.Services.Implementation
 {
@@ -206,37 +204,90 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 Post post = _mapper.Map<Post>(postDto);
 
                 post.UserId = userId;
+                // file service codes.
+                Response<List<string>>? responseData = new();
 
-                DatabaseResponse response = await _postRepository.InsertAsync(post);
-
-                // Post topluluk da paylaşılacak
-                if (post.CommunityId != null)
+                using (var client = new HttpClient())
                 {
-                    // todo RestRequest rewrite
-                    var _community = HttpRequestHelper.handle<string>(post.CommunityId, $"https://localhost:7132/Community/Participiants/{post.CommunityId}", HttpType.GET).Result;
-                    var _participiants = _community.Content.ReadAsStringAsync().Result;
-                    List<string>? participiants = JsonSerializer.Deserialize<List<string>>(_participiants);
-
-
-                    // Kullanıcı topluluk içinde değilse paylaşamasın.
-                    if (!participiants!.Contains(postDto.UserId))
+                    var imageContent = new MultipartFormDataContent();
+                    foreach (var postDtoFile in postDto.Files)
                     {
-
-                        // Post silindi ve fonksiyon bitirildi.
-                        _postRepository.DeleteCompletely(post.Id);
-                        return await Task.FromResult(Response<string>.Fail("Failed You are not the participiant of this community", Shared.Enums.ResponseStatus.Failed));
+                        var stream = new MemoryStream();
+                        postDtoFile.CopyTo(stream);
+                        var fileContent = new ByteArrayContent(stream.ToArray());
+                        fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                        imageContent.Add(fileContent, "Files", postDtoFile.FileName);
                     }
+ 
 
+                    var responseClient =
+                        await client.PostAsync("https://localhost:7165/file/upload-post-files", imageContent);
+
+                    if (responseClient.IsSuccessStatusCode)
+                    {
+                        responseData = await responseClient.Content.ReadFromJsonAsync<Response<List<string>>>();
+                        
+                        if (responseData != null)
+                        {
+                            foreach (var _response in responseData.Data)
+                            {
+                                post.Files.Add(new()
+                                {
+                                    File = _response,
+                                    
+                                });
+                            }
+                            DatabaseResponse response = await _postRepository.InsertAsync(post);
+
+                            // Post topluluk da paylaşılacak
+                            if (post.CommunityId != null)
+                            {
+                                // todo RestRequest rewrite
+                                var _community = HttpRequestHelper.handle<string>(post.CommunityId,
+                                        $"https://localhost:7132/Community/Participiants/{post.CommunityId}",
+                                        HttpType.GET)
+                                    .Result;
+                                var _participiants = _community.Content.ReadAsStringAsync().Result;
+                                List<string>? participiants = JsonSerializer.Deserialize<List<string>>(_participiants);
+
+
+                                // Kullanıcı topluluk içinde değilse paylaşamasın.
+                                if (!participiants!.Contains(postDto.UserId))
+                                {
+
+                                    // Post silindi ve fonksiyon bitirildi.
+                                    _postRepository.DeleteCompletely(post.Id);
+                                    return await Task.FromResult(Response<string>.Fail(
+                                        "Failed You are not the participiant of this community",
+                                        Shared.Enums.ResponseStatus.Failed));
+                                }
+                                else
+                                {
+                                     
+                                }
+
+                            }
+
+                            return await Task.FromResult(Response<string>.Success(response.Data,
+                                Shared.Enums.ResponseStatus.Success));
+                        }
+
+                        throw new Exception(
+                            $"{typeof(PostService)} exception, IsSuccessStatusCode=true, responseData=null");
+                    }
+                    else
+                    {
+                        return await Task.FromResult(Response<string>.Fail(
+                            "Failed while uploading image with http client", ResponseStatus.InitialError));
+                    }
                 }
-                return await Task.FromResult(Response<string>.Success(response.Data, Shared.Enums.ResponseStatus.Success));
-
             }
             catch (Exception e)
             {
                 return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
                     ResponseStatus.InitialError));
             }
-           
+
         }
 
         public async Task<Response<string>> Delete(PostDeleteDto postDto)
