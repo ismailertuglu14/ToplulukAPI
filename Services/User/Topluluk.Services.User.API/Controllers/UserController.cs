@@ -62,6 +62,16 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.ChangeProfileImage(UserName, files,cancellationToken);
         }
 
+        [HttpPost("remove-profile-image")]
+        public async Task<Response<NoContent>> RemoveProfileImage()
+        {
+            return await _userService.DeleteProfileImage(this.UserId);
+        }
+        [HttpPost("remove-banner-image")]
+        public async Task<Response<NoContent>> RemoveBannerImage()
+        {
+            return await _userService.DeleteBannerImage(this.UserId);
+        }
         [HttpPost("[action]")]
         public async Task<Response<string>> ChangeBannerImage([FromForm] UserChangeBannerDto changeBannerDto)
         {

@@ -38,14 +38,15 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10);
 
 		Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files, CancellationToken cancellationToken);
+		Task<Response<NoContent>> DeleteProfileImage(string userId);
 		Task<Response<string>> ChangeBannerImage(string userId, UserChangeBannerDto changeBannerDto);
+		Task<Response<NoContent>> DeleteBannerImage(string userId);
 
 		Task<Response<string>> PrivacyChange(string userId, UserPrivacyChangeDto dto);
 
 		Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto);
 
         // Http calls services
-
         // I'm using for get UserId, UserName, firstName, lastName, ProfileImage
          Task<Response<UserInfoForPostDto>> GetUserInfoForPost(string id, string sourceUserId);
 		Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id);

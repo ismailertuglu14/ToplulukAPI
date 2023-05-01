@@ -40,11 +40,19 @@ namespace Topluluk.Services.FileAPI.Services.Implementation
         }
         public async Task<Response<string>> DeleteAsync(string containerName, string fileName)
         {
-            _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-            string fileNameWithExtension = fileName.Substring(fileName.LastIndexOf("/") + 1);
-            BlobClient blobClient = _blobContainerClient.GetBlobClient(fileNameWithExtension);
-            var a =  await blobClient.DeleteAsync();
-            return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
+            try
+            {
+                _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+                string fileNameWithExtension = fileName.Substring(fileName.LastIndexOf("/") + 1);
+                BlobClient blobClient = _blobContainerClient.GetBlobClient(fileNameWithExtension);
+                var a =  await blobClient.DeleteAsync();
+                return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
+
+            }
         }
 
         public List<string> GetFiles(string containerName)

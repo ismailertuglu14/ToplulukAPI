@@ -327,104 +327,191 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files, CancellationToken cancellationToken)
         {
-            _User user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
-            Response<List<string>>? responseData = new();
-            byte[] imageBytes;
 
-            using (var stream = new MemoryStream())
+            try
             {
-                files[0].CopyTo(stream);
-                imageBytes = stream.ToArray();
-            }
-
-            using (var client = new HttpClient())
-            {
-                var content = new MultipartFormDataContent();
-                var imageContent = new ByteArrayContent(imageBytes);
-                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); // Resim formatına uygun mediatype belirleme
-                content.Add(imageContent, "files", files[0].FileName); // "files": paramtere adı "files[0].FileName": Resimin adı
-
-                if (user.ProfileImage != null)
+                if (files == null || files.Count == 0)
                 {
+                    return await Task.FromResult(Response<string>.Fail("Atleast Need 1 image",
+                        ResponseStatus.BadRequest));
+                }
+                _User user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
+                Response<List<string>>? responseData = new();
+                byte[] imageBytes;
 
-                    HttpResponseMessage responseMessage = await HttpRequestHelper.handle(user.ProfileImage, "https://localhost:7165/file/deleteuserimage", HttpType.POST);
-
+                using (var stream = new MemoryStream())
+                {
+                    files[0].CopyTo(stream);
+                    imageBytes = stream.ToArray();
                 }
 
-                var response = await client.PostAsync("https://localhost:7165/file/uploaduserimage", content);
-
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    responseData = await response.Content.ReadFromJsonAsync<Response<List<string>>>();
-                    if (responseData != null)
-                    {
-                        var imageUrl = responseData.Data[0];
+                    var content = new MultipartFormDataContent();
+                    var imageContent = new ByteArrayContent(imageBytes);
+                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); // Resim formatına uygun mediatype belirleme
+                    content.Add(imageContent, "files", files[0].FileName); // "files": paramtere adı "files[0].FileName": Resimin adı
 
-                        user.ProfileImage = imageUrl;
-                        _userRepository.Update(user);
-                        return await Task.FromResult(Response<string>.Success($"Image changed with {imageUrl}", ResponseStatus.Success));
+                    if (user.ProfileImage != null)
+                    {
+    
+                        NameObject nameObject = new() { Name = user.ProfileImage};
+                        var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-image").AddBody(nameObject);
+                        var response1 = await _client.ExecutePostAsync<Response<string>>(request, cancellationToken: cancellationToken);
                     }
 
-                    throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
+                    var response = await client.PostAsync("https://localhost:7165/file/upload-user-image", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        responseData = await response.Content.ReadFromJsonAsync<Response<List<string>>>();
+                        if (responseData != null)
+                        {
+                            var imageUrl = responseData.Data[0];
+
+                            user.ProfileImage = imageUrl;
+                            _userRepository.Update(user);
+                            return await Task.FromResult(Response<string>.Success($"Image changed with {imageUrl}", ResponseStatus.Success));
+                        }
+
+                        throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
+                    }
+                    else
+                    {
+                        // Resim yükleme işlemi başarısız
+                        return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
+                    }
                 }
-                else
-                {
-                    // Resim yükleme işlemi başarısız
-                    return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
-                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<NoContent>> DeleteProfileImage(string userId)
+        {
+            try
+            {
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                if (user == null)
+                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
+
+                if (user.ProfileImage == null)
+                    return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+                NameObject nameObject = new() { Name = user.ProfileImage};
+                var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-image").AddBody(nameObject);
+                var response = await _client.ExecutePostAsync<Response<string>>(request);
+
+                if (!response.IsSuccessful || !response.Data!.IsSuccess)
+                    return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.Failed));
+                
+                user.ProfileImage = null;
+                _userRepository.Update(user);
+                return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
             }
         }
 
         public async Task<Response<string>> ChangeBannerImage(string userId, UserChangeBannerDto changeBannerDto)
         {
-
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-            
-            if (user == null)
+            try
             {
-                return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotFound));
-            }
-            
-            Response<string>? responseData = new();
-            byte[] imageBytes;
-
-            using (var stream = new MemoryStream())
-            {
-                changeBannerDto.File.CopyTo(stream);
-                imageBytes = stream.ToArray();
-            }
-
-            using (var client = new HttpClient())
-            {
-                var content = new MultipartFormDataContent();
-                var imageContent = new ByteArrayContent(imageBytes);
-                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); 
-                content.Add(imageContent, "File", changeBannerDto.File.FileName); 
-
-                if (user.BannerImage != null)
+                if (changeBannerDto.File == null)
                 {
+                    return await Task.FromResult(Response<string>.Fail("Atleast Need 1 image",
+                        ResponseStatus.BadRequest));
+                }
+            
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+            
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotFound));
+                }
+            
+                Response<string>? responseData = new();
+                byte[] imageBytes;
 
-                    HttpResponseMessage responseMessage = await HttpRequestHelper.handle(user.ProfileImage, "https://localhost:7165/file/delete-user-banner", HttpType.POST);
+                using (var stream = new MemoryStream())
+                {
+                    changeBannerDto.File.CopyTo(stream);
+                    imageBytes = stream.ToArray();
                 }
 
-                var response = await client.PostAsync("https://localhost:7165/file/upload-user-banner", content);
-
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    responseData = await response.Content.ReadFromJsonAsync<Response<string>>();
-                    if (responseData != null)
+                    var content = new MultipartFormDataContent();
+                    var imageContent = new ByteArrayContent(imageBytes);
+                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); 
+                    content.Add(imageContent, "File", changeBannerDto.File.FileName); 
+
+                    if (user.BannerImage != null)
                     {
-                        user.BannerImage = responseData.Data;
-                        _userRepository.Update(user);
-                        return await Task.FromResult(Response<string>.Success($"Image changed with {user.BannerImage}", ResponseStatus.Success));
+
+                        NameObject nameObject = new() { Name = user.ProfileImage};
+                        var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-image").AddBody(nameObject);
+                        var response1 = await _client.ExecutePostAsync<Response<string>>(request);
                     }
 
-                    throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
+                    var response = await client.PostAsync("https://localhost:7165/file/upload-user-banner", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        responseData = await response.Content.ReadFromJsonAsync<Response<string>>();
+                        if (responseData != null)
+                        {
+                            user.BannerImage = responseData.Data;
+                            _userRepository.Update(user);
+                            return await Task.FromResult(Response<string>.Success($"Image changed with {user.BannerImage}", ResponseStatus.Success));
+                        }
+
+                        throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
+                    }
+                    else
+                    {
+                        return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
+                    }
                 }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
-                }
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
+        }
+
+        public async Task<Response<NoContent>> DeleteBannerImage(string userId)
+        {
+            try
+            {
+                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                if (user == null)
+                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
+
+                if (user.BannerImage == null)
+                    return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+                NameObject nameObject = new() { Name = user.BannerImage};
+                var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-banner").AddBody(nameObject);
+                var response = await _client.ExecutePostAsync<Response<string>>(request);
+
+                if (!response.IsSuccessful || !response.Data!.IsSuccess)
+                    return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.Failed));
+                
+                user.BannerImage = null;
+                _userRepository.Update(user);
+                return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+            }
+            catch (Exception e)
+            {
+
+                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
             }
         }
 
