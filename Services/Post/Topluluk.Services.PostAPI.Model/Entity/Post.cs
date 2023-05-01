@@ -28,59 +28,33 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 	public class FileModel
 	{
 		public string File { get; set; }
-		public FileType Type
+		public FileType Type { get; set; }
+		public FileModel(string file)
 		{
-			get
+			File = file;
+			Type = GetFileType(Path.GetExtension(File));
+		}
+		private FileType GetFileType(string fileExtension)
+		{
+			switch (fileExtension.ToLowerInvariant())
 			{
-				var fileExtension = Path.GetExtension(File).ToLowerInvariant();
-
-				// uzantıya göre dosya türünü belirle
-				switch (fileExtension)
-				{
-					case ".jpg":
-					case ".jpeg":
-					case ".png":
-					case ".bmp":
-					case ".gif":
-					case ".webp":
-						return FileType.IMAGE;
-					case ".mp4":
-					case ".avi":
-					case ".mov":
-					case ".wmv":
-					case ".flv":
-						return FileType.VIDEO;
-					default:
-						return FileType.OTHER;
-				}
+				case ".jpg":
+				case ".jpeg":
+				case ".png":
+				case ".bmp":
+				case ".gif":
+				case ".webp":
+				case ".jfif":	
+					return FileType.IMAGE;
+				case ".mp4":
+				case ".avi":
+				case ".mov":
+				case ".wmv":
+				case ".flv":
+					return FileType.VIDEO;
+				default:
+					return FileType.OTHER;
 			}
-			set
-			{
-				var fileExtension = Path.GetExtension(File)?.ToLowerInvariant();
-
-				// uzantıya göre dosya türünü belirle
-				switch (fileExtension)
-				{
-					case ".jpg":
-					case ".jpeg":
-					case ".png":
-					case ".bmp":
-					case ".gif": 
-					case ".webp":
-						Type = FileType.IMAGE;
-						break;
-					case ".mp4":
-					case ".avi":
-					case ".mov":
-					case ".wmv":
-					case ".flv":
-						Type = FileType.VIDEO;
-						break;
-					default:
-						Type = FileType.OTHER; 
-						break;
-				}
-			} 
 		}
 
 	}

@@ -1,4 +1,5 @@
-﻿using Topluluk.Shared.Enums;
+﻿using Topluluk.Services.PostAPI.Model.Entity;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.PostAPI.Model.Dto;
 
@@ -14,7 +15,7 @@ public class GetPostForFeedDto
     public bool IsFollowing { get; set; }
 
     public string Description { get; set; }
-    public List<string>? PostImages { get; set; }
+    public List<FileModel>? Files  { get; set; }
 
     public CommunityLink? Community { get; set; }
     public EventLink? Event { get; set; }
@@ -27,7 +28,7 @@ public class GetPostForFeedDto
 
     public GetPostForFeedDto()
     {
-        PostImages = new List<string>();
+        Files = new List<FileModel>();
     }
 }
 

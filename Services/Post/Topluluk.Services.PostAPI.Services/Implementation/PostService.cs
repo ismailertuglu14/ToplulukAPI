@@ -140,12 +140,12 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 {
                     return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail("Failed", ResponseStatus.Failed));
                 }
-                DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
+                List<Post> response =  _postRepository.GetListByExpressionPaginated(take, skip, p => getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
 
-                List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
+                List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response);
 
                 int i = 0;
-                foreach (var dto in response.Data as List<Post>)
+                foreach (var dto in response)
                 {
                     var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
                         .AddQueryParameter("id", dto.UserId).AddQueryParameter("sourceUserId", userId);
@@ -241,11 +241,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                             {
                                 foreach (var _response in responseData.Data)
                                 {
-                                    post.Files.Add(new()
-                                    {
-                                        File = _response,
-
-                                    });
+                                    post.Files.Add(new FileModel(_response));
                                 }
                             }
                         }
