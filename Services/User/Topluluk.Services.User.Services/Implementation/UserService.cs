@@ -181,39 +181,53 @@ namespace Topluluk.Services.User.Services.Implementation
         public async Task<Response<string>> FollowUser(string userId, UserFollowDto userFollowInfo)
         {
 
-            _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userId);
-            _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
-            bool isFollowing =
-                await _followRepository.AnyAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
-
-            if (isFollowing == true)
+            try
             {
-                return await Task.FromResult(Response<string>.Success("Already following", ResponseStatus.Success));
-            }
+                _User sourceUser = await _userRepository.GetFirstAsync(u => u.Id == userId);
 
-            if (targetUser.IsPrivate == true)
-            {
-                // todo: Refactor here.
-                bool isContainSourceId = targetUser.IncomingFollowRequests!.Contains(sourceUser.Id);
+                if (sourceUser == null)
+                    return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
+                
+                if (userId == userFollowInfo.TargetId)
+                    return await Task.FromResult(Response<string>.Fail("You can not follow yourself",
+                        ResponseStatus.BadRequest));
+                
+                _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
+                bool isFollowing =
+                    await _followRepository.AnyAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
 
-                if (isContainSourceId != true)
+                if (isFollowing)
+                    return await Task.FromResult(Response<string>.Success("Already following", ResponseStatus.Success));
+                
+                if (targetUser.IsPrivate)
                 {
-                    targetUser.IncomingFollowRequests!.Add(sourceUser.Id);
-                    sourceUser.OutgoingFollowRequests!.Add(targetUser.Id);
-                    List<_User> usersUpdate = new() { sourceUser, targetUser };
-                    _userRepository.BulkUpdate(usersUpdate);
+                    // todo: Refactor here.
+                    bool isContainSourceId = targetUser.IncomingFollowRequests!.Contains(sourceUser.Id);
+
+                    if (isContainSourceId != true)
+                    {
+                        targetUser.IncomingFollowRequests!.Add(sourceUser.Id);
+                        sourceUser.OutgoingFollowRequests!.Add(targetUser.Id);
+                        List<_User> usersUpdate = new() { sourceUser, targetUser };
+                        _userRepository.BulkUpdate(usersUpdate);
+                    }
+
+                    return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
+                }
+                else
+                {
+                    UserFollow userFollow = new() { SourceId = userId, TargetId = userFollowInfo.TargetId };
+                    await _followRepository.InsertAsync(userFollow);
+
+                    return await Task.FromResult(Response<string>.Success("Successfully followed!", ResponseStatus.Success));
                 }
 
-                return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
             }
-            else
+            catch (Exception e)
             {
-                UserFollow userFollow = new() { SourceId = userId, TargetId = userFollowInfo.TargetId };
-                await _followRepository.InsertAsync(userFollow);
-
-                return await Task.FromResult(Response<string>.Success("Successfully followed!", ResponseStatus.Success));
+                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
             }
-
         }
 
         public async Task<Response<string>> UnFollowUser(string userId, UserFollowDto userFollowInfo)
@@ -290,13 +304,14 @@ namespace Topluluk.Services.User.Services.Implementation
              */
 
             _User currentUser = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
+            List<_User> response = new();
             // Sorgulanan kullanıcı bizi bloklamamış olmalı
             // Bizim sorguladığımız kullanıcıyı bloklamamış olmamız lazım.
-            DatabaseResponse response = await _userRepository.GetAllAsync(limit, 0, u => u.IsDeleted == false);
+             response =  _userRepository.GetListByExpressionPaginated(limit, 0, u => u.IsDeleted == false && u.Id != userId);
+            
             //u.BlockedUsers!.Contains("") == false
             //&& currentUser.BlockedUsers!.Contains(u.Id) == false
-            List<UserSuggestionsDto> userSuggestions = _mapper.Map<List<UserSuggestionsDto>>(response.Data);
+            List<UserSuggestionsDto> userSuggestions = _mapper.Map<List<UserSuggestionsDto>>(response);
 
             return await Task.FromResult(Response<List<UserSuggestionsDto>>.Success(userSuggestions, ResponseStatus.Success));
 
