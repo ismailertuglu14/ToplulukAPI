@@ -29,7 +29,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		// Eğer tanıdığı kişi yok ise listenin ilk elemanını gösterebiliriz.
 		public ICollection<InteractionType>? InteractedByIds { get; set; }
 
-		public ICollection<string>? Files { get; set; }
+		public List<FileModel>? Files { get; set; }
 
 		public int CommentCount { get; set; }
 		
@@ -40,7 +40,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public GetPostByIdDto()
 		{
 			InteractedByIds = new HashSet<InteractionType>();
-            Files = new HashSet<string>();
+            Files = new List<FileModel>();
 			Comments = new HashSet<CommentGetDto>();
 		}
 	}
