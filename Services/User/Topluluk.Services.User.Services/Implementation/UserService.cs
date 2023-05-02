@@ -919,9 +919,21 @@ namespace Topluluk.Services.User.Services.Implementation
                     return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User not found", ResponseStatus.NotFound));
                 }
                 // fixle true kısmını
-                DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => true
+
+                var response = _followRepository.GetListByExpressionPaginated(skip, take, f => f.SourceId == userId);
+                List<string> userIds = new();
+                foreach (var userFollow in response)
+                {
+                    userIds.Add(userFollow.TargetId);
+                }
+                var followingUsers =
+                    _userRepository.GetListByExpressionPaginated(skip, take, u => userIds.Contains(u.Id) 
+                        && ((u.FirstName.ToLower() + " " + u.LastName.ToLower()).Contains(text.ToLower()) || u.UserName.Contains(text.ToLower())) );
+                List<FollowingUserDto> followingUserDtos =
+                    _mapper.Map<List<_User>, List<FollowingUserDto>>(followingUsers);
+                /*DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u =>  true
                 && ((u.FirstName.ToLower() + " " + u.LastName.ToLower()).Contains(text.ToLower()) || u.UserName.Contains(text.ToLower())));
-                List<FollowingUserDto> followingUserDtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(response.Data);
+                ;*/
                 return await Task.FromResult(Response<List<FollowingUserDto>>.Success(followingUserDtos, ResponseStatus.Success));
             }
             catch (Exception e)
