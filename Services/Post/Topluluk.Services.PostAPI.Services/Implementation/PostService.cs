@@ -183,6 +183,14 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     dtos[i].Gender = user.Gender;
                     dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(user.Id);
 
+                    var isUserInteracted = await _postInteractionRepository.GetFirstAsync(p => p.PostId == dtos[i].Id && p.UserId == userId);
+                    if (isUserInteracted != null)
+                    {
+                        dtos[i].IsInteracted = new PostInteractedDto()
+                        {
+                            Interaction = isUserInteracted.InteractionType
+                        };
+                    }
                     List<PostInteraction> interactions =
                         _postInteractionRepository.GetListByExpression(p => p.PostId == dtos[i].Id);
                     if (interactions != null)
@@ -575,7 +583,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     ResponseStatus.InitialError));
             }
         }
-
+        
         public Task<Response<string>> Update()
         {
             throw new NotImplementedException();
