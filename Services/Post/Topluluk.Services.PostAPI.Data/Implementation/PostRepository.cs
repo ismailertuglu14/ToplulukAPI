@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using DBHelper.Connection;
 using DBHelper.Repository.Mongo;
 using MongoDB.Bson;
@@ -42,6 +43,24 @@ namespace Topluluk.Services.PostAPI.Data.Implementation
                 return Task.FromResult(false);
             }
          }
+
+        public async Task<List<Post>> GetPostsWithDescending(int skip, int take,
+            Expression<Func<Post, bool>> expression)
+        {
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+            var filter = Builders<Post>.Filter.Where(expression);
+
+            var sort = Builders<Post>.Sort.Descending(p => p.CreatedAt);
+
+
+            var documents = await database.GetCollection<Post>(collectionName).Find(filter)
+                .Sort(sort)
+                .Skip(skip)
+                .Limit(take)
+                .ToListAsync();
+            return documents;
+        }
     }
 }
 
