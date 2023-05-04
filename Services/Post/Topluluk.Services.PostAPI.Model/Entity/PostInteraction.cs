@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.PostAPI.Model.Entity
 {
@@ -11,6 +12,6 @@ namespace Topluluk.Services.PostAPI.Model.Entity
     {
         public string PostId { get; set; }
         public string UserId { get; set; }
-        public InteractionType InteractionType { get; set; }
+        public InteractionEnum InteractionType { get; set; }
     }
 }

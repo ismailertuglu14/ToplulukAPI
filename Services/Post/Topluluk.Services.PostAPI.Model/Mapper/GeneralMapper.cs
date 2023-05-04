@@ -11,12 +11,12 @@ namespace Topluluk.Services.PostAPI.Model.Mapper
 		{
 			CreateMap<CreatePostDto, Post>().ForMember(d => d.Files, opt => opt.Ignore());
 			CreateMap<CommentCreateDto, PostComment>();
-			CreateMap<Post, GetPostDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count))
+			CreateMap<Post, GetPostDto>()
 										.ForMember(d => d.SharedAt, s => s.MapFrom(s => s.CreatedAt));
 
-       
-            CreateMap<PostComment, CommentGetDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count));
-            CreateMap<Post, GetPostForFeedDto>().ForMember(d => d.InteractionCount, s =>s.MapFrom(s => s.Interactions.Count));
+
+			CreateMap<PostComment, CommentGetDto>();
+			CreateMap<Post, GetPostForFeedDto>();
 			CreateMap<Post, GetPostByIdDto>();
         }
 	}

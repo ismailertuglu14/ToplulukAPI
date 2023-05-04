@@ -11,7 +11,6 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 		public string? CommunityId { get; set; }
 		public List<FileModel> Files { get; set; }
 		public string Description { get; set; }
-		public ICollection<InteractionType> Interactions { get; set; }
 		public bool IsShownOnProfile { get; set; } = true;
 
         public string? CommunityLink { get; set; }
@@ -20,7 +19,6 @@ namespace Topluluk.Services.PostAPI.Model.Entity
         
 		public Post()
 		{
-			Interactions = new HashSet<InteractionType>();
 			Files = new List<FileModel>();
 		}
 	}

@@ -171,12 +171,37 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 {
                     var user = usersResponse.Data.Data.Where(u => u.Id == dtos[i].UserId)
                         .FirstOrDefault();
+                    if (user == null)
+                    {
+                        dtos.Remove(dtos[i]);
+                        continue;
+                    }
                     dtos[i].UserId = user.Id;
                     dtos[i].FirstName = user.FirstName;
                     dtos[i].LastName = user.LastName;
                     dtos[i].ProfileImage = user.ProfileImage;
                     dtos[i].Gender = user.Gender;
                     dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(user.Id);
+
+                    List<PostInteraction> interactions =
+                        _postInteractionRepository.GetListByExpression(p => p.PostId == dtos[i].Id);
+                    if (interactions != null)
+                    {
+                        dtos[i].InteractionPreviews = interactions
+                            .GroupBy(x => x.InteractionType)
+                            .OrderByDescending(x => x.Count())
+                            .Take(3)
+                            .Select(x => new PostInteractionPreviewDto()
+                            {
+                                Interaction = x.Key,
+                                InteractionCount = x.Count()
+                            })
+                            .ToList();
+                    }
+                    dtos[i].InteractionCount = await _postInteractionRepository.Count(p => p.PostId == dtos[i].Id);
+                    
+                    
+                    
                     dtos[i].CommentCount =
                         await _commentRepository.Count(c => c.PostId == response[i].Id && c.IsDeleted == false);
                     dtos[i].IsSaved =
@@ -361,7 +386,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                 GetPostByIdDto postDto = _mapper.Map<GetPostByIdDto>(post);
 
-                postDto.InteractionCount = post.Interactions.Count;
+             //   postDto.InteractionCount = post.Interactions.Count;
 
                 var _comments = await _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId);
                 if (_comments.Data != null && _comments.Data.Count > 0)
@@ -515,19 +540,22 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         }
 
 
-        public async Task<Response<string>> Interaction(string userId,string postId, PostInteractionDto interaction)
+        public async Task<Response<string>> Interaction(string userId,string postId, PostInteractionCreateDto interactionCreate)
         {
 
             try
             {
                 Post? post = await _postRepository.GetFirstAsync(p => p.Id == postId);
                 if (post == null) throw new Exception("Post not found");
-
+                if (!Enum.IsDefined(typeof(InteractionEnum), interactionCreate.InteractionType))
+                {
+                    return await Task.FromResult(Response<string>.Fail("Invalid InteractionType value", ResponseStatus.BadRequest));
+                }
                 PostInteraction _interaction = new()
                 {
                     PostId = postId,
                     UserId = userId,
-                    InteractionType = interaction.InteractionType
+                    InteractionType = interactionCreate.InteractionType
                 };
 
                 PostInteraction? _interactionDb = await _postInteractionRepository.GetFirstAsync(i => i.PostId == postId && i.UserId == userId);
@@ -536,17 +564,10 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     await _postInteractionRepository.InsertAsync(_interaction);
                     return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
                 }
-                else
-                {
-                    _postInteractionRepository.DeleteCompletely(_interactionDb.Id);
-                    await _postInteractionRepository.InsertAsync(_interaction);
+                _postInteractionRepository.DeleteCompletely(_interactionDb.Id);
+                await _postInteractionRepository.InsertAsync(_interaction);
 
-                    return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
-                }
-
-
-                throw new Exception("");
-
+                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
             }
             catch (Exception e)
             {

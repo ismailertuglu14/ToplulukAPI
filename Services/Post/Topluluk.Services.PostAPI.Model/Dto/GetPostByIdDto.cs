@@ -25,9 +25,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 
 		public int InteractionCount { get; set; }
 
-		// Sadece tanıdığı takip ettiği kişileri öncelikli olarak gösterebilmek adına kullanıyoruz.
-		// Eğer tanıdığı kişi yok ise listenin ilk elemanını gösterebiliriz.
-		public ICollection<InteractionType>? InteractedByIds { get; set; }
+		public ICollection<InteractionEnum>? InteractedByIds { get; set; }
 
 		public List<FileModel>? Files { get; set; }
 
@@ -39,7 +37,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 
 		public GetPostByIdDto()
 		{
-			InteractedByIds = new HashSet<InteractionType>();
+			InteractedByIds = new HashSet<InteractionEnum>();
             Files = new List<FileModel>();
 			Comments = new HashSet<CommentGetDto>();
 		}

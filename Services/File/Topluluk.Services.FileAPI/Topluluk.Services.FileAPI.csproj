@@ -19,9 +19,6 @@
     <None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Topluluk.Services.FileAPI.Services\Topluluk.Services.FileAPI.Services.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>

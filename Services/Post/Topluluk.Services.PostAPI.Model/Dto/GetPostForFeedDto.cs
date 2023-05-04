@@ -19,7 +19,7 @@ public class GetPostForFeedDto
 
     public CommunityLink? Community { get; set; }
     public EventLink? Event { get; set; }
-
+    public List<PostInteractionPreviewDto> InteractionPreviews { get; set; }
     public bool IsSaved { get; set; } = false;
 
     public int CommentCount { get; set; }
@@ -29,6 +29,7 @@ public class GetPostForFeedDto
     public GetPostForFeedDto()
     {
         Files = new List<FileModel>();
+        InteractionPreviews = new List<PostInteractionPreviewDto>();
     }
 }
 

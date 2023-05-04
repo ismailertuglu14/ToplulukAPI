@@ -88,9 +88,9 @@ namespace Topluluk.Services.PostAPI.Controllers
         }
 
         [HttpPost("interaction/{postId}")]
-        public async Task<Response<string>> Interaction(string postId,PostInteractionDto dto)
+        public async Task<Response<string>> Interaction(string postId,PostInteractionCreateDto createDto)
         {
-            return await _postService.Interaction(this.UserId,postId, dto);
+            return await _postService.Interaction(this.UserId,postId, createDto);
         }
         [HttpPost("remove-interaction/{postId}")]
         public async Task<Response<string>> RemoveInteraction(string postId)
