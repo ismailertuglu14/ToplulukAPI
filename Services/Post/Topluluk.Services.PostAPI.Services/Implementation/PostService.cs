@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Topluluk.Services.PostAPI.Data.Interface;
 using Topluluk.Services.PostAPI.Model.Dto;
 using Topluluk.Services.PostAPI.Model.Entity;
@@ -7,16 +6,14 @@ using Topluluk.Services.PostAPI.Services.Interface;
 using Topluluk.Shared.Dtos;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Topluluk.Shared.Helper;
 using Topluluk.Shared.Enums;
-using System.Text.Json;
 using Topluluk.Services.PostAPI.Model.Dto.Http;
 using RestSharp;
 using Topluluk.Services.POSTAPI.Model.Dto.Http;
 using Microsoft.IdentityModel.Tokens;
 using Topluluk.Shared.Constants;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
-using Microsoft.AspNetCore.Mvc.Formatters;
+
 
 namespace Topluluk.Services.PostAPI.Services.Implementation
 {
@@ -40,6 +37,51 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             _client = new RestClient();
         }
 
+
+        public async Task<Response<List<GetPostInteractionDto>>> GetInteractions(string userId, string postId, int take = 10, int skip = 0)
+        {
+            try
+            {
+                Post? post = await _postRepository.GetFirstAsync(p => p.Id == postId);
+                if (post == null) return Response<List<GetPostInteractionDto>>.Fail("", ResponseStatus.NotFound);
+                
+                List<PostInteraction> interactions =
+                    _postInteractionRepository.GetListByExpressionPaginated(skip, take, i => i.PostId == postId);
+                IdList idList = new() { ids = interactions.Select(i => i.UserId).ToList() };
+
+                var userRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
+                var userResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(userRequest);
+                
+                var interactionDtos = _mapper.Map<List<PostInteraction>, List<GetPostInteractionDto>>(interactions);
+                
+                if (userResponse.Data != null)
+                {
+                    for (int i = 0; i < interactions.Count; i++)
+                    {
+                        var user = userResponse.Data.Data.FirstOrDefault(u => u.Id == interactionDtos[i].UserId);
+                        if (user == null)
+                        {
+                            interactionDtos.Remove(interactionDtos[i]);
+                            continue;
+                        }
+
+                        interactionDtos[i].UserId = user.Id;
+                        interactionDtos[i].FirstName = user.FirstName;
+                        interactionDtos[i].LastName= user.LastName;
+                        interactionDtos[i].ProfileImage = user.ProfileImage;
+                        interactionDtos[i].Gender = user.Gender;
+                    }
+                }
+                
+                
+                return Response<List<GetPostInteractionDto>>.Success(interactionDtos,ResponseStatus.Success);
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<List<GetPostInteractionDto>>.Fail($"Some error occurred: {e}",
+                    ResponseStatus.InitialError));
+            }
+        }
 
         public async Task<Response<string>> RemoveInteraction(string userId, string postId)
         {
@@ -122,13 +164,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                if (userId.IsNullOrEmpty()) throw new Exception("User not found");
-
-                // Request 1: Check if user exists
-                var userExistRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/getuserbyid")
-                    .AddHeader("Authorization", token).AddQueryParameter("userid", userId);
-                var userExistTask = _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userExistRequest);
-
                 // Request 2: Get user followings
                 var getUserFollowingsRequest =
                     new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id",
@@ -136,15 +171,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 var getUserFollowingsTask = _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
 
                 // Request 3: Get users' info list
-               
-
-                var userExistResponse = userExistTask.Result;
-                if (userExistResponse.Data.Data == null)
-                {
-                    return await Task.FromResult(
-                        Response<List<GetPostForFeedDto>>.Fail("Not Authorized", ResponseStatus.BadRequest));
-                }
-
                 var getUserFollowingsResponse = getUserFollowingsTask.Result;
                 if (getUserFollowingsResponse.IsSuccessful == false)
                 {
@@ -159,9 +185,9 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 
                 var usersRequest =
                     new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
-                var usersTask = _client.ExecutePostAsync<Response<List<UserInfoForCommentDto>>>(usersRequest);
+                var usersTask = _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
                 
-                await Task.WhenAll(userExistTask, getUserFollowingsTask, usersTask);
+                await Task.WhenAll( getUserFollowingsTask, usersTask);
 
 
                 List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response);
@@ -352,7 +378,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     userIdList.ids.Add(comment.UserId);
                 }
                 var userInfoRequest = new RestRequest(ServiceConstants.API_GATEWAY+"/user/get-user-info-list").AddBody(userIdList);
-                var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoForCommentDto>>>(userInfoRequest);
+                var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(userInfoRequest);
                 
                 
                 foreach (var comment in comments)
@@ -408,11 +434,11 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     var idList = new IdList { ids = ids };
 
                     var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
-                    var response = await _client.ExecutePostAsync<Response<List<UserInfoForCommentDto>>>(request);
+                    var response = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(request);
 
                     for (int i = 0; i < _comments.Data.Count; i++)
                     {
-                        UserInfoForCommentDto user = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId)
+                        UserInfoDto user = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId)
                             .FirstOrDefault() ?? throw new InvalidOperationException();
                         commentDtos[i].ProfileImage = user.ProfileImage;
                         commentDtos[i].FirstName = user.FirstName;
@@ -489,10 +515,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                
-                if (userId.IsNullOrEmpty()) throw new Exception("User not found");
-
-                    DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == id);
+                DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == id);
                     var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
                         .AddQueryParameter("id", id).AddQueryParameter("sourceUserId", userId);
                     var getUserInfoResponse =
@@ -504,7 +527,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
 
                     List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
-
+                    var commentCounts = await _commentRepository.GetPostCommentCounts(dtos.Select(p => p.Id).ToList());
                     int i = 0;
                     foreach (var dto in response.Data as List<Post>)
                     {
@@ -513,9 +536,9 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
                         dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
 
-                        dtos[i].CommentCount = await _commentRepository.Count(c => c.PostId == dto.Id);
-                        dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
-
+                        dtos[i].CommentCount = commentCounts.FirstOrDefault(c => c.Key == dtos[i].Id).Value;
+                        //dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
+    
                         if (!dto.CommunityLink.IsNullOrEmpty())
                         {
                             var communityInfoRequest =

@@ -86,7 +86,11 @@ namespace Topluluk.Services.PostAPI.Controllers
         {
             return await _postService.SavePost(this.UserId, postId);
         }
-
+        [HttpGet("interactions/{postId}")]
+        public async Task<Response<List<GetPostInteractionDto>>> GetInteractions(string postId, int take, int skip)
+        {
+            return await _postService.GetInteractions(this.UserId,postId,take,skip);
+        }
         [HttpPost("interaction/{postId}")]
         public async Task<Response<string>> Interaction(string postId,PostInteractionCreateDto createDto)
         {

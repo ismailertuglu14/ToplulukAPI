@@ -5,13 +5,14 @@ namespace DBHelper.Connection.Mongo
 {
     public class MongoDatabaseSettings : IBaseDatabaseSettings
     {
+        private bool isLocal = false;
         private readonly IDbConfiguration _dbConfiguration;
         public MongoDatabaseSettings(IDbConfiguration dbConfiguration)
         {
             _dbConfiguration = dbConfiguration;
-
-            this.ConnectionString = _dbConfiguration.ConnectionString;
-            this.DatabaseName = _dbConfiguration.DatabaseName;
+                
+            this.ConnectionString = isLocal == true ? "mongodb://localhost:27017" : _dbConfiguration.ConnectionString;
+            this.DatabaseName =  _dbConfiguration.DatabaseName;
             this.DBType = DatabaseType.MongoDB;
         }
 

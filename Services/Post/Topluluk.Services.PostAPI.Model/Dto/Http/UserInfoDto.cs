@@ -1,9 +1,9 @@
-﻿using System;
+﻿
 using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.PostAPI.Model.Dto.Http
 {
-	public class UserInfoForCommentDto
+	public class UserInfoDto
 	{
 		public string Id { get; set; }
 		public string? ProfileImage { get; set; }

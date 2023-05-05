@@ -18,7 +18,8 @@ namespace Topluluk.Services.PostAPI.Model.Mapper
 			CreateMap<PostComment, CommentGetDto>();
 			CreateMap<Post, GetPostForFeedDto>();
 			CreateMap<Post, GetPostByIdDto>();
-        }
+			CreateMap<PostInteraction, GetPostInteractionDto>();
+		}
 	}
 }
 

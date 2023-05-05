@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using DBHelper.Connection;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using SharpCompress.Common;
 using Topluluk.Shared.Dtos;
 
 
@@ -218,6 +214,7 @@ namespace DBHelper.Repository.Mongo
             return entity;
         }
 
+        
 
         public DatabaseResponse GetById(string id)
         {
@@ -420,6 +417,7 @@ namespace DBHelper.Repository.Mongo
 
             return response.Count;
         }
+
     }
 }
 
