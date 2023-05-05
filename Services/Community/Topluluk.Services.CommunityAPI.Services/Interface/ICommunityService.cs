@@ -28,11 +28,13 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
 
         Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
-        // Use this function for select community while createing a new post.
-        Task<Response<List<CommunityInfoPostLinkDto>>> GetParticpiantsCommunities(string userId, string token);
 		//http
 		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId);
-		Task<Response<string>> GetCommunityTitle(string id);
+		
+        // Use this function for select community while createing a new post.
+        Task<Response<List<CommunityInfoPostLinkDto>>> GetParticpiantsCommunities(string userId, string token);
+        Task<Response<int>> GetUserParticipiantCommunitiesCount(string userId);
+        Task<Response<string>> GetCommunityTitle(string id);
 
 		Task<Response<bool>> CheckCommunityExist(string id);
 		Task<Response<bool>> CheckIsUserAdminOwner(string userId);

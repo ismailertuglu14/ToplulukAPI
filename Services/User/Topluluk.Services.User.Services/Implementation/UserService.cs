@@ -70,6 +70,13 @@ namespace Topluluk.Services.User.Services.Implementation
                 dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == userId);
                 dto.FollowingCount = await _followRepository.Count(f => f.SourceId == userId);
                 dto.FollowersCount = await _followRepository.Count(f => f.TargetId == userId);
+                var userCommunitiesRequest =
+                    new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities-count").AddQueryParameter("id",userId);
+                var userCommunitiesResponse = await _client.ExecuteGetAsync<Response<int>>(userCommunitiesRequest);
+                if (userCommunitiesResponse.IsSuccessful)
+                {
+                    dto.CommunityCount = userCommunitiesResponse.Data!.Data;
+                }
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
             }
             catch (Exception e)

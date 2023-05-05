@@ -67,6 +67,20 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
+
+        public async Task<Response<int>> GetUserParticipiantCommunitiesCount(string userId)
+        {
+            try
+            {
+                int count = await _participiantRepository.Count(cp => cp.UserId == userId);
+                return Response<int>.Success(count, ResponseStatus.Success);
+            }
+            catch (Exception e)
+            {
+                return Response<int>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError);
+            }
+        }
+
         public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string communityId)
         {
             Community? community = await _communityRepository.GetFirstCommunity(c => c.Id == communityId && c.IsVisible == true && c.IsRestricted == false);
@@ -223,10 +237,13 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
 
             DatabaseResponse response = await _communityRepository.InsertAsync(community);
-
-            var serviceRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/community/join").AddHeader("Authorization", token).AddQueryParameter("communityId",(string)response.Data);
-            var serviceResponse = await _client.ExecutePostAsync<Response<NoContent>>(serviceRequest);
-
+            CommunityParticipiant participiant = new CommunityParticipiant()
+            {
+                UserId = userId,
+                CommunityId = response.Data,
+            };
+            await _participiantRepository.InsertAsync(participiant);
+         
             return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
         }
 
@@ -426,8 +443,10 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId)
         {
-            DatabaseResponse response = await _communityRepository.GetAllAsync(10, 0, c => c.Participiants.Contains(userId) && c.IsPublic == true && c.IsRestricted == false);
-            List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
+            var participiants =  _participiantRepository.GetListByExpressionPaginated(0, 10, c => c.UserId == userId);
+            List<string> idList = participiants.Select(p => p.CommunityId).ToList(); 
+            var communities = _communityRepository.GetListByExpression(c => idList.Contains(c.Id));
+            List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
             return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
 
         }

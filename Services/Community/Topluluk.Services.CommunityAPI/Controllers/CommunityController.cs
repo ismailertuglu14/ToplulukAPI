@@ -29,13 +29,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.GetCommunities();
         }
-
-        /// <summary>
-        /// https://topluluk.com/community/communities?skip=0&take=5
-        /// </summary>
-        /// <param name="skip"></param>
-        /// <param name="take"></param>
-        /// <returns></returns>
+        
         [HttpGet("communities")]
         public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitiySuggestions(int skip, int take)
         {
@@ -97,15 +91,14 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.GetUserCommunities(id);
         }
-
-
-        [NonAction]
-        [CapSubscribe(QueueConstants.COMMUNITY_IMAGE_UPLOADED)]
-        public async Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto)
+        
+        [HttpGet("user-communities-count")]
+        public async Task<Response<int>> GetUserParticipiantCommunityCount(string id)
         {
-            return await _communityService.UpdateCoverImage(dto);
+            return await _communityService.GetUserParticipiantCommunitiesCount(id);
         }
-
+    
+    
         [HttpGet("Participiants/{id}")]
         public async Task<List<string>> GetParticipiants(string id)
         {
