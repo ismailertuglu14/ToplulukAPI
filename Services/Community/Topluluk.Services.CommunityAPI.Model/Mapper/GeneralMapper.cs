@@ -14,9 +14,8 @@ namespace Topluluk.Services.CommunityAPI.Model.Mapper
 			CreateMap<CommunityCreateDto, Community>().ReverseMap();
 
 			CreateMap<Community, CommunitySuggestionMobileDto>();
-			CreateMap<Community,CommunitySuggestionWebDto>().ForMember(x => x.ParticipiantCount, o => o.MapFrom(x => x.Participiants.Count));
-
-			CreateMap<Community, CommunityGetPreviewDto>().ForMember(x => x.ParticipiantsCount, o => o.MapFrom(x => x.Participiants.Count));
+			CreateMap<Community, CommunitySuggestionWebDto>();
+			CreateMap<Community, CommunityGetPreviewDto>();
             CreateMap<Community, CommunityInfoPostLinkDto>();
 
         }

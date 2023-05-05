@@ -42,7 +42,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         {
             try
             {
-                DatabaseResponse response = await _communityRepository.GetAllAsync(take, skip, c => c.IsPublic != false && c.IsVisible != false && !c.Participiants.Contains(userId));
+                DatabaseResponse response = await _communityRepository.GetAllAsync(take, skip, c => c.IsPublic != false
+                                                                        && c.IsVisible != false );
                 List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
 
 
@@ -104,9 +105,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             {
                 return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Not Visible public", ResponseStatus.NotFound));
             }
-
-            // @@@@@@ starts here
-
+            
             var request = new RestRequest("https://localhost:7202/user/communityOwner").AddQueryParameter("id", community.AdminId);
             var response = await _client.ExecuteGetAsync<Response<GetCommunityOwnerDto>>(request);
             _community.AdminId = response.Data.Data.OwnerId;
@@ -118,8 +117,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             _community.IsOwner = false;
             _community.CoverImage = community.CoverImage;
             _community.BannerImage = community.BannerImage;
-            _community.ParticipiantsCount = community.Participiants.Count;
-            _community.IsParticipiant = community.Participiants.Contains(userId);
+            _community.ParticipiantsCount = await _participiantRepository.Count(p => p.CommunityId == community.Id);
+            _community.IsParticipiant = await _participiantRepository.AnyAsync(p => p.UserId == userId);
 
             return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
@@ -203,7 +202,6 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             Community community = _mapper.Map<Community>(communityInfo);
             community.Slug = slug;
             community.AdminId = userId;
-            community.Participiants.Add(userId);
 
             if (communityInfo.CoverImage != null)
             {
@@ -339,7 +337,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 Community community = await _communityRepository.GetFirstAsync(c => c.Id == dtoInfo.CommunityId);
 
                 //   Admin yapılacak kişi participiant mı ?            Isteği atan kişi admin mi ?
-                if (!community.Participiants.Contains(dtoInfo.UserId) || userId != community.AdminId)
+                var isParticipiantTargetUser = await _participiantRepository.AnyAsync(p => p.CommunityId == community.Id && p.UserId == dtoInfo.UserId ); 
+                if (!isParticipiantTargetUser || userId != community.AdminId)
                     return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.NotAuthenticated));
 
                 community.AdminId = dtoInfo.UserId;
@@ -430,8 +429,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<List<string>>> GetParticipiants(string id)
         {
-            Community community = await _communityRepository.GetFirstAsync(c => c.Id == id);
-            return await Task.FromResult(Response<List<string>>.Success(community.Participiants.ToList(), ResponseStatus.Success));
+            var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id);
+            var participiantIds = participiants.Select(p => p.UserId).ToList();
+            return await Task.FromResult(Response<List<string>>.Success(participiantIds, ResponseStatus.Success));
         }
 
 

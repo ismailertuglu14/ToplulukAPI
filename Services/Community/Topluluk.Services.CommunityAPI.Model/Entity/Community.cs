@@ -22,7 +22,6 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 		public bool IsRestricted { get; set; } = false;
 		public int? ParticipiantLimit { get; set; }
 		public string? Location { get; set; }
-		public ICollection<string> Participiants { get; set; }
 
 		public ICollection<string> JoinRequestWaitings { get; set; }
 
@@ -42,7 +41,6 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 			ModeratorIds = new HashSet<Moderator>();
 			JoinRequestWaitings = new HashSet<string>();
 			Questions = new HashSet<Question>();
-			Participiants = new HashSet<string>();
 			Cities = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();
 		}
