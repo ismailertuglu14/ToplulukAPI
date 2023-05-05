@@ -44,10 +44,14 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             {
                 DatabaseResponse response = await _communityRepository.GetAllAsync(take, skip, c => c.IsPublic != false
                                                                         && c.IsVisible != false );
-                List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
-
-
-                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
+                List<CommunityGetPreviewDto> dtos = _mapper.Map<List<CommunityGetPreviewDto>>(response.Data);
+                var communityIds = dtos.Select(c => c.Id).ToList();
+                var communityParticipiants = await _participiantRepository.GetCommunityParticipiants(communityIds);
+                foreach (var dto in dtos)
+                {
+                    dto.ParticipiantsCount = communityParticipiants.FirstOrDefault(c => c.Key == dto.Id).Value;
+                }
+                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dtos, ResponseStatus.Success));
             }
             catch(Exception e)
             {
