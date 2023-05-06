@@ -179,7 +179,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
 
                 List<Post> response = await _postRepository.GetPostsWithDescending(skip, take,
-                    p => p.IsDeleted == false && getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
+                    p => p.IsDeleted == false && (getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId));
                 
                 IdList idList = new() { ids =  response.Select(p => p.UserId).ToList() };
                 
@@ -188,7 +188,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 var usersTask = _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
                 
                 await Task.WhenAll( getUserFollowingsTask, usersTask);
-
 
                 List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response);
                 var usersResponse = usersTask.Result;
