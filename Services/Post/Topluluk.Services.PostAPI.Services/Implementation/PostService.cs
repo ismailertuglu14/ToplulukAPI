@@ -179,7 +179,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
 
                 List<Post> response = await _postRepository.GetPostsWithDescending(skip, take,
-                    p => getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
+                    p => p.IsDeleted == false && getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId);
                 
                 IdList idList = new() { ids =  response.Select(p => p.UserId).ToList() };
                 
