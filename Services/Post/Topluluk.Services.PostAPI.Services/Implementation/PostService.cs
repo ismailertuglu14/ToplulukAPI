@@ -88,7 +88,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             try
             {
                 PostInteraction? _interaction =
-                    await _postInteractionRepository.GetFirstAsync(pi => pi.PostId == postId);
+                    await _postInteractionRepository.GetFirstAsync(pi => pi.PostId == postId && pi.UserId == userId);
                 
                 if (_interaction == null) throw new Exception("Not found");
                 if (_interaction.UserId == userId)
