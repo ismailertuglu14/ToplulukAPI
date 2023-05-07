@@ -340,6 +340,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             if (post != null)
             {
                 _postInteractionRepository.DeleteByExpression(p => p.PostId == post.Id);
+                _commentRepository.DeleteByExpression(p =>p.PostId == post.Id);
                 _postRepository.DeleteById(post.Id);
 
                 return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
