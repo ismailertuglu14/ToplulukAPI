@@ -88,7 +88,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             try
             {
                 PostInteraction? _interaction =
-                    await _postInteractionRepository.GetFirstAsync(pi => pi.PostId == postId && pi.UserId == userId);
+                    await _postInteractionRepository.GetFirstAsync(pi => pi.PostId == postId);
                 
                 if (_interaction == null) throw new Exception("Not found");
                 if (_interaction.UserId == userId)
@@ -337,10 +337,14 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
 
             Post post = await _postRepository.GetFirstAsync(p => p.Id == postDto.PostId);
+            if (post != null)
+            {
+                _postInteractionRepository.DeleteByExpression(p => p.PostId == post.Id);
+                _postRepository.DeleteById(post.Id);
 
-            _postRepository.DeleteById(post.Id);
-
-            return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+            }
+            return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotFound));
         }
 
         public async Task<Response<string>> DeleteComment(string userId, string commentId)
