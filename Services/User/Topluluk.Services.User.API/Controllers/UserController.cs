@@ -31,7 +31,7 @@ namespace Topluluk.Services.User.API.Controllers
 
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("GetUserById")]
         [Authorize] 
         public async Task<Response<GetUserByIdDto>> GetUserById(string userId)
         {
@@ -88,6 +88,11 @@ namespace Topluluk.Services.User.API.Controllers
         public async Task<Response<string>> UnFollowUser([FromBody] UserFollowDto userFollowInfo)
         {
             return await _userService.UnFollowUser(this.UserId, userFollowInfo);
+        }
+        [HttpPost("remove-follow-request/{targetId}")]
+        public async Task<Response<NoContent>> RemoveFollowRequest(string targetId)
+        {
+            return await _userService.RemoveFollowRequest(this.UserId, targetId);
         }
         [HttpPost("remove-follower")]
         public async Task<Response<string>> RemoveUserFromFollower([FromBody] UserFollowDto userFollowInfo)

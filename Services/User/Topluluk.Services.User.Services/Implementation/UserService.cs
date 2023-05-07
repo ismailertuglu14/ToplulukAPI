@@ -3,7 +3,6 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using AutoMapper;
 using DBHelper.Repository;
-using DBHelper.Repository.Redis;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
@@ -15,8 +14,6 @@ using Topluluk.Services.User.Model.Entity;
 using Topluluk.Services.User.Services.Interface;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
-using Topluluk.Shared.Enums;
-using Topluluk.Shared.Helper;
 using _User = Topluluk.Services.User.Model.Entity.User;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
@@ -31,7 +28,8 @@ namespace Topluluk.Services.User.Services.Implementation
         private readonly IMapper _mapper;
         private readonly RestClient _client;
         private readonly IRedisRepository _redisRepository;
-        public UserService(IRedisRepository redisRepository, IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper)
+        private readonly IUserFollowRequestRepository _followRequestRepository;
+        public UserService(IRedisRepository redisRepository, IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper, IUserFollowRequestRepository followRequestRepository)
         {
             _redisRepository = redisRepository;
             _userRepository = userRepository;
@@ -39,6 +37,7 @@ namespace Topluluk.Services.User.Services.Implementation
             _blockedUserRepository = blockedUserRepository;
             _capPublisher = capPublisher;
             _mapper = mapper;
+            _followRequestRepository = followRequestRepository;
             _client = new RestClient();
         }
 
@@ -200,6 +199,10 @@ namespace Topluluk.Services.User.Services.Implementation
                         ResponseStatus.BadRequest));
                 
                 _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
+                
+                if(targetUser==null)
+                    return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
+
                 bool isFollowing =
                     await _followRepository.AnyAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
 
@@ -208,17 +211,12 @@ namespace Topluluk.Services.User.Services.Implementation
                 
                 if (targetUser.IsPrivate)
                 {
-                    // todo: Refactor here.
-                    bool isContainSourceId = targetUser.IncomingFollowRequests!.Contains(sourceUser.Id);
-
-                    if (isContainSourceId != true)
+                    FollowRequest requestDto = new FollowRequest()
                     {
-                        targetUser.IncomingFollowRequests!.Add(sourceUser.Id);
-                        sourceUser.OutgoingFollowRequests!.Add(targetUser.Id);
-                        List<_User> usersUpdate = new() { sourceUser, targetUser };
-                        _userRepository.BulkUpdate(usersUpdate);
-                    }
-
+                        SourceId = userId,
+                        TargetId = targetUser.Id
+                    };
+                    await _followRequestRepository.InsertAsync(requestDto);
                     return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
                 }
                 else
@@ -250,6 +248,27 @@ namespace Topluluk.Services.User.Services.Implementation
             _followRepository.DeleteCompletely(isSourceFollowingTarget.Id);
 
             return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
+        }
+
+        public async Task<Response<NoContent>> RemoveFollowRequest(string userId, string targetId)
+        {
+            try
+            {
+                FollowRequest? followRequest = await _followRequestRepository.GetFirstAsync(f => f.SourceId == userId && f.TargetId == targetId);
+                
+                if (followRequest != null)
+                {
+                    _followRequestRepository.DeleteCompletely(followRequest.Id);
+                    return Response<NoContent>.Success(ResponseStatus.Success);
+                }
+
+                return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(Response<NoContent>.Fail($"{e}", ResponseStatus.InitialError));
+
+            }
         }
 
         public async Task<Response<string>> RemoveUserFromFollowers(string userId, UserFollowDto userFollowInfo)

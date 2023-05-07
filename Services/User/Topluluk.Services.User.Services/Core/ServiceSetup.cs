@@ -31,6 +31,7 @@ namespace Topluluk.Services.User.Services.Core
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserFollowRepository, UserFollowRepository>();
             services.AddScoped<IBlockedUserRepository, BlockedUserRepository>();
+            services.AddScoped<IUserFollowRequestRepository, UserFollowRequestRepository>();
             services.AddSingleton<IRedisRepository, RedisCacheRepository>();
         }
         public static void AddServicesForServices(this IServiceCollection services)
