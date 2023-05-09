@@ -439,17 +439,16 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
             try
             {
-                Post post = await _postRepository.GetFirstAsync(p => p.Id == postId);
+                var post = await _postRepository.GetFirstAsync(p => p.Id == postId);
+                var postDto = _mapper.Map<GetPostByIdDto>(post);
+                postDto.InteractionCount = await _postInteractionRepository.Count(p => !p.IsDeleted && p.PostId == post.Id);
 
-                GetPostByIdDto postDto = _mapper.Map<GetPostByIdDto>(post);
-                postDto.InteractionCount = await _postInteractionRepository.Count(p => p.IsDeleted == false && p.PostId == post.Id);
 
-
-                var _comments = await _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId);
-                if (_comments.Data != null && _comments.Data.Count > 0)
+                var _comments =  _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId).Result.Data as List<PostComment>;
+                if (_comments != null && _comments.Count > 0)
                 {
-                    postDto.CommentCount = _comments.Data?.Count;
-                    List<CommentGetDto> commentDtos = _mapper.Map<List<PostComment>, List<CommentGetDto>>(_comments.Data);
+                    postDto.CommentCount = await _commentRepository.Count(p => p.PostId == postId);
+                    List<CommentGetDto> commentDtos = _mapper.Map<List<PostComment>, List<CommentGetDto>>(_comments);
 
                     var ids = commentDtos.Select(comment => comment.UserId).ToList();
                     var idList = new IdList { ids = ids };
@@ -457,7 +456,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
                     var response = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(request);
                     
-                    for (int i = 0; i < _comments.Data.Count; i++)
+                    for (int i = 0; i < _comments.Count; i++)
                     {
                         UserInfoDto user = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId)
                             .FirstOrDefault() ?? throw new InvalidOperationException();
@@ -469,8 +468,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     }
 
                 }
-
-
+                
                 if (post.CommunityId != null)
                 {
                     // Get community title request
