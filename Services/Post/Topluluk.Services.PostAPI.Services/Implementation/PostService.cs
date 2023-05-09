@@ -442,15 +442,13 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 Post post = await _postRepository.GetFirstAsync(p => p.Id == postId);
 
                 GetPostByIdDto postDto = _mapper.Map<GetPostByIdDto>(post);
+                postDto.InteractionCount = await _postInteractionRepository.Count(p => p.IsDeleted == false && p.PostId == post.Id);
 
-             //   postDto.InteractionCount = post.Interactions.Count;
 
                 var _comments = await _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId);
                 if (_comments.Data != null && _comments.Data.Count > 0)
                 {
                     postDto.CommentCount = _comments.Data?.Count;
-                    CommentGetDto commentDto = new();
-
                     List<CommentGetDto> commentDtos = _mapper.Map<List<PostComment>, List<CommentGetDto>>(_comments.Data);
 
                     var ids = commentDtos.Select(comment => comment.UserId).ToList();
@@ -458,7 +456,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                     var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
                     var response = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(request);
-
+                    
                     for (int i = 0; i < _comments.Data.Count; i++)
                     {
                         UserInfoDto user = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId)
@@ -660,7 +658,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 var getUserListRequest = new RestRequest("https://localhost:7149/api/user/get-user-info-list")
                     .AddQueryParameter("skip", skip)
                     .AddQueryParameter("take", take)
-                    .AddJsonBody(new UserIdListDto { Ids = userIds });
+                    .AddJsonBody(new IdList { ids = userIds });
 
                 var getUserListResponse = await _client.ExecutePostAsync<Response<List<GetUserByIdDto>>>(getUserListRequest);
                 var users = getUserListResponse.Data.Data;
@@ -673,8 +671,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     _dto.UserId = post.UserId;
                     _dto.FirstName =user!.FirstName;
                     _dto.LastName =user.LastName;
-                    _dto.UserId = post.UserId;
-
                     _dto.ProfileImage = user!.ProfileImage;
                     _dto.Gender = user!.Gender;
                     _dto.Description = post.Description;
