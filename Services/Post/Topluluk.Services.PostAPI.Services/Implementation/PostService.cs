@@ -341,6 +341,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             {
                 _postInteractionRepository.DeleteByExpression(p => p.PostId == post.Id);
                 _commentRepository.DeleteByExpression(p =>p.PostId == post.Id);
+                _savedPostRepository.DeleteByExpression(p => p.PostId == post.Id);
                 _postRepository.DeleteById(post.Id);
 
                 return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
@@ -629,19 +630,15 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 {
                     DatabaseResponse response = await _savedPostRepository.GetAllAsync(take, skip, sp => sp.UserId == userId);
                     List<GetPostForFeedDto> dtos = new();
-                    UserIdListDto userIds = new();
+                    
                     List<string> PostIds = new List<string>();
-                    foreach (var r in response.Data as List<SavedPost>)
-                    {
-                        PostIds.Add(r.PostId);
-                    }
+                    PostIds = (response.Data as List<SavedPost>).Select(p => p.PostId).ToList();
 
                     DatabaseResponse response2 = await _postRepository.GetAllAsync(take, skip, p => PostIds.Contains(p.Id));
+                    UserIdListDto userIds = new();
+                    userIds.Ids = (response2.Data as List<Post>).Select(r => r.UserId).ToList(); 
+
                     
-                    foreach (var r in response2.Data as List<Post>)
-                    {
-                        userIds.Ids.Add(r.UserId);
-                    }
                     var getUserListRequest = new RestRequest($"https://localhost:7149/api/user/get-user-info-list")
                                                 .AddQueryParameter("skip", skip)
                                                 .AddQueryParameter("take", take)
