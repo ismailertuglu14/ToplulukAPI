@@ -11,6 +11,7 @@ using Topluluk.Services.PostAPI.Model.Dto.Http;
 using RestSharp;
 using Topluluk.Services.POSTAPI.Model.Dto.Http;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Driver;
 using Topluluk.Shared.Constants;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
@@ -19,20 +20,20 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 {
 	public class PostService : IPostService
 	{
-
         private readonly IPostRepository _postRepository;
         private readonly ISavedPostRepository _savedPostRepository;
         private readonly IPostInteractionRepository _postInteractionRepository;
         private readonly IPostCommentRepository _commentRepository;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
-
-        public PostService(IPostRepository postRepository, IPostInteractionRepository postInteractionRepository, ISavedPostRepository savedPostRepository, IPostCommentRepository commentRepository, IMapper mapper)
+        private readonly IMongoClient _mongoClient;
+        public PostService(IPostRepository postRepository, IPostInteractionRepository postInteractionRepository, ISavedPostRepository savedPostRepository, IPostCommentRepository commentRepository, IMapper mapper, IMongoClient mongoClient)
         {
             _postRepository = postRepository;
             _savedPostRepository = savedPostRepository;
             _postInteractionRepository = postInteractionRepository;
             _mapper = mapper;
+            _mongoClient = mongoClient;
             _commentRepository = commentRepository;
             _client = new RestClient();
         }
@@ -335,18 +336,35 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
         public async Task<Response<string>> Delete(PostDeleteDto postDto)
         {
+            IClientSessionHandle session = null;
 
-            Post post = await _postRepository.GetFirstAsync(p => p.Id == postDto.PostId);
-            if (post != null)
+            try
             {
-                _postInteractionRepository.DeleteByExpression(p => p.PostId == post.Id);
-                _commentRepository.DeleteByExpression(p =>p.PostId == post.Id);
-                _savedPostRepository.DeleteByExpression(p => p.PostId == post.Id);
-                _postRepository.DeleteById(post.Id);
+                session = await _mongoClient.StartSessionAsync();
+                session.StartTransaction();
+                
+                Post post = await _postRepository.GetFirstAsync(p => p.Id == postDto.PostId);
+                if (post != null)
+                {
+                    _postInteractionRepository.DeleteByExpression(p => p.PostId == post.Id);
+                    _commentRepository.DeleteByExpression(p =>p.PostId == post.Id);
+                    _savedPostRepository.DeleteByExpression(p => p.PostId == post.Id);
+                    _postRepository.DeleteById(post.Id);
+                }
+
+                // commit transaction
+                await session.CommitTransactionAsync();
 
                 return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
+
             }
-            return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.NotFound));
+            catch (Exception ex)
+            {
+                // rollback transaction
+                await session.AbortTransactionAsync();
+
+                return await Task.FromResult(Response<string>.Fail("Failed", Shared.Enums.ResponseStatus.InitialError));
+            }
         }
 
         public async Task<Response<string>> DeleteComment(string userId, string commentId)
@@ -626,46 +644,46 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                if (userId != null)
+                if (userId == null)
                 {
-                    DatabaseResponse response = await _savedPostRepository.GetAllAsync(take, skip, sp => sp.UserId == userId);
-                    List<GetPostForFeedDto> dtos = new();
-                    
-                    List<string> PostIds = new List<string>();
-                    PostIds = (response.Data as List<SavedPost>).Select(p => p.PostId).ToList();
-
-                    DatabaseResponse response2 = await _postRepository.GetAllAsync(take, skip, p => PostIds.Contains(p.Id));
-                    UserIdListDto userIds = new();
-                    userIds.Ids = (response2.Data as List<Post>).Select(r => r.UserId).ToList(); 
-
-                    
-                    var getUserListRequest = new RestRequest($"https://localhost:7149/api/user/get-user-info-list")
-                                                .AddQueryParameter("skip", skip)
-                                                .AddQueryParameter("take", take)
-                                                .AddBody(userIds);
-
-                    var getUserListResponse = await _client.ExecutePostAsync<Response<List<GetUserByIdDto>>>(getUserListRequest);
-                    
-                    byte i = 0;
-                    foreach (var dto in response.Data as List<SavedPost>)
-                    {
-                        Post post = await _postRepository.GetFirstAsync(p => p.Id == dto.PostId);
-                        dtos.Add(_mapper.Map<GetPostForFeedDto>(post));
-                       
-                        dtos[i].FirstName = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().FirstName;
-                        dtos[i].LastName = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().LastName;
-                        dtos[i].ProfileImage = getUserListResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault().ProfileImage;
-                        dtos[i].IsSaved = true;
-                        //dtos[i].IsFollowing = getUserListResponse.Data[i].;
-                        i++;
-                    }
-
-                    return await Task.FromResult(Response<List<GetPostForFeedDto>>.Success(dtos,ResponseStatus.Success));
+                    return Response<List<GetPostForFeedDto>>.Fail("User not found", ResponseStatus.NotFound);
                 }
-                else
+        
+                var savedPostResponse = await _savedPostRepository.GetAllAsync(take, skip, sp => sp.UserId == userId);
+                var savedPosts = savedPostResponse.Data as List<SavedPost>;
+
+                var postIds = savedPosts.Select(p => p.PostId).ToList();
+                var postResponse = await _postRepository.GetAllAsync(take, skip, p => postIds.Contains(p.Id));
+                var posts = postResponse.Data as List<Post>;
+
+                var userIds = posts.Select(p => p.UserId).ToList();
+                var getUserListRequest = new RestRequest("https://localhost:7149/api/user/get-user-info-list")
+                    .AddQueryParameter("skip", skip)
+                    .AddQueryParameter("take", take)
+                    .AddJsonBody(new UserIdListDto { Ids = userIds });
+
+                var getUserListResponse = await _client.ExecutePostAsync<Response<List<GetUserByIdDto>>>(getUserListRequest);
+                var users = getUserListResponse.Data.Data;
+                var dtos = savedPosts.Select(dto =>
                 {
-                    return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail("User Not Found",ResponseStatus.NotFound));
-                }
+                    var post = posts.FirstOrDefault(p => p.Id == dto.PostId);
+                    var user = users.FirstOrDefault(u => u.Id == post!.UserId);
+                    var _dto = _mapper.Map<GetPostForFeedDto>(post);
+                    _dto.Id = post!.Id;
+                    _dto.UserId = post.UserId;
+                    _dto.FirstName =user!.FirstName;
+                    _dto.LastName =user.LastName;
+                    _dto.UserId = post.UserId;
+
+                    _dto.ProfileImage = user!.ProfileImage;
+                    _dto.Gender = user!.Gender;
+                    _dto.Description = post.Description;
+                    _dto.IsSaved = true;
+                    return _dto;
+                }).ToList();
+
+                return await Task.FromResult(Response<List<GetPostForFeedDto>>.Success(dtos,ResponseStatus.Success));
+
             }
             catch (Exception e)
             {
