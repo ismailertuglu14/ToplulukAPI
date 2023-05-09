@@ -3929,10 +3929,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "DBHelper": "1.0.0",
-          "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
-          "Topluluk.Services.CommunityAPI.Model": "1.0.0",
-          "Topluluk.Shared": "1.0.0"
+          "DBHelper": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Topluluk.Services.AuthenticationAPI.Data.dll": {}
@@ -3948,8 +3945,6 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "FluentValidation": "11.5.0",
-          "Microsoft.EntityFrameworkCore": "6.0.13",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.13",
           "MongoDB.Bson": "2.19.0",
           "System.Diagnostics.Tools": "4.3.0",
           "Topluluk.Shared": "1.0.0"
@@ -3979,20 +3974,6 @@
         },
         "runtime": {
           "bin/placeholder/Topluluk.Services.AuthenticationAPI.Services.dll": {}
-        }
-      },
-      "Topluluk.Services.CommunityAPI.Model/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "Topluluk.Shared": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Topluluk.Services.CommunityAPI.Model.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Topluluk.Services.CommunityAPI.Model.dll": {}
         }
       },
       "Topluluk.Shared/1.0.0": {
@@ -10797,11 +10778,6 @@
       "type": "project",
       "path": "../Topluluk.Services.AuthenticationAPI.Services/Topluluk.Services.AuthenticationAPI.Services.csproj",
       "msbuildProject": "../Topluluk.Services.AuthenticationAPI.Services/Topluluk.Services.AuthenticationAPI.Services.csproj"
-    },
-    "Topluluk.Services.CommunityAPI.Model/1.0.0": {
-      "type": "project",
-      "path": "../../Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj",
-      "msbuildProject": "../../Community/Topluluk.Services.CommunityAPI.Model/Topluluk.Services.CommunityAPI.Model.csproj"
     },
     "Topluluk.Shared/1.0.0": {
       "type": "project",

@@ -18,8 +18,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\DBHelper\DBHelper.csproj" />
-    <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
-    <ProjectReference Include="..\Topluluk.Services.AuthenticationAPI.Model\Topluluk.Services.AuthenticationAPI.Model.csproj" />
-    <ProjectReference Include="..\..\Community\Topluluk.Services.CommunityAPI.Model\Topluluk.Services.CommunityAPI.Model.csproj" />
   </ItemGroup>
 </Project>

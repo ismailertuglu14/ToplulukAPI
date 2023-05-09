@@ -67,7 +67,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.genruntimeconfig.cache
 /Users/ismail/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/ref/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.deps.json
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.runtimeconfig.json
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/bin/Debug/net6.0/Topluluk.Shared.dll
@@ -81,5 +80,4 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/refint/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/obj/Debug/net6.0/ref/Topluluk.Services.AuthenticationAPI.Model.dll

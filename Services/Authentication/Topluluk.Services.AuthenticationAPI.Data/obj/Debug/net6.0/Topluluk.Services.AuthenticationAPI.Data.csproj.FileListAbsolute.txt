@@ -87,12 +87,10 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Data.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/DBHelper.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Shared.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/DBHelper.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Shared.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Data.csproj.AssemblyReference.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Data.GeneratedMSBuildEditorConfig.editorconfig
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Data/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Data.AssemblyInfoInputs.cache

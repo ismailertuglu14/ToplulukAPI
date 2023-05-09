@@ -25,7 +25,8 @@ public class UserFileController
     [HttpPost("delete-user-image")]
     public async Task<Response<string>> DeleteUserImage( NameObject fileName)
     {
-        return await _storageService.DeleteAsync("user-images", fileName.Name);
+        var result = await _storageService.DeleteAsync("user-images", fileName.Name);
+        return  Response<string>.Success(result.Data, ResponseStatus.Success);
     }
     
     [HttpPost("upload-user-banner")]
