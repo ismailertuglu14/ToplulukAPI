@@ -326,20 +326,15 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5)
         {
-            /* id, image, firstName, lastName, userName, isPrivate(direkt follow edip edememe durumu için gerekli.)
-             */
+            var users = _userRepository.GetListByExpressionPaginated(0, 10, u => u.IsDeleted == false && u.Id != userId);
 
-            _User currentUser = await _userRepository.GetFirstAsync(u => u.Id == userId);
-            List<_User> response = new();
-            // Sorgulanan kullanıcı bizi bloklamamış olmalı
-            // Bizim sorguladığımız kullanıcıyı bloklamamış olmamız lazım.
-             response =  _userRepository.GetListByExpressionPaginated(limit, 0, u => u.IsDeleted == false && u.Id != userId);
-            
-            //u.BlockedUsers!.Contains("") == false
-            //&& currentUser.BlockedUsers!.Contains(u.Id) == false
-            List<UserSuggestionsDto> userSuggestions = _mapper.Map<List<UserSuggestionsDto>>(response);
+            var followingUserIds = _followRepository.GetListByExpression(f => f.SourceId == userId);
+    
+            var filteredUsers = users.Where(u => !followingUserIds.Select(x => x.TargetId).ToList().Contains(u.Id)).ToList();
 
-            return await Task.FromResult(Response<List<UserSuggestionsDto>>.Success(userSuggestions, ResponseStatus.Success));
+            var userDtos = _mapper.Map<List<UserSuggestionsDto>>(filteredUsers);
+
+            return await Task.FromResult(Response<List<UserSuggestionsDto>>.Success(userDtos, ResponseStatus.Success));
 
         }
 
