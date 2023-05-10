@@ -27,6 +27,7 @@ namespace Topluluk.Services.EventAPI.Model.Entity
         public DateTime? EndDate { get; set; } = DateTime.Now.AddHours(1);
 
 		public ICollection<string> Attendees { get; set; }
+		public List<string> Sponsors { get; set; }
 
 		// Everyone can see or only those with link
 		public bool IsVisible { get; set; }
@@ -37,7 +38,9 @@ namespace Topluluk.Services.EventAPI.Model.Entity
 		{
             Images = new List<string>();
 			Attendees = new HashSet<string>();
+			Sponsors = new List<string>();
 		}
 	}
+	
 }
 

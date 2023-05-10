@@ -301,30 +301,48 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<GetEventByIdDto>> GetEventById(string userId, string id)
+        public async Task<Response<GetEventByIdDto>> GetEventById(string userId, string token, string id)
         {
             try
             {
-                Event _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
+                var _event = await _eventRepository.GetFirstAsync(e => e.Id == id);
 
                 if (_event != null)
                 {
-                    GetEventByIdDto dto = _mapper.Map<GetEventByIdDto>(_event);
-                    dto.CommentCount = await _commentRepository.Count(c => c.IsDeleted == false && c.EventId == id );
-                    dto.IsAttendeed =
-                        await _attendeesRepository.AnyAsync(c => c.IsDeleted == false && c.UserId == userId && c.EventId == _event.Id);
-                    dto.AttendeesCount = await _attendeesRepository.Count(a => a.IsDeleted == false && a.EventId == id);
-                    return await Task.FromResult(Response<GetEventByIdDto>.Success(dto, ResponseStatus.Success));
+                    var dto = _mapper.Map<GetEventByIdDto>(_event);
+                    
+                    var eventOwnerRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/GetUserById")
+                        .AddQueryParameter("userId",_event.UserId)
+                        .AddHeader("Authorization",token);
+                    var eventOwnerResponseTask = _client.ExecuteGetAsync<Response<GetUserInfoDto>>(eventOwnerRequest);
+
+                    var commentCountTask =  _commentRepository.Count(c => !c.IsDeleted && c.EventId == id);
+                    var isAttendeedTask =  _attendeesRepository.AnyAsync(c => !c.IsDeleted && c.UserId == userId && c.EventId == _event.Id);
+                    var attendeesCountTask =  _attendeesRepository.Count(a => !a.IsDeleted && a.EventId == id);
+                    await Task.WhenAll(eventOwnerResponseTask, commentCountTask, isAttendeedTask, attendeesCountTask);
+                    
+                    dto.CommentCount = commentCountTask.Result;
+                    dto.IsAttendeed = isAttendeedTask.Result;
+                    dto.AttendeesCount = attendeesCountTask.Result;
+                    
+                    var user = eventOwnerResponseTask.Result.Data.Data;
+                    dto.UserId = user.Id;
+                    dto.FirstName = user.FirstName;
+                    dto.LastName = user.LastName;
+                    dto.ProfileImage = user.ProfileImage;
+                    dto.Gender = user.Gender;
+                    
+                    return Response<GetEventByIdDto>.Success(dto, ResponseStatus.Success);
                 }
 
-                return await Task.FromResult(Response<GetEventByIdDto>.Fail("Not Found", ResponseStatus.NotFound));               
-
+                return Response<GetEventByIdDto>.Fail("Not Found", ResponseStatus.NotFound);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<GetEventByIdDto>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
+                return Response<GetEventByIdDto>.Fail($"Some error occured: {e}", ResponseStatus.InitialError);
             }
         }
+
 
         
 

@@ -19,7 +19,7 @@ namespace Topluluk.Services.EventAPI.Controllers
         [HttpGet("{id}")]
         public async Task<Response<GetEventByIdDto>> GetEventById(string id)
         {
-            return await _eventService.GetEventById(this.UserId, id);
+            return await _eventService.GetEventById(this.UserId, this.Token, id);
         }
         
         [HttpPost("create")]
