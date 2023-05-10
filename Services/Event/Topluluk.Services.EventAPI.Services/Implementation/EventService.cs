@@ -324,7 +324,8 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     dto.CommentCount = commentCountTask.Result;
                     dto.IsAttendeed = isAttendeedTask.Result;
                     dto.AttendeesCount = attendeesCountTask.Result;
-                    
+                    dto.Location = _event.IsLocationOnline ? _event.LocationURL : _event.LocationPlace; 
+
                     var user = eventOwnerResponseTask.Result.Data.Data;
                     dto.UserId = user.Id;
                     dto.FirstName = user.FirstName;
