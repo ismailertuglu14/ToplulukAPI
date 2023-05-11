@@ -2,35 +2,6 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "AutoMapper/12.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.7.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/AutoMapper.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.1/AutoMapper.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.0": {
-        "type": "package",
-        "dependencies": {
-          "AutoMapper": "12.0.0",
-          "Microsoft.Extensions.Options": "6.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
-        }
-      },
       "AWSSDK.Core/3.7.100.14": {
         "type": "package",
         "compile": {
@@ -129,19 +100,6 @@
         "runtime": {
           "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll": {
             "related": ".pdb"
-          }
-        }
-      },
-      "FluentValidation/11.5.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/FluentValidation.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/FluentValidation.dll": {
-            "related": ".xml"
           }
         }
       },
@@ -959,7 +917,7 @@
           }
         }
       },
-      "Microsoft.CSharp/4.7.0": {
+      "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -3504,7 +3462,6 @@
           "MongoDB.Bson": "2.19.0",
           "MongoDB.Driver": "2.19.0",
           "StackExchange.Redis": "2.6.104",
-          "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
           "Topluluk.Shared": "1.0.0"
         },
         "compile": {
@@ -3512,24 +3469,6 @@
         },
         "runtime": {
           "bin/placeholder/DBHelper.dll": {}
-        }
-      },
-      "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "FluentValidation": "11.5.0",
-          "MongoDB.Bson": "2.19.0",
-          "System.Diagnostics.Tools": "4.3.0",
-          "Topluluk.Shared": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Topluluk.Services.AuthenticationAPI.Model.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Topluluk.Services.AuthenticationAPI.Model.dll": {}
         }
       },
       "Topluluk.Services.QRAPI.Data/1.0.0": {
@@ -3591,35 +3530,6 @@
     }
   },
   "libraries": {
-    "AutoMapper/12.0.1": {
-      "sha512": "hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
-      "type": "package",
-      "path": "automapper/12.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "automapper.12.0.1.nupkg.sha512",
-        "automapper.nuspec",
-        "icon.png",
-        "lib/netstandard2.1/AutoMapper.dll",
-        "lib/netstandard2.1/AutoMapper.xml"
-      ]
-    },
-    "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.0": {
-      "sha512": "XCJ4E3oKrbRl1qY9Mr+7uyC0xZj1+bqQjmQRWTiTKiVuuXTny+7YFWHi20tPjwkMukLbicN6yGlDy5PZ4wyi1w==",
-      "type": "package",
-      "path": "automapper.extensions.microsoft.dependencyinjection/12.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
-        "automapper.extensions.microsoft.dependencyinjection.nuspec",
-        "icon.png",
-        "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
-      ]
-    },
     "AWSSDK.Core/3.7.100.14": {
       "sha512": "gnEgxBlk4PFEfdPE8Lkf4+D16MZFYSaW7/o6Wwe5e035QWUkTJX0Dn4LfTCdV5QSEL/fOFxu+yCAm55eIIBgog==",
       "type": "package",
@@ -3734,29 +3644,6 @@
         "dotnetcore.cap.rabbitmq.nuspec",
         "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll",
         "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.pdb"
-      ]
-    },
-    "FluentValidation/11.5.0": {
-      "sha512": "DExajJh+cguLk1XodH+LVVFuSsCqoEmXOQsxqP5rvVeUD1hIda59cyuL73LHJAYIrFatR8ZZ1H7kfejHN9XFWw==",
-      "type": "package",
-      "path": "fluentvalidation/11.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "fluent-validation-icon.png",
-        "fluentvalidation.11.5.0.nupkg.sha512",
-        "fluentvalidation.nuspec",
-        "lib/net5.0/FluentValidation.dll",
-        "lib/net5.0/FluentValidation.xml",
-        "lib/net6.0/FluentValidation.dll",
-        "lib/net6.0/FluentValidation.xml",
-        "lib/net7.0/FluentValidation.dll",
-        "lib/net7.0/FluentValidation.xml",
-        "lib/netstandard2.0/FluentValidation.dll",
-        "lib/netstandard2.0/FluentValidation.xml",
-        "lib/netstandard2.1/FluentValidation.dll",
-        "lib/netstandard2.1/FluentValidation.xml"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
@@ -4373,10 +4260,10 @@
         "microsoft.codeanalysis.razor.nuspec"
       ]
     },
-    "Microsoft.CSharp/4.7.0": {
-      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+    "Microsoft.CSharp/4.5.0": {
+      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
-      "path": "microsoft.csharp/4.7.0",
+      "path": "microsoft.csharp/4.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4389,7 +4276,6 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
-        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -4399,7 +4285,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.7.0.nupkg.sha512",
+        "microsoft.csharp.4.5.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -9714,11 +9600,6 @@
       "type": "project",
       "path": "../../../Shared/DBHelper/DBHelper.csproj",
       "msbuildProject": "../../../Shared/DBHelper/DBHelper.csproj"
-    },
-    "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
-      "type": "project",
-      "path": "../../Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj",
-      "msbuildProject": "../../Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
     },
     "Topluluk.Services.QRAPI.Data/1.0.0": {
       "type": "project",

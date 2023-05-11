@@ -165,9 +165,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                var getUserFollowingsRequest =
-                    new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id",
-                        userId);
+                var getUserFollowingsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id", userId);
                 var getUserFollowingsTask = _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
 
                 var getUserFollowingsResponse = getUserFollowingsTask.Result;
@@ -177,18 +175,18 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         Response<List<GetPostForFeedDto>>.Fail("Failed", ResponseStatus.Failed));
                 }
 
-                var posts = await _postRepository.GetPostsWithDescending(skip, take,
+                var posts = await _postRepository.GetPostsWithDescending(skip, take, 
                     p => p.IsDeleted == false && (getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId));
                 
                 IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
                 
-                var usersRequest =
-                    new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
+                var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
                 var usersTask = _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
                 
                 await Task.WhenAll( getUserFollowingsTask, usersTask);
 
                 var dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(posts);
+                
                 var usersResponse = usersTask.Result;
                 
                 for (int i = 0; i < posts.Count; i++)
@@ -198,6 +196,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     if (user == null)
                     {
                         dtos.Remove(dtos[i]);
+                        i--;
                         continue;
                     }
                     dtos[i].UserId = user.Id;
@@ -215,6 +214,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         _commentRepository.Count(c => c.PostId == posts[i].Id && c.IsDeleted == false);
                     var isSavedTask = _savedPostRepository.AnyAsync(sp => sp.PostId == posts[i].Id && sp.UserId == userId);
                     await Task.WhenAll(isUserInteractedTask, commentCountTask, interactionsTask, interactionCountTask,isSavedTask);
+                    
                     if (isUserInteractedTask.Result != null)
                     {
                         dtos[i].IsInteracted = new PostInteractedDto()
@@ -236,9 +236,6 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                             .ToList();
                     }
                     dtos[i].InteractionCount = interactionCountTask.Result;
-                    
-                    //.
-                    
                     dtos[i].CommentCount = commentCountTask.Result;
                     dtos[i].IsSaved = isSavedTask.Result;
                         

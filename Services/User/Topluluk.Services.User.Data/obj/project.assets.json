@@ -18,19 +18,6 @@
           }
         }
       },
-      "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.0": {
-        "type": "package",
-        "dependencies": {
-          "AutoMapper": "12.0.0",
-          "Microsoft.Extensions.Options": "6.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
-        }
-      },
       "AWSSDK.Core/3.7.100.14": {
         "type": "package",
         "compile": {
@@ -72,19 +59,6 @@
         },
         "runtime": {
           "lib/net5.0/DnsClient.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "FluentValidation/11.5.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/FluentValidation.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/FluentValidation.dll": {
             "related": ".xml"
           }
         }
@@ -1177,19 +1151,20 @@
           }
         }
       },
-      "Microsoft.Extensions.Options/6.0.0": {
+      "Microsoft.Extensions.Options/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Primitives": "6.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Primitives": "2.2.0",
+          "System.ComponentModel.Annotations": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.1/Microsoft.Extensions.Options.dll": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.1/Microsoft.Extensions.Options.dll": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {
             "related": ".xml"
           }
         }
@@ -3229,7 +3204,6 @@
           "MongoDB.Bson": "2.19.0",
           "MongoDB.Driver": "2.19.0",
           "StackExchange.Redis": "2.6.104",
-          "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
           "Topluluk.Shared": "1.0.0"
         },
         "compile": {
@@ -3237,24 +3211,6 @@
         },
         "runtime": {
           "bin/placeholder/DBHelper.dll": {}
-        }
-      },
-      "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "FluentValidation": "11.5.0",
-          "MongoDB.Bson": "2.19.0",
-          "System.Diagnostics.Tools": "4.3.0",
-          "Topluluk.Shared": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Topluluk.Services.AuthenticationAPI.Model.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Topluluk.Services.AuthenticationAPI.Model.dll": {}
         }
       },
       "Topluluk.Services.User.Model/1.0.0": {
@@ -3307,20 +3263,6 @@
         "icon.png",
         "lib/netstandard2.1/AutoMapper.dll",
         "lib/netstandard2.1/AutoMapper.xml"
-      ]
-    },
-    "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.0": {
-      "sha512": "XCJ4E3oKrbRl1qY9Mr+7uyC0xZj1+bqQjmQRWTiTKiVuuXTny+7YFWHi20tPjwkMukLbicN6yGlDy5PZ4wyi1w==",
-      "type": "package",
-      "path": "automapper.extensions.microsoft.dependencyinjection/12.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
-        "automapper.extensions.microsoft.dependencyinjection.nuspec",
-        "icon.png",
-        "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
     "AWSSDK.Core/3.7.100.14": {
@@ -3397,29 +3339,6 @@
         "lib/netstandard2.0/DnsClient.xml",
         "lib/netstandard2.1/DnsClient.dll",
         "lib/netstandard2.1/DnsClient.xml"
-      ]
-    },
-    "FluentValidation/11.5.0": {
-      "sha512": "DExajJh+cguLk1XodH+LVVFuSsCqoEmXOQsxqP5rvVeUD1hIda59cyuL73LHJAYIrFatR8ZZ1H7kfejHN9XFWw==",
-      "type": "package",
-      "path": "fluentvalidation/11.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "fluent-validation-icon.png",
-        "fluentvalidation.11.5.0.nupkg.sha512",
-        "fluentvalidation.nuspec",
-        "lib/net5.0/FluentValidation.dll",
-        "lib/net5.0/FluentValidation.xml",
-        "lib/net6.0/FluentValidation.dll",
-        "lib/net6.0/FluentValidation.xml",
-        "lib/net7.0/FluentValidation.dll",
-        "lib/net7.0/FluentValidation.xml",
-        "lib/netstandard2.0/FluentValidation.dll",
-        "lib/netstandard2.0/FluentValidation.xml",
-        "lib/netstandard2.1/FluentValidation.dll",
-        "lib/netstandard2.1/FluentValidation.xml"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
@@ -4378,25 +4297,17 @@
         "microsoft.extensions.objectpool.nuspec"
       ]
     },
-    "Microsoft.Extensions.Options/6.0.0": {
-      "sha512": "dzXN0+V1AyjOe2xcJ86Qbo233KHuLEY0njf/P2Kw8SfJU+d45HNS2ctJdnEnrWbM9Ye2eFgaC5Mj9otRMU6IsQ==",
+    "Microsoft.Extensions.Options/2.2.0": {
+      "sha512": "UpZLNLBpIZ0GTebShui7xXYh6DmBHjWM8NxGxZbdQh/bPZ5e6YswqI+bru6BnEL5eWiOdodsXtEz3FROcgi/qg==",
       "type": "package",
-      "path": "microsoft.extensions.options/6.0.0",
+      "path": "microsoft.extensions.options/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.Extensions.Options.dll",
-        "lib/net461/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
-        "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
-        "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-        "microsoft.extensions.options.6.0.0.nupkg.sha512",
-        "microsoft.extensions.options.nuspec",
-        "useSharedDesignerContext.txt"
+        "microsoft.extensions.options.2.2.0.nupkg.sha512",
+        "microsoft.extensions.options.nuspec"
       ]
     },
     "Microsoft.Extensions.Primitives/7.0.0": {
@@ -9005,11 +8916,6 @@
       "type": "project",
       "path": "../../../Shared/DBHelper/DBHelper.csproj",
       "msbuildProject": "../../../Shared/DBHelper/DBHelper.csproj"
-    },
-    "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
-      "type": "project",
-      "path": "../../Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj",
-      "msbuildProject": "../../Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
     },
     "Topluluk.Services.User.Model/1.0.0": {
       "type": "project",

@@ -88,14 +88,6 @@
           }
         }
       },
-      "FluentValidation/11.5.0": {
-        "runtime": {
-          "lib/net6.0/FluentValidation.dll": {
-            "assemblyVersion": "11.0.0.0",
-            "fileVersion": "11.5.0.0"
-          }
-        }
-      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.DataProtection": "2.2.0",
@@ -710,8 +702,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.21.52210"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18315"
           }
         }
       },
@@ -723,8 +715,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.222.6406"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18315"
           }
         }
       },
@@ -1794,9 +1786,9 @@
           "System.Security.AccessControl": "5.0.0"
         },
         "runtime": {
-          "lib/netcoreapp3.0/System.Security.Permissions.dll": {
-            "assemblyVersion": "4.0.3.0",
-            "fileVersion": "4.700.19.56404"
+          "lib/netstandard2.0/System.Security.Permissions.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.6.26515.6"
           }
         }
       },
@@ -1984,24 +1976,10 @@
           "MongoDB.Bson": "2.19.0",
           "MongoDB.Driver": "2.19.0",
           "StackExchange.Redis": "2.6.104",
-          "Topluluk.Services.AuthenticationAPI.Model": "1.0.0",
           "Topluluk.Shared": "1.0.0"
         },
         "runtime": {
           "DBHelper.dll": {}
-        }
-      },
-      "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "FluentValidation": "11.5.0",
-          "MongoDB.Bson": "2.19.0",
-          "System.Diagnostics.Tools": "4.3.0",
-          "Topluluk.Shared": "1.0.0"
-        },
-        "runtime": {
-          "Topluluk.Services.AuthenticationAPI.Model.dll": {}
         }
       },
       "Topluluk.Services.PostAPI.Data/1.0.0": {
@@ -2085,13 +2063,6 @@
       "sha512": "sha512-sADkRtIlSBWSxiuain0RwofbeNdUCBaR0LWe4V29mvgZz6xIN35ssBI7gxhPeZ37uLkIU4fiKoYx04zQ+A+ekA==",
       "path": "dotnetcore.cap/6.0.1",
       "hashPath": "dotnetcore.cap.6.0.1.nupkg.sha512"
-    },
-    "FluentValidation/11.5.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-DExajJh+cguLk1XodH+LVVFuSsCqoEmXOQsxqP5rvVeUD1hIda59cyuL73LHJAYIrFatR8ZZ1H7kfejHN9XFWw==",
-      "path": "fluentvalidation/11.5.0",
-      "hashPath": "fluentvalidation.11.5.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",
@@ -3354,11 +3325,6 @@
       "hashPath": "zstdsharp.port.0.6.2.nupkg.sha512"
     },
     "DBHelper/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Topluluk.Services.AuthenticationAPI.Model/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

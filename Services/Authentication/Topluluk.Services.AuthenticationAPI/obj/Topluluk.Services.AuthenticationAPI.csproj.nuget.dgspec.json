@@ -26,6 +26,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
+                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
+              },
               "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj": {
                 "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/DBHelper/DBHelper.csproj"
               }
@@ -342,9 +345,6 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj": {
-                "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI.Model/Topluluk.Services.AuthenticationAPI.Model.csproj"
-              },
               "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj": {
                 "projectPath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Shared/Topluluk.Shared/Topluluk.Shared.csproj"
               }

@@ -321,9 +321,33 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     var isAttendeedTask =  _attendeesRepository.AnyAsync(c => !c.IsDeleted && c.UserId == userId && c.EventId == _event.Id);
                     var attendeesCountTask =  _attendeesRepository.Count(a => !a.IsDeleted && a.EventId == id);
                     await Task.WhenAll(eventOwnerResponseTask, commentCountTask,commentsTask, isAttendeedTask, attendeesCountTask);
-                    
+                    if (commentsTask.Result.Data.Count > 0)
+                    {
+                        var eventComments = commentsTask.Result.Data as List<EventComment>;
+                        var idList = new IdList() { ids = eventComments.Select(c => c.UserId).ToList() };
+                        var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
+                        var response = await _client.ExecutePostAsync<Response<List<GetUserInfoDto>>>(request);
+                        for (int i = 0; i < commentsTask.Result.Data.Count; i++)
+                        {
+                            GetUserInfoDto _user = response.Data.Data.Where(u => u.Id == eventComments[i].UserId)
+                                .FirstOrDefault() ?? throw new InvalidOperationException();
+                            GetEventCommentDto commentDto = new()
+                            {
+                                Id = eventComments[i].EventId,
+                                Message = eventComments[i].Message,
+                                
+                                ProfileImage = _user.ProfileImage,
+                                FirstName = _user.FirstName,
+                                LastName = _user.LastName,
+                                Gender = _user.Gender,
+                                UserId = _user.Id,
+                                
+                            };
+                            dto.Comments?.Add(commentDto);
+                        }
+                    }
+
                     dto.CommentCount = commentCountTask.Result;
-                    dto.Comments = commentsTask.Result.Data;
                     dto.IsAttendeed = isAttendeedTask.Result;
                     dto.AttendeesCount = attendeesCountTask.Result;
                     dto.Location = _event.IsLocationOnline ? _event.LocationURL : _event.LocationPlace;

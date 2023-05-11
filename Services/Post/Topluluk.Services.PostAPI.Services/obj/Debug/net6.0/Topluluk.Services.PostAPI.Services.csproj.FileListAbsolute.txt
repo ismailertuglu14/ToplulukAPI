@@ -94,7 +94,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Servi
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.PostAPI.Services.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.PostAPI.Services.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/DBHelper.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.PostAPI.Data.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.PostAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Shared.dll
@@ -102,7 +101,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Servi
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.PostAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/DBHelper.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.PostAPI.Data.pdb
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/obj/Debug/net6.0/Topluluk.Services.PostAPI.Services.csproj.AssemblyReference.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/obj/Debug/net6.0/Topluluk.Services.PostAPI.Services.GeneratedMSBuildEditorConfig.editorconfig
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI.Services/obj/Debug/net6.0/Topluluk.Services.PostAPI.Services.AssemblyInfoInputs.cache

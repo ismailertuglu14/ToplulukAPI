@@ -36,6 +36,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Topluluk.Shared\Topluluk.Shared.csproj" />
-    <ProjectReference Include="..\..\Services\Authentication\Topluluk.Services.AuthenticationAPI.Model\Topluluk.Services.AuthenticationAPI.Model.csproj" />
   </ItemGroup>
 </Project>

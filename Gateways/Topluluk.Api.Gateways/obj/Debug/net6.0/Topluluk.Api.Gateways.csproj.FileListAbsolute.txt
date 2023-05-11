@@ -224,6 +224,7 @@ C:/Users/ismai/Desktop/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Topluluk.Api.Gateways.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Topluluk.Api.Gateways.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/FluentValidation.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.MiddlewareAnalysis.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
@@ -238,6 +239,8 @@ C:/Users/ismai/Desktop/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.OpenApi.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/MongoDB.Bson.dll
@@ -272,6 +275,3 @@ C:/Users/ismai/Desktop/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/Topluluk.Api.Gateways.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/Topluluk.Api.Gateways.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/obj/Debug/net6.0/ref/Topluluk.Api.Gateways.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Gateways/Topluluk.Api.Gateways/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

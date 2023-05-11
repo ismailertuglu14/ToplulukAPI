@@ -508,10 +508,12 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/NewId.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/RabbitMQ.Client.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/RestSharp.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/SharpCompress.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Snappier.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/StackExchange.Redis.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -569,5 +571,3 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Debug/net6.0/ref/Topluluk.Services.AuthenticationAPI.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/StackExchange.Redis.dll

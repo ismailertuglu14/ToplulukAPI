@@ -94,7 +94,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Servi
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.FileAPI.Services.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.FileAPI.Services.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/DBHelper.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.FileAPI.Data.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.FileAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Shared.dll
@@ -102,7 +101,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Servi
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/DBHelper.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.FileAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.FileAPI.Data.pdb
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/obj/Debug/net6.0/Topluluk.Services.FileAPI.Services.csproj.AssemblyReference.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/obj/Debug/net6.0/Topluluk.Services.FileAPI.Services.GeneratedMSBuildEditorConfig.editorconfig
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI.Services/obj/Debug/net6.0/Topluluk.Services.FileAPI.Services.AssemblyInfoInputs.cache

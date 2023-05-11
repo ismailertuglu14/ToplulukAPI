@@ -3,7 +3,6 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using AutoMapper;
 using DBHelper.Repository;
-using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using RestSharp;

@@ -10,6 +10,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("31d0ef8c-3801-49e1-9bf7-d5af8d640c76")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Topluluk.Services.User.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

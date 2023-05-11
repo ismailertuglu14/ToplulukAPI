@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "oQQ96b7/nUVls+vOqI3rxHRSaA0FPqK4F+iX6TNLjpmFeu390uGoW5Fhpx0sAGnadGqYVvTYFmsWg8YtEj/TFQ==",
+  "dgSpecHash": "Ode2iOoX1IQMPa7iSptWM4Wf32UoFOBdmAYt6b7TUWZ9/98JIzJ2VKTijkeLwCAEMr0AudgNHJ/nqRoE/1RB6A==",
   "success": true,
   "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/Topluluk.Services.FileAPI.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/Users/ismail/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "/Users/ismail/.nuget/packages/azure.core/1.28.0/azure.core.1.28.0.nupkg.sha512",
@@ -15,7 +14,6 @@
     "/Users/ismail/.nuget/packages/dotnetcore.cap/6.0.1/dotnetcore.cap.6.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/dotnetcore.cap.mongodb/6.0.1/dotnetcore.cap.mongodb.6.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/dotnetcore.cap.rabbitmq/6.0.1/dotnetcore.cap.rabbitmq.6.0.1.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/fluentvalidation/11.5.0/fluentvalidation.11.5.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

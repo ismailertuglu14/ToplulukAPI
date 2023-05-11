@@ -86,12 +86,10 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Dat
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Services.EventAPI.Data.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Services.EventAPI.Data.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/DBHelper.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Services.EventAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Shared.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/DBHelper.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Services.EventAPI.Model.pdb
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/bin/Debug/net6.0/Topluluk.Shared.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/obj/Debug/net6.0/Topluluk.Services.EventAPI.Data.csproj.AssemblyReference.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/obj/Debug/net6.0/Topluluk.Services.EventAPI.Data.GeneratedMSBuildEditorConfig.editorconfig

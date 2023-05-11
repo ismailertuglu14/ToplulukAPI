@@ -86,12 +86,10 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.Communit
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/DBHelper.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Shared.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/DBHelper.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Services.CommunityAPI.Model.pdb
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Services.AuthenticationAPI.Model.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/bin/Debug/net6.0/Topluluk.Shared.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.csproj.AssemblyReference.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI.Data/obj/Debug/net6.0/Topluluk.Services.CommunityAPI.Data.GeneratedMSBuildEditorConfig.editorconfig

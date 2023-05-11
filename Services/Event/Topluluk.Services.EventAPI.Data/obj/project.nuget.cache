@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jcnt30KCeI4LAn7imG84/FrtBsSoD9ZxnsaDiO1aaWvct3r1FETZF44zj2MxgbS7Ze7X8M+4gxcytKIIvB8tXQ==",
+  "dgSpecHash": "PA8IDc0K8kDpgOKAi538cXzPdykSCMidCgfrVApMYyiriHIWvyfIpX3NMpi0g6MQURAwzybwSKbwQEb++TmwfQ==",
   "success": true,
   "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Data/Topluluk.Services.EventAPI.Data.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,6 @@
     "/Users/ismail/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/Users/ismail/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "/Users/ismail/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/fluentvalidation/11.5.0/fluentvalidation.11.5.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

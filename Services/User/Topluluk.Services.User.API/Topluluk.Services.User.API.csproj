@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>31d0ef8c-3801-49e1-9bf7-d5af8d640c76</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,9 +14,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-    <PackageReference Include="DotNetCore.CAP" Version="6.0.1" />
-    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="6.0.1" />
-    <PackageReference Include="DotNetCore.CAP.MongoDB" Version="6.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
   </ItemGroup>
 

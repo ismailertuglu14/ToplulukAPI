@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Tm5epMnKENK1KpYTIkMbYFK3rCODscrFAW1qizFQ/qNcDjyBz+m5oV00nFubN7n8C8oiLnhKwsgV2SQ3LX/U8Q==",
+  "dgSpecHash": "OsSviP32itcYKRMlj7UJ05Hq7fwFJeoMUFtteVDf0CJZGC0OQB02J4C6p0l4h2WgHQhkagPnZbbvM5gw9r7UcA==",
   "success": true,
   "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/Topluluk.Services.PostAPI.csproj",
   "expectedPackageFiles": [
@@ -12,7 +12,6 @@
     "/Users/ismail/.nuget/packages/dotnetcore.cap/6.0.1/dotnetcore.cap.6.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/dotnetcore.cap.mongodb/6.0.1/dotnetcore.cap.mongodb.6.0.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/dotnetcore.cap.rabbitmq/6.0.1/dotnetcore.cap.rabbitmq.6.0.1.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/fluentvalidation/11.5.0/fluentvalidation.11.5.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6cVY9Iz2UokuNDv5xUzHnKuXY3uqGpiDs77ZjRFnKmgCVVlH0cy1BaGpoOY8DdAGBp8wve44vz6dtUxrakn/RA==",
+  "dgSpecHash": "a8mELeT7N9oM9DyzygMfYNpP1OuMFIRUeVCB1cRnkiXRciwPCMqcudzgiwhdkJ+1Z6/42Wp5mNWkS1uM5bNMRQ==",
   "success": true,
   "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Event/Topluluk.Services.EventAPI.Services/Topluluk.Services.EventAPI.Services.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,6 @@
     "/Users/ismail/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/Users/ismail/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "/Users/ismail/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",
-    "/Users/ismail/.nuget/packages/fluentvalidation/11.5.0/fluentvalidation.11.5.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/greenpipes/4.0.0/greenpipes.4.0.0.nupkg.sha512",
     "/Users/ismail/.nuget/packages/masstransit/7.1.7/masstransit.7.1.7.nupkg.sha512",
     "/Users/ismail/.nuget/packages/masstransit.aspnetcore/7.1.7/masstransit.aspnetcore.7.1.7.nupkg.sha512",

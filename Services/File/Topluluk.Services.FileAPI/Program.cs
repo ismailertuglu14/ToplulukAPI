@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using Topluluk.Services.FileAPI.Data.Settings;
 using Topluluk.Services.FileAPI.Model.Mapper;

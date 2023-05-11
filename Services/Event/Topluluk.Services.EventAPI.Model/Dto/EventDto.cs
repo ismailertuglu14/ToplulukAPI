@@ -25,6 +25,8 @@ namespace Topluluk.Services.EventAPI.Model.Dto
 		
 		public bool IsPaid { get; set; } = false;
 		public double Price { get; set; }
+		public bool IsLimited { get; set; }
+		public int ParticipiantLimit { get; set; }
 		
 		public EventDto()
 		{

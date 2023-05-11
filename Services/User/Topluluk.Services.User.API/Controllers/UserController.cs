@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DotNetCore.CAP;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using Topluluk.Services.User.Model.Dto;
 using Topluluk.Services.User.Model.Dto.Http;
 using Topluluk.Services.User.Services.Interface;
 using Topluluk.Shared.BaseModels;
-using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
-using Topluluk.Shared.Enums;
+
 
 namespace Topluluk.Services.User.API.Controllers
 {
