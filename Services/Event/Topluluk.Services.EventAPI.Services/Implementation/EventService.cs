@@ -301,7 +301,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<GetEventByIdDto>> GetEventById(string userId, string token, string id)
+        public async Task<Response<EventDto>> GetEventById(string userId, string token, string id)
         {
             try
             {
@@ -309,7 +309,7 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
 
                 if (_event != null)
                 {
-                    var dto = _mapper.Map<GetEventByIdDto>(_event);
+                    var dto = _mapper.Map<EventDto>(_event);
                     
                     var eventOwnerRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/GetUserById")
                         .AddQueryParameter("userId",_event.UserId)
@@ -317,15 +317,16 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     var eventOwnerResponseTask = _client.ExecuteGetAsync<Response<GetUserInfoDto>>(eventOwnerRequest);
 
                     var commentCountTask =  _commentRepository.Count(c => !c.IsDeleted && c.EventId == id);
+                    var commentsTask = _commentRepository.GetAllAsync(10, 0, c => c.EventId == id);
                     var isAttendeedTask =  _attendeesRepository.AnyAsync(c => !c.IsDeleted && c.UserId == userId && c.EventId == _event.Id);
                     var attendeesCountTask =  _attendeesRepository.Count(a => !a.IsDeleted && a.EventId == id);
-                    await Task.WhenAll(eventOwnerResponseTask, commentCountTask, isAttendeedTask, attendeesCountTask);
+                    await Task.WhenAll(eventOwnerResponseTask, commentCountTask,commentsTask, isAttendeedTask, attendeesCountTask);
                     
                     dto.CommentCount = commentCountTask.Result;
+                    dto.Comments = commentsTask.Result.Data;
                     dto.IsAttendeed = isAttendeedTask.Result;
                     dto.AttendeesCount = attendeesCountTask.Result;
-                    dto.Location = _event.IsLocationOnline ? _event.LocationURL : _event.LocationPlace; 
-
+                    dto.Location = _event.IsLocationOnline ? _event.LocationURL : _event.LocationPlace;
                     var user = eventOwnerResponseTask.Result.Data.Data;
                     dto.UserId = user.Id;
                     dto.FirstName = user.FirstName;
@@ -333,14 +334,14 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
                     dto.ProfileImage = user.ProfileImage;
                     dto.Gender = user.Gender;
                     
-                    return Response<GetEventByIdDto>.Success(dto, ResponseStatus.Success);
+                    return Response<EventDto>.Success(dto, ResponseStatus.Success);
                 }
 
-                return Response<GetEventByIdDto>.Fail("Not Found", ResponseStatus.NotFound);
+                return Response<EventDto>.Fail("Not Found", ResponseStatus.NotFound);
             }
             catch (Exception e)
             {
-                return Response<GetEventByIdDto>.Fail($"Some error occured: {e}", ResponseStatus.InitialError);
+                return Response<EventDto>.Fail($"Some error occured: {e}", ResponseStatus.InitialError);
             }
         }
 
@@ -383,30 +384,54 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<Response<List<FeedEventDto>>> GetUserEvents(string id)
+        public async Task<Response<List<EventDto>>> GetUserEvents(string id, string token)
         {
 
             try
             {
-                DatabaseResponse response = await _eventRepository.GetAllAsync(5, 0, e => e.UserId == id);
-                if (response.IsSuccess)
+                var events =  _eventRepository.GetListByExpressionPaginated(10, 0, e => e.UserId == id);
+                
+                var eventOwnerRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/GetUserById")
+                    .AddQueryParameter("userId",id)
+                    .AddHeader("Authorization",token);
+                var eventOwnerResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(eventOwnerRequest);
+
+                var dtos = _mapper.Map<List<Event>, List<EventDto>>(events);
+                var eventIds = dtos.Select(e => e.Id).ToList();
+                var eventsComments = await _commentRepository.GetEventCommentCounts(eventIds);
+                
+                var user = eventOwnerResponse.Data.Data;
+                
+                byte i = 0;
+                foreach (var dto in dtos)
                 {
-                    List<FeedEventDto> dto = _mapper.Map<List<Event>, List<FeedEventDto>>(response.Data);
+                    var commentsTask = _commentRepository.GetAllAsync(10, 0, c => c.EventId == dto.Id);
+                    var isAttendeedTask =  _attendeesRepository.AnyAsync(c => !c.IsDeleted && c.UserId == id && c.EventId == dto.Id);
+                    var attendeesCountTask =  _attendeesRepository.Count(a => !a.IsDeleted && a.EventId == dto.Id);
+                    await Task.WhenAll(commentsTask, isAttendeedTask, attendeesCountTask);
+
+                    dto.CommentCount = eventsComments.FirstOrDefault(c => c.Key == dto.Id).Value;
+                    var comments = commentsTask.Result.Data as List<EventComment>; 
+                    dto.Comments = _mapper.Map<List<EventComment>,List<GetEventCommentDto>>(comments);
+                    dto.IsAttendeed = isAttendeedTask.Result;
+                    dto.AttendeesCount = attendeesCountTask.Result;
+                    dto.Location = events[i].IsLocationOnline ? events[i].LocationURL : events[i].LocationPlace;
+
                     
-                    int i = 0;
-                    foreach(var e in dto)
-                    {
-                        e.EventId = response.Data[i].Id;
-                    }
-                    return await Task.FromResult(Response<List<FeedEventDto>>.Success(dto, ResponseStatus.Success));
-
+                    dto.UserId = user.Id;
+                    dto.FirstName = user.FirstName;
+                    dto.LastName = user.LastName;
+                    dto.ProfileImage = user.ProfileImage;
+                    dto.Gender = user.Gender;
+                    i++;
                 }
-                return await Task.FromResult(Response<List<FeedEventDto>>.Fail("Some error occured", ResponseStatus.InitialError));
-
+                
+                
+                return await Task.FromResult(Response<List<EventDto>>.Success(dtos, ResponseStatus.Success));
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<FeedEventDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
+                return await Task.FromResult(Response<List<EventDto>>.Fail($"Some error occured: {e}", ResponseStatus.InitialError));
             }
 
         }

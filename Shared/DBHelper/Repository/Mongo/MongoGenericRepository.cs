@@ -315,6 +315,19 @@ namespace DBHelper.Repository.Mongo
             return data;
         }
 
+        public async Task<List<T>> GetListByExpressionAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            var defaultFilter = Builders<T>.Filter.Eq(x => x.IsDeleted, false);
+            var finalFilter = Builders<T>.Filter.And(defaultFilter, predicate);
+
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+
+            var data = database.GetCollection<T>(collectionName).Find(finalFilter).ToList();
+
+            return await Task.FromResult(data);
+        }
+
         public List<T> GetListByExpressionPaginated(int skip, int take, Expression<Func<T, bool>> predicate = null)
         {
             var defaultFilter = Builders<T>.Filter.Eq(x => x.IsDeleted, false);

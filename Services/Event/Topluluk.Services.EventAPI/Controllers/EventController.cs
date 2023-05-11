@@ -17,7 +17,7 @@ namespace Topluluk.Services.EventAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Response<GetEventByIdDto>> GetEventById(string id)
+        public async Task<Response<EventDto>> GetEventById(string id)
         {
             return await _eventService.GetEventById(this.UserId, this.Token, id);
         }
@@ -29,9 +29,9 @@ namespace Topluluk.Services.EventAPI.Controllers
         }
 
         [HttpGet("user/{id}")]
-        public async Task<Response<List<FeedEventDto>>> GetUserEvents(string id)
+        public async Task<Response<List<EventDto>>> GetUserEvents(string id)
         {
-            return await _eventService.GetUserEvents(id);
+            return await _eventService.GetUserEvents(id,this.Token);
         }
 
         [HttpPost("join/{id}")]

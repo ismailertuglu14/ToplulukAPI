@@ -165,13 +165,11 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                // Request 2: Get user followings
                 var getUserFollowingsRequest =
                     new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id",
                         userId);
                 var getUserFollowingsTask = _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
 
-                // Request 3: Get users' info list
                 var getUserFollowingsResponse = getUserFollowingsTask.Result;
                 if (getUserFollowingsResponse.IsSuccessful == false)
                 {
@@ -179,10 +177,10 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         Response<List<GetPostForFeedDto>>.Fail("Failed", ResponseStatus.Failed));
                 }
 
-                List<Post> response = await _postRepository.GetPostsWithDescending(skip, take,
+                var posts = await _postRepository.GetPostsWithDescending(skip, take,
                     p => p.IsDeleted == false && (getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId));
                 
-                IdList idList = new() { ids =  response.Select(p => p.UserId).ToList() };
+                IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
                 
                 var usersRequest =
                     new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
@@ -190,10 +188,10 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 
                 await Task.WhenAll( getUserFollowingsTask, usersTask);
 
-                List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response);
+                var dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(posts);
                 var usersResponse = usersTask.Result;
                 
-                for (int i = 0; i < response.Count; i++)
+                for (int i = 0; i < posts.Count; i++)
                 {
                     var user = usersResponse.Data.Data.Where(u => u.Id == dtos[i].UserId)
                         .FirstOrDefault();
@@ -209,19 +207,24 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     dtos[i].Gender = user.Gender;
                     dtos[i].IsFollowing = getUserFollowingsResponse.Data.Data.Contains(user.Id);
 
-                    var isUserInteracted = await _postInteractionRepository.GetFirstAsync(p => p.PostId == dtos[i].Id && p.UserId == userId);
-                    if (isUserInteracted != null)
+                    var isUserInteractedTask =  _postInteractionRepository.GetFirstAsync(p => p.PostId == dtos[i].Id && p.UserId == userId);
+                    var interactionsTask =
+                        _postInteractionRepository.GetListByExpressionAsync(p => p.PostId == dtos[i].Id);
+                    var interactionCountTask = _postInteractionRepository.Count(p => p.PostId == dtos[i].Id);
+                    var commentCountTask =
+                        _commentRepository.Count(c => c.PostId == posts[i].Id && c.IsDeleted == false);
+                    var isSavedTask = _savedPostRepository.AnyAsync(sp => sp.PostId == posts[i].Id && sp.UserId == userId);
+                    await Task.WhenAll(isUserInteractedTask, commentCountTask, interactionsTask, interactionCountTask,isSavedTask);
+                    if (isUserInteractedTask.Result != null)
                     {
                         dtos[i].IsInteracted = new PostInteractedDto()
                         {
-                            Interaction = isUserInteracted.InteractionType
+                            Interaction = isUserInteractedTask.Result.InteractionType
                         };
                     }
-                    List<PostInteraction> interactions =
-                        _postInteractionRepository.GetListByExpression(p => p.PostId == dtos[i].Id);
-                    if (interactions != null)
+                    if (interactionsTask.Result != null)
                     {
-                        dtos[i].InteractionPreviews = interactions
+                        dtos[i].InteractionPreviews = interactionsTask.Result
                             .GroupBy(x => x.InteractionType)
                             .OrderByDescending(x => x.Count())
                             .Take(3)
@@ -232,20 +235,19 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                             })
                             .ToList();
                     }
-                    dtos[i].InteractionCount = await _postInteractionRepository.Count(p => p.PostId == dtos[i].Id);
+                    dtos[i].InteractionCount = interactionCountTask.Result;
                     
                     
                     
-                    dtos[i].CommentCount =
-                        await _commentRepository.Count(c => c.PostId == response[i].Id && c.IsDeleted == false);
-                    dtos[i].IsSaved =
-                        await _savedPostRepository.AnyAsync(sp => sp.PostId == response[i].Id && sp.UserId == userId);
-                    if (!response[i].CommunityLink.IsNullOrEmpty())
+                    dtos[i].CommentCount = commentCountTask.Result;
+                    dtos[i].IsSaved = isSavedTask.Result;
+                        
+                    if (!posts[i].CommunityLink.IsNullOrEmpty())
                     {
                         // Get-community-title and image request
                         var communityInfoRequest =
                             new RestRequest("https://localhost:7149/api/community/community-info-post-link")
-                                .AddQueryParameter("id", response[i].CommunityLink);
+                                .AddQueryParameter("id", posts[i].CommunityLink);
                         var communityInfoTask =
                             _client.ExecuteGetAsync<Response<CommunityInfoPostLinkDto>>(communityInfoRequest);
                     }

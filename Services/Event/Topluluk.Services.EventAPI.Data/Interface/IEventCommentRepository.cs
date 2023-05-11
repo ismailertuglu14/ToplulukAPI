@@ -6,7 +6,7 @@ namespace Topluluk.Services.EventAPI.Data.Interface
 {
 	public interface IEventCommentRepository : IGenericRepository<EventComment>
 	{
-		
+		Task<Dictionary<string, int>> GetEventCommentCounts(List<string> eventIds);
 	}
 }
 

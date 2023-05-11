@@ -17,8 +17,7 @@ namespace Topluluk.Services.EventAPI.Model.Dto
 
 		public int InteractionCount { get; set; }
 
-		public bool IsLiked { get; set; } = false;
-		public bool IsOwner { get; set; } = false;
+		public bool IsInteracted { get; set; } = false;
         public GenderEnum Gender { get; set; }
 
         public GetEventCommentDto()

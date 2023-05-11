@@ -11,12 +11,13 @@ namespace Topluluk.Services.EventAPI.Model.Mapper
 		public GeneralMapper()
 		{
 			CreateMap<Event, FeedEventDto>();
-			CreateMap<Event, GetEventByIdDto>().ForMember(d => d.AttendeesCount, s => s.MapFrom(s => s.Attendees.Count));
+			CreateMap<Event, EventDto>().ForMember(d => d.AttendeesCount, s => s.MapFrom(s => s.Attendees.Count));
 			CreateMap<CommentCreateDto, EventComment>();
-			CreateMap<EventComment, GetEventCommentDto>().ForMember(d => d.InteractionCount, s => s.MapFrom(s => s.Interactions.Count));
+			CreateMap<EventComment, GetEventCommentDto>();
 			CreateMap<GetUserInfoDto, GetEventCommentDto>().ReverseMap(); // ?
             CreateMap<Event, GetEventAttendeesDto>();
             CreateMap<CreateEventDto, Event>();
+            
 		}
 	}
 }

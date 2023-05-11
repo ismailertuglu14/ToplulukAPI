@@ -24,18 +24,16 @@ namespace Topluluk.Services.User.Services.Implementation
         private readonly IUserRepository _userRepository;
         private readonly IUserFollowRepository _followRepository;
         private readonly IBlockedUserRepository _blockedUserRepository;
-        private readonly ICapPublisher _capPublisher;
         private readonly IMapper _mapper;
         private readonly RestClient _client;
         private readonly IRedisRepository _redisRepository;
         private readonly IUserFollowRequestRepository _followRequestRepository;
-        public UserService(IRedisRepository redisRepository, IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, ICapPublisher capPublisher, IMapper mapper, IUserFollowRequestRepository followRequestRepository)
+        public UserService(IRedisRepository redisRepository, IUserRepository userRepository, IBlockedUserRepository blockedUserRepository, IUserFollowRepository followRepository, IMapper mapper, IUserFollowRequestRepository followRequestRepository)
         {
             _redisRepository = redisRepository;
             _userRepository = userRepository;
             _followRepository = followRepository;
             _blockedUserRepository = blockedUserRepository;
-            _capPublisher = capPublisher;
             _mapper = mapper;
             _followRequestRepository = followRequestRepository;
             _client = new RestClient();

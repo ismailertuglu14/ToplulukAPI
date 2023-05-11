@@ -114,6 +114,11 @@ namespace DBHelper.Repository.SQL
             throw new NotImplementedException();
         }
 
+        public async Task<List<T>> GetListByExpressionAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<T> GetListByExpressionPaginated(int skip, int take, Expression<Func<T, bool>> predicate = null)
         {
             throw new NotImplementedException();

@@ -1,9 +1,10 @@
 ﻿using System;
+using Topluluk.Services.EventAPI.Model.Entity;
 using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.EventAPI.Model.Dto
 {
-	public class GetEventByIdDto
+	public class EventDto
 	{
 		public string Id { get; set; }
 		public string UserId { get; set; }
@@ -20,12 +21,15 @@ namespace Topluluk.Services.EventAPI.Model.Dto
 		public int AttendeesCount { get; set; }
 		public bool IsAttendeed { get; set; } = false;
 		public int CommentCount { get; set; }
+		public List<GetEventCommentDto> Comments { get; set; }
+		
 		public bool IsPaid { get; set; } = false;
 		public double Price { get; set; }
-
-		public GetEventByIdDto()
+		
+		public EventDto()
 		{
 			Images = new List<string>();
+			Comments = new List<GetEventCommentDto>();
 		}
 	}
 }
