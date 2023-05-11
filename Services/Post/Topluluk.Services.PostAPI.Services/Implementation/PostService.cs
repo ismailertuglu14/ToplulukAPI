@@ -237,7 +237,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     }
                     dtos[i].InteractionCount = interactionCountTask.Result;
                     
-                    
+                    //.
                     
                     dtos[i].CommentCount = commentCountTask.Result;
                     dtos[i].IsSaved = isSavedTask.Result;
