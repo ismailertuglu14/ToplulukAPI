@@ -115,13 +115,13 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             var user = userResponseTask.Result.Data.Data;
             _community.AdminId = user.Id;
             _community.AdminName = user.FirstName;
-            _community.AdminName = user.LastName;
+            _community.AdminLastName = user.LastName;
             _community.AdminImage = user.ProfileImage;
             _community.AdminGender = user.Gender;
             _community.Location = community.Location ?? "";
             _community.Title = community.Title;
             _community.Description = community.Description;
-            _community.IsOwner = false;
+            _community.IsOwner = community.AdminId == userId ? true : false;
             _community.CoverImage = community.CoverImage;
             _community.BannerImage = community.BannerImage;
             _community.ParticipiantsCount = participiantCountTask.Result;
