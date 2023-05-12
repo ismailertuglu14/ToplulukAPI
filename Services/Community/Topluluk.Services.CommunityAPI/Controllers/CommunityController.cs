@@ -44,7 +44,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpGet("{id}")]
         public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string id)
         {
-            return await _communityService.GetCommunityById(UserId,id);
+            return await _communityService.GetCommunityById(UserId, this.Token, id);
         }
 
         [HttpPost("[action]")]

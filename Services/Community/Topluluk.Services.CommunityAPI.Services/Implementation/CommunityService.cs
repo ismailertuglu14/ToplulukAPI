@@ -86,21 +86,17 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string communityId)
+        public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId, string token, string communityId)
         {
             Community? community = await _communityRepository.GetFirstCommunity(c => c.Id == communityId && c.IsVisible == true && c.IsRestricted == false);
             CommunityGetByIdDto _community = new();
-            if (community == null )
+            if (community == null || community.IsDeleted)
             {
                 return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Not found",ResponseStatus.NotFound));
             }
+            
 
-            if (community.IsDeleted == true)
-            {
-                return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Deleted", ResponseStatus.NotFound));
-            }
-
-            if (community.IsRestricted == true)
+            if (community.IsRestricted )
             {
                 return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Restricted", ResponseStatus.NotFound));
             }
@@ -110,20 +106,27 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 return await Task.FromResult(Response<CommunityGetByIdDto>.Fail("Not Visible public", ResponseStatus.NotFound));
             }
             
-            var request = new RestRequest("https://localhost:7202/user/communityOwner").AddQueryParameter("id", community.AdminId);
-            var response = await _client.ExecuteGetAsync<Response<GetCommunityOwnerDto>>(request);
-            _community.AdminId = response.Data.Data.OwnerId;
-            _community.AdminName = response.Data.Data.Name;
-            _community.AdminImage = response.Data.Data.ProfileImage;
+            var userRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/GetUserById").AddQueryParameter("userId", community.AdminId).AddHeader("Authorization",token);
+            var userResponseTask =  _client.ExecuteGetAsync<Response<UserDto>>(userRequest);
+            var participiantCountTask = _participiantRepository.Count(p => !p.IsDeleted && p.CommunityId == community.Id);
+            var IsParticipiantTask =  _participiantRepository.AnyAsync(p => !p.IsDeleted && p.CommunityId == communityId && p.UserId == userId);
+            
+            await Task.WhenAll(userResponseTask, participiantCountTask, IsParticipiantTask);
+            var user = userResponseTask.Result.Data.Data;
+            _community.AdminId = user.Id;
+            _community.AdminName = user.FirstName;
+            _community.AdminName = user.LastName;
+            _community.AdminImage = user.ProfileImage;
+            _community.AdminGender = user.Gender;
             _community.Location = community.Location ?? "";
             _community.Title = community.Title;
             _community.Description = community.Description;
             _community.IsOwner = false;
             _community.CoverImage = community.CoverImage;
             _community.BannerImage = community.BannerImage;
-            _community.ParticipiantsCount = await _participiantRepository.Count(p => p.CommunityId == community.Id);
-            _community.IsParticipiant = await _participiantRepository.AnyAsync(p => p.UserId == userId);
-
+            _community.ParticipiantsCount = participiantCountTask.Result;
+            _community.IsParticipiant = IsParticipiantTask.Result;
+            
             return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
 
