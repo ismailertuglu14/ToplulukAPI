@@ -11,7 +11,7 @@ namespace DBHelper.Connection.Mongo
         {
             _dbConfiguration = dbConfiguration;
                 
-            this.ConnectionString = isLocal == true ? "mongodb://localhost:27017" : _dbConfiguration.ConnectionString;
+            this.ConnectionString = isLocal  ? "mongodb://localhost:27017" : _dbConfiguration.ConnectionString;
             this.DatabaseName =  _dbConfiguration.DatabaseName;
             this.DBType = DatabaseType.MongoDB;
         }
