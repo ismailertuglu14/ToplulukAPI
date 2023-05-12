@@ -248,14 +248,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "DotNetCore.CAP.MongoDB": {
-              "target": "Package",
-              "version": "[6.0.1, )"
-            },
-            "DotNetCore.CAP.RabbitMQ": {
-              "target": "Package",
-              "version": "[6.0.1, )"
-            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.2, )"

@@ -462,8 +462,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Community/Topluluk.Services.Communit
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/AWSSDK.SecurityToken.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DnsClient.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Community/Topluluk.Services.CommunityAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll

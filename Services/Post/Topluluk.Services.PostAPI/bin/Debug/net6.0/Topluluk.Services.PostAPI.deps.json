@@ -8,8 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "Topluluk.Services.PostAPI/1.0.0": {
         "dependencies": {
-          "DotNetCore.CAP.MongoDB": "6.0.1",
-          "DotNetCore.CAP.RabbitMQ": "6.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.2",
           "Swashbuckle.AspNetCore": "6.2.3",
           "Topluluk.Services.PostAPI.Services": "1.0.0",
@@ -83,31 +81,6 @@
         },
         "runtime": {
           "lib/netstandard2.1/DotNetCore.CAP.dll": {
-            "assemblyVersion": "6.0.1.0",
-            "fileVersion": "6.0.1.0"
-          }
-        }
-      },
-      "DotNetCore.CAP.MongoDB/6.0.1": {
-        "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "MongoDB.Bson": "2.19.0",
-          "MongoDB.Driver": "2.19.0"
-        },
-        "runtime": {
-          "lib/netstandard2.1/DotNetCore.CAP.MongoDB.dll": {
-            "assemblyVersion": "6.0.1.0",
-            "fileVersion": "6.0.1.0"
-          }
-        }
-      },
-      "DotNetCore.CAP.RabbitMQ/6.0.1": {
-        "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "RabbitMQ.Client": "6.2.2"
-        },
-        "runtime": {
-          "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll": {
             "assemblyVersion": "6.0.1.0",
             "fileVersion": "6.0.1.0"
           }
@@ -883,18 +856,6 @@
           }
         }
       },
-      "RabbitMQ.Client/6.2.2": {
-        "dependencies": {
-          "System.Memory": "4.5.4",
-          "System.Threading.Channels": "6.0.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/RabbitMQ.Client.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.2.2.0"
-          }
-        }
-      },
       "RestSharp/109.0.1": {
         "runtime": {
           "lib/net6.0/RestSharp.dll": {
@@ -1256,7 +1217,6 @@
           "System.Threading": "4.3.0"
         }
       },
-      "System.Memory/4.5.4": {},
       "System.Net.Http/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -1869,20 +1829,6 @@
       "path": "dotnetcore.cap/6.0.1",
       "hashPath": "dotnetcore.cap.6.0.1.nupkg.sha512"
     },
-    "DotNetCore.CAP.MongoDB/6.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-YU2EEjSVOxLh0qve2k7FUrTM2MBXed3Nd5NPxcrTjnffO4F7b5AY+ag+XXdt1UMGZHOlg2bTWnbUUYY/uR7WWw==",
-      "path": "dotnetcore.cap.mongodb/6.0.1",
-      "hashPath": "dotnetcore.cap.mongodb.6.0.1.nupkg.sha512"
-    },
-    "DotNetCore.CAP.RabbitMQ/6.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uG7Om11+AsSONVl9Lv+7rcgqiwo5/I/ZUQpu379MDtOknzI+5KztJZ1I1ALPIt+7QfqHi536J11qNSm+FQ23JA==",
-      "path": "dotnetcore.cap.rabbitmq/6.0.1",
-      "hashPath": "dotnetcore.cap.rabbitmq.6.0.1.nupkg.sha512"
-    },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -2492,13 +2438,6 @@
       "path": "pipelines.sockets.unofficial/2.2.2",
       "hashPath": "pipelines.sockets.unofficial.2.2.2.nupkg.sha512"
     },
-    "RabbitMQ.Client/6.2.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-+tJSgE+rQXgLvOxWvOxdZ0+No1EMa86+puZuNlCb4cNryHw2PY2Xiw/y2dz/WWdeJQp74Y2UnNXPkuLiYpvn+A==",
-      "path": "rabbitmq.client/6.2.2",
-      "hashPath": "rabbitmq.client.6.2.2.nupkg.sha512"
-    },
     "RestSharp/109.0.1": {
       "type": "package",
       "serviceable": true,
@@ -2848,13 +2787,6 @@
       "sha512": "sha512-PGKkrd2khG4CnlyJwxwwaWWiSiWFNBGlgXvJpeO0xCXrZ89ODrQ6tjEWS/kOqZ8GwEOUATtKtzp1eRgmYNfclg==",
       "path": "system.linq.expressions/4.3.0",
       "hashPath": "system.linq.expressions.4.3.0.nupkg.sha512"
-    },
-    "System.Memory/4.5.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
-      "path": "system.memory/4.5.4",
-      "hashPath": "system.memory.4.5.4.nupkg.sha512"
     },
     "System.Net.Http/4.3.0": {
       "type": "package",

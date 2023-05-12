@@ -8,9 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "Topluluk.Services.CommunityAPI/1.0.0": {
         "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "DotNetCore.CAP.MongoDB": "6.0.1",
-          "DotNetCore.CAP.RabbitMQ": "6.0.1",
           "MongoDB.Driver": "2.19.0",
           "RabbitMQ.Client": "6.4.0",
           "Swashbuckle.AspNetCore": "6.2.3",
@@ -74,31 +71,6 @@
         },
         "runtime": {
           "lib/netstandard2.1/DotNetCore.CAP.dll": {
-            "assemblyVersion": "6.0.1.0",
-            "fileVersion": "6.0.1.0"
-          }
-        }
-      },
-      "DotNetCore.CAP.MongoDB/6.0.1": {
-        "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "MongoDB.Bson": "2.19.0",
-          "MongoDB.Driver": "2.19.0"
-        },
-        "runtime": {
-          "lib/netstandard2.1/DotNetCore.CAP.MongoDB.dll": {
-            "assemblyVersion": "6.0.1.0",
-            "fileVersion": "6.0.1.0"
-          }
-        }
-      },
-      "DotNetCore.CAP.RabbitMQ/6.0.1": {
-        "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "RabbitMQ.Client": "6.4.0"
-        },
-        "runtime": {
-          "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll": {
             "assemblyVersion": "6.0.1.0",
             "fileVersion": "6.0.1.0"
           }
@@ -1817,20 +1789,6 @@
       "sha512": "sha512-sADkRtIlSBWSxiuain0RwofbeNdUCBaR0LWe4V29mvgZz6xIN35ssBI7gxhPeZ37uLkIU4fiKoYx04zQ+A+ekA==",
       "path": "dotnetcore.cap/6.0.1",
       "hashPath": "dotnetcore.cap.6.0.1.nupkg.sha512"
-    },
-    "DotNetCore.CAP.MongoDB/6.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-YU2EEjSVOxLh0qve2k7FUrTM2MBXed3Nd5NPxcrTjnffO4F7b5AY+ag+XXdt1UMGZHOlg2bTWnbUUYY/uR7WWw==",
-      "path": "dotnetcore.cap.mongodb/6.0.1",
-      "hashPath": "dotnetcore.cap.mongodb.6.0.1.nupkg.sha512"
-    },
-    "DotNetCore.CAP.RabbitMQ/6.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uG7Om11+AsSONVl9Lv+7rcgqiwo5/I/ZUQpu379MDtOknzI+5KztJZ1I1ALPIt+7QfqHi536J11qNSm+FQ23JA==",
-      "path": "dotnetcore.cap.rabbitmq/6.0.1",
-      "hashPath": "dotnetcore.cap.rabbitmq.6.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
       "type": "package",

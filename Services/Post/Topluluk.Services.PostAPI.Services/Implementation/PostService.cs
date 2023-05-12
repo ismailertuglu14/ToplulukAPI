@@ -176,7 +176,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
 
                 var posts = await _postRepository.GetPostsWithDescending(skip, take, 
-                    p => p.IsDeleted == false && (getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId));
+                    p => !p.IsDeleted && (getUserFollowingsResponse.Data.Data.Contains(p.UserId) || p.UserId == userId));
                 
                 IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
                 
@@ -533,29 +533,60 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                DatabaseResponse response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == id);
+                var postsTask =  _postRepository.GetPostsWithDescending(skip, take, p => !p.IsDeleted && p.UserId == id);
                     var getUserInfoRequest = new RestRequest("https://localhost:7149/api/user/GetUserInfoForPost")
                         .AddQueryParameter("id", id).AddQueryParameter("sourceUserId", userId);
-                    var getUserInfoResponse =
-                        await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
-
-                if (getUserInfoResponse.Data.Data == null)
+                    var getUserInfoResponseTask =
+                         _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(getUserInfoRequest);
+                    var commentCountsTask =  _commentRepository.GetPostCommentCounts(_mapper.Map<List<Post>, List<GetPostForFeedDto>>(postsTask.Result).Select(p => p.Id).ToList());
+                    await Task.WhenAll(postsTask, getUserInfoResponseTask,commentCountsTask);
+                if (getUserInfoResponseTask.Result.Data.Data == null)
                 {
                     return await Task.FromResult(Response<List<GetPostForFeedDto>>.Fail("User Not Found", ResponseStatus.NotFound));
                 }
 
-                    List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(response.Data);
-                    var commentCounts = await _commentRepository.GetPostCommentCounts(dtos.Select(p => p.Id).ToList());
+                    List<GetPostForFeedDto> dtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(postsTask.Result);
                     int i = 0;
-                    foreach (var dto in response.Data as List<Post>)
+                    var user = getUserInfoResponseTask.Result.Data.Data;
+                    foreach (var dto in postsTask.Result)
                     {
-                        dtos[i].UserId = getUserInfoResponse.Data.Data.UserId;
-                        dtos[i].FirstName = getUserInfoResponse.Data.Data.FirstName;
-                        dtos[i].LastName = getUserInfoResponse.Data.Data.LastName;
-                        dtos[i].ProfileImage = getUserInfoResponse.Data.Data.ProfileImage;
-
-                        dtos[i].CommentCount = commentCounts.FirstOrDefault(c => c.Key == dtos[i].Id).Value;
-                        //dtos[i].IsSaved = await _savedPostRepository.AnyAsync(sp => sp.PostId == dto.Id && sp.UserId == userId);
+                        var isUserInteractedTask =  _postInteractionRepository.GetFirstAsync(p => p.PostId == dtos[i].Id && p.UserId == userId);
+                        var interactionsTask = _postInteractionRepository.GetListByExpressionAsync(p => p.PostId == dtos[i].Id);
+                        var interactionCountTask = _postInteractionRepository.Count(p => p.PostId == dtos[i].Id);
+                        var commentCountTask = _commentRepository.Count(c => c.PostId == postsTask.Result[i].Id && c.IsDeleted == false);
+                        var isSavedTask = _savedPostRepository.AnyAsync(sp => sp.PostId == postsTask.Result[i].Id && sp.UserId == userId);
+                        await Task.WhenAll(isUserInteractedTask, commentCountTask, interactionsTask, interactionCountTask,isSavedTask);
+                        dtos[i].InteractionCount = interactionCountTask.Result;
+                        dtos[i].CommentCount = commentCountTask.Result;
+                        dtos[i].IsSaved = isSavedTask.Result;
+                        if (isUserInteractedTask.Result != null)
+                        {
+                            dtos[i].IsInteracted = new PostInteractedDto()
+                            {
+                                Interaction = isUserInteractedTask.Result.InteractionType
+                            };
+                        }
+                        if (interactionsTask.Result != null)
+                        {
+                            dtos[i].InteractionPreviews = interactionsTask.Result
+                                .GroupBy(x => x.InteractionType)
+                                .OrderByDescending(x => x.Count())
+                                .Take(3)
+                                .Select(x => new PostInteractionPreviewDto()
+                                {
+                                    Interaction = x.Key,
+                                    InteractionCount = x.Count()
+                                })
+                                .ToList();
+                        }
+                        
+                        dtos[i].UserId = user.UserId;
+                        dtos[i].FirstName = user.FirstName;
+                        dtos[i].LastName = user.LastName;
+                        dtos[i].ProfileImage = user.ProfileImage;
+                        dtos[i].Gender = user.Gender;
+                        
+                        dtos[i].CommentCount = commentCountsTask.Result.FirstOrDefault(c => c.Key == dtos[i].Id).Value;
     
                         if (!dto.CommunityLink.IsNullOrEmpty())
                         {

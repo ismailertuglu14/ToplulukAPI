@@ -463,8 +463,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/obj/D
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/AWSSDK.SecurityToken.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/DnsClient.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
@@ -493,7 +491,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/obj/D
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Pipelines.Sockets.Unofficial.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/RabbitMQ.Client.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/RestSharp.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/SharpCompress.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Post/Topluluk.Services.PostAPI/bin/Debug/net6.0/Snappier.dll

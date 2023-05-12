@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
 using MassTransit;
-using StackExchange.Redis;
 using Topluluk.Services.AuthenticationAPI.Model.Mapper;
 using Topluluk.Services.AuthenticationAPI.Model.Validators;
 using Topluluk.Services.AuthenticationAPI.Services.Core;

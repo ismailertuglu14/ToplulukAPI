@@ -97,41 +97,6 @@
           }
         }
       },
-      "DotNetCore.CAP.MongoDB/6.0.1": {
-        "type": "package",
-        "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "MongoDB.Bson": "2.13.2",
-          "MongoDB.Driver": "2.13.2"
-        },
-        "compile": {
-          "lib/netstandard2.1/DotNetCore.CAP.MongoDB.dll": {
-            "related": ".pdb"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.1/DotNetCore.CAP.MongoDB.dll": {
-            "related": ".pdb"
-          }
-        }
-      },
-      "DotNetCore.CAP.RabbitMQ/6.0.1": {
-        "type": "package",
-        "dependencies": {
-          "DotNetCore.CAP": "6.0.1",
-          "RabbitMQ.Client": "6.2.2"
-        },
-        "compile": {
-          "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll": {
-            "related": ".pdb"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll": {
-            "related": ".pdb"
-          }
-        }
-      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1680,23 +1645,6 @@
           }
         }
       },
-      "RabbitMQ.Client/6.2.2": {
-        "type": "package",
-        "dependencies": {
-          "System.Memory": "4.5.4",
-          "System.Threading.Channels": "4.7.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/RabbitMQ.Client.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/RabbitMQ.Client.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
       "RestSharp/109.0.1": {
         "type": "package",
         "compile": {
@@ -2452,15 +2400,6 @@
         },
         "runtime": {
           "lib/netstandard1.6/System.Linq.Expressions.dll": {}
-        }
-      },
-      "System.Memory/4.5.4": {
-        "type": "package",
-        "compile": {
-          "ref/netcoreapp2.1/_._": {}
-        },
-        "runtime": {
-          "lib/netcoreapp2.1/_._": {}
         }
       },
       "System.Net.Http/4.3.0": {
@@ -3691,32 +3630,6 @@
         "lib/netstandard2.1/DotNetCore.CAP.dll",
         "lib/netstandard2.1/DotNetCore.CAP.pdb",
         "lib/netstandard2.1/DotNetCore.CAP.xml"
-      ]
-    },
-    "DotNetCore.CAP.MongoDB/6.0.1": {
-      "sha512": "YU2EEjSVOxLh0qve2k7FUrTM2MBXed3Nd5NPxcrTjnffO4F7b5AY+ag+XXdt1UMGZHOlg2bTWnbUUYY/uR7WWw==",
-      "type": "package",
-      "path": "dotnetcore.cap.mongodb/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "dotnetcore.cap.mongodb.6.0.1.nupkg.sha512",
-        "dotnetcore.cap.mongodb.nuspec",
-        "lib/netstandard2.1/DotNetCore.CAP.MongoDB.dll",
-        "lib/netstandard2.1/DotNetCore.CAP.MongoDB.pdb"
-      ]
-    },
-    "DotNetCore.CAP.RabbitMQ/6.0.1": {
-      "sha512": "uG7Om11+AsSONVl9Lv+7rcgqiwo5/I/ZUQpu379MDtOknzI+5KztJZ1I1ALPIt+7QfqHi536J11qNSm+FQ23JA==",
-      "type": "package",
-      "path": "dotnetcore.cap.rabbitmq/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "dotnetcore.cap.rabbitmq.6.0.1.nupkg.sha512",
-        "dotnetcore.cap.rabbitmq.nuspec",
-        "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll",
-        "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.pdb"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
@@ -5270,25 +5183,6 @@
         "lib/netstandard2.1/Pipelines.Sockets.Unofficial.xml",
         "pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
         "pipelines.sockets.unofficial.nuspec"
-      ]
-    },
-    "RabbitMQ.Client/6.2.2": {
-      "sha512": "+tJSgE+rQXgLvOxWvOxdZ0+No1EMa86+puZuNlCb4cNryHw2PY2Xiw/y2dz/WWdeJQp74Y2UnNXPkuLiYpvn+A==",
-      "type": "package",
-      "path": "rabbitmq.client/6.2.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "icon.png",
-        "lib/net461/RabbitMQ.Client.dll",
-        "lib/net461/RabbitMQ.Client.pdb",
-        "lib/net461/RabbitMQ.Client.xml",
-        "lib/netstandard2.0/RabbitMQ.Client.dll",
-        "lib/netstandard2.0/RabbitMQ.Client.pdb",
-        "lib/netstandard2.0/RabbitMQ.Client.xml",
-        "rabbitmq.client.6.2.2.nupkg.sha512",
-        "rabbitmq.client.nuspec"
       ]
     },
     "RestSharp/109.0.1": {
@@ -7048,29 +6942,6 @@
         "runtimes/aot/lib/netcore50/System.Linq.Expressions.dll",
         "system.linq.expressions.4.3.0.nupkg.sha512",
         "system.linq.expressions.nuspec"
-      ]
-    },
-    "System.Memory/4.5.4": {
-      "sha512": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
-      "type": "package",
-      "path": "system.memory/4.5.4",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/System.Memory.dll",
-        "lib/net461/System.Memory.xml",
-        "lib/netcoreapp2.1/_._",
-        "lib/netstandard1.1/System.Memory.dll",
-        "lib/netstandard1.1/System.Memory.xml",
-        "lib/netstandard2.0/System.Memory.dll",
-        "lib/netstandard2.0/System.Memory.xml",
-        "ref/netcoreapp2.1/_._",
-        "system.memory.4.5.4.nupkg.sha512",
-        "system.memory.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.Net.Http/4.3.0": {
@@ -9685,8 +9556,6 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DotNetCore.CAP.MongoDB >= 6.0.1",
-      "DotNetCore.CAP.RabbitMQ >= 6.0.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.2",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "Topluluk.Services.PostAPI.Services >= 1.0.0",
@@ -9737,14 +9606,6 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "DotNetCore.CAP.MongoDB": {
-            "target": "Package",
-            "version": "[6.0.1, )"
-          },
-          "DotNetCore.CAP.RabbitMQ": {
-            "target": "Package",
-            "version": "[6.0.1, )"
-          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[6.0.2, )"
