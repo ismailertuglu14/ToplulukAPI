@@ -113,6 +113,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             
             await Task.WhenAll(userResponseTask, participiantCountTask, IsParticipiantTask);
             var user = userResponseTask.Result.Data.Data;
+            _community.Id = communityId;
             _community.AdminId = user.Id;
             _community.AdminName = user.FirstName;
             _community.AdminLastName = user.LastName;

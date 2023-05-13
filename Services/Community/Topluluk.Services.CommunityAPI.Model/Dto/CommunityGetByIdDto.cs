@@ -7,6 +7,7 @@ namespace Topluluk.Services.CommunityAPI.Model.Dto
 {
 	public class CommunityGetByIdDto
     {
+	    public string Id { get; set; }
         public string AdminId { get; set; }
         public string AdminName { get; set; }
         public string AdminLastName { get; set; }
