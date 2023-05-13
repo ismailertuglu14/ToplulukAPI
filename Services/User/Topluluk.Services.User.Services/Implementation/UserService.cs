@@ -42,33 +42,47 @@ namespace Topluluk.Services.User.Services.Implementation
         {
             try
             {
-                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<GetUserByIdDto>.Fail("User Not Found",
-                        ResponseStatus.NotFound));
-                }
+                _User? user = new();
 
                 if (_redisRepository.IsConnected)
                 {
-                    string key = $"user_{user.Id}";
-                    var userObject = new 
-                        { Id = user.Id,FirstName=user.FirstName,LastName=user.LastName,UserName = user.UserName,
-                            ProfileImage=user.ProfileImage,Gender=user.Gender};
-                    
-                    var userJson = JsonSerializer.Serialize(userObject);
-                    await _redisRepository.SetValueAsync(key, userJson);
+                    string key = $"user_{userId}";
+
+                    var cacheUser = await _redisRepository.GetValueAsync(key);
+
+                    if (cacheUser.IsNullOrEmpty())
+                    {
+                        user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                        var userJson = JsonSerializer.Serialize(user);
+                        await _redisRepository.SetValueAsync(key, userJson);
+                    }
+                    else
+                    {
+                        user = JsonSerializer.Deserialize<_User>(cacheUser);
+                    }
                 }
+                else
+                {
+                    user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+                }
+                
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
+                
+                var isFollowingTask = _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == userId);
+                var followingCountTask = _followRepository.Count(f => f.SourceId == userId); 
+                var followersCountTask = _followRepository.Count(f => f.TargetId == userId);
+                var userCommunitiesRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities-count").AddQueryParameter("id",userId);
+                var userCommunitiesTask = _client.ExecuteGetAsync<Response<int>>(userCommunitiesRequest);
+
+                await Task.WhenAll(isFollowingTask, followingCountTask, followersCountTask, userCommunitiesTask);
+
                 dto.IsFollowRequestSent = user.IncomingFollowRequests!.Contains(id);
                 dto.IsFollowRequested = user.OutgoingFollowRequests!.Contains(id);
 
-                dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == userId);
-                dto.FollowingCount = await _followRepository.Count(f => f.SourceId == userId);
-                dto.FollowersCount = await _followRepository.Count(f => f.TargetId == userId);
-                var userCommunitiesRequest =
-                    new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities-count").AddQueryParameter("id",userId);
-                var userCommunitiesResponse = await _client.ExecuteGetAsync<Response<int>>(userCommunitiesRequest);
+                dto.IsFollowing = isFollowingTask.Result;
+                dto.FollowingCount = followingCountTask.Result;
+                dto.FollowersCount = followersCountTask.Result;
+                var userCommunitiesResponse = userCommunitiesTask.Result;
                 if (userCommunitiesResponse.IsSuccessful)
                 {
                     dto.CommunityCount = userCommunitiesResponse.Data!.Data;
