@@ -34,6 +34,7 @@ var mapperConfig = new MapperConfiguration(cfg =>
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 IConfiguration configuration = builder.Configuration;
+
 var multiplexer = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
 builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
 
