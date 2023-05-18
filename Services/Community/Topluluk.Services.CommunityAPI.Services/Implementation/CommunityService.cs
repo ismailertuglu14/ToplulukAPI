@@ -458,11 +458,21 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<List<string>>> GetParticipiants(string id)
+        public async Task<Response<List<UserDto>>> GetParticipiants(string token, string id)
         {
             var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id);
-            var participiantIds = participiants.Select(p => p.UserId).ToList();
-            return await Task.FromResult(Response<List<string>>.Success(participiantIds, ResponseStatus.Success));
+            var idList = new IdList() { ids = participiants.Select(p => p.UserId).ToList() };
+            var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list")
+                                .AddHeader("Authorization",token).AddBody(idList);
+            var usersResponse = await _client.ExecutePostAsync<Response<List<UserDto>>>(usersRequest);
+    
+            if (!usersResponse.IsSuccessful)
+                return Response<List<UserDto>>.Fail("Failed", ResponseStatus.Failed);
+            
+            
+
+
+            return Response<List<UserDto>>.Success(usersResponse.Data.Data, ResponseStatus.Success);
         }
 
 

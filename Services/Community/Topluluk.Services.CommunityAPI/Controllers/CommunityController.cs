@@ -106,10 +106,9 @@ namespace Topluluk.Services.CommunityAPI.Controllers
     
     
         [HttpGet("Participiants/{id}")]
-        public async Task<List<string>> GetParticipiants(string id)
+        public async Task<Response<List<UserDto>>> GetParticipiants(string id)
         {
-            var response = await _communityService.GetParticipiants(id);
-            return response.Data;
+            return await _communityService.GetParticipiants(this.Token, id);
         }
 
         [HttpGet("getCommunityTitle")]
