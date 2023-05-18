@@ -29,22 +29,6 @@ var mapperConfig = new MapperConfiguration(cfg =>
     cfg.AddProfile(new GeneralMapper());
 });
 
-builder.Services.AddCap(options =>
-{
-    options.UseMongoDB("mongodb+srv://ismail:ismail@cluster0.psznbcu.mongodb.net/?retryWrites=true&w=majority");
-    options.UseRabbitMQ(options =>
-    {
-
-        options.ConnectionFactoryOptions = options =>
-        {
-            options.Ssl.Enabled = false;
-            options.HostName = "localhost";
-            options.UserName = "guest";
-            options.Password = "guest";
-            options.Port = 5672;
-        };
-    });
-});
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 

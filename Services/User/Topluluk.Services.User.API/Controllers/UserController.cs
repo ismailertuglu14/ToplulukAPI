@@ -183,7 +183,7 @@ namespace Topluluk.Services.User.API.Controllers
         }
 
         [HttpPost("get-user-info-list")]
-        public async Task<Response<List<GetUserByIdDto>>> GetUserInfoList(UserIdListDto idList, int skip, int take)
+        public async Task<Response<List<GetUserByIdDto>>> GetUserInfoList(IdList idList, int skip, int take)
         {
             return await _userService.GetUserList(idList, skip, take);
         }

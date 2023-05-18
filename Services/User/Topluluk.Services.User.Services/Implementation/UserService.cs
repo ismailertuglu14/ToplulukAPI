@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text.Json;
 using AutoMapper;
 using DBHelper.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using RestSharp;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Model.Dto;
@@ -14,6 +14,7 @@ using Topluluk.Services.User.Services.Interface;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using _User = Topluluk.Services.User.Model.Entity.User;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.User.Services.Implementation
@@ -186,7 +187,7 @@ namespace Topluluk.Services.User.Services.Implementation
                     else
                     {
                         return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
-                    }
+                    } 
                 }
             }
             catch (Exception e)
@@ -754,21 +755,48 @@ namespace Topluluk.Services.User.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<Response<List<GetUserByIdDto>>> GetUserList(UserIdListDto dto, int skip = 0, int take = 10)
+        public async Task<Response<List<GetUserByIdDto>>> GetUserList(IdList dto, int skip = 0, int take = 10)
         {
             try
             {
-                DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u => dto.Ids.Contains(u.Id));
-                List<GetUserByIdDto> userDtos = _mapper.Map<List<_User>, List<GetUserByIdDto>>(response.Data);
+                List<_User> users = new();
 
-                return await Task.FromResult(Response<List<GetUserByIdDto>>.Success(userDtos, ResponseStatus.Success));
+                if (_redisRepository.IsConnected)
+                {
+                    List<string> keys = dto.ids.Select(id => $"user_{id}").ToList();
+                    var cachedUsers = await _redisRepository.GetAllAsync(keys);
+
+                    List<string> missingRedisKeys = cachedUsers.Where(doc => string.IsNullOrEmpty(doc.Value)).Select(doc => doc.Key).ToList();
+                    List<string> missingIds = missingRedisKeys.Select(key => key.Substring(5)).ToList();
+
+                    if (missingRedisKeys.Any())
+                    {
+                        var missingUsers = _userRepository.GetListByExpression(u => missingIds.Contains(u.Id));
+                        foreach (var user in missingUsers)
+                        {
+                             _redisRepository.SetValueAsync($"user_{user.Id}", JsonSerializer.Serialize(user));
+                        }
+                        users.AddRange(missingUsers);
+                    }
+
+                    users.AddRange(cachedUsers.Where(doc => !string.IsNullOrEmpty(doc.Value)).Select(doc => JsonConvert.DeserializeObject<_User>(doc.Value)));
+                }
+                else
+                {
+                    users = _userRepository.GetListByExpressionPaginated(skip, take, u => dto.ids.Contains(u.Id));
+                }
+
+                List<GetUserByIdDto> userDtos = _mapper.Map<List<_User>, List<GetUserByIdDto>>(users);
+
+                return Response<List<GetUserByIdDto>>.Success(userDtos, ResponseStatus.Success);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<GetUserByIdDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError));
-
+                return Response<List<GetUserByIdDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError);
             }
         }
+
+
 
         public async Task<Response<List<UserFollowRequestDto>>> GetFollowerRequests(string id, string userId, int skip = 0, int take = 10)
         {

@@ -10,10 +10,8 @@ public class RedisCacheRepository : IRedisRepository
     private readonly IConnectionMultiplexer _redisCon;
     private readonly IDatabase _cache;
     private TimeSpan ExpireTime => TimeSpan.FromMinutes(5);
-    private IConfiguration _configuration;
-    public RedisCacheRepository(IConnectionMultiplexer redisCon,IConfiguration configuration)
+    public RedisCacheRepository(IConnectionMultiplexer redisCon)
     {
-        _configuration = configuration;
         _redisCon = redisCon;
         _cache = redisCon.GetDatabase();
         
@@ -46,7 +44,14 @@ public class RedisCacheRepository : IRedisRepository
             server.FlushAllDatabases();
         }
     }
- 
+
+    public async Task<List<string>> GetListValueAsync(List<string> keys)
+    {
+        var redisKeys = keys.Select(key => (RedisKey)key).ToArray();
+        var redisValues = await _cache.StringGetAsync(redisKeys);
+        return redisValues.Select(value => (string)value).ToList();
+    }
+
     public async Task<T> GetOrAddAsync<T>(string key, Func<Task<T>> action) where T : class
     {
         var result = await _cache.StringGetAsync(key);
@@ -62,7 +67,19 @@ public class RedisCacheRepository : IRedisRepository
     {
         return await _cache.StringGetAsync(key);
     }
- 
+
+    public async Task<Dictionary<string, string>> GetAllAsync(List<string> keys)
+    {
+        
+        var redisValues = await _cache.StringGetAsync(keys.Select(x => (RedisKey)x).ToArray());
+        var result = new Dictionary<string, string>();
+        for (int i = 0; i < keys.Count; i++)
+        {
+            result[keys[i]] = redisValues[i];
+        }
+        return result;
+    }
+
     public async Task<bool> SetValueAsync(string key, string value)
     {
         return await _cache.StringSetAsync(key,value, ExpireTime);
