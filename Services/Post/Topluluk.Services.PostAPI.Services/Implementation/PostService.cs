@@ -88,20 +88,13 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         {
             try
             {
-                PostInteraction? _interaction = await _postInteractionRepository.GetFirstAsync(pi => pi.PostId == postId && pi.UserId == userId);
-                
-                if (_interaction == null) throw new Exception("Not found");
-                if (_interaction.UserId == userId)
-                {
-                    _postInteractionRepository.DeleteCompletely(_interaction.Id);
-                    return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
-                }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("Not found", ResponseStatus.NotFound));
-                }
-                
+                PostInteraction? interaction = await _postInteractionRepository.GetFirstAsync(pi => pi.PostId == postId && pi.UserId == userId);
 
+                if (interaction == null || interaction.UserId != userId)
+                    return await Task.FromResult(Response<string>.Fail("Not found", ResponseStatus.NotFound));
+                
+                _postInteractionRepository.DeleteCompletely(interaction.Id);
+                return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
             }
             catch (Exception e)
             {

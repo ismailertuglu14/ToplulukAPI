@@ -83,13 +83,19 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             dtoInfo.AssignedById = UserId;
             return await _communityService.AssignUserAsModerator(dtoInfo);
         }
+        
+        
+        [HttpGet("user/{id}")]
+        public async Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string id)
+        {
+            return await _communityService.ParticipiantCommunities(this.UserId, id);
+        }
 
         // Http call methods
-
         [HttpGet("user-communities")]
         public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string id)
         {
-            return await _communityService.GetUserCommunities(id);
+            return await _communityService.GetUserCommunities( id);
         }
         
         [HttpGet("user-communities-count")]
