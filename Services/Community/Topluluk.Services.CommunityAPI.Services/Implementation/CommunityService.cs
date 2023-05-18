@@ -77,7 +77,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         {
             try
             {
-                int count = await _participiantRepository.Count(cp => cp.UserId == userId);
+                int count = await _participiantRepository.Count(cp => !cp.IsDeleted && cp.UserId == userId);
                 return Response<int>.Success(count, ResponseStatus.Success);
             }
             catch (Exception e)
@@ -279,17 +279,12 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 else
                 {
                     return await Task.FromResult(Response<string>.Fail("Not authorized for delete community. You are not an admin!", ResponseStatus.NotAuthenticated));
-
                 }
-
-
             }
             catch(Exception e)
             {
                 return await Task.FromResult(Response<string>.Fail($"Error occured: {e}", ResponseStatus.NotAuthenticated));
-
             }
-
         }
 
 
@@ -389,6 +384,18 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         }
 
+        public async Task<Response<NoContent>> UpdateBannerImage(CommunityImageUploadedDto dto)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception e)
+            {
+                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
+            }
+        }
+
         public async Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string sourceId, string targetId)
         {
             try
@@ -408,8 +415,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         private string StringToSlugConvert(string phrase)
         {
-            char[] turkishChars = new char[] { 'ç', 'ğ', 'ı', 'i', 'ö', 'ş', 'ü' };
-            char[] englishChars = new char[] { 'c', 'g', 'i', 'i', 'o', 's', 'u' };
+            var turkishChars = new char[] { 'ç', 'ğ', 'ı', 'i', 'ö', 'ş', 'ü' };
+            var englishChars = new char[] { 'c', 'g', 'i', 'i', 'o', 's', 'u' };
 
             string str = phrase.ToLower();
 
