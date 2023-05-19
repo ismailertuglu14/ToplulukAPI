@@ -378,34 +378,39 @@ namespace Topluluk.Services.EventAPI.Services.Implementation
 
         
 
-        public async Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string userId, string eventId,
+        public async Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string token, string eventId,
             int skip = 0, int take = 10)
         {
             try
             {
                 Event _event = await _eventRepository.GetFirstAsync(e => e.Id == eventId);
                 if (_event == null) throw new Exception("Event Not found");
-                List<GetEventAttendeesDto> dto = new();
-                int i = 0;
-                foreach (var user in _event.Attendees)
+
+                var attendees = _attendeesRepository.GetListByExpressionPaginated(skip,take, e => e.EventId == eventId);
+                
+                IdList idList = new() { ids = attendees.Select(a => a.UserId).ToList() };
+                
+                var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY+"/user/get-user-info-list")
+                    .AddHeader("Authorization",token).AddBody(idList);
+                var usersResponse = await _client.ExecutePostAsync<Response<List<GetUserInfoDto>>>(usersRequest);
+                
+                List<GetEventAttendeesDto> dtos = _mapper.Map<List<EventAttendee>, List<GetEventAttendeesDto>>(attendees);
+
+                foreach (var dto in dtos)
                 {
-                    var userInfoRequest =
-                        new RestRequest("https://localhost:7202/user/user-info-comment").AddQueryParameter("id", user);
-                    var userInfoResponse = await _client.ExecuteGetAsync<Response<GetUserInfoDto>>(userInfoRequest);
-                    dto.Add(new()
-                        {Id = _event.Attendees.ToList()[i],FirstName = userInfoResponse.Data.Data.FirstName,
-                            LastName = userInfoResponse.Data.Data.LastName,ProfileImage = userInfoResponse.Data.Data.ProfileImage, Gender = userInfoResponse.Data.Data.Gender});
-                    i++;
+                    var user = usersResponse.Data.Data.FirstOrDefault(u =>u.Id == dto.Id);
+                    dto.Id = user.Id;
+                    dto.FirstName = user.FirstName;
+                    dto.LastName = user.LastName;
+                    dto.ProfileImage = user.ProfileImage;
+                    dto.Gender = user.Gender;
                 }
-
-
-                return await Task.FromResult(
-                    Response<List<GetEventAttendeesDto>>.Success(dto, ResponseStatus.Success));
+                
+                return Response<List<GetEventAttendeesDto>>.Success(dtos, ResponseStatus.Success);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<GetEventAttendeesDto>>.Fail($"Some error occured {e}",
-                    ResponseStatus.InitialError));
+                return Response<List<GetEventAttendeesDto>>.Fail(e.ToString(), ResponseStatus.InitialError);
             }
         }
 

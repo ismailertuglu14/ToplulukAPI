@@ -19,7 +19,7 @@ namespace Topluluk.Services.EventAPI.Services.Interface
 		Task<Response<string>> DeleteCompletelyEvent(string userId, string id);
 
 		
-        Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string userId, string eventId, int skip = 0,
+        Task<Response<List<GetEventAttendeesDto>>> GetEventAttendees(string token, string eventId, int skip = 0,
             int take = 10);
     }
 }

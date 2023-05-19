@@ -67,7 +67,7 @@ namespace Topluluk.Services.EventAPI.Controllers
         [HttpGet("{id}/attendees")]
         public async Task<Response<List<GetEventAttendeesDto>>> GetAttendees(string id,int skip, int take)
         {
-            return await _eventService.GetEventAttendees(this.UserId, id,skip, take);
+            return await _eventService.GetEventAttendees(this.Token, id,skip, take);
         }
 
         
