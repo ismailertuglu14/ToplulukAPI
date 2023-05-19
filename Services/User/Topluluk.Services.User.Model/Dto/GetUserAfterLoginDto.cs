@@ -21,6 +21,8 @@ namespace Topluluk.Services.User.Model.Dto
 		
 		public int FollowingsCount { get; set; }
 		public int FollowersCount { get; set; }
+		public bool IsPrivate { get; set; }
+		
 
 		public GetUserAfterLoginDto()
 		{
