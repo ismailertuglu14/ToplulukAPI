@@ -273,7 +273,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 if (community.AdminId == ownerId)
                 {
                     _communityRepository.DeleteById(communityId);
-                    _participiantRepository.DeleteByExpression(p =>p.CommunityId == communityId);
+                    _participiantRepository.DeleteByExpression(p => p.CommunityId == communityId);
                     return await Task.FromResult(Response<string>.Success("Deleted", ResponseStatus.Success));
                 }
                 else
@@ -403,8 +403,13 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 var participiants =  _participiantRepository.GetListByExpressionPaginated(0, 10, c => c.UserId == targetId && (sourceId == targetId || c.IsShownOnProfile));
                 List<string> idList = participiants.Select(p => p.CommunityId).ToList(); 
                 var communities = _communityRepository.GetListByExpression(c => idList.Contains(c.Id));
-                List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
-                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
+                List<CommunityGetPreviewDto> dtos = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
+                foreach (var dto in dtos)
+                {
+                    dto.ParticipiantsCount =
+                        await _participiantRepository.Count(p => !p.IsDeleted && p.CommunityId == dto.Id);
+                }
+                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dtos, ResponseStatus.Success));
             }
             catch (Exception e)
             {
