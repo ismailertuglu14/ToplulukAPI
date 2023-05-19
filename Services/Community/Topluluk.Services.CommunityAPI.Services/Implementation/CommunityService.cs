@@ -469,9 +469,6 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             if (!usersResponse.IsSuccessful)
                 return Response<List<UserDto>>.Fail("Failed", ResponseStatus.Failed);
             
-            
-
-
             return Response<List<UserDto>>.Success(usersResponse.Data.Data, ResponseStatus.Success);
         }
 
