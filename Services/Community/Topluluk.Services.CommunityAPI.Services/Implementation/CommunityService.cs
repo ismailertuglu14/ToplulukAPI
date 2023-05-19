@@ -465,7 +465,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<List<UserDto>>> GetParticipiants(string token, string id)
         {
-            var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id);
+            Community? community = await _communityRepository.GetFirstAsync(c => c.Id == id);
+            
+            var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id && c.UserId != community.AdminId);
             var idList = new IdList() { ids = participiants.Select(p => p.UserId).ToList() };
             var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list")
                                 .AddHeader("Authorization",token).AddBody(idList);
