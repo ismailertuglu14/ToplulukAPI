@@ -61,16 +61,7 @@ namespace Topluluk.Services.PostAPI.Data.Implementation
                 .ToListAsync();
             return documents;
         }
-
-        public async Task<Dictionary<string, PostInteraction>> IsUserInteractedPosts(string userId, List<string> postdIds)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Dictionary<string, int>> PostsInteractionCounts(List<string> postIds)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
 

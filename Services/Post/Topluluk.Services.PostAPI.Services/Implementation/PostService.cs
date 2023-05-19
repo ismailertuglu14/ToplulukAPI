@@ -176,13 +176,15 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 
                 var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
                 var usersTask = _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
-                
-                await Task.WhenAll( getUserFollowingsTask, usersTask);
-
+                var interactedTask =  _postInteractionRepository.IsUserInteractedPosts(userId, posts.Select(p => p.Id).ToList());
+                var interactionCountsTask =  _postInteractionRepository.PostsInteractionCounts(posts.Select(p => p.Id).ToList());
+                await Task.WhenAll(interactionCountsTask, interactedTask, getUserFollowingsTask, usersTask);
+               
+                    
                 var postDtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(posts);
                 
                 var usersResponse = usersTask.Result;
-                
+
                 for (int i = 0; i < posts.Count; i++)
                 {
                     var user = usersResponse.Data.Data.Where(u => u.Id == postDtos[i].UserId)
@@ -200,24 +202,23 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     postDtos[i].Gender = user.Gender;
                     postDtos[i].IsFollowing = getUserFollowingsResponse.Contains(user.Id);
 
-                    var isUserInteractedTask =  _postInteractionRepository.GetFirstAsync(p => p.PostId == postDtos[i].Id && p.UserId == userId);
                     var interactionsTask = _postInteractionRepository.GetListByExpressionAsync(p => p.PostId == postDtos[i].Id);
-                    var interactionCountTask = _postInteractionRepository.Count(p => p.PostId == postDtos[i].Id);
                     var commentCountTask = _commentRepository.Count(c => c.PostId == posts[i].Id && c.IsDeleted == false);
                     var isSavedTask = _savedPostRepository.AnyAsync(sp => sp.PostId == posts[i].Id && sp.UserId == userId);
-                    await Task.WhenAll(isUserInteractedTask, commentCountTask, interactionsTask, interactionCountTask,isSavedTask);
-                    
-                    postDtos[i].InteractionCount = interactionCountTask.Result;
+                    await Task.WhenAll( commentCountTask, interactionsTask,isSavedTask);
+                    postDtos[i].InteractionCount = interactionCountsTask.Result.ContainsKey(postDtos[i].Id) == true
+                        ? interactionCountsTask.Result[postDtos[i].Id]
+                        : 0;
                     postDtos[i].CommentCount = commentCountTask.Result;
                     postDtos[i].IsSaved = isSavedTask.Result;
-                    
-                    if (isUserInteractedTask.Result != null)
+                    if (interactedTask.Result.ContainsKey(postDtos[i].Id))
                     {
                         postDtos[i].IsInteracted = new PostInteractedDto()
                         {
-                            Interaction = isUserInteractedTask.Result.InteractionType
+                            Interaction = interactedTask.Result[postDtos[i].Id].InteractionType
                         };
                     }
+                    
                     if (interactionsTask.Result != null)
                     {
                         postDtos[i].InteractionPreviews = interactionsTask.Result

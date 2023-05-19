@@ -10,8 +10,7 @@ namespace Topluluk.Services.PostAPI.Data.Interface
 	{
 		Task<bool> DeletePosts(string userId);
 		Task<List<Post>> GetPostsWithDescending(int skip, int take, Expression<Func<Post, bool>> expression);
-		Task<Dictionary<string, PostInteraction>> IsUserInteractedPosts(string userId, List<string> postdIds);
-		Task<Dictionary<string, int>> PostsInteractionCounts(List<string> postIds);
+
 	}
 }
 
