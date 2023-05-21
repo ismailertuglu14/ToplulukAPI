@@ -22,6 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMailService, MailService>();
 
+IConfiguration configuration = builder.Configuration;
 
 builder.Services.AddMassTransit(x =>
 {
@@ -30,10 +31,10 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<EventDeletedCosumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost", "/", host =>
+        cfg.Host(new Uri(configuration.GetSection("RabbitMQ:Host").Value), host =>
         {
-            host.Username("guest");
-            host.Password("guest");
+            host.Username(configuration.GetSection("RabbitMQ:Username").Value);
+            host.Password(configuration.GetSection("RabbitMQ:Password").Value);
         });
 
         cfg.ReceiveEndpoint("successfully-registered", e =>

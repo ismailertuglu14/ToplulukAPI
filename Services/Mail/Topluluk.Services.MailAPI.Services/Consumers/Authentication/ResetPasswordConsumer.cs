@@ -21,8 +21,7 @@ namespace Topluluk.Services.MailAPI.Services.Consumers.Authentication
             {
                 To = context.Message.To,
                 UserId = context.Message.UserId,
-
-                ResetToken = context.Message.ResetToken
+                Code = context.Message.Code
             });
         }
     }

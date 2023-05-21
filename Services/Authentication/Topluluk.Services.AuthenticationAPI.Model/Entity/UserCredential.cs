@@ -31,7 +31,7 @@ namespace Topluluk.Services.AuthenticationAPI.Model.Entity
 		public int? AccessFailedCount { get; set; } = 0;
 		public bool? Locked { get; set; } = false;
 		public DateTime LockoutEnd { get; set; }
-        public string? ResetPasswordToken { get; set; }
+        public string? ResetPasswordCode { get; set; }
         public DateTime? ResetPasswordTokenEndDate { get; set; }
 
         public UserCredential()

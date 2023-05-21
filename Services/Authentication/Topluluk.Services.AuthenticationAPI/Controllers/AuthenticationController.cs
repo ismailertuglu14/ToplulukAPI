@@ -50,17 +50,15 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         {
             return await _authenticationService.ResetPasswordRequest(mail.Mail);
         }
-
-        [HttpPost("verify-reset-token/{userId}/{resetToken}")]
-        public async Task<Response<bool>> VerifyResetToken(string userId, string resetToken)
+        [HttpPost("check-otp")]
+        public async Task<Response<NoContent>> ResetPasswordCheckOTPCode(ResetPasswordCheckOTPDto dto)
         {
-            return await _authenticationService.VerifyResetToken(userId, resetToken);
+            return await _authenticationService.ResetPasswordCheckOTP(dto);
         }
-
-        [HttpPost("reset-password/{userId}/{resetToken}")]
-        public async Task<Response<NoContent>> ResetPassword(string userId, string resetToken, [FromBody] ResetPasswordDto resetPasswordDto)
+        [HttpPost("reset-password")]
+        public async Task<Response<NoContent>> ResetPassword( ResetPasswordDto resetPasswordDto)
         {
-            return await _authenticationService.ResetPassword(userId, resetToken, resetPasswordDto);
+            return await _authenticationService.ResetPassword( resetPasswordDto);
         }
         // @@@@@@@@@@@ Http Requests @@@@@@@@@@@@@@@
 

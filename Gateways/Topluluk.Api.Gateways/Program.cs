@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Topluluk.Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

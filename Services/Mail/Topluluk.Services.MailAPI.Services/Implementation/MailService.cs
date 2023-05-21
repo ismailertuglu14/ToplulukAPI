@@ -75,7 +75,6 @@ public class MailService : IMailService
         try
         {
             var subject = "Şifre Sıfırlama İsteği";
-            string resetPasswordLink = $"https://example.com/reset-password/{resetDto.UserId}/{resetDto.ResetToken}";
             string body = string.Format(@"
                     <!DOCTYPE html>
                     <html>
@@ -85,12 +84,12 @@ public class MailService : IMailService
                         <body>
                             <h1>Şifrenizi sıfırlayabilirsiniz!</h1>
                             <p>Merhaba,</p>
-                            <p>Şifrenizi sıfırlamak için aşağıdaki linke tıklayabilirsiniz:</p>
-                            <a href='{0}'>{0}</a>
+                            <p>Şifrenizi sıfırlamak için gereken kod aşağıda verilmiştir. Lütfen bu kodu kimseyle paylaşmayınız!</p>
+                            <p>{0}</p>
                             <p>Eğer bu mesajı yanlışlıkla aldıysanız, lütfen dikkate almayınız.</p>
                         </body>
                     </html>
-                    ", resetPasswordLink);
+                    ", resetDto.Code);
             await SendMailAsync(new List<string>() { resetDto.To }, subject, body);
         }
         catch (Exception e)

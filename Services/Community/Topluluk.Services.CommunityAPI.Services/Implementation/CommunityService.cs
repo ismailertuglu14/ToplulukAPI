@@ -470,7 +470,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id && c.UserId != community.AdminId);
             var idList = new IdList() { ids = participiants.Select(p => p.UserId).ToList() };
             var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list")
-                                .AddHeader("Authorization",token).AddBody(idList);
+                                    .AddHeader("Authorization",token)                 
+                                    .AddBody(idList);
+            
             var usersResponse = await _client.ExecutePostAsync<Response<List<UserDto>>>(usersRequest);
     
             if (!usersResponse.IsSuccessful)
