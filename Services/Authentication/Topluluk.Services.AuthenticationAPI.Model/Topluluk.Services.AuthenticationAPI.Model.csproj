@@ -23,7 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
-    <Folder Include="Dto\" />
     <Folder Include="Mapper\" />
     <Folder Include="Validators\" />
     <Folder Include="Dto\Http\" />

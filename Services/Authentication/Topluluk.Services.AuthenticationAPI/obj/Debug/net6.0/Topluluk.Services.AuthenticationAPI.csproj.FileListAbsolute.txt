@@ -480,7 +480,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.CSharp.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.CodeAnalysis.Razor.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.DotNet.PlatformAbstractions.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll
@@ -571,3 +570,14 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/Authentication/Topluluk.Services.Aut
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.pdb
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Debug/net6.0/Topluluk.Services.AuthenticationAPI.genruntimeconfig.cache
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/obj/Debug/net6.0/ref/Topluluk.Services.AuthenticationAPI.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.AspNetCore.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Extensions.Hosting.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Extensions.Logging.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Formatting.Compact.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Settings.Configuration.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Sinks.Console.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Sinks.Debug.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Sinks.File.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Sinks.MongoDB.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Authentication/Topluluk.Services.AuthenticationAPI/bin/Debug/net6.0/Serilog.Sinks.PeriodicBatching.dll

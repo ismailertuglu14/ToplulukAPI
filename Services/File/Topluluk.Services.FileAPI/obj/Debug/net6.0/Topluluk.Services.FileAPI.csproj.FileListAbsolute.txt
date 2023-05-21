@@ -491,9 +491,6 @@ C:/Users/ismai/Desktop/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/obj/D
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Azure.Storage.Blobs.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Azure.Storage.Common.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DnsClient.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DotNetCore.CAP.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DotNetCore.CAP.MongoDB.dll
-/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/DotNetCore.CAP.RabbitMQ.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 /Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/File/Topluluk.Services.FileAPI/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll

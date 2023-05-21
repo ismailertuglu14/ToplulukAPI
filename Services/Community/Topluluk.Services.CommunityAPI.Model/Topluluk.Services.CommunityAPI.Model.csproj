@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Mapper\" />
     <Folder Include="Validators\" />
-    <Folder Include="Dto\Http\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Topluluk.Shared\Topluluk.Shared.csproj" />
