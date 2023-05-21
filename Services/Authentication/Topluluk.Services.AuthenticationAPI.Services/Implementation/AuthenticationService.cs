@@ -201,7 +201,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 sendEndpoint.Send<ResetPasswordCommand>(registerMessage);
                 return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
             }
-            return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
+            return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
         }
 
         public async Task<Response<NoContent>> ResetPasswordCheckOTP(ResetPasswordCheckOTPDto codeDto)
