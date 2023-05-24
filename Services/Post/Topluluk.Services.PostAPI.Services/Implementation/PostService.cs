@@ -173,21 +173,22 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     p => !p.IsDeleted && (getUserFollowingsResponse.Contains(p.UserId) || p.UserId == userId));
                 
                 IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
-                
+                List<string> postIds = posts.Select(p => p.Id).ToList();
                 var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
                 var usersTask = _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
-                var interactedTask =  _postInteractionRepository.IsUserInteractedPosts(userId, posts.Select(p => p.Id).ToList());
-                var interactionCountsTask =  _postInteractionRepository.PostsInteractionCounts(posts.Select(p => p.Id).ToList());
-                await Task.WhenAll(interactionCountsTask, interactedTask, getUserFollowingsTask, usersTask);
+                var interactedTask =  _postInteractionRepository.IsUserInteractedPosts(userId,postIds );
+                var interactionCountsTask =  _postInteractionRepository.PostsInteractionCounts(postIds);
+                var postCommentCountsTask = _commentRepository.GetPostCommentCounts(postIds);
+                var postSavedTask = _savedPostRepository.IsUserSavedPosts(userId, postIds);
+                var interactionsTask = _postInteractionRepository.GetPostInteractionPreviews(postIds);
+                await Task.WhenAll(interactionsTask,postCommentCountsTask,postSavedTask, interactionCountsTask, interactedTask, getUserFollowingsTask, usersTask);
                
-                    
                 var postDtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(posts);
                 
-                var usersResponse = usersTask.Result;
 
                 for (int i = 0; i < posts.Count; i++)
                 {
-                    var user = usersResponse.Data.Data.Where(u => u.Id == postDtos[i].UserId)
+                    var user = usersTask.Result.Data.Data.Where(u => u.Id == postDtos[i].UserId)
                         .FirstOrDefault();
                     if (user == null)
                     {
@@ -195,43 +196,38 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         i--;
                         continue;
                     }
-                    postDtos[i].UserId = user.Id;
-                    postDtos[i].FirstName = user.FirstName;
-                    postDtos[i].LastName = user.LastName;
-                    postDtos[i].ProfileImage = user.ProfileImage;
-                    postDtos[i].Gender = user.Gender;
-                    postDtos[i].IsFollowing = getUserFollowingsResponse.Contains(user.Id);
+                    var postDto = postDtos.FirstOrDefault(p => p.Id == postDtos[i].Id);
+                    postDto.UserId = user.Id;
+                    postDto.FirstName = user.FirstName;
+                    postDto.LastName = user.LastName;
+                    postDto.ProfileImage = user.ProfileImage;
+                    postDto.Gender = user.Gender;
+                    postDto.IsFollowing = getUserFollowingsResponse.Contains(user.Id);
 
-                    var interactionsTask = _postInteractionRepository.GetListByExpressionAsync(p => p.PostId == postDtos[i].Id);
-                    var commentCountTask = _commentRepository.Count(c => c.PostId == posts[i].Id && c.IsDeleted == false);
-                    var isSavedTask = _savedPostRepository.AnyAsync(sp => sp.PostId == posts[i].Id && sp.UserId == userId);
-                    await Task.WhenAll( commentCountTask, interactionsTask,isSavedTask);
-                    postDtos[i].InteractionCount = interactionCountsTask.Result.ContainsKey(postDtos[i].Id) == true
-                        ? interactionCountsTask.Result[postDtos[i].Id]
+           
+                    
+                    postDto.InteractionCount = interactionCountsTask.Result.ContainsKey(postDto.Id) == true
+                        ? interactionCountsTask.Result[postDto.Id]
                         : 0;
-                    postDtos[i].CommentCount = commentCountTask.Result;
-                    postDtos[i].IsSaved = isSavedTask.Result;
-                    if (interactedTask.Result.ContainsKey(postDtos[i].Id))
+                    
+                    
+                    postDto.CommentCount = postCommentCountsTask.Result.ContainsKey(postDto.Id) ?postCommentCountsTask.Result[postDto.Id] : 0 ;
+                    
+                    postDto.IsSaved = postSavedTask.Result.ContainsKey(postDto.Id) ? postSavedTask.Result[postDto.Id] : false ;
+
+                    if (interactedTask.Result.ContainsKey(postDto.Id))
                     {
-                        postDtos[i].IsInteracted = new PostInteractedDto()
+                        postDto.IsInteracted = new PostInteractedDto()
                         {
-                            Interaction = interactedTask.Result[postDtos[i].Id].InteractionType
+                            Interaction = interactedTask.Result[postDto.Id].InteractionType
                         };
                     }
                     
-                    if (interactionsTask.Result != null)
-                    {
-                        postDtos[i].InteractionPreviews = interactionsTask.Result
-                            .GroupBy(x => x.InteractionType)
-                            .OrderByDescending(x => x.Count())
-                            .Take(3)
-                            .Select(x => new PostInteractionPreviewDto()
-                            {
-                                Interaction = x.Key,
-                                InteractionCount = x.Count()
-                            })
-                            .ToList();
-                    }
+                    var interactions = interactionsTask.Result != null && interactionsTask.Result.TryGetValue(postDto.Id, out var interactionArray)
+                        ? interactionArray.ToList()
+                        : new List<PostInteractionPreviewDto>();
+
+                    postDto!.InteractionPreviews = interactions;
                         
                     if (!posts[i].CommunityLink.IsNullOrEmpty())
                     {
