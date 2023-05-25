@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Topluluk.Services.PostAPI.Model.Dto;
+using Topluluk.Services.PostAPI.Model.Dto.Http;
 using Topluluk.Services.PostAPI.Model.Entity;
 
 namespace Topluluk.Services.PostAPI.Model.Mapper
@@ -18,7 +19,7 @@ namespace Topluluk.Services.PostAPI.Model.Mapper
 			CreateMap<PostComment, CommentGetDto>();
 			CreateMap<Post, GetPostForFeedDto>();
 			CreateMap<Post, GetPostByIdDto>();
-			CreateMap<PostInteraction, GetPostInteractionDto>();
+			CreateMap<PostInteraction, UserInfoDto>().ForMember(d => d.Id, s => s.MapFrom(s => s.UserId));
 		}
 	}
 }

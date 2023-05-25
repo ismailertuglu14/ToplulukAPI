@@ -1,5 +1,6 @@
 ﻿using System;
 using Topluluk.Services.PostAPI.Model.Dto;
+using Topluluk.Services.PostAPI.Model.Dto.Http;
 using Topluluk.Services.PostAPI.Model.Entity;
 using Topluluk.Shared.Dtos;
 
@@ -7,6 +8,9 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 {
 	public interface IPostService
 	{
+		//Test
+		
+		
         Task<Response<List<GetPostDto>>> GetPosts(string userId, int take = 10, int skip = 0 );
         Task<Response<GetPostByIdDto>> GetPostById(string postId, string sourceUserId, bool isDeleted = false);
         Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10);
@@ -24,7 +28,7 @@ namespace Topluluk.Services.PostAPI.Services.Interface
         
         
 		Task<Response<string>> Interaction(string userId, string postId, PostInteractionCreateDto interactionCreate);
-		Task<Response<List<GetPostInteractionDto>>> GetInteractions(string userId, string postId, int take = 10, int skip = 0);
+		Task<Response<List<UserInfoDto>>> GetInteractions(string userId, string postId, int type = 0, int take = 10, int skip = 0);
 		Task<Response<string>> RemoveInteraction(string userId, string postId);
 
         

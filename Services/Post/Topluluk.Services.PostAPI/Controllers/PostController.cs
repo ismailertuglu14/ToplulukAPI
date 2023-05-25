@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Topluluk.Services.PostAPI.Model.Dto;
+using Topluluk.Services.PostAPI.Model.Dto.Http;
 using Topluluk.Services.PostAPI.Services.Interface;
 using Topluluk.Shared.BaseModels;
 using Topluluk.Shared.Dtos;
@@ -18,12 +19,19 @@ namespace Topluluk.Services.PostAPI.Controllers
         
 
         private readonly IPostService _postService;
-
-        public PostController(IPostService postService)
+    
+        private readonly ITestPostService _test;
+        public PostController(IPostService postService, ITestPostService test)
         {
             _postService = postService;
+            _test = test;
         }
-
+    
+        [HttpPost("test/create")]
+        public async Task<Response<NoContent>> CreateTestPost(int count)
+        {
+            return await _test.CreatePostsForTest(count);
+        }
 
         [HttpGet("feed")]
         public async Task<Response<List<GetPostForFeedDto>>> GetPostsForFeedScreen(int take = 10, int skip = 0)
@@ -87,9 +95,9 @@ namespace Topluluk.Services.PostAPI.Controllers
             return await _postService.SavePost(this.UserId, postId);
         }
         [HttpGet("interactions/{postId}")]
-        public async Task<Response<List<GetPostInteractionDto>>> GetInteractions(string postId, int take, int skip)
+        public async Task<Response<List<UserInfoDto>>> GetInteractions(string postId,int type, int take, int skip)
         {
-            return await _postService.GetInteractions(this.UserId,postId,take,skip);
+            return await _postService.GetInteractions(this.UserId,postId,type, take,skip);
         }
         [HttpPost("interaction/{postId}")]
         public async Task<Response<string>> Interaction(string postId,PostInteractionCreateDto createDto)

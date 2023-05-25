@@ -45,6 +45,7 @@ namespace DBHelper.Repository
 
         DatabaseResponse Insert(T entity);
         Task<DatabaseResponse> InsertAsync(T entity);
+        Task<DatabaseResponse> InsertManyAsync(List<T> entities);
 
         DatabaseResponse Update(T entity);
         DatabaseResponse BulkUpdate(List<T> entityList);

@@ -326,8 +326,6 @@ namespace DBHelper.Repository.Mongo
 
         public async Task<DatabaseResponse> InsertAsync(T entity)
         {
-            entity.CreatedAt = DateTime.Now;
-
             await _collection.InsertOneAsync(entity);
 
             var dbResponse = new DatabaseResponse();
@@ -335,6 +333,14 @@ namespace DBHelper.Repository.Mongo
             dbResponse.Data = entity.Id;
 
             return await Task.FromResult(dbResponse);
+        }
+
+        public async Task<DatabaseResponse> InsertManyAsync(List<T> entities)
+        {
+            _collection.InsertMany(entities);
+            var dbResponse = new DatabaseResponse();
+            dbResponse.IsSuccess = true;
+            return dbResponse;
         }
 
         public IEnumerable<T> Page(int pageSize, int pageNumber, int count)

@@ -147,6 +147,11 @@ namespace DBHelper.Repository.SQL
 
         }
 
+        public async Task<DatabaseResponse> InsertManyAsync(List<T> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<T> Page(int pageSize, int pageNumber, int count)
         {
             throw new NotImplementedException();

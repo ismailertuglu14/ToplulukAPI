@@ -44,21 +44,21 @@ namespace Topluluk.Services.PostAPI.Data.Implementation
             }
          }
 
-        public async Task<List<Post>> GetPostsWithDescending(int skip, int take,
-            Expression<Func<Post, bool>> expression)
+        public async Task<List<Post>> GetPostsWithDescending(int skip, int take, Expression<Func<Post, bool>> expression)
         {
             var database = GetConnection();
             var collectionName = GetCollectionName();
             var filter = Builders<Post>.Filter.Where(expression);
-
             var sort = Builders<Post>.Sort.Descending(p => p.CreatedAt);
 
-
-            var documents = await database.GetCollection<Post>(collectionName).Find(filter)
+            var cursor = await database.GetCollection<Post>(collectionName)
+                .Find(filter)
                 .Sort(sort)
-                .Skip(skip)
+                .Skip(skip * take)
                 .Limit(take)
-                .ToListAsync();
+                .ToCursorAsync();
+
+            var documents = await cursor.ToListAsync();
             return documents;
         }
         

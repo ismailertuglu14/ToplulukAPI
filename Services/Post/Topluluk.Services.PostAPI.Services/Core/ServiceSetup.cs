@@ -38,6 +38,7 @@ namespace Topluluk.Services.PostAPI.Services.Core
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ITestPostService,TestPostService>();
 
         }
 
