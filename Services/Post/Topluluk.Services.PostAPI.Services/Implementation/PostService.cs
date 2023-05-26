@@ -422,13 +422,45 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             {
                 var post = await _postRepository.GetFirstAsync(p => p.Id == postId);
                 var postDto = _mapper.Map<GetPostByIdDto>(post);
-                postDto.InteractionCount = await _postInteractionRepository.Count(p => !p.IsDeleted && p.PostId == post.Id);
 
+                var postIds = new List<string>();
+                postIds.Add(postDto.Id);
+                
+                var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
+                    .AddParameter("id", post.UserId)
+                    .AddParameter("sourceUserId", sourceUserId);
+                var userInfoResponseTask = _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userInfoRequest);
 
+                var interactionCountTask =  _postInteractionRepository.PostsInteractionCounts(postIds);
+                var interactionPreviewsTask = _postInteractionRepository.GetPostInteractionPreviews(postIds);
+                var isSavedTask = _savedPostRepository.AnyAsync(p => !p.IsDeleted && p.PostId == postId && p.UserId == sourceUserId);
+                var isInteractedTask = _postInteractionRepository.GetFirstAsync(p => p.PostId == p.Id && p.UserId == sourceUserId);
+                var commentCountTask =  _commentRepository.Count(p => !p.IsDeleted && p.PostId == postId);
+                
+                await Task.WhenAll(interactionPreviewsTask, commentCountTask, isSavedTask, isInteractedTask, userInfoResponseTask, interactionCountTask);
+                    
+                postDto.IsSaved = isSavedTask.Result;        
+                
+                postDto.InteractionCount = interactionCountTask.Result.ContainsKey(postDto.Id) ? interactionCountTask.Result[postDto.Id] : 0;
+                var interactions = interactionPreviewsTask.Result != null && interactionPreviewsTask.Result.TryGetValue(postDto.Id, out var interactionArray)
+                    ? interactionArray.ToList()
+                    : new List<PostInteractionPreviewDto>();
+
+                postDto!.InteractionPreviews = interactions;
+
+                if (isInteractedTask.Result != null)
+                {
+                    postDto.IsInteracted = new PostInteractedDto()
+                    {
+                        Interaction = isInteractedTask.Result.InteractionType
+                    };
+                }
+              
+                
                 var comments =  _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId).Result.Data as List<PostComment>;
                 if (comments != null && comments.Count > 0)
                 {
-                    postDto.CommentCount = await _commentRepository.Count(p => !p.IsDeleted && p.PostId == postId);
+                    postDto.CommentCount = commentCountTask.Result;
                     List<CommentGetDto> commentDtos = _mapper.Map<List<PostComment>, List<CommentGetDto>>(comments);
 
                     var ids = commentDtos.Select(comment => comment.UserId).ToList();
@@ -458,12 +490,9 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     var communityResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<string>>(communityGetTitleResponse.Content);
                     postDto.CommunityTitle = communityResponse?.Data;
                 }
-
-                var userInfoRequest = new RestRequest("https://localhost:7202/User/GetUserInfoForPost")
-                    .AddParameter("id", post.UserId)
-                    .AddParameter("sourceUserId", sourceUserId);
-                var userInfoResponse = await _client.ExecuteGetAsync<Response<UserInfoGetResponse>>(userInfoRequest);
-
+                
+                var userInfoResponse = userInfoResponseTask.Result;
+                
                 postDto.UserId = userInfoResponse.Data.Data.UserId;
                 postDto.FirstName = userInfoResponse.Data.Data.FirstName;
                 postDto.LastName = userInfoResponse.Data.Data.LastName;
@@ -472,38 +501,13 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 postDto.Gender = userInfoResponse.Data.Data.Gender;
                 postDto.UserName = userInfoResponse.Data.Data.UserName;
                 
-                return await Task.FromResult(Response<GetPostByIdDto>.Success(postDto, Shared.Enums.ResponseStatus.Success));
+                
+                return Response<GetPostByIdDto>.Success(postDto, ResponseStatus.Success);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<GetPostByIdDto>.Fail($"Some error occurred: {e} ", ResponseStatus.InitialError));
+                return Response<GetPostByIdDto>.Fail(e.ToString(), ResponseStatus.InitialError);
             }
-        }
-
-        // Feed ekranındaki postlar için hazırlanmış metod.
-        public async Task<Response<List<GetPostDto>>> GetPosts(string userId, int take = 10, int skip = 0)
-        {
-            // Communit servise istek atıp takip ettiğimiz kullanıcıların id listesini döndürcez.
-            //var userCommunitiesRequest = new RestRequest("https://localhost:7132/community/user-communities").AddQueryParameter("id", userId);
-            ////var userCommunitiesResponse = await _client.ExecuteGetAsync<Response<List<string>>>(userCommunitiesRequest);
-            //List<string> userCommunities = new();
-
-            //if (userCommunitiesResponse.IsSuccessful == true)
-            //{
-            //    foreach (var community in userCommunitiesResponse.Data.Data)
-            //    {user
-            //        userCommunities.Add(community);
-            //    }
-            //}
-
-
-            // Kullanıcının takip ettiği kullanıcıların postları, kendi postları, kendi katıldığı topluluklarının postları
-            var response = await _postRepository.GetAllAsync(take, skip, p => p.UserId == userId);
-            List<GetPostDto> posts = _mapper.Map<List<Post>, List<GetPostDto>>(response.Data);
-
-
-            return await Task.FromResult(Response<List<GetPostDto>>.Success(posts, Shared.Enums.ResponseStatus.Success));
-
         }
 
         // Kullanıcı ekranında kullanıcının paylaşımlarını listelemek için kullanılacak action

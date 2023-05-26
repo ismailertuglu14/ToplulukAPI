@@ -19,25 +19,25 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 
 		public string Description { get; set; }
 		public DateTime CreatedAt { get; set; }
+		
+		public PostInteractedDto IsInteracted { get; set; }
 
 		// Kullanıcı postu paylaşan kişiyi takip ediyor mu?
 		public bool IsUserFollowing { get; set; }
 
 		public int InteractionCount { get; set; }
 
-		public ICollection<InteractionEnum>? InteractedByIds { get; set; }
+		public List<PostInteractionPreviewDto> InteractionPreviews { get; set; }
 
 		public List<FileModel>? Files { get; set; }
 
 		public int CommentCount { get; set; }
-		
-		
-		// todo Change PostComment to CommendtDto.
+		public bool IsSaved { get; set; }
 		public ICollection<CommentGetDto>? Comments { get; set; }
 
 		public GetPostByIdDto()
 		{
-			InteractedByIds = new HashSet<InteractionEnum>();
+			InteractionPreviews = new List<PostInteractionPreviewDto>();
             Files = new List<FileModel>();
 			Comments = new HashSet<CommentGetDto>();
 		}
