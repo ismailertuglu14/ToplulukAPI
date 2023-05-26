@@ -906,13 +906,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     return await Task.FromResult(Response<NoContent>.Fail("User not found", ResponseStatus.NotFound));
                 }
-
-                if (user.Id != userId)
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("", ResponseStatus.Unauthorized));
-                }
-
-
+                
                 if (user.UserName != userDto.UserName)
                 {
                     var result = await _userRepository.CheckIsUsernameUnique(userDto.UserName);
@@ -927,7 +921,7 @@ namespace Topluluk.Services.User.Services.Implementation
                     var result = await _userRepository.CheckIsUsernameUnique(userDto.Email);
                     if (result == true)
                     {
-                        return await Task.FromResult(Response<NoContent>.Fail("Email already taken!", ResponseStatus.EmailInUse));
+                        return Response<NoContent>.Fail("Email already taken!", ResponseStatus.EmailInUse);
                     }
                 }
                 // Http request to auth service for change username and email
@@ -937,29 +931,29 @@ namespace Topluluk.Services.User.Services.Implementation
                 credentialDto.Email = userDto.Email;
 
                 var _request = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/update-profile").AddHeader("Authorization", token).AddBody(credentialDto);
-                var _response = await _client.ExecutePostAsync<Response<NoContent>>(_request);
+                await _client.ExecutePostAsync<Response<NoContent>>(_request);
 
-                user.FirstName = userDto.FirstName;
-                user.LastName = userDto.LastName;
-                user.UserName = userDto.UserName;
-                user.Email = userDto.Email;
+                user.FirstName = userDto.FirstName.IsNullOrEmpty() ? user.FirstName : userDto.FirstName;
+                user.LastName = userDto.LastName.IsNullOrEmpty() ?  user.LastName : userDto.LastName;
+                user.UserName =  userDto.UserName.IsNullOrEmpty() ? user.UserName : userDto.UserName;
+                user.Email = userDto.Email.IsNullOrEmpty() ? user.Email : userDto.Email;
                 user.Gender = userDto.Gender;
-                user.Bio = userDto.Bio;
+                user.Bio = userDto.Bio.IsNullOrEmpty() ? user.Bio : userDto.Bio;
                 user.BirthdayDate = userDto.BirthdayDate;
-
+                user.Title = userDto.Title.IsNullOrEmpty() ? user.Title : userDto.Title;
                 DatabaseResponse response = _userRepository.Update(user);
 
-                if (response.IsSuccess == true)
+                if (response.IsSuccess)
                 {
-                    return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
+                    return Response<NoContent>.Success( ResponseStatus.Success);
                 }
 
 
-                return await Task.FromResult(Response<NoContent>.Fail("Update failed", ResponseStatus.InitialError));
+                return Response<NoContent>.Fail("Update failed", ResponseStatus.InitialError);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
+                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
             }
         }
 
@@ -969,14 +963,14 @@ namespace Topluluk.Services.User.Services.Implementation
             {
                 if (userId.IsNullOrEmpty())
                 {
-                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User Not Found", ResponseStatus.BadRequest));
+                    return Response<List<FollowingUserDto>>.Fail("User Not Found", ResponseStatus.BadRequest);
                 }
 
                 _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
 
                 if (user == null)
                 {
-                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("User not found", ResponseStatus.NotFound));
+                    return Response<List<FollowingUserDto>>.Fail("User not found", ResponseStatus.NotFound);
                 }
                 // fixle true kısmını
 
@@ -994,11 +988,11 @@ namespace Topluluk.Services.User.Services.Implementation
                 /*DatabaseResponse response = await _userRepository.GetAllAsync(take, skip, u =>  true
                 && ((u.FirstName.ToLower() + " " + u.LastName.ToLower()).Contains(text.ToLower()) || u.UserName.Contains(text.ToLower())));
                 ;*/
-                return await Task.FromResult(Response<List<FollowingUserDto>>.Success(followingUserDtos, ResponseStatus.Success));
+                return Response<List<FollowingUserDto>>.Success(followingUserDtos, ResponseStatus.Success);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<List<FollowingUserDto>>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError));
+                return Response<List<FollowingUserDto>>.Fail($"Some error occurreed : {e}", ResponseStatus.InitialError);
             }
         }
 
