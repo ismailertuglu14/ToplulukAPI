@@ -533,7 +533,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         {
             try
             {
-                bool result = await _communityRepository.AnyAsync(c => c.AdminId == userId);
+                bool result = await _communityRepository.AnyAsync(c => !c.IsDeleted && c.AdminId == userId);
                 return await Task.FromResult(Response<bool>.Success(result, ResponseStatus.Success));
             }
             catch (Exception e)

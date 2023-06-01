@@ -49,7 +49,7 @@ public class RedisCacheRepository : IRedisRepository
     {
         var redisKeys = keys.Select(key => (RedisKey)key).ToArray();
         var redisValues = await _cache.StringGetAsync(redisKeys);
-        return redisValues.Select(value => (string)value).ToList();
+        return redisValues.Select(value => (string)value!).ToList();
     }
 
     public async Task<T> GetOrAddAsync<T>(string key, Func<Task<T>> action) where T : class

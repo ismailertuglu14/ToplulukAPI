@@ -19,7 +19,7 @@ namespace Topluluk.Services.User.Model.Dto
         public bool IsFollowing { get; set; }
         
         ///  Is target user sent to follow request to source user
-        public bool IsFollowRequested { get; set; }
+        public bool isFollowRequestReceived { get; set; }
         
         /// Is source user sent to follow request to target user 
         public bool IsFollowRequestSent { get; set; }

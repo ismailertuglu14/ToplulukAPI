@@ -13,7 +13,6 @@ namespace Topluluk.Services.User.Services.Interface
 		Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin(string id);
 		Task<Response<GetUserByIdDto>> GetUserByUserName(string id, string userName);
         Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5);
-		Task<Response<List<UserSuggestionsDto>>> GetUserSuggestionsMore(int skip = 0, int take = 5);
 		
         Task<Response<string>> InsertUser(UserInsertDto userInfo);
 

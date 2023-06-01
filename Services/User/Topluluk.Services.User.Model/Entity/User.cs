@@ -25,14 +25,10 @@ namespace Topluluk.Services.User.Model.Entity
 		public bool IsPrivate { get; set; } = false;
 
 		public ICollection<string> BlockedUsers { get; set; }
-		public ICollection<string> IncomingFollowRequests { get; set; }
-		public ICollection<string> OutgoingFollowRequests { get; set; }
 
 
 		public User()
 		{
-			IncomingFollowRequests = new HashSet<string>();
-			OutgoingFollowRequests = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();
 			Gender = GenderEnum.Unspecified;
         }
