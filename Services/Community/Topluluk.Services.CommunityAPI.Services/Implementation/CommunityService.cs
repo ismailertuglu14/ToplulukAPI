@@ -14,6 +14,7 @@ using Topluluk.Services.CommunityAPI.Model.Entity;
 using Topluluk.Services.CommunityAPI.Services.Interface;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Helper;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.CommunityAPI.Services.Implementation
@@ -288,9 +289,39 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         }
 
 
-        public Task<Response<string>> KickUser()
+        public async Task<Response<NoContent>> KickUser(string token, string communityId, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string currentId = TokenHelper.GetUserIdByToken(token);
+
+                Community? community = await _communityRepository.GetFirstAsync(c => c.Id == communityId && c.AdminId == currentId);
+                
+                if (community == null)
+                    return Response<NoContent>.Fail("Community Not Found",ResponseStatus.NotFound);
+                
+                // Only admin can kick participiants.
+                if(currentId != community.AdminId)
+                    return Response<NoContent>.Fail("Unaturhoized for this feature.",ResponseStatus.Unauthorized);
+
+                // Admin can't kick himself
+                if(currentId == community.AdminId)
+                    return Response<NoContent>.Fail("Admin can not kick yourself",ResponseStatus.BadRequest);
+
+                CommunityParticipiant? participiant = await _participiantRepository.GetFirstAsync(p => p.CommunityId == communityId && p.UserId == userId);
+                
+                if(participiant == null)
+                    return Response<NoContent>.Fail("User Not Found",ResponseStatus.NotFound);
+                
+                _participiantRepository.DeleteByExpression(p => p.CommunityId == communityId && p.UserId == userId);
+                
+                return Response<NoContent>.Success(ResponseStatus.Success);
+            }
+            catch (Exception e)
+            {
+
+                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
+            }
         }
 
         public async Task<Response<NoContent>> Leave(string userId, string token, string communityId)

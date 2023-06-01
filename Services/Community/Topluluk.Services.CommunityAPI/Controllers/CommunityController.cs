@@ -83,7 +83,12 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             dtoInfo.AssignedById = UserId;
             return await _communityService.AssignUserAsModerator(dtoInfo);
         }
-        
+
+        [HttpPost("kick-user/{communityId}/{userId}")]
+        public async Task<Response<NoContent>> KickUser(string communityId, string userId)
+        {
+            return await _communityService.KickUser(this.Token, communityId, userId);
+        }
         
         [HttpGet("user/{id}")]
         public async Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string id)
