@@ -273,6 +273,14 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
         }
 
+        
+        
+        /// <summary>
+        /// It is used if the user wants to remove a follow request made to another user.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="targetId"></param>
+        /// <returns></returns>
         public async Task<Response<NoContent>> RemoveFollowRequest(string userId, string targetId)
         {
             try
@@ -583,8 +591,13 @@ namespace Topluluk.Services.User.Services.Implementation
                 
                 GetUserAfterLoginDto dto = new();
                 dto = _mapper.Map<GetUserAfterLoginDto>(user);
-                dto.FollowingsCount = await _followRepository.Count(u => u.SourceId == id);
-                dto.FollowersCount = await _followRepository.Count(u => u.TargetId == id);
+                var followinCountTask =  _followRepository.Count(u => !u.IsDeleted && u.SourceId == id);
+                var followersCountTask =  _followRepository.Count(u => !u.IsDeleted && u.TargetId == id);
+                await Task.WhenAll(followersCountTask, followersCountTask);
+                
+                dto.FollowingsCount = followinCountTask.Result;
+                dto.FollowersCount = followersCountTask.Result;
+                
                 return await Task.FromResult(Response<GetUserAfterLoginDto>.Success(dto, ResponseStatus.Success));
             }
             catch(Exception e)
@@ -635,6 +648,15 @@ namespace Topluluk.Services.User.Services.Implementation
 
             }
         }
+        
+        
+        /// <summary>
+        /// It is used to accept follow requests from the other users.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="targetId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<Response<string>> AcceptFollowRequest(string id, string targetId)
         {
             try
@@ -758,10 +780,25 @@ namespace Topluluk.Services.User.Services.Implementation
 
         }
         
-        public Task<Response<string>> DeclineFollowRequest(string id, string targetId)
+        public async Task<Response<NoContent>> DeclineFollowRequest(string id, string targetId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FollowRequest? followRequest = await _followRequestRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == id);
+                
+                if(followRequest == null)
+                    return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
+                
+                _followRequestRepository.DeleteById(followRequest.Id);
+                return Response<NoContent>.Success(ResponseStatus.Success);
+            }
+            
+            catch (Exception e)
+            {
+                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
+            }
         }
+        
 
         public async Task<Response<List<GetUserByIdDto>>> GetUserList(IdList dto, int skip = 0, int take = 10)
         {

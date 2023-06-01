@@ -49,7 +49,19 @@ namespace Topluluk.Shared.Helper
 
             return userId ?? throw new Exception($"{typeof(TokenHelper).Name}:UserId not found in token");
         }
-        
+        public static string GetUserIdByToken(string token)
+        {
+            if (token.IsNullOrEmpty())
+            {
+                return string.Empty;
+            }
+
+            var handler = new JwtSecurityTokenHandler();
+            token = token.Split("Bearer ")[1];
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            var userId =  jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return userId ?? throw new Exception($"{typeof(TokenHelper).Namespace}: UserId not found in token");
+        }
         public static List<string> GetUserRolesByToken(HttpRequest request)
         {
             if (request == null || request.Headers == null || !request.Headers.ContainsKey("Authorization") || request.Headers["Authorization"].Count == 0)
@@ -73,6 +85,8 @@ namespace Topluluk.Shared.Helper
             var token = request.Headers["Authorization"][0];
             return token;
         }
+
+       
         public static bool GetByTokenControl(HttpRequest request)
         {
             if (request != null && request.Headers != null && request.Headers["Authorization"].Count == 0)

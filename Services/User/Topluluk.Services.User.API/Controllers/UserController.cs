@@ -90,12 +90,16 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.RemoveUserFromFollowers(this.UserId, userFollowInfo);
         }
-        [HttpPost("accept-request/{targetId}")]
+        [HttpPost("accept-follow-request/{targetId}")]
         public async Task<Response<string>> AcceptFollowRequest(string targetId)
         {
             return await _userService.AcceptFollowRequest(this.UserId, targetId);
         }
-
+        [HttpPost("decline-follow-request/{targetId}")]
+        public async Task<Response<NoContent>> DeclineFollowRequest(string targetId)
+        {
+            return await _userService.DeclineFollowRequest(this.UserId, targetId);
+        }
         [HttpGet("incoming-requests/{id}")]
         public async Task<Response<List<UserFollowRequestDto>>> IncomingRequests(string id,int take, int skip)
         {

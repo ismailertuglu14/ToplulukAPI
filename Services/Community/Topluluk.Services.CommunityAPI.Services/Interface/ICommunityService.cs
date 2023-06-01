@@ -21,7 +21,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> Delete(string ownerId, string communityId);
         Task<Response<string>> DeletePermanently(string ownerId, string communityId);
 		Task<Response<List<UserDto>>> GetParticipiants(string token, string id);
-        Task<Response<string>> KickUser();
+        Task<Response<NoContent>> KickUser(string token, string communityId, string userId);
 		Task<Response<string>> AcceptUserJoinRequest();
 		Task<Response<string>> DeclineUserJoinRequest();
 		Task<Response<string>> AssignUserAsAdmin(string userId, AssignUserAsAdminDto dtoInfo);
