@@ -233,11 +233,8 @@ namespace Topluluk.Services.User.Services.Implementation
                     {
                         return Response<string>.Success("Already sent before!", ResponseStatus.Success);
                     }
-                    FollowRequest requestDto = new FollowRequest()
-                    {
-                        SourceId = userId,
-                        TargetId = targetUser.Id
-                    };
+
+                    FollowRequest requestDto = new FollowRequest(userId, targetUser.Id);
                     
                     await _followRequestRepository.InsertAsync(requestDto);
                     return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
@@ -657,7 +654,7 @@ namespace Topluluk.Services.User.Services.Implementation
         /// <param name="targetId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<Response<string>> AcceptFollowRequest(string id, string targetId)
+        public async Task<Response<NoContent>> AcceptFollowRequest(string id, string targetId)
         {
             try
             {
@@ -672,11 +669,11 @@ namespace Topluluk.Services.User.Services.Implementation
                 await _followRepository.InsertAsync(insertDocument);
                 _followRequestRepository.DeleteByExpression(f => f.SourceId == targetId && f.TargetId == id); 
 
-                return Response<string>.Fail("User Not Found", ResponseStatus.NotFound);
+                return Response<NoContent>.Success(ResponseStatus.Success);
             }
             catch (Exception e)
             {
-                return Response<string>.Fail(e.ToString(), ResponseStatus.InitialError);
+                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
             }
         }
         

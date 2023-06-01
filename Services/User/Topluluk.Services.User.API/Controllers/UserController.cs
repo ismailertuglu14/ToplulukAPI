@@ -91,7 +91,7 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.RemoveUserFromFollowers(this.UserId, userFollowInfo);
         }
         [HttpPost("accept-follow-request/{targetId}")]
-        public async Task<Response<string>> AcceptFollowRequest(string targetId)
+        public async Task<Response<NoContent>> AcceptFollowRequest(string targetId)
         {
             return await _userService.AcceptFollowRequest(this.UserId, targetId);
         }
