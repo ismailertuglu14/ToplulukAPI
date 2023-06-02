@@ -83,7 +83,18 @@ namespace DBHelper.Repository.Mongo
 
         public bool Delete(List<T> entities)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<T>.Filter.In("_id", entities.Select(entity => entity.Id));
+                var update = Builders<T>.Update.Set(x => x.IsDeleted, true);
+                var result = _collection.UpdateMany(filter, update);
+                return result.ModifiedCount == entities.Count;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                return false;
+            }
         }
 
         public bool Delete(params T[] entities)

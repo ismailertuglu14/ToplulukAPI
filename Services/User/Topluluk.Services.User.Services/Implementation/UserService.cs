@@ -627,13 +627,23 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     return await Task.FromResult(Response<string>.Fail("Update failed", ResponseStatus.BadRequest));
                 }
-
-                // Kullanıcı profilini açığa çekmişse incomingFollowRequestleri kabulet. Usera followings olarak ekle
-                // incomingRequestlerdeki id lere sahip userların outgoingFollowRequestleri sil, usera followers olarak ekle.
-                if (user.IsPrivate == false)
+                
+                // It was true at first.
+                if (user.IsPrivate != false)
+                    return await Task.FromResult(Response<string>.Success(
+                        $"Privacy status Successfully updated to {user.IsPrivate}", ResponseStatus.Success));
+                
+                var followRequests = await _followRequestRepository.GetListByExpressionAsync(f => f.TargetId == userId);
+                
+                var followDocuments = followRequests.Select(followRequest => 
+                        new UserFollow() { SourceId = followRequest.SourceId, TargetId = followRequest.TargetId }).ToList();
+                if (followDocuments != null && followDocuments.Count > 0)
                 {
-                    // Takip istekleri varsa kabul edicez hepsini.
+                    await _followRepository.InsertManyAsync(followDocuments);
+                    _followRequestRepository.DeleteByExpression(x => followRequests.Select(f =>f.TargetId).ToList().Contains(x.TargetId));
                 }
+          
+                
 
 
                 return await Task.FromResult(Response<string>.Success($"Privacy status Successfully updated to {user.IsPrivate}", ResponseStatus.Success));
