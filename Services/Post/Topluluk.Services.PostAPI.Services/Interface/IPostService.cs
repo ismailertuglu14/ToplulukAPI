@@ -12,9 +12,8 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 		
 		
         Task<Response<GetPostByIdDto>> GetPostById(string postId, string sourceUserId, bool isDeleted = false);
-        Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10);
+        Task<Response<List<GetPostForFeedDto>>> GetCommunityPosts(string userId, string communityId, int skip = 0, int take = 10);
         Task<Response<List<GetPostForFeedDto>>> GetUserPosts(string userId, string id, int take = 10, int skip = 0);
-
 
         Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, string token, int skip = 0, int take = 10);
 
@@ -36,15 +35,12 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 
 		Task<Response<string>> Comment(CommentCreateDto commentDto);
         Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int take = 10, int skip = 0);
-        // Her kullanıcı kendi yorumunu silebilir.
-        // Adminler herkesin yorumunu silebilir.
         Task<Response<string>> DeleteComment(string userId, string commentId);
 		Task<Response<string>> UpdateComment(string userId, string commentId, string newComment);
 
 
 
         // Http Calls
-
         Task<Response<bool>> DeletePosts(string userId);
      }
 }

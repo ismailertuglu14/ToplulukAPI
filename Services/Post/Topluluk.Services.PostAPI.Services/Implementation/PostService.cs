@@ -165,8 +165,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 
                 IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
                 List<string> postIds = posts.Select(p => p.Id).ToList();
+
                 var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
-                // Post owner informations
                 var usersTask = _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
                 
                 var interactedTask =  _postInteractionRepository.IsUserInteractedPosts(userId,postIds );
@@ -263,10 +263,11 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
 
                 Response<List<string>>? responseData = new();
-                using (var client = new HttpClient())
+                if (postDto.Files != null)
                 {
-                    if (postDto.Files != null)
+                    using (var client = new HttpClient())
                     {
+                   
                         var imageContent = new MultipartFormDataContent();
                         foreach (var postDtoFile in postDto.Files)
                         {
@@ -287,9 +288,9 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                             if (responseData != null)
                             {
-                                foreach (var _response in responseData.Data)
+                                foreach (var file in responseData.Data)
                                 {
-                                    post.Files.Add(new FileModel(_response));
+                                    post.Files.Add(new FileModel(file));
                                 }
                             }
                         }
@@ -298,19 +299,18 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                             return await Task.FromResult(Response<string>.Fail(
                                 "Failed while uploading image with http client", ResponseStatus.InitialError));
                         }
-                    }
 
+                    }
                 }
+
                 response = await _postRepository.InsertAsync(post);
 
-                return await Task.FromResult(Response<string>.Success(response.Data,
-                    Shared.Enums.ResponseStatus.Success));
+                return Response<string>.Success(response.Data, ResponseStatus.Success);
                 
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
+                return Response<string>.Fail(e.ToString(), ResponseStatus.InitialError);
             }
 
         }
@@ -402,15 +402,79 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> GetCommunityPosts(string communityId, int skip = 0, int take = 10)
+        public async Task<Response<List<GetPostForFeedDto>>> GetCommunityPosts(string userId, string communityId, int skip = 0, int take = 10)
         {
             try
             {
-                throw new NotImplementedException();
+                var posts = await _postRepository.GetPostsWithDescending(
+                    skip,take, p => !p.IsDeleted && p.CommunityId == communityId);
+                if (posts == null)
+                {
+                    return Response<List<GetPostForFeedDto>>.Success(new(){},ResponseStatus.Success);
+                }
+                
+                var postDtos = _mapper.Map<List<Post>, List<GetPostForFeedDto>>(posts);
+
+                var userIds = new IdList()
+                {
+                    ids = posts.Select(p => p.UserId).ToList()
+                };
+
+                var postIds = postDtos.Select(p => p.Id).ToList();
+                    
+                var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(userIds);
+                var usersResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(usersRequest);
+                  
+                var interactedTask =  _postInteractionRepository.IsUserInteractedPosts(userId,postIds );
+                var interactionCountsTask =  _postInteractionRepository.PostsInteractionCounts(postIds);
+                var postCommentCountsTask = _commentRepository.GetPostCommentCounts(postIds);
+                var postSavedTask = _savedPostRepository.IsUserSavedPosts(userId, postIds);
+                var interactionsTask = _postInteractionRepository.GetPostInteractionPreviews(postIds);
+                
+                await Task.WhenAll(interactionsTask,postCommentCountsTask,postSavedTask, interactionCountsTask, interactedTask);
+
+                if (!usersResponse.IsSuccessful) throw new Exception();
+                
+                
+                foreach (var post in postDtos)
+                {
+                    var user = usersResponse.Data.Data.Where(u => u.Id == post.UserId).FirstOrDefault();
+                    post.UserId = user.Id;
+                    post.FirstName = user.FirstName;
+                    post.LastName = user.LastName;
+                    post.ProfileImage = user.ProfileImage;
+                    post.Gender = user.Gender;
+                    
+                            
+                    post.InteractionCount = interactionCountsTask.Result.ContainsKey(post.Id) == true
+                        ? interactionCountsTask.Result[post.Id]
+                        : 0;
+                    
+                    
+                    post.CommentCount = postCommentCountsTask.Result.ContainsKey(post.Id) ?postCommentCountsTask.Result[post.Id] : 0 ;
+                    
+                    post.IsSaved = postSavedTask.Result.ContainsKey(post.Id) ? postSavedTask.Result[post.Id] : false ;
+
+                    if (interactedTask.Result.ContainsKey(post.Id))
+                    {
+                        post.IsInteracted = new PostInteractedDto()
+                        {
+                            Interaction = interactedTask.Result[post.Id].InteractionType
+                        };
+                    }
+                    
+                    var interactions = interactionsTask.Result != null && interactionsTask.Result.TryGetValue(post.Id, out var interactionArray)
+                        ? interactionArray.ToList()
+                        : new List<PostInteractionPreviewDto>();
+
+                    post!.InteractionPreviews = interactions;
+                }
+                
+                return Response<List<GetPostForFeedDto>>.Success(postDtos,ResponseStatus.Success);
             }
             catch (Exception e)
             {
-             return await Task.FromResult(Response<string>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
+             return Response<List<GetPostForFeedDto>>.Fail(e.ToString(),ResponseStatus.InitialError);
             }
 
         }

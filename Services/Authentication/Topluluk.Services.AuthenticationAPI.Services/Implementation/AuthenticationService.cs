@@ -138,14 +138,14 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 var user = _repository.GetFirst(u => u.UserName == userDto.UserName);
                 UpdateRefreshToken(user, token, 2);
                 
-                var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri(QueueConstants.SUCCESSFULLY_REGISTERED_MAIL));
+             /*   var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri(QueueConstants.SUCCESSFULLY_REGISTERED_MAIL));
                 var registerMessage = new SuccessfullyRegisteredCommand
                 {
                     To = userDto.Email,
                     FullName = $"{userDto.FirstName} {userDto.LastName}"
                 };
                 sendEndpoint.Send<SuccessfullyRegisteredCommand>(registerMessage);
-
+*/
                 return Response<TokenDto>.Success(token, ResponseStatus.Success);
             }
             catch (Exception e)

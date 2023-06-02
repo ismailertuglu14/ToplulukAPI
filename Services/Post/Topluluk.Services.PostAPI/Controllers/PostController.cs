@@ -38,7 +38,11 @@ namespace Topluluk.Services.PostAPI.Controllers
         {
             return await _postService.GetPostForFeedScreen(this.UserId,this.Token,skip,take);
         }
-
+        [HttpGet("community/{communityId}")]
+        public async Task<Response<List<GetPostForFeedDto>>> GetCommunityPosts(string communityId, int take = 10, int skip = 0)
+        {
+            return await _postService.GetCommunityPosts(this.UserId, communityId,skip,take);
+        }
         [HttpGet("user/{id}")]
         public async Task<Response<List<GetPostForFeedDto>>> GetUserPosts(string id, int take,int skip)
         {
@@ -51,14 +55,14 @@ namespace Topluluk.Services.PostAPI.Controllers
             return await _postService.GetPostById(id, this.UserId);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("Create")]
         public async Task<Response<string>> Create( [FromForm] CreatePostDto postDto)
         {
             postDto.UserId = UserId;
             return await _postService.Create(this.UserId, postDto);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("Delete")]
         public async Task<Response<string>> Delete(PostDeleteDto postDto)
         {
             postDto.UserId = UserId;
@@ -66,7 +70,7 @@ namespace Topluluk.Services.PostAPI.Controllers
         }
 
 
-        [HttpPost("[action]")]
+        [HttpPost("Comment")]
         public async Task<Response<string>> Comment(CommentCreateDto commentDto)
         {
             commentDto.UserId = UserId;
