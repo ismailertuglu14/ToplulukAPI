@@ -11,4 +11,5 @@ public class UserFollowRequestDto
     public string UserName { get; set; }
     public string? ProfileImage { get; set; }
     public GenderEnum Gender { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
