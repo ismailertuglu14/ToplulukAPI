@@ -1,5 +1,4 @@
-﻿using System;
-using DBHelper.BaseDto;
+﻿using DBHelper.BaseDto;
 using DBHelper.Connection;
 using DBHelper.Connection.Mongo;
 using Microsoft.Extensions.DependencyInjection;

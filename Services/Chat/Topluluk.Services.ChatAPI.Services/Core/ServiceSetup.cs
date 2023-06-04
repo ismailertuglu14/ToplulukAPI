@@ -29,8 +29,7 @@ public static class ServiceSetup
     public static void AddServicesForServices(this IServiceCollection services)
     {
         services.AddTransient<IChatService, ChatService>();
+        services.AddSignalR();
     }
-
-
 
 }
