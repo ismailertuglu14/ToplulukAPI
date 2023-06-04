@@ -17,7 +17,9 @@ namespace Topluluk.Services.ChatAPI.Data.Settings
             _configuration = configuration;
         }
 
-        public string ConnectionString { get { return _configuration.GetConnectionString("MongoDB");; } }
-        public string DatabaseName { get { return "Topluluk"; } }
+        public string ConnectionString => _configuration.GetConnectionString("MongoDB") ?? throw new NullReferenceException();
+       
+
+        public string DatabaseName => "Chat";
     }
 }
