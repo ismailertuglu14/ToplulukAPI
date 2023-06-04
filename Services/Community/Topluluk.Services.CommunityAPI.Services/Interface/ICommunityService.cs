@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Topluluk.Services.CommunityAPI.Model.Dto;
 using Topluluk.Services.CommunityAPI.Model.Dto.Http;
 using Topluluk.Services.CommunityAPI.Model.Entity;
+using Topluluk.Services.FileAPI.Model.Dto.Http;
 using Topluluk.Shared.Dtos;
 
 namespace Topluluk.Services.CommunityAPI.Services.Interface
@@ -15,7 +16,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 	
 		// Community Detail Page
 		Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId,string token, string id);
-		Task<Response<string>> Join(string userId, string token, CommunityJoinDto communityInfo);
+		Task<Response<string>> Join(string userId, string token, string communityId);
 		Task<Response<string>> Create(string userId, string token, CommunityCreateDto communityInfo);
 		Task<Response<NoContent>> Leave(string userId, string token, string communityId);
 		Task<Response<string>> Delete(string ownerId, string communityId);
@@ -27,8 +28,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> AssignUserAsAdmin(string userId, AssignUserAsAdminDto dtoInfo);
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
 
-        Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto);
-        Task<Response<NoContent>> UpdateBannerImage(CommunityImageUploadedDto dto);
+        Task<Response<string>> UpdateCoverImage(string userId, string communityId, CoverImageUpdateDto dto);
+        Task<Response<NoContent>> UpdateBannerImage(string userId, string communityId, BannerImageUpdateDto dto);
  
         /// Lists the communities that the user is a member of in the profile
         Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string sourceId, string targetId);

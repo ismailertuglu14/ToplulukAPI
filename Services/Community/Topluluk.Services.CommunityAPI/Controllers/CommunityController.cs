@@ -4,6 +4,7 @@ using Topluluk.Services.CommunityAPI.Model.Dto;
 using Topluluk.Services.CommunityAPI.Model.Dto.Http;
 using Topluluk.Services.CommunityAPI.Model.Entity;
 using Topluluk.Services.CommunityAPI.Services.Interface;
+using Topluluk.Services.FileAPI.Model.Dto.Http;
 using Topluluk.Shared.BaseModels;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
@@ -35,10 +36,10 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         {
             return await _communityService.GetCommunitySuggestions(this.UserId,Request,skip, take);
         }
-        [HttpPost("[action]")]
-        public async Task<Response<string>> Join(CommunityJoinDto communityInfo)
+        [HttpPost("{communityId}/join")]
+        public async Task<Response<string>> Join(string communityId)
         {
-            return await _communityService.Join(this.UserId, this.Token, communityInfo);
+            return await _communityService.Join(this.UserId, this.Token, communityId);
         }
 
         [HttpGet("{id}")]
@@ -47,7 +48,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.GetCommunityById(UserId, this.Token, id);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("create")]
         public async Task<Response<string>> Create([FromForm] CommunityCreateDto communityInfo)
         {
 
@@ -60,24 +61,30 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.Leave(this.UserId, this.Token, communityId);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("delete")]
         public async Task<Response<string>> Delete(string id)
         {
             return await _communityService.Delete(this.UserId,id);
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("{communityId}/update-cover-image")]
+        public async Task<Response<string>> UpdateCoverImage(string communityId, [FromForm] CoverImageUpdateDto dto)
+        {
+            return await _communityService.UpdateCoverImage(this.UserId,communityId, dto);
+        }
+
+        [HttpPost("delete-permanently/{id}")]
         public async Task<Response<string>> DeletePermanently(string id)
         {
             return await _communityService.DeletePermanently(UserName, id);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("assign-user-as-admin")]
         public async Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo)
         {
             return await _communityService.AssignUserAsAdmin(this.UserId, dtoInfo);
         }
-        [HttpPost("[action]")]
+        [HttpPost("assign-user-as-moderator")]
         public async Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo)
         {
             dtoInfo.AssignedById = UserId;
@@ -96,7 +103,26 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.ParticipiantCommunities(this.UserId, id);
         }
 
-        // Http call methods
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // @@@@@@@@@@@@@@@@@@@@@@@ Http call methods @@@@@@@@@@@@@@@@@@@@@@@ 
+        
+        
+        
+        
+        
+        
         [HttpGet("user-communities")]
         public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string id)
         {

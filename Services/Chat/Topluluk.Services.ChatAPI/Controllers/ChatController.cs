@@ -21,5 +21,4 @@ public class ChatController : BaseController
         return await _chatService.SendMessage(this.UserId, dto);
     }
     
-    
 }

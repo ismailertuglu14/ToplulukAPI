@@ -6,12 +6,14 @@ using AutoMapper;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
 using RestSharp;
 using Topluluk.Services.CommunityAPI.Data.Interface;
 using Topluluk.Services.CommunityAPI.Model.Dto;
 using Topluluk.Services.CommunityAPI.Model.Dto.Http;
 using Topluluk.Services.CommunityAPI.Model.Entity;
 using Topluluk.Services.CommunityAPI.Services.Interface;
+using Topluluk.Services.FileAPI.Model.Dto.Http;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
 using Topluluk.Shared.Helper;
@@ -132,11 +134,11 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> Join(string userId, string token, CommunityJoinDto communityInfo)
+        public async Task<Response<string>> Join(string userId, string token, string communityId)
         {
             try
             {
-                 Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityInfo.CommunityId );
+                 Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId );
                 var participiants =
                     _participiantRepository.GetListByExpression(p => p.UserId == userId && p.CommunityId == community.Id);
                 
@@ -174,7 +176,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                     CommunityParticipiant participiant = new()
                     {   
                         UserId = userId,
-                        CommunityId = communityInfo.CommunityId,
+                        CommunityId = communityId,
                     };
                 
                     await _participiantRepository.InsertAsync(participiant);
@@ -405,17 +407,73 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> UpdateCoverImage(CommunityImageUploadedDto dto)
+        public async Task<Response<string>> UpdateCoverImage(string userId, string communityId, CoverImageUpdateDto dto)
         {
-            Community community = await _communityRepository.GetFirstAsync(c => c.Id == dto.CommunityId);
-            community.CoverImage = dto.CoverImage;
-            Console.WriteLine($"ismail DEBUG: {dto.CoverImage}");
-            _communityRepository.Update(community);
-            return await Task.FromResult(Response<string>.Success($"Success ${community.CoverImage}", ResponseStatus.Success));
+            Community? community = await _communityRepository.GetFirstAsync(c => c.Id == communityId && c.AdminId == userId);
 
+            if (community == null)
+            {
+                return Response<string>.Fail("Community Not Found", ResponseStatus.NotFound);
+            }
+
+            if (dto.File == null)
+                return Response<string>.Success(community.CoverImage ?? "", ResponseStatus.Success);
+            
+            byte[] imageBytes;
+
+            using (var stream = new MemoryStream())
+            {
+                await dto.File.CopyToAsync(stream);
+                imageBytes = stream.ToArray();
+            }
+            
+            using (var client = new HttpClient())
+            {
+                var content = new MultipartFormDataContent();
+                Response<string>? responseData = new();
+
+                var imageContent = new ByteArrayContent(imageBytes);
+                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                content.Add(imageContent, "File", dto.File.FileName);
+
+
+                if (!community.CoverImage.IsNullOrEmpty())
+                {
+
+                    NameObject nameObject = new() { Name = community.CoverImage! };
+                    var deleteCoverImageRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-community-cover-image").AddBody(nameObject);
+                    var deleteCoverImageResponse = await _client.ExecutePostAsync<Response<string>>(deleteCoverImageRequest);
+                }
+                var response = await client.PostAsync("https://localhost:7165/file/upload-community-cover-image", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    responseData = await response.Content.ReadFromJsonAsync<Response<string>>(); 
+                    if (responseData != null)
+                    {
+                        var imageUrl = responseData.Data;
+
+                        community.CoverImage = imageUrl;
+                        _communityRepository.Update(community);
+                        return await Task.FromResult(Response<string>.Success(imageUrl, ResponseStatus.Success));
+                    }
+
+                    throw new Exception($"{typeof(CommunityService)} exception, IsSuccessStatusCode=true, responseData=null");
+                }
+                else
+                {
+                    // Resim yükleme işlemi başarısız
+                    return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
+                }
+                
+            }
+
+            
+            
+            
+           throw new NotImplementedException();
         }
 
-        public async Task<Response<NoContent>> UpdateBannerImage(CommunityImageUploadedDto dto)
+        public async Task<Response<NoContent>> UpdateBannerImage(string userId, string communityId, BannerImageUpdateDto dto)
         {
             try
             {
@@ -573,7 +631,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                     ResponseStatus.InitialError));
             }
         }
-        // todo
+
         public async Task<Response<bool>> LeaveUserDelete(string id, IdList list)
         {
             try

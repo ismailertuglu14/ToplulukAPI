@@ -22,7 +22,7 @@ namespace Topluluk.Services.CommunityAPI.Data.Implementation
 		}
         private IMongoDatabase GetConnection() => (MongoDB.Driver.IMongoDatabase)_connectionFactory.GetConnection;
 
-        private string GetCollectionName() => string.Format("{0}Collection", typeof(Community).Name);
+        private string GetCollectionName() => $"{nameof(Community)}Collection";
 
         public async Task<DatabaseResponse> AddItemToArrayProperty(string id, string arrayName, object item)
         {
