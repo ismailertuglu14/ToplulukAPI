@@ -33,12 +33,7 @@ namespace Topluluk.Services.PostAPI.Services.Interface
 		Task<Response<List<GetPostForFeedDto>>> GetSavedPosts(string userId, int take = 10, int skip = 0);
         Task<Response<string>> SavePost(string userId, string postId);
 
-		Task<Response<string>> Comment(CommentCreateDto commentDto);
-        Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int take = 10, int skip = 0);
-        Task<Response<string>> DeleteComment(string userId, string commentId);
-		Task<Response<string>> UpdateComment(string userId, string commentId, string newComment);
-
-
+		
 
         // Http Calls
         Task<Response<bool>> DeletePosts(string userId);

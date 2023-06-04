@@ -13,8 +13,8 @@ namespace Topluluk.Services.EventAPI.Data.Settings
             _configuration = configuration;
         }
 
-        public string ConnectionString { get { return _configuration.GetConnectionString("MongoDB");; } }
-        public string DatabaseName { get { return "Event"; } }
+        public string ConnectionString => _configuration.GetConnectionString("MongoDB") ?? throw new ArgumentNullException();
+        public string DatabaseName => "Event";
     }
 }
 

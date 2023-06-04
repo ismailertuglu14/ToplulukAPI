@@ -11,9 +11,6 @@ using Topluluk.Shared.Dtos;
 
 namespace Topluluk.Services.PostAPI.Controllers
 {
-
-    [ApiController]
-    [Route("[controller]")]
     public class PostController : BaseController
     {
         
@@ -70,24 +67,10 @@ namespace Topluluk.Services.PostAPI.Controllers
         }
 
 
-        [HttpPost("Comment")]
-        public async Task<Response<string>> Comment(CommentCreateDto commentDto)
-        {
-            commentDto.UserId = UserId;
-            return await _postService.Comment(commentDto);
-        }
+     
 
-        [HttpGet("comments")]
-        public async Task<Response<List<CommentGetDto>>> GetComments(string id)
-        {
-            return await _postService.GetComments(this.UserId, id);
-        }
+      
 
-        [HttpPost("comment/delete/{id}")]
-        public async Task<Response<string>> DeleteComment(string id)
-        {
-            return await _postService.DeleteComment(this.UserId, id);
-        }
         [HttpGet("saved-posts")]
         public async Task<Response<List<GetPostForFeedDto>>> GetSavedPosts()
         {

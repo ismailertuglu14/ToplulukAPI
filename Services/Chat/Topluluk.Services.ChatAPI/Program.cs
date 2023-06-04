@@ -2,6 +2,7 @@ using AutoMapper;
 using Topluluk.Services.ChatAPI.Model.Mapper;
 using Topluluk.Services.ChatAPI.Services;
 using Topluluk.Services.ChatAPI.Services.Core;
+using Topluluk.Services.ChatAPI.Services.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,5 +42,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chat-hub");
 
 app.Run();

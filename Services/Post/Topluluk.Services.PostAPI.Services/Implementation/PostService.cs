@@ -134,20 +134,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> Comment(CommentCreateDto commentDto)
-        {
-            PostComment comment = _mapper.Map<PostComment>(commentDto);
-
-            Post? post = await _postRepository.GetFirstAsync(p => p.Id == commentDto.PostId);
-
-            if (post != null)
-            {
-                await _commentRepository.InsertAsync(comment);
-                return await Task.FromResult(Response<string>.Success("Success", Shared.Enums.ResponseStatus.Success));
-            }
-
-            return await Task.FromResult(Response<string>.Fail("Post not found", Shared.Enums.ResponseStatus.NotFound));
-        }
+      
 
         public async Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, string token,
             int skip = 0, int take = 10)
@@ -348,59 +335,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> DeleteComment(string userId, string commentId)
-        {
-            try
-            {
-                PostComment commemt = await _commentRepository.GetFirstAsync(c => c.Id == commentId);
 
-                if (commemt.UserId == userId)
-                {
-                    _commentRepository.DeleteById(commentId);
-                    return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
-                }
-                return await Task.FromResult(Response<string>.Fail("UnAauthorized", ResponseStatus.NotAuthenticated));
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
-
-            }
-        }
-
-        public async Task<Response<List<CommentGetDto>?>> GetComments(string userId, string postId, int take = 10, int skip = 0)
-        {
-            try
-            {
-                DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
-                byte i = 0;
-                List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
-                IdList userIdList = new IdList() { };
-                foreach (var comment in comments)
-                {
-                    userIdList.ids.Add(comment.UserId);
-                }
-                var userInfoRequest = new RestRequest(ServiceConstants.API_GATEWAY+"/user/get-user-info-list").AddBody(userIdList);
-                var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(userInfoRequest);
-                
-                
-                foreach (var comment in comments)
-                {
-                    comment.UserId = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().Id;
-                    comment.Gender = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().Gender;
-                    comment.FirstName = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().FirstName;
-                    comment.LastName = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().LastName;
-                    comment.ProfileImage = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().ProfileImage;
-                }
-                return await Task.FromResult(Response<List<CommentGetDto>?>.Success(comments, Shared.Enums.ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-             return await Task.FromResult(Response<List<CommentGetDto>?>.Fail($"Some error occured: {e}", Shared.Enums.ResponseStatus.InitialError));
-
-            }
-        }
+        
 
         public async Task<Response<List<GetPostForFeedDto>>> GetCommunityPosts(string userId, string communityId, int skip = 0, int take = 10)
         {
