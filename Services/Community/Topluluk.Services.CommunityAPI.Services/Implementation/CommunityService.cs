@@ -170,19 +170,16 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                         return await Task.FromResult(Response<string>.Success("You already send request this community", ResponseStatus.Success));
                     }
                 }
-                else
-                {
 
-                    CommunityParticipiant participiant = new()
-                    {   
-                        UserId = userId,
-                        CommunityId = communityId,
-                    };
+                CommunityParticipiant participiant = new()
+                {   
+                    UserId = userId,
+                    CommunityId = communityId,
+                };
                 
-                    await _participiantRepository.InsertAsync(participiant);
+                await _participiantRepository.InsertAsync(participiant);
 
-                    return await Task.FromResult(Response<string>.Success("Joined", ResponseStatus.Success));
-                }
+                return await Task.FromResult(Response<string>.Success("Joined", ResponseStatus.Success));
             }
             catch (Exception e)
             {
@@ -567,7 +564,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             if (!usersResponse.IsSuccessful)
                 return Response<List<UserDto>>.Fail("Failed", ResponseStatus.Failed);
             
-            return Response<List<UserDto>>.Success(usersResponse.Data.Data, ResponseStatus.Success);
+            return Response<List<UserDto>>.Success(usersResponse.Data!.Data, ResponseStatus.Success);
         }
 
 

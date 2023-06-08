@@ -7,6 +7,7 @@ using Topluluk.Services.PostAPI.Model.Entity;
 using Topluluk.Services.PostAPI.Services.Interface;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Exceptions;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.PostAPI.Services.Implementation;
@@ -28,25 +29,27 @@ public class PostCommentService : IPostCommentService
 
     public async Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int take = 10, int skip = 0)
     {
-        DatabaseResponse response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
-        byte i = 0;
+        var response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
+        
         List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
-        IdList userIdList = new IdList() { };
-        foreach (var comment in comments)
+        
+        IdList userIdList = new ()
         {
-            userIdList.ids.Add(comment.UserId);
-        }
+            ids = comments.Select(c => c.UserId).ToList()
+        };
+
         var userInfoRequest = new RestRequest(ServiceConstants.API_GATEWAY+"/user/get-user-info-list").AddBody(userIdList);
         var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(userInfoRequest);
                 
                 
         foreach (var comment in comments)
         {
-            comment.UserId = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().Id;
-            comment.Gender = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().Gender;
-            comment.FirstName = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().FirstName;
-            comment.LastName = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().LastName;
-            comment.ProfileImage = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault().ProfileImage;
+            var user = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault();
+            comment.UserId = user.Id;
+            comment.Gender = user.Gender;
+            comment.FirstName = user.FirstName;
+            comment.LastName = user.LastName;
+            comment.ProfileImage = user.ProfileImage;
         }
             
         return Response<List<CommentGetDto>>.Success(comments,ResponseStatus.Success);
@@ -70,24 +73,30 @@ public class PostCommentService : IPostCommentService
 
     public async Task<Response<NoContent>> UpdateComment(string userId, CommentUpdateDto commentDto)
     {
-        try
-        {
-            
-            PostComment? comment = await _commentRepository.GetFirstAsync(c => c.Id == commentDto.CommentId && c.UserId == userId );
-            
-            if (comment == null)
-                return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
+        PostComment? comment = await _commentRepository.GetFirstAsync(c => c.Id == commentDto.CommentId);
 
-            comment.Message = commentDto.Message;
+        if (comment == null)
+            throw new NotFoundException("Comment Not Found");
 
-            _commentRepository.Update(comment);
-            
-            return Response<NoContent>.Success(ResponseStatus.Success);
-        }
-        catch (Exception e)
+        if (comment.UserId != userId)
+            throw new UnauthorizedAccessException();
+        
+        var previousMessage = new PreviousMessage()
         {
-            return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
+            Message = comment.Message,
+            EditedDate = DateTime.Now
+        };
+            
+        if (comment.PreviousMessages == null)
+        {
+            comment.PreviousMessages = new List<PreviousMessage>();
         }
+            
+        comment.PreviousMessages.Add(previousMessage);
+        comment.Message = commentDto.Message;
+        _commentRepository.Update(comment);
+            
+        return Response<NoContent>.Success(ResponseStatus.Success);
     }
 
     public async Task<Response<NoContent>> DeleteComment(string userId, string commentId)

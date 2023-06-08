@@ -36,5 +36,11 @@ public class PostCommentController : BaseController
     {
         return await _commentService.DeleteComment(this.UserId, id);
     }
-   
+    
+    [HttpPut("comment/{id}/update")]
+    public async Task<Response<NoContent>> UpdateComment(string id, CommentUpdateDto dto)
+    {
+        dto.CommentId = id;
+        return await _commentService.UpdateComment(this.UserId, dto);
+    }
 }
