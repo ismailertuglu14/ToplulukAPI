@@ -21,6 +21,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public int InteractionCount { get; set; }
 		public bool IsLiked { get; set; } = false;
 
+		public bool IsEdited { get; set; }
 		// Replies lar farklı olacak. REply' a tekrardan REply atılamayacak.
 		//public ICollection<CommentGetDto>? Replies { get; set; }
 

@@ -29,9 +29,9 @@ public class PostCommentService : IPostCommentService
 
     public async Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int take = 10, int skip = 0)
     {
-        var response = await _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId);
+        List<PostComment> response =  _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId).Result.Data;
         
-        List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response.Data);
+        List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response);
         
         IdList userIdList = new ()
         {
@@ -50,6 +50,7 @@ public class PostCommentService : IPostCommentService
             comment.FirstName = user.FirstName;
             comment.LastName = user.LastName;
             comment.ProfileImage = user.ProfileImage;
+            comment.IsEdited = response.Where(c => c.Id == comment.Id).FirstOrDefault().PreviousMessages != null ;
         }
             
         return Response<List<CommentGetDto>>.Success(comments,ResponseStatus.Success);
