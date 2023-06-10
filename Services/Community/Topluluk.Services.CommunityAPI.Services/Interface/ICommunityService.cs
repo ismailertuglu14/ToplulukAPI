@@ -46,7 +46,6 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 
         Task<Response<CommunityInfoPostLinkDto>> GetCommunityInfoForPostLink(string id);
 
-		Task<Response<bool>> LeaveUserDelete(string id, IdList list);
     }
 }
 
