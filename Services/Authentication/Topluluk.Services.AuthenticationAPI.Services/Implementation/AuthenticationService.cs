@@ -25,14 +25,12 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 	{
         private readonly IAuthenticationRepository _repository;
         private readonly ILoginLogRepository _loginLogRepository;
-        private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly RestClient _client;
         private readonly _MassTransit.ISendEndpointProvider _endpointProvider;
-        public AuthenticationService(IAuthenticationRepository repository, _MassTransit.ISendEndpointProvider endpointProvider, IMapper mapper, IConfiguration configuration, ILoginLogRepository loginLogRepository)
+        public AuthenticationService(IAuthenticationRepository repository, _MassTransit.ISendEndpointProvider endpointProvider, IConfiguration configuration, ILoginLogRepository loginLogRepository)
 		{
             _repository = repository;
-            _mapper = mapper;
             _configuration = configuration;
             _loginLogRepository = loginLogRepository;
             _endpointProvider = endpointProvider;
@@ -62,7 +60,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                     // Dead code fix later.b
                     if (DateTime.Now < user.LockoutEnd)
                     {
-                        return await Task.FromResult(Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked));
+                        return Response<TokenDto>.Fail($"User locked until {user.LockoutEnd}", ResponseStatus.AccountLocked);
                     }
                     TokenDto token = _tokenHelper.CreateAccessToken(user.Id, user.UserName, user.Role, 2);
                     user.AccessFailedCount = 0;
@@ -74,7 +72,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                     LoginLog loginLog = new() { UserId = user.Id, IpAdress = ipAdress, DeviceId = deviceId };
                     await _loginLogRepository.InsertAsync(loginLog);
 
-                    return await Task.FromResult(Response<TokenDto>.Success(token, ResponseStatus.Success));
+                    return Response<TokenDto>.Success(token, ResponseStatus.Success);
                 }
                 // User found but password wrong.
 
@@ -91,7 +89,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 }
                 _repository.Update(user);
             }
-            return await Task.FromResult(Response<TokenDto>.Fail("Username or password wrong!", ResponseStatus.NotAuthenticated));
+            return Response<TokenDto>.Fail("Username or password wrong!", ResponseStatus.NotAuthenticated);
         }
 
         public async Task<Response<TokenDto>> SignUp(CreateUserDto userDto)
@@ -102,10 +100,7 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             {
                 return Response<TokenDto>.Fail(checkUniqueResult.Errors, ResponseStatus.InitialError);
             }
-
-            try
-            {
-                var response = await _repository.InsertAsync(new UserCredential
+            var response = await _repository.InsertAsync(new UserCredential
                 {
                     UserName = userDto.UserName,
                     Email = userDto.Email,
@@ -147,83 +142,60 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                 sendEndpoint.Send<SuccessfullyRegisteredCommand>(registerMessage);
 */
                 return Response<TokenDto>.Success(token, ResponseStatus.Success);
-            }
-            catch (Exception e)
-            {
-                return Response<TokenDto>.Fail($"Some error occurred {e}", ResponseStatus.InitialError);
-            }
+   
         }
 
 
-        public async Task<Response<string>> SignOut(string userId,SignOutUserDto userDto)
+        public async Task<Response<NoContent>> SignOut(string userId,SignOutUserDto userDto)
         {
-            try
-            {
-                if (userId.IsNullOrEmpty() || userDto.RefreshToken.IsNullOrEmpty())
-                    throw new Exception("User Not Found");
+      
+            if (userId.IsNullOrEmpty() || userDto.RefreshToken.IsNullOrEmpty())
+                throw new Exception("User Not Found");
 
-                UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
+            UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
 
-                if (user != null)
-                {
-                    user.RefreshToken = null;
-                    _repository.Update(user);
-                    return await Task.FromResult(Response<string>.Success("Signout successfully!",
-                        ResponseStatus.Success));
-                }
-
-                return await Task.FromResult(Response<string>.Fail("User not found!", ResponseStatus.NotFound));
+            if (user == null)
+                return Response<NoContent>.Fail("User not found!", ResponseStatus.NotFound);
+            
+            user.RefreshToken = null;
+            _repository.Update(user);
+            return Response<NoContent>.Success(ResponseStatus.Success);
 
 
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
-            }
         }
-        public async Task<Response<string>> ResetPasswordRequest(string email)
+        public async Task<Response<NoContent>> ResetPasswordRequest(string email)
         {
             UserCredential? user = await _repository.GetFirstAsync(u => u.Email == email);
-            if (user != null)
+            if (user == null)
+                return Response<NoContent>.Fail("User not found", ResponseStatus.NotFound);
+            Random random = new Random();
+            int randomNumber = random.Next(100000, 999999);
+            user.ResetPasswordCode = randomNumber.ToString();
+            _repository.Update(user);
+            var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri("queue:reset-password"));
+            var registerMessage = new ResetPasswordCommand()
             {
-                Random random = new Random();
-                int randomNumber = random.Next(100000, 999999);
-                user.ResetPasswordCode = randomNumber.ToString();
-                _repository.Update(user);
-                var sendEndpoint = await _endpointProvider.GetSendEndpoint(new Uri("queue:reset-password"));
-                var registerMessage = new ResetPasswordCommand()
-                {
-                    To = email,
-                    UserId = user.Id,
-                    Code = randomNumber.ToString()
-                };
-                sendEndpoint.Send<ResetPasswordCommand>(registerMessage);
-                return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
-            }
-            return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
+                To = email,
+                UserId = user.Id,
+                Code = randomNumber.ToString()
+            };
+            sendEndpoint.Send<ResetPasswordCommand>(registerMessage);
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
         public async Task<Response<NoContent>> ResetPasswordCheckOTP(ResetPasswordCheckOTPDto codeDto)
         {
-            try
+            UserCredential user = await _repository.GetFirstAsync(u => u.Email == codeDto.Mail);
+            if (user == null)
             {
-                UserCredential user = await _repository.GetFirstAsync(u => u.Email == codeDto.Mail);
-                if (user == null)
-                {
-                    return Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound);
-                }
-                if (user.ResetPasswordCode != codeDto.Code)
-                {
-                    return Response<NoContent>.Fail("UnAuthorized", ResponseStatus.Unauthorized);
-                }
+                return Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound);
+            }
+            if (user.ResetPasswordCode != codeDto.Code)
+            {
+                return Response<NoContent>.Fail("UnAuthorized", ResponseStatus.Unauthorized);
+            }
 
-                return Response<NoContent>.Success(ResponseStatus.Success);
-            }
-            catch (Exception e)
-            {
-                return Response<NoContent>.Fail(e.ToString(),ResponseStatus.InitialError);
-            }
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
 
@@ -233,13 +205,13 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 
             if (passwordDto.NewPassword != passwordDto.NewPasswordAgain)
             {
-                return await Task.FromResult(Response<NoContent>.Fail("Passwords does not match!", ResponseStatus.BadRequest));
+                return Response<NoContent>.Fail("Passwords does not match!", ResponseStatus.BadRequest);
             }
             if (user != null)
             {
                 if (user.ResetPasswordTokenEndDate < DateTime.Now)
                 {
-                    return await Task.FromResult(Response<NoContent>.Fail("Token expired", ResponseStatus.NotAuthenticated));
+                    return Response<NoContent>.Fail("Token expired", ResponseStatus.NotAuthenticated);
                 }
 
                 if (user.ResetPasswordCode == passwordDto.Code)
@@ -248,45 +220,35 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
                     user.ResetPasswordCode = null;
                     user.ResetPasswordTokenEndDate = null;
                     _repository.Update(user);
-                    return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
+                    return Response<NoContent>.Success(ResponseStatus.Success);
                 }
 
             }
 
-            return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.Failed));
+            return Response<NoContent>.Fail("Failed", ResponseStatus.Failed);
         }
 
-        public async Task<Response<string>> ChangePassword(string userId, PasswordChangeDto passwordDto)
+        public async Task<Response<NoContent>> ChangePassword(string userId, PasswordChangeDto passwordDto)
         {
-            try
-            {
-                UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
+
+            UserCredential? user = await _repository.GetFirstAsync(u => u.Id == userId);
                 
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<string>.Fail("Not Found",
-                        ResponseStatus.NotFound));
-                }
-
-                var verifiedPassword = VerifyPassword(passwordDto.OldPassword, user.HashedPassword);
-
-                if (verifiedPassword == false)
-                {
-                    return await Task.FromResult(Response<string>.Fail("Not authenticated",
-                        ResponseStatus.NotAuthenticated));
-                }
-
-                user.HashedPassword = HashPassword(passwordDto.NewPassword);
-                _repository.Update(user);
-
-                return await Task.FromResult(Response<string>.Success("Success", ResponseStatus.Success));
-
-            }
-            catch (Exception e)
+            if (user == null)
             {
-                return await Task.FromResult(Response<string>.Fail($"Some error occurred {e}",
-                    ResponseStatus.InitialError));
+                return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
             }
+
+            var verifiedPassword = VerifyPassword(passwordDto.OldPassword, user.HashedPassword);
+
+            if (verifiedPassword == false)
+            {
+                return Response<NoContent>.Fail("Not authenticated", ResponseStatus.NotAuthenticated);
+            }
+
+            user.HashedPassword = HashPassword(passwordDto.NewPassword);
+            _repository.Update(user);
+
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
         // UserName and Email must be unique
@@ -303,10 +265,10 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
 
             if(_userName == null && _email == null)
             {
-                return await Task.FromResult(Response<string>.Success("", ResponseStatus.Success));
+                return Response<string>.Success("", ResponseStatus.Success);
             }
 
-            return await Task.FromResult(Response<string>.Fail(response.ErrorMessage, ResponseStatus.InitialError));
+            return Response<string>.Fail(response.ErrorMessage, ResponseStatus.InitialError);
         }
 
 
@@ -350,62 +312,51 @@ namespace Topluluk.Services.AuthenticationAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<string>> DeleteUser(string id, UserDeleteDto userDto)
+        public async Task<Response<NoContent>> DeleteUser(string id, UserDeleteDto userDto)
         {
             try
             {
                 if (!id.IsNullOrEmpty())
                 {
                     _repository.DeleteById(id);
-                    return await Task.FromResult(Response<string>.Success("Successfully deleted", ResponseStatus.Success));
+                    return Response<NoContent>.Success(ResponseStatus.Success);
 
                 }
 
-                return await Task.FromResult(Response<string>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated));
+                return Response<NoContent>.Fail("UnAuthorized", ResponseStatus.NotAuthenticated);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+                return Response<NoContent>.Fail($"Error occured {e}", ResponseStatus.InitialError);
             }
         }
 
         public async Task<Response<NoContent>> UpdateProfile(string userId, UserUpdateDto userDto)
         {
-            try
+
+            UserCredential user = await _repository.GetFirstAsync(u => u.Id == userId);
+
+            if (user == null)
             {
-                if (userId.IsNullOrEmpty())
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("", ResponseStatus.Unauthorized));
-                }
-
-                UserCredential user = await _repository.GetFirstAsync(u => u.Id == userId);
-
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("User not found", ResponseStatus.NotFound));
-                }
-
-                if (user.Id != userId)
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("UnAuthorized",ResponseStatus.Unauthorized));
-                }
-
-                user.UserName = userDto.UserName;
-                user.Email = userDto.Email;
-
-                DatabaseResponse response = _repository.Update(user);
-
-                if (response.IsSuccess)
-                {
-                    return await Task.FromResult(Response<NoContent>.Success(null, ResponseStatus.Success));
-                }
-
-                return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.InitialError));
+                return Response<NoContent>.Fail("User not found", ResponseStatus.NotFound);
             }
-            catch (Exception e)
+
+            if (user.Id != userId)
             {
-                return await Task.FromResult(Response<NoContent>.Fail($"Error occured {e}", ResponseStatus.InitialError));
+                return Response<NoContent>.Fail("UnAuthorized",ResponseStatus.Unauthorized);
             }
+
+            user.UserName = userDto.UserName;
+            user.Email = userDto.Email;
+
+            DatabaseResponse response = _repository.Update(user);
+
+            if (response.IsSuccess)
+            {
+                return Response<NoContent>.Success(ResponseStatus.Success);
+            }
+
+            return Response<NoContent>.Fail("Failed", ResponseStatus.InitialError);
         }
         public string GenerateResetPasswordToken(string email)
         {

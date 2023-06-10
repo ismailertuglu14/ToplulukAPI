@@ -41,12 +41,12 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<Response<string>> SignOut(SignOutUserDto userDto)
+        public async Task<Response<NoContent>> SignOut(SignOutUserDto userDto)
         {
             return await _authenticationService.SignOut(this.UserId, userDto);
         }
         [HttpPost("reset-password-request")]
-        public async Task<Response<string>> ResetPasswordRequest(MailDto mail)
+        public async Task<Response<NoContent>> ResetPasswordRequest(MailDto mail)
         {
             return await _authenticationService.ResetPasswordRequest(mail.Mail);
         }
@@ -63,14 +63,14 @@ namespace Topluluk.Services.AuthenticationAPI.Controllers
         // @@@@@@@@@@@ Http Requests @@@@@@@@@@@@@@@
 
         [HttpPost("delete")]
-        public async Task<Response<string>> Delete(UserDeleteDto dto)
+        public async Task<Response<NoContent>> Delete(UserDeleteDto dto)
         {
 
             return await _authenticationService.DeleteUser(this.UserId, dto);
         }
 
         [HttpPost("change-password")]
-        public async Task<Response<string>> ChangePassword(PasswordChangeDto passwordDto)
+        public async Task<Response<NoContent>> ChangePassword(PasswordChangeDto passwordDto)
         {
             return await _authenticationService.ChangePassword(this.UserId, passwordDto);
         }
