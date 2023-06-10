@@ -139,16 +139,20 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
         public async Task<Response<List<GetPostForFeedDto>>> GetPostForFeedScreen(string userId, string token,
             int skip = 0, int take = 10)
         {
-            try
-            {
+
                 var getUserFollowingsRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/user-followings").AddQueryParameter("id", userId);
                 var getUserFollowingsTask = _client.ExecuteGetAsync<Response<List<string>>>(getUserFollowingsRequest);
-
+                var userCommunitiesRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities").AddQueryParameter("id",userId);
+                var userCommunitiesTask = _client.ExecuteGetAsync<Response<List<CommunityInfoPostLinkDto>>>(userCommunitiesRequest);
+                
+                await Task.WhenAll(getUserFollowingsTask, userCommunitiesTask);
+                
                 // Id list of users followed by Source User
                 var getUserFollowingsResponse = getUserFollowingsTask.Result.Data.Data;
-
+                List<string> communityIds = userCommunitiesTask.Result.Data.Data.Select(c => c.Id).ToList();
                 var posts = await _postRepository.GetPostsWithDescending(skip, take, 
-                    p => !p.IsDeleted && (getUserFollowingsResponse.Contains(p.UserId) || p.UserId == userId));
+                    p => !p.IsDeleted && (getUserFollowingsResponse.Contains(p.UserId) || p.UserId == userId)
+                        && (p.CommunityId == null || communityIds.Contains(p.CommunityId) ));
                 
                 IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
                 List<string> postIds = posts.Select(p => p.Id).ToList();
@@ -191,9 +195,9 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         : 0;
                     
                     
-                    postDto.CommentCount = postCommentCountsTask.Result.ContainsKey(postDto.Id) ?postCommentCountsTask.Result[postDto.Id] : 0 ;
+                    postDto.CommentCount = postCommentCountsTask.Result.ContainsKey(postDto.Id) ? postCommentCountsTask.Result[postDto.Id] : 0 ;
                     
-                    postDto.IsSaved = postSavedTask.Result.ContainsKey(postDto.Id) ? postSavedTask.Result[postDto.Id] : false ;
+                    postDto.IsSaved = postSavedTask.Result.ContainsKey(postDto.Id) && postSavedTask.Result[postDto.Id] ;
 
                     if (interactedTask.Result.ContainsKey(postDto.Id))
                     {
@@ -220,12 +224,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     }
                 }
 
-                return Response<List<GetPostForFeedDto>>.Success(postDtos, ResponseStatus.Success);
-            }
-            catch (Exception e)
-            {
-                return Response<List<GetPostForFeedDto>>.Fail(e.ToString(), ResponseStatus.InitialError);
-            }
+                return Response<List<GetPostForFeedDto>>.Success(postDtos, ResponseStatus.Success);   
         }
 
         public async Task<Response<string>> Create(string userId, CreatePostDto postDto)
