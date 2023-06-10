@@ -102,21 +102,14 @@ public class PostCommentService : IPostCommentService
 
     public async Task<Response<NoContent>> DeleteComment(string userId, string commentId)
     {
-        try
-        {
-            PostComment commemt = await _commentRepository.GetFirstAsync(c => c.Id == commentId);
 
-            if (commemt.UserId != userId)
-                return Response<NoContent>.Fail("UnAauthorized", ResponseStatus.NotAuthenticated);
+        PostComment comment = await _commentRepository.GetFirstAsync(c => c.Id == commentId);
+
+        if (comment.UserId != userId)
+            return Response<NoContent>.Fail("UnAauthorized", ResponseStatus.NotAuthenticated);
             
-            _commentRepository.DeleteById(commentId);
-            return Response<NoContent>.Success(ResponseStatus.Success);
-
-        }
-        catch (Exception e)
-        {
-            return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
-
-        }
+        _commentRepository.DeleteById(commentId);
+        return Response<NoContent>.Success(ResponseStatus.Success);
+            
     }
 }
