@@ -151,8 +151,10 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 var getUserFollowingsResponse = getUserFollowingsTask.Result.Data.Data;
                 List<string> communityIds = userCommunitiesTask.Result.Data.Data.Select(c => c.Id).ToList();
                 var posts = await _postRepository.GetPostsWithDescending(skip, take, 
-                    p => !p.IsDeleted && (getUserFollowingsResponse.Contains(p.UserId) || p.UserId == userId)
-                        && (p.CommunityId == null || communityIds.Contains(p.CommunityId) ));
+                    p => !p.IsDeleted 
+                         && (getUserFollowingsResponse.Contains(p.UserId) || p.UserId == userId) 
+                         && (p.CommunityId == null || communityIds.Contains(p.CommunityId))
+                         );
                 
                 IdList idList = new() { ids =  posts.Select(p => p.UserId).ToList() };
                 List<string> postIds = posts.Select(p => p.Id).ToList();
@@ -172,8 +174,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                 for (int i = 0; i < posts.Count; i++)
                 {
-                    var user = usersTask.Result.Data.Data.Where(u => u.Id == postDtos[i].UserId)
-                        .FirstOrDefault();
+                    var user = usersTask.Result.Data.Data
+                        .FirstOrDefault(u => u.Id == postDtos[i].UserId);
                     if (user == null)
                     {
                         postDtos.Remove(postDtos[i]);

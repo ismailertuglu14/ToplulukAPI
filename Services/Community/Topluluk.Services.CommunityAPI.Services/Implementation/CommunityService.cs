@@ -16,6 +16,7 @@ using Topluluk.Services.CommunityAPI.Services.Interface;
 using Topluluk.Services.FileAPI.Model.Dto.Http;
 using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Exceptions;
 using Topluluk.Shared.Helper;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
@@ -463,22 +464,66 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 }
                 
             }
-
-            
-            
-            
-           throw new NotImplementedException();
         }
 
-        public async Task<Response<NoContent>> UpdateBannerImage(string userId, string communityId, BannerImageUpdateDto dto)
+        public async Task<Response<string>> UpdateBannerImage(string userId, string communityId, BannerImageUpdateDto dto)
         {
-            try
+            
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
+
+            if (community == null)
+                throw new NotFoundException("Community Not Found");
+
+            if (community.AdminId != userId)
+                throw new UnauthorizedAccessException();
+
+            using (var client = new HttpClient())
             {
-                throw new NotImplementedException();
-            }
-            catch (Exception e)
-            {
-                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
+                
+                byte[] imageBytes;
+
+                using (var stream = new MemoryStream())
+                {
+                    await dto.File.CopyToAsync(stream);
+                    imageBytes = stream.ToArray();
+                }
+
+                var content = new MultipartFormDataContent();
+                Response<string>? responseData = new();
+
+                var imageContent = new ByteArrayContent(imageBytes);
+                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                content.Add(imageContent, "File", dto.File.FileName);
+
+
+                if (!community.CoverImage.IsNullOrEmpty())
+                {
+
+                    NameObject nameObject = new() { Name = community.CoverImage! };
+                    var deleteBannerImageRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-community-banner-image").AddBody(nameObject);
+                    var deleteCoverImageResponse = await _client.ExecutePostAsync<Response<string>>(deleteBannerImageRequest);
+                }
+                var response = await client.PostAsync("https://localhost:7165/file/upload-community-banner-image", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    responseData = await response.Content.ReadFromJsonAsync<Response<string>>(); 
+                    if (responseData != null)
+                    {
+                        var imageUrl = responseData.Data;
+
+                        community.BannerImage = imageUrl;
+                        _communityRepository.Update(community);
+                        return Response<string>.Success(imageUrl, ResponseStatus.Success);
+                    }
+
+                    throw new Exception($"{typeof(CommunityService)} exception, IsSuccessStatusCode=true, responseData=null");
+                }
+                else
+                {
+                    // Resim yükleme işlemi başarısız
+                    return Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError);
+                }
+
             }
         }
 

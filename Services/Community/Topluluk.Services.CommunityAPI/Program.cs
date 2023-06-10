@@ -2,6 +2,7 @@
 using Topluluk.Services.CommunityAPI.Model.Mapper;
 using Topluluk.Services.CommunityAPI.Services.Core;
 using Microsoft.AspNetCore.Http.Features;
+using Topluluk.Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,9 +49,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
 app.UseCors();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 //app.Use(async (context, next) =>
 //{
 //    context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null; // unlimited I guess

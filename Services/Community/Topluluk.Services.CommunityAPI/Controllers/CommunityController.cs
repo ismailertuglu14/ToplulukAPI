@@ -73,6 +73,13 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.UpdateCoverImage(this.UserId,communityId, dto);
         }
 
+        [HttpPost("{communityId}/update-banner-image")]
+        public async Task<Response<string>> UpdateBannerImage(string communityId, [FromForm] BannerImageUpdateDto dto)
+        {
+            return await _communityService.UpdateBannerImage(this.UserId,communityId, dto);
+        }
+        
+        
         [HttpPost("delete-permanently/{id}")]
         public async Task<Response<string>> DeletePermanently(string id)
         {

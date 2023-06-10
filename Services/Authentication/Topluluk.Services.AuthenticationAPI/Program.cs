@@ -77,7 +77,7 @@ app.UseAuthorization();
 app.UseSerilogRequestLogging();
 app.MapControllers();
 app.UseMiddleware<RequestResponseMiddleware>();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseCors();
 app.Run();
 Log.CloseAndFlush();
