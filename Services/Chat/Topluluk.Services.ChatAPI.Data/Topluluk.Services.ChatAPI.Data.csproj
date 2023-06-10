@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Implementation\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DotNetCore.CAP" Version="6.0.1" />
   </ItemGroup>
 
