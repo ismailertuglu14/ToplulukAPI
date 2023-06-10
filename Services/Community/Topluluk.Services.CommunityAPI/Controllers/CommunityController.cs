@@ -13,8 +13,7 @@ using Topluluk.Shared.Dtos;
 
 namespace Topluluk.Services.CommunityAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    
     public class CommunityController : BaseController
     {
 
@@ -67,18 +66,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.Delete(this.UserId,id);
         }
 
-        [HttpPost("{communityId}/update-cover-image")]
-        public async Task<Response<string>> UpdateCoverImage(string communityId, [FromForm] CoverImageUpdateDto dto)
-        {
-            return await _communityService.UpdateCoverImage(this.UserId,communityId, dto);
-        }
 
-        [HttpPost("{communityId}/update-banner-image")]
-        public async Task<Response<string>> UpdateBannerImage(string communityId, [FromForm] BannerImageUpdateDto dto)
-        {
-            return await _communityService.UpdateBannerImage(this.UserId,communityId, dto);
-        }
-        
         
         [HttpPost("delete-permanently/{id}")]
         public async Task<Response<string>> DeletePermanently(string id)

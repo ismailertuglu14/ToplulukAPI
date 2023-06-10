@@ -33,6 +33,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Core
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<ICommunityService, CommunityService>();
+            services.AddTransient<ICommunityImageService, CommunityImageService>();
         }
     }
 }
