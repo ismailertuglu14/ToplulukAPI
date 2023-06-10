@@ -139,6 +139,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.UpdateAPI
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7CA79822-4F12-427D-9658-6C31F2DD52E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topluluk.Services.PostAPI.Test", "Services\Post\Topluluk.Services.PostAPI.Test\Topluluk.Services.PostAPI.Test.csproj", "{B7AD96EF-E868-49BD-B5B5-5876B380C27C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -353,6 +355,10 @@ Global
 		{7CA79822-4F12-427D-9658-6C31F2DD52E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CA79822-4F12-427D-9658-6C31F2DD52E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CA79822-4F12-427D-9658-6C31F2DD52E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7AD96EF-E868-49BD-B5B5-5876B380C27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7AD96EF-E868-49BD-B5B5-5876B380C27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7AD96EF-E868-49BD-B5B5-5876B380C27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7AD96EF-E868-49BD-B5B5-5876B380C27C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -422,6 +428,7 @@ Global
 		{58F284C9-539B-4DC9-BA32-0B592F3771B2} = {7C50F559-15D6-4D96-90DE-3FDEE534050F}
 		{C8424248-6B61-4047-94F6-AFBD2B4352F4} = {7C50F559-15D6-4D96-90DE-3FDEE534050F}
 		{19D63953-9667-4A1F-AB6C-D4D25B6D19F3} = {7C50F559-15D6-4D96-90DE-3FDEE534050F}
+		{B7AD96EF-E868-49BD-B5B5-5876B380C27C} = {A6408CF5-D4E2-4489-A92C-464BC2161777}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10EA4274-58F2-4046-97AB-649E4E28F089}

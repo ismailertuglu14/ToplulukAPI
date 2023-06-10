@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.IdentityModel.Tokens;
 using Topluluk.Services.ChatAPI.Model.Dto;
 using Topluluk.Services.ChatAPI.Services.Interface;
 
@@ -26,9 +27,11 @@ public class ChatHub : Hub
             await Task.CompletedTask;
         }
 
-        var targetUserConnectionId = _connections.GetConnections(to).Last();
-        
-        await Clients.Client(targetUserConnectionId).SendAsync("receiveMessage", message);
+       var targetUserConnectionId = _connections.GetConnections(to).LastOrDefault();
+        if (!targetUserConnectionId.IsNullOrEmpty())
+        { 
+            await Clients.Client(targetUserConnectionId).SendAsync("receiveMessage", message);
+        }
         
         await _chatService.SendMessage(message.From.Id,new MessageCreateDto
         {

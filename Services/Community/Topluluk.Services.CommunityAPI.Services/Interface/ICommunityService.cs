@@ -29,7 +29,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
 
         Task<Response<string>> UpdateCoverImage(string userId, string communityId, CoverImageUpdateDto dto);
-        Task<Response<NoContent>> UpdateBannerImage(string userId, string communityId, BannerImageUpdateDto dto);
+        Task<Response<string>> UpdateBannerImage(string userId, string communityId, BannerImageUpdateDto dto);
  
         /// Lists the communities that the user is a member of in the profile
         Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string sourceId, string targetId);
