@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using StackExchange.Redis;
-using Topluluk.Services.User.Data.Settings;
 using Topluluk.Services.User.Model.Mapper;
 using Topluluk.Services.User.Services.Core;
 using Topluluk.Shared.Middleware;
@@ -39,7 +38,9 @@ var multiplexer = ConnectionMultiplexer.Connect(configuration.GetConnectionStrin
 builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
 
 
+
 builder.Services.AddInfrastructure();
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -52,9 +53,9 @@ builder.Services.AddAuthentication(options =>
     options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters()
     {   
-        ValidateIssuer = true,
+        ValidateIssuer = false,
         ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-        ValidateAudience = true,
+        ValidateAudience = false,
         ValidAudience = builder.Configuration["JWT:ValidAudience"],
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
@@ -78,8 +79,6 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication(); // For jwt
 app.UseAuthorization();
-
-app.MapControllers();
 app.UseCors();
+app.MapControllers();
 app.Run();
-

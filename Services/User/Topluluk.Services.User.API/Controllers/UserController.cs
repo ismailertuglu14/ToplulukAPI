@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Topluluk.Services.User.Model.Dto;
@@ -10,7 +11,6 @@ using Topluluk.Shared.Dtos;
 
 namespace Topluluk.Services.User.API.Controllers
 {
-
     public class UserController : BaseController
     {
 
@@ -47,74 +47,9 @@ namespace Topluluk.Services.User.API.Controllers
             return await _userService.InsertUser(userInfo);
         }
 
-        [HttpPost("[action]")]
-        public async Task<Response<string>> ChangeProfileImage(IFormFileCollection files, CancellationToken cancellationToken)
-        {
-            return await _userService.ChangeProfileImage(UserName, files,cancellationToken);
-        }
+       
 
-        [HttpPost("remove-profile-image")]
-        public async Task<Response<NoContent>> RemoveProfileImage()
-        {
-            return await _userService.DeleteProfileImage(this.UserId);
-        }
-        [HttpPost("remove-banner-image")]
-        public async Task<Response<NoContent>> RemoveBannerImage()
-        {
-            return await _userService.DeleteBannerImage(this.UserId);
-        }
-        [HttpPost("[action]")]
-        public async Task<Response<string>> ChangeBannerImage([FromForm] UserChangeBannerDto changeBannerDto)
-        {
-            return await _userService.ChangeBannerImage(this.UserId, changeBannerDto);
-        }
-
-        [HttpPost("Follow")]
-        public async Task<Response<string>> FollowUser( [FromBody] UserFollowDto userFollowInfo)
-        {
-            return await _userService.FollowUser(this.UserId, userFollowInfo);
-        }
-
-        [HttpPost("UnFollow")]
-        public async Task<Response<string>> UnFollowUser([FromBody] UserFollowDto userFollowInfo)
-        {
-            return await _userService.UnFollowUser(this.UserId, userFollowInfo);
-        }
-        [HttpPost("remove-follow-request/{targetId}")]
-        public async Task<Response<NoContent>> RemoveFollowRequest(string targetId)
-        {
-            return await _userService.RemoveFollowRequest(this.UserId, targetId);
-        }
-        [HttpPost("remove-follower")]
-        public async Task<Response<string>> RemoveUserFromFollower([FromBody] UserFollowDto userFollowInfo)
-        {
-            return await _userService.RemoveUserFromFollowers(this.UserId, userFollowInfo);
-        }
-        [HttpPost("accept-follow-request/{targetId}")]
-        public async Task<Response<NoContent>> AcceptFollowRequest(string targetId)
-        {
-            return await _userService.AcceptFollowRequest(this.UserId, targetId);
-        }
-        [HttpPost("decline-follow-request/{targetId}")]
-        public async Task<Response<NoContent>> DeclineFollowRequest(string targetId)
-        {
-            return await _userService.DeclineFollowRequest(this.UserId, targetId);
-        }
-        [HttpGet("incoming-requests/{id}")]
-        public async Task<Response<List<UserFollowRequestDto>>> IncomingRequests(string id,int take, int skip)
-        {
-            return await _userService.GetFollowerRequests(this.UserId, id,skip,take);
-        }
-        [HttpGet("followings")]
-        public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string id, int take, int skip)
-        {
-            return await _userService.GetFollowingUsers(this.UserId, id, skip, take);
-        }
-        [HttpGet("followers")]
-        public async Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string id, int take, int skip)
-        {
-            return await _userService.GetFollowerUsers(this.UserId, id, skip, take);
-        }
+        
         
 
         [HttpPost("Block")]
@@ -178,12 +113,6 @@ namespace Topluluk.Services.User.API.Controllers
         public async Task<Response<GetCommunityOwnerDto>> GetCommunityOwner(string id)
         {
             return await _userService.GetCommunityOwner(id);
-        }
-
-        [HttpGet("user-followings")]
-        public async Task<Response<List<string>>> GetUserFollowings(string id)
-        {
-            return await _userService.GetUserFollowings(id);
         }
 
         [HttpPost("get-user-info-list")]

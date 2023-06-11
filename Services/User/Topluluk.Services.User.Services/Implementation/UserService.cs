@@ -41,9 +41,7 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<GetUserByIdDto>> GetUserById(string id, string userId)
         {
-            try
-            {
-                _User? user = new();
+           _User? user = new();
 
                 if (_redisRepository.IsConnected)
                 {
@@ -54,8 +52,7 @@ namespace Topluluk.Services.User.Services.Implementation
                     if (cacheUser.IsNullOrEmpty())
                     {
                         user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-                        var userJson = JsonSerializer.Serialize(user);
-                        await _redisRepository.SetValueAsync(key, userJson);
+                        await _redisRepository.SetValueAsync(key, user);
                     }
                     else
                     {
@@ -72,8 +69,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 var isFollowingTask = _followRepository.AnyAsync(f => !f.IsDeleted && f.SourceId == id && f.TargetId == userId);
                 var isFollowRequestSentTask = _followRequestRepository.AnyAsync(f => !f.IsDeleted && f.SourceId == id && f.TargetId == userId);
                 var isFollowRequestReceivedTask = _followRequestRepository.AnyAsync(f => !f.IsDeleted && f.SourceId == userId && f.TargetId == id);
-                var followingCountTask = _followRepository.Count(f => !f.IsDeleted &&  f.SourceId == userId); 
-                
+                var followingCountTask = _followRepository.Count(f => !f.IsDeleted &&  f.SourceId == userId);
                 var followersCountTask = _followRepository.Count(f => !f.IsDeleted && f.TargetId == userId );
                 var userCommunitiesRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities-count").AddQueryParameter("id",userId);
                 var userCommunitiesTask = _client.ExecuteGetAsync<Response<int>>(userCommunitiesRequest);
@@ -91,14 +87,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 {
                     dto.CommunityCount = userCommunitiesResponse.Data!.Data;
                 }
-                return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<GetUserByIdDto>.Fail($"Some error occured: {e}",
-                    ResponseStatus.InitialError));
-            }
-
+                return Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success);
         }
 
         public async Task<Response<GetUserByIdDto>> GetUserByUserName(string id, string userName)
@@ -204,121 +193,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 return await Task.FromResult(Response<string>.Fail($"Error occured {e}", ResponseStatus.InitialError));
             }
         }
-
-        public async Task<Response<string>> FollowUser(string userId, UserFollowDto userFollowInfo)
-        {
-
-            try
-            {
-                if (userId == userFollowInfo.TargetId)
-                    return await Task.FromResult(Response<string>.Fail("You can not follow yourself",
-                        ResponseStatus.BadRequest));
-                
-                _User targetUser = await _userRepository.GetFirstAsync(u => u.Id == userFollowInfo.TargetId);
-                
-                if(targetUser==null)
-                    return await Task.FromResult(Response<string>.Fail("User not found", ResponseStatus.NotFound));
-
-                bool isFollowing =
-                    await _followRepository.AnyAsync(f => !f.IsDeleted && f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
-
-                if (isFollowing)
-                    return await Task.FromResult(Response<string>.Success("Already following", ResponseStatus.Success));
-                
-                if (targetUser.IsPrivate)
-                {
-                    var isAlreadySent = await _followRequestRepository.AnyAsync(f =>
-                        !f.IsDeleted && f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
-                    if (isAlreadySent)
-                    {
-                        return Response<string>.Success("Already sent before!", ResponseStatus.Success);
-                    }
-
-                    FollowRequest requestDto = new FollowRequest(userId, targetUser.Id);
-                    
-                    await _followRequestRepository.InsertAsync(requestDto);
-                    return await Task.FromResult(Response<string>.Success("Successfully follow request sent!", ResponseStatus.Success));
-                }
-                else
-                {
-                    UserFollow userFollow = new() { SourceId = userId, TargetId = userFollowInfo.TargetId };
-                    await _followRepository.InsertAsync(userFollow);
-
-                    return await Task.FromResult(Response<string>.Success("Successfully followed!", ResponseStatus.Success));
-                }
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
-            }
-        }
-
-        public async Task<Response<string>> UnFollowUser(string userId, UserFollowDto userFollowInfo)
-        {
-            UserFollow? isSourceFollowingTarget =
-                await _followRepository.GetFirstAsync(f => f.SourceId == userId && f.TargetId == userFollowInfo.TargetId);
-
-            if (isSourceFollowingTarget == null)
-            {
-                return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
-            }
-
-            _followRepository.DeleteCompletely(isSourceFollowingTarget.Id);
-
-            return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
-        }
-
         
-        
-        /// <summary>
-        /// It is used if the user wants to remove a follow request made to another user.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="targetId"></param>
-        /// <returns></returns>
-        public async Task<Response<NoContent>> RemoveFollowRequest(string userId, string targetId)
-        {
-            try
-            {
-                FollowRequest? followRequest = await _followRequestRepository.GetFirstAsync(f => f.SourceId == userId && f.TargetId == targetId);
-                
-                if (followRequest != null)
-                {
-                    _followRequestRepository.DeleteCompletely(followRequest.Id);
-                    return Response<NoContent>.Success(ResponseStatus.Success);
-                }
-
-                return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<NoContent>.Fail($"{e}", ResponseStatus.InitialError));
-
-            }
-        }
-
-        public async Task<Response<string>> RemoveUserFromFollowers(string userId, UserFollowDto userFollowInfo)
-        {
-            try
-            {
-                UserFollow? userFollow = await _followRepository.GetFirstAsync(f => f.SourceId == userFollowInfo.TargetId && f.TargetId == userId);
-
-                if (userFollow == null)
-                {
-                    return await Task.FromResult(Response<string>.Fail("Failed", ResponseStatus.Failed));
-                }
-
-                _followRepository.DeleteCompletely(userFollow.Id);
-                return await Task.FromResult(Response<string>.Success("Successfully unfollowed!", ResponseStatus.Success));
-            }
-            catch
-            {
-                return await Task.FromResult(Response<string>.Fail("Some error occured", ResponseStatus.InitialError));
-            }
-        }
-
         public async Task<Response<string>> BlockUser(string sourceId, string targetId)
         {
             // Kullanıcı blocklanırken source ve target userlardaki takip ve takipçi listesinden
@@ -384,195 +259,7 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<List<UserSearchResponseDto>>.Success(users, ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> ChangeProfileImage(string userName, IFormFileCollection files, CancellationToken cancellationToken)
-        {
 
-            try
-            {
-                if (files == null || files.Count == 0)
-                {
-                    return await Task.FromResult(Response<string>.Fail("Atleast Need 1 image",
-                        ResponseStatus.BadRequest));
-                }
-                _User user = await _userRepository.GetFirstAsync(u => u.UserName == userName);
-                Response<List<string>>? responseData = new();
-                byte[] imageBytes;
-
-                using (var stream = new MemoryStream())
-                {
-                    files[0].CopyTo(stream);
-                    imageBytes = stream.ToArray();
-                }
-
-                using (var client = new HttpClient())
-                {
-                    var content = new MultipartFormDataContent();
-                    var imageContent = new ByteArrayContent(imageBytes);
-                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); // Resim formatına uygun mediatype belirleme
-                    content.Add(imageContent, "files", files[0].FileName); // "files": paramtere adı "files[0].FileName": Resimin adı
-
-                    if (user.ProfileImage != null)
-                    {
-    
-                        NameObject nameObject = new() { Name = user.ProfileImage};
-                        var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-image").AddBody(nameObject);
-                        var response1 = await _client.ExecutePostAsync<Response<string>>(request, cancellationToken: cancellationToken);
-                    }
-
-                    var response = await client.PostAsync("https://localhost:7165/file/upload-user-image", content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        responseData = await response.Content.ReadFromJsonAsync<Response<List<string>>>();
-                        if (responseData != null)
-                        {
-                            var imageUrl = responseData.Data[0];
-
-                            user.ProfileImage = imageUrl;
-                            _userRepository.Update(user);
-                            return await Task.FromResult(Response<string>.Success($"Image changed with {imageUrl}", ResponseStatus.Success));
-                        }
-
-                        throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
-                    }
-                    else
-                    {
-                        // Resim yükleme işlemi başarısız
-                        return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",ResponseStatus.InitialError));
-            }
-        }
-
-        public async Task<Response<NoContent>> DeleteProfileImage(string userId)
-        {
-            try
-            {
-                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-                if (user == null)
-                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
-
-                if (user.ProfileImage == null)
-                    return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
-                NameObject nameObject = new() { Name = user.ProfileImage};
-                var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-image").AddBody(nameObject);
-                var response = await _client.ExecutePostAsync<Response<string>>(request);
-
-                if (!response.IsSuccessful || !response.Data!.IsSuccess)
-                    return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.Failed));
-                
-                user.ProfileImage = null;
-                _userRepository.Update(user);
-                return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
-            }
-        }
-
-        public async Task<Response<string>> ChangeBannerImage(string userId, UserChangeBannerDto changeBannerDto)
-        {
-            try
-            {
-                if (changeBannerDto.File == null)
-                {
-                    return await Task.FromResult(Response<string>.Fail("Atleast Need 1 image",
-                        ResponseStatus.BadRequest));
-                }
-            
-                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-            
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<string>.Fail("User Not Found", ResponseStatus.NotFound));
-                }
-            
-                Response<string>? responseData = new();
-                byte[] imageBytes;
-
-                using (var stream = new MemoryStream())
-                {
-                    changeBannerDto.File.CopyTo(stream);
-                    imageBytes = stream.ToArray();
-                }
-
-                using (var client = new HttpClient())
-                {
-                    var content = new MultipartFormDataContent();
-                    var imageContent = new ByteArrayContent(imageBytes);
-                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); 
-                    content.Add(imageContent, "File", changeBannerDto.File.FileName); 
-
-                    if (user.BannerImage != null)
-                    {
-
-                        NameObject nameObject = new() { Name = user.ProfileImage};
-                        var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-image").AddBody(nameObject);
-                        var response1 = await _client.ExecutePostAsync<Response<string>>(request);
-                    }
-
-                    var response = await client.PostAsync("https://localhost:7165/file/upload-user-banner", content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        responseData = await response.Content.ReadFromJsonAsync<Response<string>>();
-                        if (responseData != null)
-                        {
-                            user.BannerImage = responseData.Data;
-                            _userRepository.Update(user);
-                            return await Task.FromResult(Response<string>.Success($"Image changed with {user.BannerImage}", ResponseStatus.Success));
-                        }
-
-                        throw new Exception($"{typeof(UserService)} exception, IsSuccessStatusCode=true, responseData=null");
-                    }
-                    else
-                    {
-                        return await Task.FromResult(Response<string>.Fail("Failed while uploading image with http client", ResponseStatus.InitialError));
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
-            }
-        }
-
-        public async Task<Response<NoContent>> DeleteBannerImage(string userId)
-        {
-            try
-            {
-                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-                if (user == null)
-                    return await Task.FromResult(Response<NoContent>.Fail("User Not Found", ResponseStatus.NotFound));
-
-                if (user.BannerImage == null)
-                    return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
-                NameObject nameObject = new() { Name = user.BannerImage};
-                var request = new RestRequest(ServiceConstants.API_GATEWAY + "/file/delete-user-banner").AddBody(nameObject);
-                var response = await _client.ExecutePostAsync<Response<string>>(request);
-
-                if (!response.IsSuccessful || !response.Data!.IsSuccess)
-                    return await Task.FromResult(Response<NoContent>.Fail("Failed", ResponseStatus.Failed));
-                
-                user.BannerImage = null;
-                _userRepository.Update(user);
-                return await Task.FromResult(Response<NoContent>.Success(ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-
-                return await Task.FromResult(Response<NoContent>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
-            }
-        }
 
         // todo FollowingRequest leri kullanıcı adı, ad, soyad, id, kullanıcı resmi ve istek attığı tarih ile dön.
         public async Task<Response<GetUserAfterLoginDto>> GetUserAfterLogin(string id)
@@ -656,67 +343,8 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
         
-        
-        /// <summary>
-        /// It is used to accept follow requests from the other users.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="targetId"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public async Task<Response<NoContent>> AcceptFollowRequest(string id, string targetId)
-        {
-            try
-            {
 
-                var document = await _followRequestRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == id);
-                if (document == null) throw new ArgumentNullException(nameof(FollowRequest));
-                var insertDocument = new UserFollow()
-                {
-                    SourceId = targetId,
-                    TargetId = id,
-                };
-                await _followRepository.InsertAsync(insertDocument);
-                _followRequestRepository.DeleteByExpression(f => f.SourceId == targetId && f.TargetId == id); 
 
-                return Response<NoContent>.Success(ResponseStatus.Success);
-            }
-            catch (Exception e)
-            {
-                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
-            }
-        }
-        
-        
-        
-        public async Task<Response<List<UserFollowRequestDto>>> GetFollowerRequests(string id, string userId, int skip = 0, int take = 10)
-        {
-            try
-            {
-                if (!id.Equals(userId))
-                {
-                    return await Task.FromResult(Response<List<UserFollowRequestDto>>.Fail("",
-                        ResponseStatus.Unauthorized));
-                }
-
-                var incomingRequests = await _followRequestRepository.GetListByExpressionAsync(f => !f.IsDeleted && f.TargetId == userId);
-
-                List<string> requestIds = incomingRequests.Select(i => i.SourceId).ToList();
-
-                List<_User> users = _userRepository.GetListByExpression(u => requestIds.Contains(u.Id));
-                var dto = _mapper.Map<List<_User>, List<UserFollowRequestDto>>(users);
-
-                return await Task.FromResult(Response<List<UserFollowRequestDto>>.Success(dto, ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<List<UserFollowRequestDto>>.Fail($"Some error occurred: {e}",
-                    ResponseStatus.InitialError));
-            }
-
-        }
-
-        
         
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ For Http calls coming from other services @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\
 
@@ -772,41 +400,6 @@ namespace Topluluk.Services.User.Services.Implementation
             return await Task.FromResult(Response<UserInfoForCommentDto>.Success(dto, ResponseStatus.Success));
         }
 
-        public async Task<Response<List<string>>> GetUserFollowings(string id)
-        {
-            _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
-            if (user == null)
-                return await Task.FromResult(Response<List<string>>.Fail("User Not found", ResponseStatus.BadRequest));
-            List<string> followingIds = new();
-            var followings = _followRepository.GetListByExpression(f => f.SourceId == id);
-            foreach (var follow in followings)
-            {
-                followingIds.Add(follow.TargetId);
-            }
-            return await Task.FromResult(Response<List<string>>.Success(followingIds, ResponseStatus.Success));
-
-        }
-        
-        public async Task<Response<NoContent>> DeclineFollowRequest(string id, string targetId)
-        {
-            try
-            {
-                FollowRequest? followRequest = await _followRequestRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == id);
-                
-                if(followRequest == null)
-                    return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
-                
-                _followRequestRepository.DeleteById(followRequest.Id);
-                return Response<NoContent>.Success(ResponseStatus.Success);
-            }
-            
-            catch (Exception e)
-            {
-                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
-            }
-        }
-        
-
         public async Task<Response<List<GetUserByIdDto>>> GetUserList(IdList dto, int skip = 0, int take = 10)
         {
             try
@@ -847,74 +440,6 @@ namespace Topluluk.Services.User.Services.Implementation
                 return Response<List<GetUserByIdDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError);
             }
         }
-
-
-
-
-        // Takip edilen kullanıcıları ve o kullanıcıların bilgilerini getireceğiz
-        public async Task<Response<List<FollowingUserDto>>> GetFollowingUsers(string id, string userId, int skip = 0, int take = 10)
-        {
-            try
-            {
-                if (userId.IsNullOrEmpty())
-                {
-                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("Bad Request", ResponseStatus.BadRequest));
-                }
-
-                _User user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<List<FollowingUserDto>>.Fail("", ResponseStatus.NotFound));
-                }
-                // Target Id leri elimde. Bu target id ler ile kullanıcı bilgilerini alıcaz.
-                DatabaseResponse followingsResponse = await _followRepository.GetAllAsync(take, skip, f => f.SourceId == userId);
-                List<string> x = new();
-                foreach (var y in followingsResponse.Data)
-                {
-                    x.Add(y.TargetId);
-                }
-                DatabaseResponse followingUsers = await _userRepository.GetAllAsync(take, skip, fu => x.Contains(fu.Id));
-                List<FollowingUserDto> dtos = _mapper.Map<List<_User>, List<FollowingUserDto>>(followingUsers.Data);
-
-                return await Task.FromResult(Response<List<FollowingUserDto>>.Success(dtos, ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<List<FollowingUserDto>>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
-            }
-        }
-
-        public async Task<Response<List<FollowerUserDto>>> GetFollowerUsers(string id, string userId, int skip = 0, int take = 10)
-        {
-            try
-            {
-                if (id.IsNullOrEmpty() || userId.IsNullOrEmpty())
-                {
-                    return await Task.FromResult(Response<List<FollowerUserDto>>.Fail("", ResponseStatus.BadRequest));
-                }
-
-                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<List<FollowerUserDto>>.Fail($"User Not Found!", ResponseStatus.NotFound));
-                }
-
-                List<UserFollow> followers = _followRepository.GetListByExpressionPaginated(skip,take,f => f.TargetId == userId);
-
-                List<_User> users = _userRepository.GetListByExpressionPaginated(skip,take, u => followers.Any(f => f.SourceId == u.Id));
-                List<FollowerUserDto> followersDto = _mapper.Map<List<_User>, List<FollowerUserDto>>(users);
-
-                return await Task.FromResult(Response<List<FollowerUserDto>>.Success(followersDto, ResponseStatus.Success));
-
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<List<FollowerUserDto>>.Fail($"Some error occurred: {e}", ResponseStatus.InitialError));
-
-            }
-        }
-
         public async Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto)
         {
 

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 using Topluluk.Shared.Dtos;
+using Topluluk.Shared.Enums;
 
 namespace Topluluk.Shared.Helper
 {
@@ -31,7 +32,7 @@ namespace Topluluk.Shared.Helper
             token = token.Split("Bearer ")[1];
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
-            var username = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            var username = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.NAME)|| c.Type == ClaimTypes.Name )?.Value;
 
             return username ?? throw new Exception($"{typeof(TokenHelper).Name}:Username not found in token");
         }
@@ -45,7 +46,7 @@ namespace Topluluk.Shared.Helper
             token = token.Split("Bearer ")[1];
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
-            var userId = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.ID) || c.Type == ClaimTypes.NameIdentifier )?.Value;
 
             return userId ?? throw new Exception($"{typeof(TokenHelper).Name}:UserId not found in token");
         }
@@ -59,7 +60,7 @@ namespace Topluluk.Shared.Helper
             var handler = new JwtSecurityTokenHandler();
             token = token.Split("Bearer ")[1];
             var jwtSecurityToken = handler.ReadJwtToken(token);
-            var userId =  jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId =  jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.ID) || c.Type == ClaimTypes.NameIdentifier)?.Value;
             return userId ?? throw new Exception($"{typeof(TokenHelper).Namespace}: UserId not found in token");
         }
         public static List<string> GetUserRolesByToken(HttpRequest request)
@@ -72,7 +73,7 @@ namespace Topluluk.Shared.Helper
             token = token.Split("Bearer ")[1];
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token);
-            var userRoles = jwtSecurityToken.Claims.Where(c => c.Type == ClaimTypes.Role)?.Select(c => c.Value).ToList();
+            var userRoles = jwtSecurityToken.Claims.Where(c => c.Type == Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.ROLES) || c.Type == ClaimTypes.Role )?.Select(c => c.Value).ToList();
 
             return userRoles ?? throw new Exception($"{typeof(TokenHelper).Name}:UserId not found in token");
         }
@@ -106,19 +107,17 @@ namespace Topluluk.Shared.Helper
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
             var authClaims = new List<Claim>()
             {
-                new(ClaimTypes.NameIdentifier, userId),
-                new(ClaimTypes.Name, userName),
+                new(Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.ID)!, userId),
+                new(Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.NAME)!, userName),
             };
             foreach (var userRole in roles)
             {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                authClaims.Add(new Claim(Enum.GetName(typeof(TokenFieldEnum),TokenFieldEnum.ROLES)!, userRole));
             }
             // Oluşturulacak token ayarlarını veriyoruz.
             token.ExpiredAt = DateTime.UtcNow.AddMonths(month);
 
             JwtSecurityToken securityToken = new(
-                audience: _configuration["JWT:ValidAudience"],
-                issuer: _configuration["JWT:ValidIssuer"],
                 expires: token.ExpiredAt,
                 notBefore: DateTime.UtcNow, // Bu token üretildiği anda devreye girecek
                 signingCredentials: signingCredentials, // Security key buradaki bilgiler doğrultusunda olacak.

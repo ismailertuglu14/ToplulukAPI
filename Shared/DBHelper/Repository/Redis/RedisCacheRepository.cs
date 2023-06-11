@@ -80,9 +80,17 @@ public class RedisCacheRepository : IRedisRepository
         return result;
     }
 
-    public async Task<bool> SetValueAsync(string key, string value)
+    /// <summary>
+    /// Auto Serialize T model
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public async Task<bool> SetValueAsync<T>(string key, T value)
     {
-        return await _cache.StringSetAsync(key,value, ExpireTime);
+        var json = JsonSerializer.Serialize(value);
+        return await _cache.StringSetAsync(key,json, ExpireTime);
     }
  
     public T GetOrAdd<T>(string key, Func<T> action) where T : class

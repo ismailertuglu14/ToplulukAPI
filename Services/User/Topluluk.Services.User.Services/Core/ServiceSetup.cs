@@ -37,6 +37,8 @@ namespace Topluluk.Services.User.Services.Core
         public static void AddServicesForServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFollowService, FollowService>();
+            services.AddTransient<IImageService, ImageService>();
         }
     
 

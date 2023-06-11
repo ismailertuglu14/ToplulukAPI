@@ -24,12 +24,10 @@ namespace Topluluk.Services.User.Model.Entity
 
 		public bool IsPrivate { get; set; } = false;
 
-		public ICollection<string> BlockedUsers { get; set; }
 
 
 		public User()
 		{
-			BlockedUsers = new HashSet<string>();
 			Gender = GenderEnum.Unspecified;
         }
 
