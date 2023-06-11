@@ -1,7 +1,8 @@
-using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using StackExchange.Redis;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace DBHelper.Repository.Redis;
 
@@ -89,7 +90,7 @@ public class RedisCacheRepository : IRedisRepository
     /// <returns></returns>
     public async Task<bool> SetValueAsync<T>(string key, T value)
     {
-        var json = JsonSerializer.Serialize(value);
+        var json = JsonConvert.SerializeObject(value);
         return await _cache.StringSetAsync(key,json, ExpireTime);
     }
  
