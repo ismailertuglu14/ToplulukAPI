@@ -343,6 +343,73 @@ namespace Topluluk.Services.User.Services.Implementation
             }
         }
         
+      public async Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto)
+        {
+
+            try
+            {
+                if (userId.IsNullOrEmpty())
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("", ResponseStatus.Unauthorized));
+                }
+
+
+                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return await Task.FromResult(Response<NoContent>.Fail("User not found", ResponseStatus.NotFound));
+                }
+                
+                if (user.UserName != userDto.UserName)
+                {
+                    var result = await _userRepository.CheckIsUsernameUnique(userDto.UserName);
+                    if (result == true)
+                    {
+                        return await Task.FromResult(Response<NoContent>.Fail("UserName already taken!", ResponseStatus.UsernameInUse));
+                    }
+                }
+
+                if (user.Email != userDto.Email)
+                {
+                    var result = await _userRepository.CheckIsUsernameUnique(userDto.Email);
+                    if (result == true)
+                    {
+                        return Response<NoContent>.Fail("Email already taken!", ResponseStatus.EmailInUse);
+                    }
+                }
+                // Http request to auth service for change username and email
+
+                UserCredentialUpdateDto credentialDto = new();
+                credentialDto.UserName = userDto.UserName;
+                credentialDto.Email = userDto.Email;
+
+                var _request = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/update-profile").AddHeader("Authorization", token).AddBody(credentialDto);
+                await _client.ExecutePostAsync<Response<NoContent>>(_request);
+
+                user.FirstName = userDto.FirstName.IsNullOrEmpty() ? user.FirstName : userDto.FirstName;
+                user.LastName = userDto.LastName.IsNullOrEmpty() ?  user.LastName : userDto.LastName;
+                user.UserName =  userDto.UserName.IsNullOrEmpty() ? user.UserName : userDto.UserName;
+                user.Email = userDto.Email.IsNullOrEmpty() ? user.Email : userDto.Email;
+                user.Gender = userDto.Gender;
+                user.Bio = userDto.Bio.IsNullOrEmpty() ? user.Bio : userDto.Bio;
+                user.BirthdayDate = userDto.BirthdayDate;
+                user.Title = userDto.Title.IsNullOrEmpty() ? user.Title : userDto.Title;
+                DatabaseResponse response = _userRepository.Update(user);
+
+                if (response.IsSuccess)
+                {
+                    return Response<NoContent>.Success( ResponseStatus.Success);
+                }
+
+
+                return Response<NoContent>.Fail("Update failed", ResponseStatus.InitialError);
+            }
+            catch (Exception e)
+            {
+                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
+            }
+        }
 
 
         
@@ -440,74 +507,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 return Response<List<GetUserByIdDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError);
             }
         }
-        public async Task<Response<NoContent>> UpdateProfile(string userId, string token, UserUpdateProfileDto userDto)
-        {
-
-            try
-            {
-                if (userId.IsNullOrEmpty())
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("", ResponseStatus.Unauthorized));
-                }
-
-
-                _User? user = await _userRepository.GetFirstAsync(u => u.Id == userId);
-
-                if (user == null)
-                {
-                    return await Task.FromResult(Response<NoContent>.Fail("User not found", ResponseStatus.NotFound));
-                }
-                
-                if (user.UserName != userDto.UserName)
-                {
-                    var result = await _userRepository.CheckIsUsernameUnique(userDto.UserName);
-                    if (result == true)
-                    {
-                        return await Task.FromResult(Response<NoContent>.Fail("UserName already taken!", ResponseStatus.UsernameInUse));
-                    }
-                }
-
-                if (user.Email != userDto.Email)
-                {
-                    var result = await _userRepository.CheckIsUsernameUnique(userDto.Email);
-                    if (result == true)
-                    {
-                        return Response<NoContent>.Fail("Email already taken!", ResponseStatus.EmailInUse);
-                    }
-                }
-                // Http request to auth service for change username and email
-
-                UserCredentialUpdateDto credentialDto = new();
-                credentialDto.UserName = userDto.UserName;
-                credentialDto.Email = userDto.Email;
-
-                var _request = new RestRequest(ServiceConstants.API_GATEWAY + "/authentication/update-profile").AddHeader("Authorization", token).AddBody(credentialDto);
-                await _client.ExecutePostAsync<Response<NoContent>>(_request);
-
-                user.FirstName = userDto.FirstName.IsNullOrEmpty() ? user.FirstName : userDto.FirstName;
-                user.LastName = userDto.LastName.IsNullOrEmpty() ?  user.LastName : userDto.LastName;
-                user.UserName =  userDto.UserName.IsNullOrEmpty() ? user.UserName : userDto.UserName;
-                user.Email = userDto.Email.IsNullOrEmpty() ? user.Email : userDto.Email;
-                user.Gender = userDto.Gender;
-                user.Bio = userDto.Bio.IsNullOrEmpty() ? user.Bio : userDto.Bio;
-                user.BirthdayDate = userDto.BirthdayDate;
-                user.Title = userDto.Title.IsNullOrEmpty() ? user.Title : userDto.Title;
-                DatabaseResponse response = _userRepository.Update(user);
-
-                if (response.IsSuccess)
-                {
-                    return Response<NoContent>.Success( ResponseStatus.Success);
-                }
-
-
-                return Response<NoContent>.Fail("Update failed", ResponseStatus.InitialError);
-            }
-            catch (Exception e)
-            {
-                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
-            }
-        }
-
+  
         public async Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10)
         {
             try
