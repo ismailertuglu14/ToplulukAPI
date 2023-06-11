@@ -469,43 +469,43 @@ namespace Topluluk.Services.User.Services.Implementation
 
         public async Task<Response<List<GetUserByIdDto>>> GetUserList(IdList dto, int skip = 0, int take = 10)
         {
-            try
+            List<_User> users = new();
+
+            if (_redisRepository.IsConnected)
             {
-                List<_User> users = new();
+                List<string> keys = dto.ids.Select(id => $"user_{id}").ToList();
+                var cachedUsers = await _redisRepository.GetAllAsync(keys);
 
-                if (_redisRepository.IsConnected)
+                List<string> missingRedisKeys = cachedUsers.Where(doc => string.IsNullOrEmpty(doc.Value)).Select(doc => doc.Key).ToList();
+                List<string> missingIds = missingRedisKeys.Select(key => key.Substring(5)).ToList();
+
+                if (missingRedisKeys.Any())
                 {
-                    List<string> keys = dto.ids.Select(id => $"user_{id}").ToList();
-                    var cachedUsers = await _redisRepository.GetAllAsync(keys);
-
-                    List<string> missingRedisKeys = cachedUsers.Where(doc => string.IsNullOrEmpty(doc.Value)).Select(doc => doc.Key).ToList();
-                    List<string> missingIds = missingRedisKeys.Select(key => key.Substring(5)).ToList();
-
-                    if (missingRedisKeys.Any())
+                    var missingUsers = _userRepository.GetListByExpression(u => missingIds.Contains(u.Id));
+                    foreach (var user in missingUsers)
                     {
-                        var missingUsers = _userRepository.GetListByExpression(u => missingIds.Contains(u.Id));
-                        foreach (var user in missingUsers)
-                        {
-                             _redisRepository.SetValueAsync($"user_{user.Id}", JsonSerializer.Serialize(user));
-                        }
-                        users.AddRange(missingUsers);
+                        await _redisRepository.SetValueAsync($"user_{user.Id}", user);
                     }
-
-                    users.AddRange(cachedUsers.Where(doc => !string.IsNullOrEmpty(doc.Value)).Select(doc => JsonConvert.DeserializeObject<_User>(doc.Value)));
+                    users.AddRange(missingUsers);
                 }
-                else
+
+                if (cachedUsers != null)
                 {
-                    users = _userRepository.GetListByExpressionPaginated(skip, take, u => dto.ids.Contains(u.Id));
+                    var x = cachedUsers.Where(doc => !string.IsNullOrEmpty(doc.Value))
+                        .Select(doc => JsonConvert.DeserializeObject<_User>(doc.Value));
+
+                    users.AddRange(x);
                 }
-
-                List<GetUserByIdDto> userDtos = _mapper.Map<List<_User>, List<GetUserByIdDto>>(users);
-
-                return Response<List<GetUserByIdDto>>.Success(userDtos, ResponseStatus.Success);
             }
-            catch (Exception e)
+            else
             {
-                return Response<List<GetUserByIdDto>>.Fail($"Error occured {e}", ResponseStatus.InitialError);
+                users = _userRepository.GetListByExpressionPaginated(skip, take, u => dto.ids.Contains(u.Id));
             }
+
+            List<GetUserByIdDto> userDtos = _mapper.Map<List<_User>, List<GetUserByIdDto>>(users);
+
+            return Response<List<GetUserByIdDto>>.Success(userDtos, ResponseStatus.Success);
+
         }
   
         public async Task<Response<List<FollowingUserDto>>> SearchInFollowings(string id, string userId, string text, int skip = 0, int take = 10)
