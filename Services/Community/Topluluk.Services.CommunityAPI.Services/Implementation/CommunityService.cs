@@ -301,7 +301,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                     return Response<NoContent>.Fail("Unaturhoized for this feature.",ResponseStatus.Unauthorized);
 
                 // Admin can't kick himself
-                if(currentId == community.AdminId)
+                if(currentId == userId)
                     return Response<NoContent>.Fail("Admin can not kick yourself",ResponseStatus.BadRequest);
 
                 CommunityParticipiant? participiant = await _participiantRepository.GetFirstAsync(p => p.CommunityId == communityId && p.UserId == userId);
