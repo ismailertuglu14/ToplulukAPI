@@ -8,8 +8,6 @@ namespace DBHelper.Connection.Mongo
     public class MongoConnectionFactory : IConnectionFactory
     {
         private readonly IBaseDatabaseSettings _configuration;
-
-
         public MongoConnectionFactory(IBaseDatabaseSettings configuration)
         {
             _configuration = configuration;

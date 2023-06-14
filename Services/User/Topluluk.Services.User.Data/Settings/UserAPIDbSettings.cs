@@ -12,7 +12,7 @@ namespace Topluluk.Services.User.Data.Settings
 		{
 			_configuration = configuration;
 		}
-        public string ConnectionString { get { return _configuration.GetConnectionString("MongoDB"); } }
+        public string ConnectionString => _configuration.GetConnectionString("MongoDB") ?? throw new Exception("Use API Db Settings con string null"); 
         public string DatabaseName { get { return "User"; } }
     }
 }
