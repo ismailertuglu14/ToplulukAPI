@@ -1,0 +1,15 @@
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/bin/Debug/net6.0/Topluluk.Services.MailAPI.Model.deps.json
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/bin/Debug/net6.0/Topluluk.Services.MailAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/bin/Debug/net6.0/Topluluk.Services.MailAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/bin/Debug/net6.0/Topluluk.Shared.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/bin/Debug/net6.0/Topluluk.Shared.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.csproj.AssemblyReference.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.AssemblyInfoInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.AssemblyInfo.cs
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.csproj.CoreCompileInputs.cache
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.csproj.CopyComplete
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/refint/Topluluk.Services.MailAPI.Model.dll
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/Topluluk.Services.MailAPI.Model.pdb
+/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Mail/Topluluk.Services.MailAPI.Model/obj/Debug/net6.0/ref/Topluluk.Services.MailAPI.Model.dll

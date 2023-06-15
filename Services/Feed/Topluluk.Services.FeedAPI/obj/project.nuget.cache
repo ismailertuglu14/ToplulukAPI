@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "6MtGGdZ5RFi3nMqzS1TOC5lsO+D+w/mi9tiQ9CGSSSa5vrrPFtbhGdbHaGJFT3GlmR0KsyJDz+ueJvzfrJEPDQ==",
+  "success": true,
+  "projectFilePath": "/Users/ismail/Desktop/Topluluk Documents/ToplulukAPI/Services/Feed/Topluluk.Services.FeedAPI/Topluluk.Services.FeedAPI.csproj",
+  "expectedPackageFiles": [
+    "/Users/ismail/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
