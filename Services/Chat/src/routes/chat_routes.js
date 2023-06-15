@@ -2,6 +2,9 @@ const {
   tokenMiddleware,
   getUserIdFromToken,
 } = require("../middleware/token_middlewares");
+
+const { isValidObjectId } = require("mongoose");
+
 const Message = require("../models/message_model");
 const router = require("express").Router();
 const isNullOrEmpty = require("../helpers/null_or_empty");
@@ -13,7 +16,7 @@ const MessageStatus = require("../dtos/message_status");
 
 // Exceptions
 const NotFoundException = require("../core/exceptions/not_found_excepiton");
-
+const BadRequestException = require("../core/exceptions/bad_request_exception");
 router.get(
   "/history/:targetUserId",
   tokenMiddleware,
@@ -23,9 +26,9 @@ router.get(
       const targetUserId = req.params.targetUserId;
       const sourceUserId = getUserIdFromToken(req.token);
 
-      if (isNullOrEmpty(sourceUserId) || isNullOrEmpty(targetUserId)) {
-        return res.status(400).send("Invalid user id");
-      }
+      // If the target user id or source user id is not a valid object id, an exception is thrown.
+      if (!isValidObjectId(targetUserId) || !isValidObjectId(sourceUserId))
+        throw new BadRequestException("Invalid user id");
 
       // The MessageStatus information of the messages sent by the target user is assigned as "SEEN".
       await Message.updateMany(
@@ -58,6 +61,9 @@ router.get("/recent-chats", tokenMiddleware, async (req, res, next) => {
   });
   axios.defaults.httpsAgent = httpsAgent;
 
+  /**
+   * @description Source User Id
+   */
   const userId = getUserIdFromToken(req.token);
 
   if (isNullOrEmpty(userId)) {
@@ -123,23 +129,42 @@ router.get("/recent-chats", tokenMiddleware, async (req, res, next) => {
     { $replaceRoot: { newRoot: "$message" } },
     { $sort: { createdAt: -1 } },
   ]);
-  messages.forEach((message) => {
-    let recentChat = recentChats.find(
-      (x) => x.userId == message.senderId || x.userId == message.receiverId
+
+  for (let i = 0; i < recentChats.length; i++) {
+    const recentChat = recentChats[i];
+    let message = messages.find(
+      (x) =>
+        (x.senderId == recentChat.userId && x.receiverId == userId) ||
+        (x.senderId == userId && x.receiverId == recentChat.userId)
     );
-    if (recentChat) {
+
+    const unreadCount = await Message.countDocuments({
+      senderId: recentChat.userId,
+      receiverId: userId,
+      status: MessageStatus.SENT,
+    });
+
+    recentChat.unreadMessageCount = unreadCount;
+
+    if (message) {
       recentChat.lastMessage = message.content;
       recentChat.lastMessageDate = message.createdAt;
-      recentChat.unreadMessageCount = messages.filter(
-        (x) =>
-          x.senderId == message.senderId &&
-          x.receiverId == userId &&
-          x.status == MessageStatus.SENT
-      ).length;
     }
-  });
+  }
 
+  recentChats.forEach((x) =>
+    console.log(x.userId + " kullanisinin sayisi : " + x.unreadMessageCount)
+  );
+  console.log("-------------------- -------------------");
+  console.log(recentChats);
   res.status(200).send(new BaseModel(recentChats, 200, true, null));
+});
+
+router.post("/create-group", tokenMiddleware, async (req, res, next) => {
+  try {
+  } catch (error) {
+    res.status(500).send(new BaseModel(null, 500, false, error.message));
+  }
 });
 
 module.exports = router;
