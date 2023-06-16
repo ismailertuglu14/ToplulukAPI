@@ -71,14 +71,14 @@ namespace Topluluk.Services.User.Services.Implementation
                 var isFollowRequestReceivedTask = _followRequestRepository.AnyAsync(f => !f.IsDeleted && f.SourceId == userId && f.TargetId == id);
                 var followingCountTask = _followRepository.Count(f => !f.IsDeleted &&  f.SourceId == userId);
                 var followersCountTask = _followRepository.Count(f => !f.IsDeleted && f.TargetId == userId );
+                var isTargetUserBlockedTask = _blockedUserRepository.AnyAsync(b => b.SourceId == id && b.TargetId == userId); 
                 var userCommunitiesRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities-count").AddQueryParameter("id",userId);
                 var userCommunitiesTask = _client.ExecuteGetAsync<Response<int>>(userCommunitiesRequest);
-
-                await Task.WhenAll(isFollowingTask,isFollowRequestSentTask,isFollowRequestReceivedTask, followingCountTask, followersCountTask, userCommunitiesTask);
+                await Task.WhenAll(isFollowingTask,isFollowRequestSentTask,isTargetUserBlockedTask, isFollowRequestReceivedTask, followingCountTask, followersCountTask, userCommunitiesTask);
 
                 dto.IsFollowRequestSent = isFollowRequestSentTask.Result;
                 dto.isFollowRequestReceived = isFollowRequestReceivedTask.Result;
-
+                dto.IsBlocked = isTargetUserBlockedTask.Result;
                 dto.IsFollowing = isFollowingTask.Result;
                 dto.FollowingCount = followingCountTask.Result;
                 dto.FollowersCount = followersCountTask.Result;
@@ -102,7 +102,14 @@ namespace Topluluk.Services.User.Services.Implementation
                 }
 
                 string key = $"user_{user.Id}";
-                var userObject = new { Id = user.Id,FirstName=user.FirstName,LastName=user.LastName,ProfileImage=user.ProfileImage,Gender=user.Gender};
+                var userObject = new
+                {
+                    Id = user.Id,
+                    FirstName=user.FirstName,
+                    LastName=user.LastName,
+                    ProfileImage=user.ProfileImage,
+                    Gender=user.Gender
+                };
                 var userJson = JsonSerializer.Serialize(userObject);
                 await _redisRepository.SetValueAsync(key, userJson);
                 GetUserByIdDto dto = _mapper.Map<GetUserByIdDto>(user);
@@ -111,10 +118,10 @@ namespace Topluluk.Services.User.Services.Implementation
 
                 dto.IsFollowRequestSent = isFollowRequestSentTask.Result;
                 dto.isFollowRequestReceived = isFollowRequestReceivedTask.Result;
-
                 dto.IsFollowing = await _followRepository.AnyAsync(f => f.SourceId == id && f.TargetId == id);
                 dto.FollowingCount = await _followRepository.Count(f => f.SourceId == id);
                 dto.FollowersCount = await _followRepository.Count(f => f.TargetId == id);
+                
                 return await Task.FromResult(Response<GetUserByIdDto>.Success(dto, ResponseStatus.Success));
             }
             catch (Exception e)
