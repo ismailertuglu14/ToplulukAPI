@@ -4,22 +4,13 @@ const groupSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  groupId: {
+  adminId: {
     type: String,
-    required: true,
-    unique: true,
   },
-  users: [
-    {
-      userId: {
-        type: String,
-      },
-      connectionId: {
-        type: String,
-      },
-    },
-  ],
+  users: {
+    type: Array,
+  },
 });
 
-const Group = mongoose.model("GroupCollection", groupSchema, "GroupCollection");
+const Group = mongoose.model("GroupCollection", groupSchema);
 module.exports = Group;

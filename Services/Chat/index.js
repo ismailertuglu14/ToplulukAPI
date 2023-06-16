@@ -12,6 +12,12 @@ const MessageStatus = require("./src/dtos/message_status");
 
 const chatRoutes = require("./src/routes/chat_routes");
 
+// Events
+
+const {
+  sendMessageEvent,
+  joinGroupEvent,
+} = require("./src/socket/socket_events");
 // Connect to DB
 connectDB();
 
@@ -27,6 +33,7 @@ app.use("/chat", chatRoutes);
 
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
+const NotFoundException = require("./src/core/exceptions/not_found_excepiton");
 
 const io = new Server({
   cors: {
@@ -39,32 +46,18 @@ const io = new Server({
 });
 io.listen(4000);
 
-//const connectedUsers = {};
-
 io.on("connection", (socket) => {
-  socket.on("joinGroup", async (data) => {
-    const { groupId, userId } = data;
-
-    let group = await Group.findOne({ groupId: groupId });
-
-    if (!group) {
-      group = await Group.create({ groupId: groupId });
+  socket.on("connected", async (data) => {
+    const { id } = data;
+    const connectedUser = await ConnectedUser.find({ userId: id });
+    if (connectedUser) {
+      await ConnectedUser.findOneAndUpdate(
+        { userId: id },
+        { $set: { connectionId: socket.id } }
+      );
+    } else {
+      await ConnectedUser.create({ userId: id, connectionId: socket.id });
     }
-
-    await Group.findOneAndUpdate(
-      { groupId: groupId },
-      {
-        $push: {
-          users: {
-            userId: userId,
-            connectionId: socket.id,
-          },
-        },
-      }
-    );
-
-    socket.join(groupId);
-    console.log("joinGroup çalıştı");
   });
 
   socket.on("sendMessageToGroup", async (data) => {
@@ -80,45 +73,7 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("sendMessage", async (message) => {
-    try {
-      /**
-       * @type {{from: ReceiveMessageModel , to: string, content: string, createdAt: Date}}
-       */
-      const { to, from, content, createdAt } = message;
-
-      var createdMessage = await Message.create({
-        content: content,
-        senderId: from.id,
-        receiverId: to,
-        createdAt: createdAt,
-      });
-      var targetUser = await ConnectedUser.findOne({ userId: to });
-
-      if (targetUser) {
-        io.to(socket.id).to(targetUser.connectionId).emit("receiveMessage", {
-          from,
-          content,
-          createdAt,
-        });
-        await Message.findOneAndUpdate(
-          { _id: createdMessage._id },
-          { $set: { status: MessageStatus.DELIVERED } }
-        );
-        console.log("Mesaj gönderildi:", message);
-      } else {
-        io.to(socket.id).emit("receiveMessage", {
-          from,
-          content,
-          createdAt,
-        });
-
-        console.log("Hedef kullanıcı bulunamadı: ", to);
-      }
-    } catch (err) {
-      return err;
-    }
-  });
+  sendMessageEvent(socket);
 
   socket.on("messageUpdate", async (message) => {
     const { id, userId, content } = message;
@@ -129,12 +84,17 @@ io.on("connection", (socket) => {
     );
     var targetUser = await ConnectedUser.findOne({ userId: result.receiverId });
 
-    console.log("Update result: ", result);
-
-    io.to(socket.id).to(targetUser.connectionId).emit("messageUpdated", {
-      id,
-      content,
-    });
+    if (targetUser) {
+      io.to(socket.id).to(targetUser.connectionId).emit("messageUpdated", {
+        id,
+        content,
+      });
+    } else {
+      io.to(socket.id).emit("messageUpdated", {
+        id,
+        content,
+      });
+    }
   });
 
   socket.on("messageDelete", async (message) => {
@@ -164,6 +124,8 @@ io.on("connection", (socket) => {
       });
     }
   });
+
+  joinGroupEvent(socket);
 
   // Soket bağlantısı kesildiğinde gerçekleşecek olaylar
   socket.on("disconnect", async () => {

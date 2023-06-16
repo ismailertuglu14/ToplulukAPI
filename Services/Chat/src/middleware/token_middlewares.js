@@ -14,7 +14,7 @@ function tokenMiddleware(req, res, next) {
     res.status(401).send("Token error");
     return;
   }
-  
+
   if (!isValidObjectId(getUserIdFromToken(token))) {
     res.status(401).send("Invalid token");
     return;
@@ -32,9 +32,12 @@ function tokenMiddleware(req, res, next) {
  */
 function getUserIdFromToken(token) {
   const decodedToken = jwt.decode(token);
+  console.log("decodedToken: " + decodedToken[TokenConstants.ID]);
+
   if (decodedToken && TokenConstants.ID in decodedToken) {
     return decodedToken[TokenConstants.ID];
   } else {
+    console.log("decodedToken has no id");
     return null;
   }
 }

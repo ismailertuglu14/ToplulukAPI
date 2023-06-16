@@ -13,7 +13,7 @@ const axios = require("axios");
 const https = require("https");
 const RecentChatModel = require("../dtos/recent_chat_model");
 const MessageStatus = require("../dtos/message_status");
-
+const GroupModel = require("../models/group_model");
 // Exceptions
 const NotFoundException = require("../core/exceptions/not_found_excepiton");
 const BadRequestException = require("../core/exceptions/bad_request_exception");
@@ -162,8 +162,24 @@ router.get("/recent-chats", tokenMiddleware, async (req, res, next) => {
 
 router.post("/create-group", tokenMiddleware, async (req, res, next) => {
   try {
+    const { name } = req.body;
+    const adminId = getUserIdFromToken(req.headers.authorization.split(" ")[1]);
+
+    if (!isValidObjectId(adminId))
+      throw new BadRequestException("Invalid user id");
+
+    try {
+      const group = await GroupModel.create({
+        name: req.body.name,
+        adminId: adminId,
+        users: [adminId],
+      });
+      return res.status(200).send(new BaseModel(group, 200, true, null));
+    } catch (error) {
+      res.status(500).send(new BaseModel(null, 500, false, error.message));
+    }
   } catch (error) {
-    res.status(500).send(new BaseModel(null, 500, false, error.message));
+    return res.status(500).send(new BaseModel(null, 500, false, error.message));
   }
 });
 
