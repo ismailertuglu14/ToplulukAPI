@@ -29,7 +29,7 @@ public class PostCommentService : IPostCommentService
 
     public async Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int take = 10, int skip = 0)
     {
-        List<PostComment> response =  _commentRepository.GetAllAsync(take, skip, c => c.PostId == postId).Result.Data;
+        List<PostComment> response =  await _commentRepository.GetPostCommentsDescendingDate(skip, take, c => c.PostId == postId);
         
         List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response);
         
@@ -40,11 +40,15 @@ public class PostCommentService : IPostCommentService
 
         var userInfoRequest = new RestRequest(ServiceConstants.API_GATEWAY+"/user/get-user-info-list").AddBody(userIdList);
         var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(userInfoRequest);
-                
-                
+        
         foreach (var comment in comments)
         {
             var user = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault();
+            if (user == null)
+            {
+                comments.Remove(comment);
+                continue;
+            }
             comment.UserId = user.Id;
             comment.Gender = user.Gender;
             comment.FirstName = user.FirstName;

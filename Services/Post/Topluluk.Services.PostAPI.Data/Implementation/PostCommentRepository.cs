@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using DBHelper.Connection;
 using DBHelper.Repository.Mongo;
 using MongoDB.Bson;
@@ -18,7 +19,29 @@ namespace Topluluk.Services.PostAPI.Data.Implementation
         }
         private IMongoDatabase GetConnection() => (MongoDB.Driver.IMongoDatabase)_connectionFactory.GetConnection;
 
-        private string GetCollectionName() => string.Format("{0}Collection", typeof(PostComment).Name);
+        private string GetCollectionName() => $"{nameof(PostComment)}Collection";
+
+        public async Task<List<PostComment>> GetPostCommentsDescendingDate(int skip, int take, Expression<Func<PostComment, bool>> predicate)
+        {
+            try
+            {
+                var database = GetConnection();
+                var collectionName = GetCollectionName();
+                var sort = Builders<PostComment>.Sort.Descending(p => p.CreatedAt);
+                var cursor = await database.GetCollection<PostComment>(collectionName)
+                    .Find(predicate)
+                    .Sort(sort)
+                    .Skip(skip * take)
+                    .Limit(take)
+                    .ToCursorAsync();
+                
+                return await cursor.ToListAsync();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
 
         public async Task<bool> DeletePostsComments(string userId)
         {
