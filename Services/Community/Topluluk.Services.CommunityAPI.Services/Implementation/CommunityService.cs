@@ -476,6 +476,10 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         {
             Community? community = await _communityRepository.GetFirstAsync(c => c.Id == id);
             
+            if(community == null)
+                return Response<List<UserDto>>.Success(null, ResponseStatus.Success);
+
+            
             var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id && c.UserId != community.AdminId);
             var idList = new IdList() { ids = participiants.Select(p => p.UserId).ToList() };
             var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list")
