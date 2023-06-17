@@ -17,8 +17,9 @@ namespace Topluluk.Services.CommunityAPI.Model.Mapper
 			CreateMap<Community, CommunitySuggestionWebDto>();
 			CreateMap<Community, CommunityGetPreviewDto>();
             CreateMap<Community, CommunityInfoPostLinkDto>();
+            CreateMap<UserDtoWithUserName, UserDto>().ReverseMap();
 
-        }
+		}
 	}
 }
 
