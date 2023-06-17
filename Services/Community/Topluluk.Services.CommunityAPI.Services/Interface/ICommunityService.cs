@@ -22,6 +22,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
         Task<Response<string>> DeletePermanently(string ownerId, string communityId);
         
         Task<Response<List<UserDto>>> GetParticipiants(string token, string id, int skip = 0, int take = 10);
+        Task<Response<List<UserDto>>> SearchParticipiant(string communityId, string name, int skip = 0, int take = 10);
         Task<Response<NoContent>> KickUser(string token, string communityId, string userId);
 		Task<Response<NoContent>> AcceptUserJoinRequest(string userId, string communityId, string targetUserId);
 		Task<Response<NoContent>> DeclineUserJoinRequest(string userId, string communityId, string targetUserId);
