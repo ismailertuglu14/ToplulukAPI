@@ -23,7 +23,6 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 		public int? ParticipiantLimit { get; set; }
 		public string? Location { get; set; }
 
-		public ICollection<string> JoinRequestWaitings { get; set; }
 
 		public ICollection<Question> Questions { get; set; }
 
@@ -39,7 +38,6 @@ namespace Topluluk.Services.CommunityAPI.Model.Entity
 		public Community()
 		{
 			ModeratorIds = new HashSet<Moderator>();
-			JoinRequestWaitings = new HashSet<string>();
 			Questions = new HashSet<Question>();
 			Cities = new HashSet<string>();
 			BlockedUsers = new HashSet<string>();

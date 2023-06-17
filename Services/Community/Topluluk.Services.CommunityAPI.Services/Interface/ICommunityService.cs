@@ -11,7 +11,6 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 	public interface ICommunityService
 	{
 
-		Task<Response<List<Community>>> GetCommunities();
 		Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5 );
 	
 		// Community Detail Page
@@ -21,21 +20,15 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 		Task<Response<NoContent>> Leave(string userId, string token, string communityId);
 		Task<Response<string>> Delete(string ownerId, string communityId);
         Task<Response<string>> DeletePermanently(string ownerId, string communityId);
-        Task<Response<List<UserDto>>> GetParticipiants(string token, string id);
+        
+        Task<Response<List<UserDto>>> GetParticipiants(string token, string id, int skip = 0, int take = 10);
         Task<Response<NoContent>> KickUser(string token, string communityId, string userId);
-		Task<Response<string>> AcceptUserJoinRequest();
-		Task<Response<string>> DeclineUserJoinRequest();
+		Task<Response<NoContent>> AcceptUserJoinRequest(string userId, string communityId, string targetUserId);
+		Task<Response<NoContent>> DeclineUserJoinRequest(string userId, string communityId, string targetUserId);
 		Task<Response<string>> AssignUserAsAdmin(string userId, AssignUserAsAdminDto dtoInfo);
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
-
-     
-        /// Lists the communities that the user is a member of in the profile
-        Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string sourceId, string targetId);
-		//http
-		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities( string userId);
+		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities( string userId, int skip = 0, int take = 10);
 		
-        // Use this function for select community while createing a new post.
-        Task<Response<List<CommunityInfoPostLinkDto>>> GetParticpiantsCommunities(string userId, string token);
         Task<Response<int>> GetUserParticipiantCommunitiesCount(string userId);
         Task<Response<string>> GetCommunityTitle(string id);
 

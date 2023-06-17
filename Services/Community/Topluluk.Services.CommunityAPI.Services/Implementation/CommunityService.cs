@@ -32,11 +32,6 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             _mapper = mapper;
             _client = new RestClient();
         }
-        public async Task<Response<List<Community>>> GetCommunities()
-        {
-            DatabaseResponse communities = await _communityRepository.GetAllAsync(1,0,x=>x.IsVisible == true);
-            return await Task.FromResult(Response<List<Community>>.Success(communities.Data, ResponseStatus.Success));
-        }
 
         public async Task<Response<List<CommunityGetPreviewDto>>> GetCommunitySuggestions(string userId, HttpRequest request, int skip = 0, int take = 5)
         {
@@ -131,12 +126,11 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<CommunityGetByIdDto>.Success(_community, ResponseStatus.Success));
         }
 
-        public async Task<Response<string>> Join(string userId, string token, string communityId)
+       public async Task<Response<string>> Join(string userId, string token, string communityId)
         {
-            try
-            {
-                 Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId );
-                var participiants =
+            
+               Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId ); 
+               var participiants =
                     _participiantRepository.GetListByExpression(p => p.UserId == userId && p.CommunityId == community.Id);
                 
                 if (participiants.Any(p => p.UserId == userId))
@@ -154,35 +148,35 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                     return await Task.FromResult(Response<string>.Fail("Community full now!", ResponseStatus.Failed));
                 }
 
-                if (!community.IsPublic)
-                {
-                    if (!community.JoinRequestWaitings.Contains(userId))
-                    {
-                        community.JoinRequestWaitings.Add(userId);
-                        _communityRepository.Update(community);
-                        return await Task.FromResult(Response<string>.Success("Send request", ResponseStatus.Success));
-                    }
-                    else
-                    {
-                        return await Task.FromResult(Response<string>.Success("You already send request this community", ResponseStatus.Success));
-                    }
-                }
-
                 CommunityParticipiant participiant = new()
                 {   
                     UserId = userId,
                     CommunityId = communityId,
                 };
                 
+                if (!community.IsPublic)
+                {
+                    var isRequested = await _participiantRepository.AnyAsync(c => !c.IsDeleted 
+                                                                        && c.CommunityId == communityId && c.UserId == userId 
+                                                                        && c.Status != ParticipiantStatus.ACCEPTED);
+                    if (!isRequested)
+                    {
+                        participiant.Status = ParticipiantStatus.REQUESTED;
+                        await _participiantRepository.InsertAsync(participiant);
+                        return await Task.FromResult(Response<string>.Success("Send request", ResponseStatus.Success));
+                    }
+
+                    return await Task.FromResult(Response<string>.Success("You already send request this community", ResponseStatus.Success));
+                }
+
+
+                participiant.Status = ParticipiantStatus.ACCEPTED;
                 await _participiantRepository.InsertAsync(participiant);
 
                 return await Task.FromResult(Response<string>.Success("Joined", ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Error occured: {e}", ResponseStatus.NotAuthenticated));
-            }            
+          
         }
+
 
         public async Task<Response<string>> Create(string userId,string token, CommunityCreateDto communityInfo)
         {
@@ -250,15 +244,41 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<string>.Success(response.Data, ResponseStatus.Success));
         }
 
-        public Task<Response<string>> AcceptUserJoinRequest()
+        public async Task<Response<NoContent>> AcceptUserJoinRequest(string userId, string communityId, string targetUserId)
         {
-            throw new NotImplementedException();
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
+
+            if (community.AdminId != userId)
+                throw new UnauthorizedAccessException();
+
+            CommunityParticipiant participiantRequest = await _participiantRepository.GetFirstAsync(p =>
+                p.CommunityId == communityId && p.UserId == targetUserId && p.Status == ParticipiantStatus.REQUESTED);
+            
+            if (participiantRequest == null)
+                throw new ArgumentNullException();
+
+            participiantRequest.Status = ParticipiantStatus.ACCEPTED;
+            _participiantRepository.Update(participiantRequest);
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
 
-        public Task<Response<string>> DeclineUserJoinRequest()
+        public async Task<Response<NoContent>> DeclineUserJoinRequest(string userId, string communityId, string targetUserId)
         {
-            throw new NotImplementedException();
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
+
+            if (community.AdminId != userId)
+                throw new UnauthorizedAccessException();
+
+            CommunityParticipiant participiantRequest = await _participiantRepository.GetFirstAsync(p =>
+                p.CommunityId == communityId && p.UserId == targetUserId && p.Status == ParticipiantStatus.REQUESTED);
+            
+            if (participiantRequest == null)
+                throw new ArgumentNullException();
+
+            participiantRequest.Status = ParticipiantStatus.REJECTED;
+            _participiantRepository.Update(participiantRequest);
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
         public async Task<Response<string>> Delete(string ownerId,string communityId)
@@ -401,32 +421,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-      
-
         
-
-        public async Task<Response<List<CommunityGetPreviewDto>>> ParticipiantCommunities(string sourceId, string targetId)
-        {
-            try
-            {
-                var participiants =  _participiantRepository.GetListByExpressionPaginated(0, 10, c => c.UserId == targetId && (sourceId == targetId || c.IsShownOnProfile));
-                List<string> idList = participiants.Select(p => p.CommunityId).ToList(); 
-                var communities = _communityRepository.GetListByExpression(c => idList.Contains(c.Id));
-                List<CommunityGetPreviewDto> dtos = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
-                foreach (var dto in dtos)
-                {
-                    dto.ParticipiantsCount =
-                        await _participiantRepository.Count(p => !p.IsDeleted && p.CommunityId == dto.Id);
-                }
-                return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dtos, ResponseStatus.Success));
-            }
-            catch (Exception e)
-            {
-                return Response<List<CommunityGetPreviewDto>>.Fail(e.ToString(),ResponseStatus.InitialError);
-            }
-        }
-
-
         private string StringToSlugConvert(string phrase)
         {
             var turkishChars = new char[] { 'ç', 'ğ', 'ı', 'i', 'ö', 'ş', 'ü' };
@@ -472,7 +467,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             }
         }
 
-        public async Task<Response<List<UserDto>>> GetParticipiants(string token, string id)
+        public async Task<Response<List<UserDto>>> GetParticipiants(string token, string id, int skip = 0, int take = 10)
         {
             Community? community = await _communityRepository.GetFirstAsync(c => c.Id == id);
             
@@ -480,7 +475,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
                 return Response<List<UserDto>>.Success(null, ResponseStatus.Success);
 
             
-            var participiants = _participiantRepository.GetListByExpression(c => c.CommunityId == id && c.UserId != community.AdminId);
+            var participiants = _participiantRepository.GetListByExpressionPaginated(skip, take, c => c.CommunityId == id && c.UserId != community.AdminId && c.Status == ParticipiantStatus.ACCEPTED);
             var idList = new IdList() { ids = participiants.Select(p => p.UserId).ToList() };
             var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list")
                                     .AddHeader("Authorization",token)                 
@@ -501,11 +496,11 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return await Task.FromResult(Response<string>.Success(community.Title, ResponseStatus.Success));
         }
 
-        public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId)
+        public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId, int skip = 0, int take = 10)
         {
-            var participiants =  _participiantRepository.GetListByExpressionPaginated(0, 10, c => c.UserId == userId);
+            var participiants =  _participiantRepository.GetListByExpressionPaginated(skip, take, c => c.UserId == userId && c.IsShownOnProfile && c.Status == ParticipiantStatus.ACCEPTED);
             List<string> idList = participiants.Select(p => p.CommunityId).ToList(); 
-            var communities = _communityRepository.GetListByExpression(c => idList.Contains(c.Id));
+            var communities = await _communityRepository.GetListByExpressionAsync(c => idList.Contains(c.Id));
             List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
             return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
 
