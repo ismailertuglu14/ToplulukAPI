@@ -489,6 +489,29 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             return Response<List<UserDto>>.Success(usersResponse.Data!.Data, ResponseStatus.Success);
         }
 
+        public async Task<Response<List<UserDto>>> SearchParticipiant(string communityId, string query, int skip = 0, int take = 10)
+        {
+            List<CommunityParticipiant> participiants = await _participiantRepository.GetListByExpressionAsync(p => p.CommunityId == communityId);
+            IdList participiantIds = new() { ids = participiants.Select(p => p.UserId).ToList() };
+
+            var usersRequest =
+                new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(participiantIds);
+            var usersResponse = await _client.ExecutePostAsync<Response<List<UserDtoWithUserName>>>(usersRequest);
+            
+            if (!usersResponse.IsSuccessful)
+                throw new Exception();
+            
+            if (usersResponse.Data?.Data == null || usersResponse.Data.Data.Count == 0)
+            {
+                return Response<List<UserDto>>.Success(new List<UserDto>(),ResponseStatus.Success);
+            }
+            var filteredUsers = usersResponse.Data.Data .Where(u => u.FirstName.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                    || u.LastName.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                    ).ToList();
+            
+            List<UserDto> dtos = _mapper.Map<List<UserDto>>(filteredUsers);
+            return Response<List<UserDto>>.Success(dtos,ResponseStatus.Success);
+        }
 
         public async Task<Response<string>> GetCommunityTitle(string id)
         {

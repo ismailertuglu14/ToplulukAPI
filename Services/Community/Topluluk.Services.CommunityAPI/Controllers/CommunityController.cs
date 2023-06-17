@@ -76,10 +76,25 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        [HttpGet("Participiants/{id}")]
-        public async Task<Response<List<UserDto>>> GetParticipiants(string id, int skip, int take)
+        [HttpGet("{communityId}/Participiants")]
+        public async Task<Response<List<UserDto>>> GetParticipiants(string communityId, int skip, int take)
         {
-            return await _communityService.GetParticipiants(this.Token, id, skip, take);
+            return await _communityService.GetParticipiants(this.Token, communityId, skip, take);
+        }
+        
+        
+        /// <summary>
+        /// Search spesific user in the community participiants
+        /// </summary>
+        /// <param name="communityId"></param>
+        /// <param name="q"></param>
+        /// <param name="skip"></param>
+        /// <param name="take"></param>
+        /// <returns></returns>
+        [HttpGet("{communityId}/Participiants/Search")]
+        public async Task<Response<List<UserDto>>> SearchParticipiant(string communityId, string q, int skip, int take)
+        {
+            return await _communityService.SearchParticipiant(communityId, q, skip, take);
         }
         
 
