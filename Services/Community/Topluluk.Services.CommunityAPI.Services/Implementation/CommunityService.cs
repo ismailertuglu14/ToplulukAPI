@@ -505,9 +505,9 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             {
                 return Response<List<UserDto>>.Success(new List<UserDto>(),ResponseStatus.Success);
             }
-            var filteredUsers = usersResponse.Data.Data .Where(u => u.FirstName.Contains(query, StringComparison.OrdinalIgnoreCase)
-                                    || u.LastName.Contains(query, StringComparison.OrdinalIgnoreCase)
-                                    ).ToList();
+            var filteredUsers = usersResponse.Data.Data.Where(u => 
+                                     (u.FirstName.ToLower() + u.LastName.ToLower()).Replace(" ","").Contains(query.Replace(" ","").ToLower(), StringComparison.OrdinalIgnoreCase)
+                                     || u.UserName.ToLower().Contains(query.ToLower(), StringComparison.OrdinalIgnoreCase)).ToList();
             
             List<UserDto> dtos = _mapper.Map<List<UserDto>>(filteredUsers);
             return Response<List<UserDto>>.Success(dtos,ResponseStatus.Success);
