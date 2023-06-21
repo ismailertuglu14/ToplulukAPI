@@ -57,7 +57,11 @@ namespace Topluluk.Services.User.API.Controllers
         {
             return await _userService.BlockUser(UserId, targetId);
         }
-
+        [HttpPost("Unblock")]
+        public async Task<Response<NoContent>> UnblockUser([FromForm] string targetId)
+        {
+            return await _userService.UnBlockUser(UserId, targetId);
+        }
         [HttpGet("Search")]
         public async Task<Response<List<UserSearchResponseDto>>?> SearchUser([FromQuery] string text, int skip = 0, int take = 5)
         {

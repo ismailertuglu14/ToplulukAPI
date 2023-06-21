@@ -71,7 +71,7 @@ namespace Topluluk.Services.User.Services.Implementation
                 var isFollowRequestReceivedTask = _followRequestRepository.AnyAsync(f => !f.IsDeleted && f.SourceId == userId && f.TargetId == id);
                 var followingCountTask = _followRepository.Count(f => !f.IsDeleted &&  f.SourceId == userId);
                 var followersCountTask = _followRepository.Count(f => !f.IsDeleted && f.TargetId == userId );
-                var isTargetUserBlockedTask = _blockedUserRepository.AnyAsync(b => b.SourceId == id && b.TargetId == userId); 
+                var isTargetUserBlockedTask = _blockedUserRepository.AnyAsync(b => !b.IsDeleted && b.SourceId == id && b.TargetId == userId); 
                 var userCommunitiesRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/community/user-communities-count").AddQueryParameter("id",userId);
                 var userCommunitiesTask = _client.ExecuteGetAsync<Response<int>>(userCommunitiesRequest);
                 await Task.WhenAll(isFollowingTask,isFollowRequestSentTask,isTargetUserBlockedTask, isFollowRequestReceivedTask, followingCountTask, followersCountTask, userCommunitiesTask);
@@ -232,6 +232,12 @@ namespace Topluluk.Services.User.Services.Implementation
             }
 
             return await Task.FromResult(Response<string>.Success("User blocked successfully.", ResponseStatus.Success));
+        }
+
+        public async Task<Response<NoContent>> UnBlockUser(string sourceId, string targetId)
+        {
+            _blockedUserRepository.DeleteByExpression(u => u.SourceId == sourceId && u.TargetId == targetId);
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
         public async Task<Response<List<UserSuggestionsDto>>> GetUserSuggestions(string userId, int limit = 5)
