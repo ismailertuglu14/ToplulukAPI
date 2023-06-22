@@ -638,8 +638,12 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                 var postIds = savedPosts.Select(p => p.PostId).ToList();
                 var postResponse = await _postRepository.GetAllAsync(take, skip, p => postIds.Contains(p.Id));
+                if (postResponse.Data == null || (postResponse.Data as List<Post>).Count == 0)
+                {
+                    return Response<List<GetPostForFeedDto>>.Success(new(), ResponseStatus.Success);
+                }
                 var posts = postResponse.Data as List<Post>;
-
+                
                 var userIds = posts.Select(p => p.UserId).ToList();
                 var getUserListRequest = new RestRequest("https://localhost:7149/api/user/get-user-info-list")
                     .AddQueryParameter("skip", skip)
