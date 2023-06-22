@@ -30,26 +30,14 @@ public class ErrorHandlingMiddleware
 
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        ResponseStatus statusCode;
+        ResponseStatus statusCode = exception switch
+        {
+            NotFoundException => ResponseStatus.NotFound,
+            UnauthorizedAccessException => ResponseStatus.Unauthorized,
+            ArgumentException => ResponseStatus.BadRequest,
+            _ => ResponseStatus.InitialError
+        };
 
-        if (exception is NotFoundException)
-        {
-            statusCode = ResponseStatus.NotFound;
-        }
-        else if (exception is UnauthorizedAccessException)
-        {
-            statusCode = ResponseStatus.Unauthorized;
-        }
-        else if (exception is ArgumentException)
-        {
-            statusCode = ResponseStatus.BadRequest;
-        }
-        else
-        {
-            statusCode = ResponseStatus.InitialError;
-        }
-        
-        
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         context.Response.ContentType = "application/json";
 
