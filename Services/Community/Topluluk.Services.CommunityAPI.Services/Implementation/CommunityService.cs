@@ -188,6 +188,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             {
                 UserId = userId,
                 CommunityId = response.Data,
+                Status = ParticipiantStatus.ACCEPTED
             };
             await _participiantRepository.InsertAsync(participiant);
          
