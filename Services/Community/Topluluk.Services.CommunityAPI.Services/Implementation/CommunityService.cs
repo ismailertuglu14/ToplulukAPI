@@ -443,28 +443,22 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
 
         public async Task<Response<string>> DeletePermanently(string ownerId, string communityId)
         {
-            try
+
+            Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
+
+            if (community.AdminId == ownerId)
             {
-                Community community = await _communityRepository.GetFirstAsync(c => c.Id == communityId);
-
-                if (community.AdminId == ownerId)
-                {
-                    _communityRepository.DeleteCompletely(communityId);
-                    return await Task.FromResult(Response<string>.Success("Deleted", ResponseStatus.Success));
-                }
-                else
-                {
-                    return await Task.FromResult(Response<string>.Fail("Not authorized for delete community. You are not an admin!", ResponseStatus.NotAuthenticated));
-
-                }
-
+                _communityRepository.DeleteCompletely(communityId);
+                return Response<string>.Success("Deleted", ResponseStatus.Success);
+            }
+            else
+            {
+                return Response<string>.Fail("Not authorized for delete community. You are not an admin!", ResponseStatus.NotAuthenticated);
 
             }
-            catch (Exception e)
-            {
-                return await Task.FromResult(Response<string>.Fail($"Error occured: {e}", ResponseStatus.InitialError));
 
-            }
+
+       
         }
 
         public async Task<Response<List<UserDto>>> GetParticipiants(string token, string id, int skip = 0, int take = 10)
@@ -494,8 +488,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             List<CommunityParticipiant> participiants = await _participiantRepository.GetListByExpressionAsync(p => p.CommunityId == communityId);
             IdList participiantIds = new() { ids = participiants.Select(p => p.UserId).ToList() };
 
-            var usersRequest =
-                new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(participiantIds);
+            var usersRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(participiantIds);
             var usersResponse = await _client.ExecutePostAsync<Response<List<UserDtoWithUserName>>>(usersRequest);
             
             if (!usersResponse.IsSuccessful)
@@ -516,7 +509,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
         public async Task<Response<string>> GetCommunityTitle(string id)
         {
             Community community = await _communityRepository.GetFirstAsync(c => c.Id == id);
-            return await Task.FromResult(Response<string>.Success(community.Title, ResponseStatus.Success));
+            return Response<string>.Success(community.Title, ResponseStatus.Success);
         }
 
         public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string userId, int skip = 0, int take = 10)
@@ -524,9 +517,22 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             var participiants =  _participiantRepository.GetListByExpressionPaginated(skip, take, c => c.UserId == userId && c.IsShownOnProfile && c.Status == ParticipiantStatus.ACCEPTED);
             List<string> idList = participiants.Select(p => p.CommunityId).ToList(); 
             var communities = await _communityRepository.GetListByExpressionAsync(c => idList.Contains(c.Id));
-            List<CommunityGetPreviewDto> dto = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
-            return await Task.FromResult(Response<List<CommunityGetPreviewDto>>.Success(dto, ResponseStatus.Success));
-
+            List<CommunityGetPreviewDto> dtos = _mapper.Map<List<CommunityGetPreviewDto>>(communities);
+            List<string> communityIds = dtos.Select(c => c.Id).ToList();
+            Dictionary<string, int> communityParticipiantCounts = await _participiantRepository.GetCommunityParticipiants(communityIds);
+            
+            foreach (var dto in dtos)
+            {
+                if (communityParticipiantCounts.TryGetValue(dto.Id, out int participiantCount))
+                {
+                    dto.ParticipiantsCount = participiantCount;
+                }
+                else
+                {
+                    dto.ParticipiantsCount = 0; // veya başka bir değer atanabilir
+                }        
+            }
+            return Response<List<CommunityGetPreviewDto>>.Success(dtos, ResponseStatus.Success);
         }
 
         public async Task<Response<bool>> CheckCommunityExist(string id)
