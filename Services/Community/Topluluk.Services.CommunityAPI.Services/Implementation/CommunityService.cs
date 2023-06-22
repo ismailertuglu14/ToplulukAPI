@@ -103,8 +103,8 @@ namespace Topluluk.Services.CommunityAPI.Services.Implementation
             
             var userRequest = new RestRequest(ServiceConstants.API_GATEWAY + "/user/GetUserById").AddQueryParameter("userId", community.AdminId).AddHeader("Authorization",token);
             var userResponseTask =  _client.ExecuteGetAsync<Response<UserDto>>(userRequest);
-            var participiantCountTask = _participiantRepository.Count(p => !p.IsDeleted && p.CommunityId == community.Id);
-            var IsParticipiantTask =  _participiantRepository.AnyAsync(p => !p.IsDeleted && p.CommunityId == communityId && p.UserId == userId);
+            var participiantCountTask = _participiantRepository.Count(p => !p.IsDeleted && p.CommunityId == community.Id && p.Status == ParticipiantStatus.ACCEPTED);
+            var IsParticipiantTask =  _participiantRepository.AnyAsync(p => !p.IsDeleted && p.CommunityId == communityId && p.UserId == userId && p.Status == ParticipiantStatus.ACCEPTED);
             
             await Task.WhenAll(userResponseTask, participiantCountTask, IsParticipiantTask);
             var user = userResponseTask.Result.Data.Data;
