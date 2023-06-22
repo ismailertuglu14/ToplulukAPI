@@ -30,11 +30,6 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.GetCommunitySuggestions(this.UserId,Request,skip, take);
         }
         
-        [HttpPost("{communityId}/join")]
-        public async Task<Response<string>> Join(string communityId)
-        {
-            return await _communityService.Join(this.UserId, this.Token, communityId);
-        }
 
         [HttpGet("{id}")]
         public async Task<Response<CommunityGetByIdDto>> GetCommunityById(string id)
@@ -49,11 +44,6 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.Create(this.UserId, this.Token, communityInfo);
         }
 
-        [HttpPost("{communityId}/leave")]
-        public async Task<Response<NoContent>> Leave(string communityId)
-        {
-            return await _communityService.Leave(this.UserId, this.Token, communityId);
-        }
 
         [HttpPost("delete")]
         public async Task<Response<string>> Delete(string id)
@@ -69,34 +59,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.DeletePermanently(UserName, id);
         }
 
-        /// <summary>
-        /// Use to list the community's participants.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="skip"></param>
-        /// <param name="take"></param>
-        /// <returns></returns>
-        [HttpGet("{communityId}/Participiants")]
-        public async Task<Response<List<UserDto>>> GetParticipiants(string communityId, int skip, int take)
-        {
-            return await _communityService.GetParticipiants(this.Token, communityId, skip, take);
-        }
-        
-        
-        /// <summary>
-        /// Search spesific user in the community participiants
-        /// </summary>
-        /// <param name="communityId"></param>
-        /// <param name="q"></param>
-        /// <param name="skip"></param>
-        /// <param name="take"></param>
-        /// <returns></returns>
-        [HttpGet("{communityId}/Participiants/Search")]
-        public async Task<Response<List<UserDto>>> SearchParticipiant(string communityId, string q, int skip, int take)
-        {
-            return await _communityService.SearchParticipiant(communityId, q, skip, take);
-        }
-        
+
 
         [HttpPost("assign-user-as-admin")]
         public async Task<Response<string>> AssignUserAsAdmin(AssignUserAsAdminDto dtoInfo)
@@ -117,18 +80,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
             return await _communityService.KickUser(this.Token, communityId, userId);
         }
         
-        
-        [HttpPost("{communityId}/accept-join-request")]
-        public async Task<Response<NoContent>> AcceptJoinRequest(string communityId, string id)
-        {
-            return await _communityService.AcceptUserJoinRequest(this.UserId, communityId, id);
-        }
-        
-        [HttpPost("{communityId}/decline-join-request")]
-        public async Task<Response<NoContent>> DeclineJoinRequest(string communityId, string id)
-        {
-            return await _communityService.DeclineUserJoinRequest(this.UserId, communityId, id);
-        }
+     
 
         /// <summary>
         /// Returns information of the communities the user has joined.

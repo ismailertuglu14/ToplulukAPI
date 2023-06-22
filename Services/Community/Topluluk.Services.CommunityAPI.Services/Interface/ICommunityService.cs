@@ -15,17 +15,13 @@ namespace Topluluk.Services.CommunityAPI.Services.Interface
 	
 		// Community Detail Page
 		Task<Response<CommunityGetByIdDto>> GetCommunityById(string userId,string token, string id);
-		Task<Response<string>> Join(string userId, string token, string communityId);
 		Task<Response<string>> Create(string userId, string token, CommunityCreateDto communityInfo);
-		Task<Response<NoContent>> Leave(string userId, string token, string communityId);
 		Task<Response<string>> Delete(string ownerId, string communityId);
         Task<Response<string>> DeletePermanently(string ownerId, string communityId);
         
-        Task<Response<List<UserDto>>> GetParticipiants(string token, string id, int skip = 0, int take = 10);
-        Task<Response<List<UserDto>>> SearchParticipiant(string communityId, string name, int skip = 0, int take = 10);
+      
         Task<Response<NoContent>> KickUser(string token, string communityId, string userId);
-		Task<Response<NoContent>> AcceptUserJoinRequest(string userId, string communityId, string targetUserId);
-		Task<Response<NoContent>> DeclineUserJoinRequest(string userId, string communityId, string targetUserId);
+	
 		Task<Response<string>> AssignUserAsAdmin(string userId, AssignUserAsAdminDto dtoInfo);
 		Task<Response<string>> AssignUserAsModerator(AssignUserAsModeratorDto dtoInfo);
 		Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities( string userId, int skip = 0, int take = 10);

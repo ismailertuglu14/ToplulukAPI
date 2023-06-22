@@ -27,17 +27,17 @@ namespace Topluluk.Services.CommunityAPI.Data.Implementation
 			             & Builders<CommunityParticipiant>.Filter.Eq(x => x.IsDeleted, false);
 			var participiants  = await database.GetCollection<CommunityParticipiant>(collectionName).Find(filter).ToListAsync();
 
-			var postCommentCounts = new Dictionary<string, int>();
+			var communityParicipiantCounts = new Dictionary<string, int>();
 			foreach (var communityId in communityIds)
 			{
 				var count = participiants.Count(x => x.CommunityId == communityId);
 				if (count > 0)
 				{
-					postCommentCounts.Add(communityId, count);
+					communityParicipiantCounts.Add(communityId, count);
 				}
 			}
 
-			return postCommentCounts;
+			return communityParicipiantCounts;
 		}
 	}
 }

@@ -34,6 +34,7 @@ namespace Topluluk.Services.CommunityAPI.Services.Core
         {
             services.AddTransient<ICommunityService, CommunityService>();
             services.AddTransient<ICommunityImageService, CommunityImageService>();
+            services.AddTransient<IParticipiantService,ParticipiantService>();
         }
     }
 }
