@@ -83,8 +83,7 @@ public class ImageService : IImageService
 
             if (updateSuccess && _redisRepository.IsConnected)
             {
-                var userJson = JsonSerializer.Serialize(user);
-                await _redisRepository.SetValueAsync($"user_{user.Id}",userJson);
+                await _redisRepository.SetValueAsync($"user_{user.Id}",user);
             }
 
             return Response<string>.Success($"Image changed with {user.BannerImage}", ResponseStatus.Success);
