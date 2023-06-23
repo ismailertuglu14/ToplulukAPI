@@ -1,14 +1,15 @@
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
+using RestSharp;
 using Topluluk.Services.User.Data.Interface;
 using Topluluk.Services.User.Model.Dto;
 using Topluluk.Services.User.Model.Entity;
 using Topluluk.Services.User.Services.Interface;
+using Topluluk.Shared.Constants;
 using Topluluk.Shared.Dtos;
-using Topluluk.Shared.Enums;
-
-
+using Topluluk.Shared.Exceptions;
 using _User = Topluluk.Services.User.Model.Entity.User;
+using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 namespace Topluluk.Services.User.Services.Implementation;
 
@@ -19,13 +20,14 @@ public class FollowService : IFollowService
         private readonly IUserFollowRepository _followRepository;
         private readonly IUserFollowRequestRepository _followRequestRepository;
         private readonly IMapper _mapper;
-    
+        private readonly RestClient _client;
         public FollowService(IUserRepository userRepository, IUserFollowRepository followRepository, IUserFollowRequestRepository followRequestRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _followRepository = followRepository;
             _followRequestRepository = followRequestRepository;
             _mapper = mapper;
+            _client = new RestClient();
         }
         public async Task<Response<NoContent>> FollowUser(string userId, UserFollowDto userFollowInfo)
         {
@@ -176,6 +178,39 @@ public class FollowService : IFollowService
 
         }
 
+        public async Task<Response<List<UserSuggestionsDto>>> GetUserFollowSuggestions(string userId)
+        {
+            // Source user's followings
+            var followings = await _followRepository.GetListByExpressionAsync(f => f.SourceId == userId);
+            var followingIds = followings.Select(f => f.TargetId).ToList();
+
+            var targetIds =  _followRepository.GetListByExpressionAsync(f => followingIds.Contains(f.SourceId) && f.TargetId != userId).Result
+                .Select(f => f.TargetId)
+                .Distinct()
+                .ToList();
+
+            targetIds.RemoveAll(id => followingIds.Contains(id));
+            List<_User> users = await _userRepository.GetListByExpressionAsync(u => targetIds.Contains(u.Id));
+            List<UserSuggestionsDto> dtos = _mapper.Map<List<_User>, List<UserSuggestionsDto>>(users);
+            
+            foreach (var dto in dtos)
+            {
+              //  int mutualFriendCount = await CalculateMutualFriendCount(userId, dto.Id);
+                dto.MutualFriendCount = await _followRepository.Count(f => !f.IsDeleted && followingIds.Contains(f.SourceId) && f.TargetId == dto.Id);
+            }
+            
+            return Response<List<UserSuggestionsDto>>.Success(dtos, ResponseStatus.Success);
+        }
+
+        private async Task<int> CalculateMutualFriendCount(string userId, string suggestedUserId)
+        {
+            var userFollowings = await _followRepository.GetListByExpressionAsync(f => f.SourceId == userId);
+            var suggestedUserFollowings = await _followRepository.GetListByExpressionAsync(f => f.SourceId == suggestedUserId);
+    
+            int mutualFriendCount = userFollowings.Count(f => suggestedUserFollowings.Any(sf => sf.TargetId == f.TargetId));
+            return mutualFriendCount;
+        }
+        
         public async Task<Response<List<string>>> GetUserFollowings(string id)
         {
             _User user = await _userRepository.GetFirstAsync(u => u.Id == id);
@@ -193,21 +228,13 @@ public class FollowService : IFollowService
         
         public async Task<Response<NoContent>> DeclineFollowRequest(string id, string targetId)
         {
-            try
-            {
-                FollowRequest? followRequest = await _followRequestRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == id);
+            FollowRequest? followRequest = await _followRequestRepository.GetFirstAsync(f => f.SourceId == targetId && f.TargetId == id);
+
+            if (followRequest == null)
+                throw new NotFoundException();
                 
-                if(followRequest == null)
-                    return Response<NoContent>.Fail("Not Found", ResponseStatus.NotFound);
-                
-                _followRequestRepository.DeleteById(followRequest.Id);
-                return Response<NoContent>.Success(ResponseStatus.Success);
-            }
-            
-            catch (Exception e)
-            {
-                return Response<NoContent>.Fail(e.ToString(), ResponseStatus.InitialError);
-            }
+            _followRequestRepository.DeleteById(followRequest.Id);
+            return Response<NoContent>.Success(ResponseStatus.Success);
         }
 
            // Takip edilen kullanıcıları ve o kullanıcıların bilgilerini getireceğiz

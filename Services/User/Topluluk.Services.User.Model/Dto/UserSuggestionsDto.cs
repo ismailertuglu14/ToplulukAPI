@@ -12,6 +12,7 @@ namespace Topluluk.Services.User.Model.Dto
 		public string? ProfileImage { get; set; }
 		public GenderEnum Gender { get; set; }
 		public bool IsPrivate { get; set; }
+		public int MutualFriendCount { get; set; }
 	}
 }
 
