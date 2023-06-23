@@ -66,7 +66,12 @@ public class FollowController : BaseController
     {
         return await _followService.GetFollowerUsers(this.UserId, id, skip, take);
     }
-    
+    [HttpGet("follow-suggestions")]
+    public async Task<Response<List<UserSuggestionsDto>>> FollowSuggestions()
+    {
+        return await _followService.GetUserFollowSuggestions(this.UserId);
+    }
+
     
     //HTTP
     [HttpGet("user-followings")]
