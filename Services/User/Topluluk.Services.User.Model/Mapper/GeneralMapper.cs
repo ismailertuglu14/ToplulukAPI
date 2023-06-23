@@ -26,7 +26,7 @@ namespace Topluluk.Services.User.Model.Mapper
 			CreateMap<_User, FollowerUserDto>();
 			CreateMap<_User, UserFollowRequestDto>();
 
-
+			CreateMap<_User, UserSuggestionsDto>();
 		}		
 	}
 }

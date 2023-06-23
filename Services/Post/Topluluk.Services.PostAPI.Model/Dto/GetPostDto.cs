@@ -9,6 +9,7 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		public string Id { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public string UserName { get; set; }
 		public string? ProfileImage { get; set; }
 
 		public string Description { get; set; }
@@ -16,9 +17,6 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 		// Oran orantı kur.
 		public int InteractionCount { get; set; }
 		public int CommentsCount { get; set; }
-
-		
-		
 	}
 }
 

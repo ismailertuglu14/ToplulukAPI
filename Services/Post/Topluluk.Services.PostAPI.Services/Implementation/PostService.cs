@@ -186,14 +186,15 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                     postDto.UserId = user.Id;
                     postDto.FirstName = user.FirstName;
                     postDto.LastName = user.LastName;
+                    postDto.UserName = user.UserName;
                     postDto.ProfileImage = user.ProfileImage;
                     postDto.Gender = user.Gender;
                     postDto.IsFollowing = getUserFollowingsResponse.Contains(user.Id);
 
            
                     
-                    postDto.InteractionCount = interactionCountsTask.Result.ContainsKey(postDto.Id) == true
-                        ? interactionCountsTask.Result[postDto.Id]
+                    postDto.InteractionCount = interactionCountsTask.Result.TryGetValue(postDto.Id, out var value)
+                        ? value
                         : 0;
                     
                     
