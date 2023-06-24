@@ -195,21 +195,14 @@ public class FollowService : IFollowService
             
             foreach (var dto in dtos)
             {
-              //  int mutualFriendCount = await CalculateMutualFriendCount(userId, dto.Id);
                 dto.MutualFriendCount = await _followRepository.Count(f => !f.IsDeleted && followingIds.Contains(f.SourceId) && f.TargetId == dto.Id);
+                dto.IsFollowRequested = await _followRequestRepository.AnyAsync(f =>
+                    !f.IsDeleted && f.SourceId == userId && f.TargetId == dto.Id);
             }
             
             return Response<List<UserSuggestionsDto>>.Success(dtos, ResponseStatus.Success);
         }
-
-        private async Task<int> CalculateMutualFriendCount(string userId, string suggestedUserId)
-        {
-            var userFollowings = await _followRepository.GetListByExpressionAsync(f => f.SourceId == userId);
-            var suggestedUserFollowings = await _followRepository.GetListByExpressionAsync(f => f.SourceId == suggestedUserId);
-    
-            int mutualFriendCount = userFollowings.Count(f => suggestedUserFollowings.Any(sf => sf.TargetId == f.TargetId));
-            return mutualFriendCount;
-        }
+        
         
         public async Task<Response<List<string>>> GetUserFollowings(string id)
         {
