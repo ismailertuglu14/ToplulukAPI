@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using Topluluk.Services.PostAPI.Data.Implementation;
 using Topluluk.Services.PostAPI.Data.Interface;
 using Topluluk.Services.PostAPI.Data.Settings;
+using Topluluk.Services.PostAPI.Model.Entity;
 using Topluluk.Services.PostAPI.Services.Implementation;
 using Topluluk.Services.PostAPI.Services.Interface;
 using Topluluk.Shared.Middleware;
@@ -32,6 +33,7 @@ namespace Topluluk.Services.PostAPI.Services.Core
             services.AddSingleton<IBaseDatabaseSettings, MongoDatabaseSettings>();
             // services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ICommentInteractionRepository, CommentInteractionRepository>();
             services.AddScoped<IPostCommentRepository, PostCommentRepository>();
             services.AddScoped<ISavedPostRepository, SavedPostRepository>();
             services.AddScoped<IPostInteractionRepository,PostInteractionRepository>();   
