@@ -172,12 +172,12 @@ public class PostCommentService : IPostCommentService
 
         CommentInteraction commentInteraction = await _commentInteractionRepository.GetFirstAsync(c => c.CommentId == commentId);
 
-        if (commentInteraction != null && commentInteraction.Type != type)
+        if (commentInteraction != null)
         {
             _commentInteractionRepository.DeleteById(commentInteraction);
         }
 
-        if (commentInteraction == null || commentInteraction.Type != type)
+        else if (commentInteraction == null || commentInteraction.Type != type)
         {
             CommentInteraction interaction = new()
             {
