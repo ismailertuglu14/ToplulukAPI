@@ -18,18 +18,19 @@ public class PostCommentService : IPostCommentService
     private readonly IPostRepository _postRepository;
     private readonly IPostCommentRepository _commentRepository;
     private readonly RestClient _client;
-    
-    public PostCommentService(IMapper mapper, IPostRepository postRepository, IPostCommentRepository commentRepository)
+    private readonly ICommentInteractionRepository _commentInteractionRepository;
+    public PostCommentService(IMapper mapper, IPostRepository postRepository, IPostCommentRepository commentRepository, ICommentInteractionRepository commentInteractionRepository)
     {
         _mapper = mapper;
         _postRepository = postRepository;
         _commentRepository = commentRepository;
+        _commentInteractionRepository = commentInteractionRepository;
         _client = new RestClient();
     }
 
     public async Task<Response<List<CommentGetDto>>> GetComments(string userId, string postId, int skip = 0,int take = 10)
     {
-        List<PostComment> response =  await _commentRepository.GetPostCommentsDescendingDate(skip, take, c => c.PostId == postId && (c.ParentCommentId == "" || c.ParentCommentId == null));
+        List<PostComment> response =  await _commentRepository.GetPostCommentsDescendingDate(skip, take, c => !c.IsDeleted && c.PostId == postId && (c.ParentCommentId == "" || c.ParentCommentId == null));
         
         List<CommentGetDto> comments = _mapper.Map<List<PostComment>, List<CommentGetDto>>(response);
         
@@ -67,7 +68,7 @@ public class PostCommentService : IPostCommentService
 
     public async Task<Response<List<CommentGetDto>>> GetReplies(string commentId, int skip = 0, int take = 10)
     {
-        List<PostComment> response =  await _commentRepository.GetPostCommentsDescendingDate(skip, take, c => c.ParentCommentId == commentId );
+        List<PostComment> response =  await _commentRepository.GetPostCommentsDescendingDate(skip, take, c => !c.IsDeleted && c.ParentCommentId == commentId );
 
         if (response == null || response.Count == 0)
         {
@@ -163,4 +164,31 @@ public class PostCommentService : IPostCommentService
         return Response<NoContent>.Success(ResponseStatus.Success);
             
     }
+
+    public async Task<Response<NoContent>> Interaction(string userId, string commentId, int type)
+    {
+        if (!Enum.IsDefined(typeof(CommentInteractionEnum), type))
+            throw new ArgumentException();
+
+        CommentInteraction commentInteraction = await _commentInteractionRepository.GetFirstAsync(c => c.CommentId == commentId);
+
+        if (commentInteraction != null && commentInteraction.Type != type)
+        {
+            _commentInteractionRepository.DeleteById(commentInteraction);
+        }
+
+        if (commentInteraction == null || commentInteraction.Type != type)
+        {
+            CommentInteraction interaction = new()
+            {
+                UserId = userId,
+                CommentId = commentId,
+                Type = type
+            };
+            await _commentInteractionRepository.InsertAsync(interaction);
+        }
+
+        return Response<NoContent>.Success(ResponseStatus.Success);
+    }
+
 }
