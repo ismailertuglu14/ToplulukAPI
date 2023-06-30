@@ -48,4 +48,12 @@ public class PostCommentController : BaseController
         dto.CommentId = id;
         return await _commentService.UpdateComment(this.UserId, dto);
     }
+
+    [HttpPost("comment/{commentId}/interaction")]
+    public async Task<Response<NoContent>> Interaction(string commentId, int type)
+    {
+        return await _commentService.Interaction(this.UserId, commentId, type);
+    }
+
+    
 }
