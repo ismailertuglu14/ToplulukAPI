@@ -92,7 +92,7 @@ namespace Topluluk.Services.CommunityAPI.Controllers
         [HttpGet("user-communities")]
         public async Task<Response<List<CommunityGetPreviewDto>>> GetUserCommunities(string id, int skip, int take)
         {
-            return await _communityService.GetUserCommunities( id,skip,take);
+            return await _communityService.GetUserCommunities(id,skip,take);
         }
         
         /// <summary>

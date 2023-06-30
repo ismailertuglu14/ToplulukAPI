@@ -10,7 +10,7 @@ namespace Topluluk.Services.PostAPI.Data.Interface
 		Task<List<PostComment>> GetPostCommentsDescendingDate(int skip, int take, Expression<Func<PostComment,bool>> predicate);
 		Task<bool> DeletePostsComments(string userId);
 		Task<Dictionary<string, int>> GetPostCommentCounts(List<string> postIds);
-
+		Task<Dictionary<string, int>> GetCommentsReplyCounts(List<string> commentIds);
 	}
 }
 

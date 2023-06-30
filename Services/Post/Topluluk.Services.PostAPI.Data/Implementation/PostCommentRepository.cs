@@ -85,6 +85,28 @@ namespace Topluluk.Services.PostAPI.Data.Implementation
 
             return postCommentCounts;
         }
+
+        public async Task<Dictionary<string, int>> GetCommentsReplyCounts(List<string> commentIds)
+        {
+            var database = GetConnection();
+            var collectionName = GetCollectionName();
+            var filter = Builders<PostComment>.Filter.In(x => x.ParentCommentId, commentIds)
+                         & Builders<PostComment>.Filter.Eq(x => x.IsDeleted, false);
+            var comments = await database.GetCollection<PostComment>(collectionName).Find(filter).ToListAsync();
+
+            var commentReplyCounts = new Dictionary<string, int>();
+            
+            foreach (var commentId in commentIds)
+            {
+                var count = comments.Count(x => x.ParentCommentId == commentId);
+                if (count > 0)
+                {
+                    commentReplyCounts.Add(commentId, count);
+                }
+            }
+
+            return commentReplyCounts;
+        }
     }
 }
 
