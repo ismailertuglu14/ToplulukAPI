@@ -16,12 +16,17 @@ public class PostCommentController : BaseController
         _commentService = commentService;
     }
     
-    [HttpGet("comments")]
-    public async Task<Response<List<CommentGetDto>>> GetComments(string id)
+    [HttpGet("{id}/comments")]
+    public async Task<Response<List<CommentGetDto>>> GetComments(string id, int skip, int take)
     {
-        return await _commentService.GetComments(this.UserId, id);
+        return await _commentService.GetComments(this.UserId, id, skip, take);
     }
     
+    [HttpGet("comment/{commentId}/replies")]
+    public async Task<Response<List<CommentGetDto>>> GetReplies(string commentId, int skip, int take)
+    {
+        return await _commentService.GetReplies(commentId, skip, take);
+    }
     
     [HttpPost("Comment")]
     public async Task<Response<NoContent>> Comment(CommentCreateDto commentDto)

@@ -7,11 +7,9 @@ namespace Topluluk.Services.PostAPI.Model.Entity
 	{
 		public string? UserId { get; set; }
 		public string PostId { get; set; }
+		public string ParentCommentId { get; set; }
 		public string Message { get; set; }
-		
-
 		public List<PreviousMessage> PreviousMessages { get; set; }
-
 	}
 
 	public class PreviousMessage
