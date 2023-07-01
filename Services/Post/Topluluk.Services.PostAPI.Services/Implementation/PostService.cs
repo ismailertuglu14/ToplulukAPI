@@ -148,6 +148,14 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 
                 await Task.WhenAll(getUserFollowingsTask, userCommunitiesTask);
                 
+                if (getUserFollowingsTask.Result.Data == null || getUserFollowingsTask.Result.IsSuccessful == false)
+                    throw new Exception("Get User Followings Error");
+                
+                if (userCommunitiesTask.Result.Data == null || userCommunitiesTask.Result.IsSuccessful == false)
+                    throw new Exception("Get User Communities Error");            
+                    
+                    
+                
                 // Id list of users followed by Source User
                 var getUserFollowingsResponse = getUserFollowingsTask.Result.Data.Data;
                 List<string> communityIds = userCommunitiesTask.Result.Data.Data.Select(c => c.Id).ToList();
