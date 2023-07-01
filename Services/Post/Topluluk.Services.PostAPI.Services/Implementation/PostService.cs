@@ -12,6 +12,7 @@ using RestSharp;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using Topluluk.Shared.Constants;
+using Topluluk.Shared.Exceptions;
 using ResponseStatus = Topluluk.Shared.Enums.ResponseStatus;
 
 
@@ -423,6 +424,10 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
             try
             {
                 var post = await _postRepository.GetFirstAsync(p => p.Id == postId);
+                if (post == null)
+                    throw new NotFoundException();
+                    
+                
                 var postDto = _mapper.Map<GetPostByIdDto>(post);
 
                 var postIds = new List<string>();
@@ -437,8 +442,8 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 var interactionPreviewsTask = _postInteractionRepository.GetPostInteractionPreviews(postIds);
                 var isSavedTask = _savedPostRepository.AnyAsync(p => !p.IsDeleted && p.PostId == postId && p.UserId == sourceUserId);
                 var isInteractedTask = _postInteractionRepository.GetFirstAsync(p => p.PostId == p.Id && p.UserId == sourceUserId);
-                var commentCountTask =  _commentRepository.Count(p => !p.IsDeleted && p.PostId == postId);
-                
+                var commentCountTask =  _commentRepository.Count(c => !c.IsDeleted && c.PostId == postId && (c.ParentCommentId == "" || c.ParentCommentId == null));
+                 
                 await Task.WhenAll(interactionPreviewsTask, commentCountTask, isSavedTask, isInteractedTask, userInfoResponseTask, interactionCountTask);
                     
                 postDto.IsSaved = isSavedTask.Result;        
@@ -459,7 +464,10 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                 }
               
                 
-                var comments =  _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId).Result.Data as List<PostComment>;
+                var comments =  _commentRepository.GetAllAsync(10, 0, c => c.PostId == postId && (c.ParentCommentId == "" || c.ParentCommentId == null)).Result.Data as List<PostComment>;
+                var commentReplyCounts = await _commentRepository.GetCommentsReplyCounts(comments.Select(c =>c.Id).ToList());
+                
+
                 if (comments != null && comments.Count > 0)
                 {
                     postDto.CommentCount = commentCountTask.Result;
@@ -470,18 +478,23 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
 
                     var request = new RestRequest(ServiceConstants.API_GATEWAY + "/user/get-user-info-list").AddBody(idList);
                     var response = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(request);
-                    
-                    for (int i = 0; i < comments.Count; i++)
+    
+                    foreach (var commentDto in commentDtos)
                     {
-                        UserInfoDto user = response.Data.Data.Where(u => u.Id == commentDtos[i].UserId)
+                        UserInfoDto user = response.Data.Data.Where(u => u.Id == commentDto.UserId)
                             .FirstOrDefault() ?? throw new InvalidOperationException();
-                        commentDtos[i].ProfileImage = user.ProfileImage;
-                        commentDtos[i].FirstName = user.FirstName;
-                        commentDtos[i].LastName = user.LastName;
-                        commentDtos[i].Gender = user.Gender;
-                        postDto.Comments?.Add(commentDtos[i]);
+                        commentDto.ProfileImage = user.ProfileImage;
+                        commentDto.FirstName = user.FirstName;
+                        commentDto.LastName = user.LastName;
+                        commentDto.IsEdited =
+                            commentDto.PreviousMessages != null && commentDto.PreviousMessages.Count != 0;
+                        
+                        commentDto.Gender = user.Gender;
+                        commentDto.ReplyCount = commentReplyCounts.TryGetValue(commentDto.Id, out int value)
+                            ? value
+                            : 0;
+                        postDto.Comments?.Add(commentDto);
                     }
-
                 }
                 
                 if (post.CommunityId != null)

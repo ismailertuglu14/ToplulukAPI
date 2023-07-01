@@ -34,8 +34,7 @@ namespace DBHelper.Repository.Mongo
         //todo: Need performence improvements
         public DatabaseResponse BulkUpdate(List<T> entityList)
         {
-
-
+            
             foreach (T entity in entityList)
             {
                 var data = _collection.ReplaceOne(x => x.Id == entity.Id, entity);
@@ -54,13 +53,17 @@ namespace DBHelper.Repository.Mongo
 
         public int Delete(T entity)
         {
-            throw new NotImplementedException();
+            var filter = Builders<T>.Filter.Eq(x => x.Id, entity.Id);
+            var update = Builders<T>.Update.Set(x => x.IsDeleted, true);
+            var result = _collection.UpdateMany(filter, update);
+            return (int)result.ModifiedCount;
         }
 
         public void Delete(string id)
         {
-
-            _collection.DeleteOne(x=>x.Id == id);
+            var filter = Builders<T>.Filter.Eq(x => x.Id, id);
+            var update = Builders<T>.Update.Set(x => x.IsDeleted, true);
+            _collection.UpdateMany(filter, update);
         }
 
         public void DeleteByExpression(Expression<Func<T, bool>> predicate)
@@ -74,11 +77,10 @@ namespace DBHelper.Repository.Mongo
         public int Delete(string[] id)
         {
           
-            foreach (string userId in id)
-            {
-                _collection.DeleteOne(x => x.Id == userId);
-            }
-            return 1;
+            var filter = Builders<T>.Filter.In("_id", id);
+            var update = Builders<T>.Update.Set(x => x.IsDeleted, true);
+            var result = _collection.UpdateMany(filter, update);
+            return (int)result.ModifiedCount;
         }
 
         public bool Delete(List<T> entities)
@@ -227,8 +229,9 @@ namespace DBHelper.Repository.Mongo
 
         public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
         {
-       
-            return _collection.Find(predicate).AnyAsync();
+            var filter = Builders<T>.Filter.Eq(x => x.IsDeleted, false);
+            var finalFilter = Builders<T>.Filter.And(filter, predicate);
+            return _collection.Find(finalFilter).AnyAsync();
         }
 
         public DatabaseResponse GetByIdWithDeleted(string id)
@@ -384,8 +387,10 @@ namespace DBHelper.Repository.Mongo
 
         public async Task<int> Count(Expression<Func<T, bool>> predicate)
         {
-            var response = await _collection.Find(predicate).ToListAsync();
-            return response.Count;
+            var filter = Builders<T>.Filter.Eq(x => x.IsDeleted, false);
+            var finalFilter = Builders<T>.Filter.And(filter, predicate);
+            var response = await _collection.CountDocumentsAsync(finalFilter);
+            return (int)response;
         }
 
     }
