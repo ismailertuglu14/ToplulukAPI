@@ -70,7 +70,9 @@ namespace Topluluk.Services.PostAPI.Data.Implementation
             var database = GetConnection();
             var collectionName = GetCollectionName();
             var filter = Builders<PostComment>.Filter.In(x => x.PostId, postIds)
-                         & Builders<PostComment>.Filter.Eq(x => x.IsDeleted, false);
+                         & Builders<PostComment>.Filter.Eq(x => x.IsDeleted, false)
+                         & Builders<PostComment>.Filter.Eq( x => x.ParentCommentId, null);
+                
             var comments = await database.GetCollection<PostComment>(collectionName).Find(filter).ToListAsync();
 
             var postCommentCounts = new Dictionary<string, int>();
