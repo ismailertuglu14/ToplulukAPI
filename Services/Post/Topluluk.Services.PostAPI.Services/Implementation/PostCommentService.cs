@@ -43,8 +43,10 @@ public class PostCommentService : IPostCommentService
         var userInfoResponse = await _client.ExecutePostAsync<Response<List<UserInfoDto>>>(userInfoRequest);
         
         List<string> commentIds = comments.Select(c => c.Id).ToList();
-        var commentReplyCounts = await _commentRepository.GetCommentsReplyCounts(commentIds);
-        
+        var commentReplyCountTask =  _commentRepository.GetCommentsReplyCounts(commentIds);
+        var commentsInteractedTask = _commentInteractionRepository.GetCommentsIsInteracted(userId, commentIds);
+        var commentsInteractionCountsTask = _commentInteractionRepository.GetCommentsInteractionCounts(commentIds);
+        await Task.WhenAll(commentsInteractedTask, commentReplyCountTask, commentsInteractionCountsTask);
         foreach (var comment in comments)
         {
             var user = userInfoResponse.Data.Data.Where(u => u.Id == comment.UserId).FirstOrDefault();
@@ -58,8 +60,14 @@ public class PostCommentService : IPostCommentService
             comment.FirstName = user.FirstName;
             comment.LastName = user.LastName;
             comment.ProfileImage = user.ProfileImage;
-            comment.ReplyCount = commentReplyCounts.TryGetValue(comment.Id, out int value) ? value : 0;
-                
+            comment.ReplyCount = commentReplyCountTask.Result.TryGetValue(comment.Id, out int value) ? value : 0;
+            comment.IsInteracted = commentsInteractedTask.Result.TryGetValue(comment.Id, out var isInteracted)
+                ? isInteracted
+                : new CommentInteracted();
+            comment.InteractionCounts = commentsInteractionCountsTask.Result.TryGetValue(comment.Id, out var counts)
+                ? counts
+                : new CommentLikes();
+            
             comment.IsEdited = response.Where(c => c.Id == comment.Id).FirstOrDefault().PreviousMessages != null ;
         }
             
@@ -171,20 +179,20 @@ public class PostCommentService : IPostCommentService
             throw new ArgumentException();
 
         CommentInteraction commentInteraction = await _commentInteractionRepository.GetFirstAsync(c => c.CommentId == commentId);
-
+        CommentInteraction interaction = new()
+        {
+            UserId = userId,
+            CommentId = commentId,
+            Type = (CommentInteractionType)type
+        };
         if (commentInteraction != null)
         {
             _commentInteractionRepository.DeleteById(commentInteraction);
+            await _commentInteractionRepository.InsertAsync(interaction);
         }
 
-        else if (commentInteraction == null || commentInteraction.Type != type)
+        else if (commentInteraction == null && !Enum.IsDefined(typeof(CommentInteractionEnum), type))
         {
-            CommentInteraction interaction = new()
-            {
-                UserId = userId,
-                CommentId = commentId,
-                Type = type
-            };
             await _commentInteractionRepository.InsertAsync(interaction);
         }
 
