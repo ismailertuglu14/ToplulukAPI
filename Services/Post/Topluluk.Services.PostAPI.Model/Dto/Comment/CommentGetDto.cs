@@ -17,17 +17,27 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 
 		public DateTime CreatedAt { get; set; }
 
-		public int InteractionCount { get; set; }
-		public bool IsLiked { get; set; } = false;
-		
 		public bool IsEdited { get; set; }
 
 		public int ReplyCount { get; set; }
-		public List<PreviousMessage> PreviousMessages { get; set; }
+		public CommentInteracted IsInteracted { get; set; }
+		public CommentLikes InteractionCounts { get; set; }
 		public CommentGetDto()
 		{
 			
 		}
+	}
+
+	public class CommentInteracted
+	{
+		public bool Like { get; set; }
+		public bool Dislike { get; set; }
+	}
+
+	public class CommentLikes
+	{
+		public int LikeCount { get; set; }
+		public int DislikeCount { get; set; }
 	}
 }
 
