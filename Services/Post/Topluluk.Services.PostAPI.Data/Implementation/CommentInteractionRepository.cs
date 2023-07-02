@@ -42,13 +42,16 @@ public class CommentInteractionRepository : MongoGenericRepository<CommentIntera
         
         foreach (var interaction in interactions)
         {
-            var likeCount = interactions.Count(x => x.CommentId == interaction.CommentId && x.Type == CommentInteractionType.LIKE);
-            var dislikeCount = interactions.Count(x => x.CommentId == interaction.CommentId && x.Type == CommentInteractionType.DISLIKE);
-            commentsInteractionCounts.Add(interaction.CommentId, new CommentLikes
+            if (!commentsInteractionCounts.ContainsKey(interaction.CommentId))
             {
-                LikeCount = likeCount,
-                DislikeCount = dislikeCount
-            } );
+                var likeCount = interactions.Count(x => x.CommentId == interaction.CommentId && x.Type == CommentInteractionType.LIKE);
+                var dislikeCount = interactions.Count(x => x.CommentId == interaction.CommentId && x.Type == CommentInteractionType.DISLIKE);
+                commentsInteractionCounts.Add(interaction.CommentId, new CommentLikes
+                {
+                    LikeCount = likeCount,
+                    DislikeCount = dislikeCount
+                } );
+            }
         }
 
         return commentsInteractionCounts;
@@ -67,6 +70,7 @@ public class CommentInteractionRepository : MongoGenericRepository<CommentIntera
 
         var projection = Builders<CommentInteraction>.Projection
             .Include(c => c.CommentId)
+            .Include(c =>c.UserId)
             .Include(c => c.Type);
 
         var interactionsCursor = await database.GetCollection<CommentInteraction>(collectionName)
@@ -78,7 +82,7 @@ public class CommentInteractionRepository : MongoGenericRepository<CommentIntera
 
         while (await interactionsCursor.MoveNextAsync())
         {
-            var interactions = interactionsCursor.Current.ToList();
+            var interactions = interactionsCursor.Current;
             foreach (var interaction in interactions)
             {
                 var commentId = interaction.CommentId;
