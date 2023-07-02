@@ -176,9 +176,9 @@ public class PostCommentService : IPostCommentService
     public async Task<Response<NoContent>> Interaction(string userId, string commentId, int type)
     {
         if (!Enum.IsDefined(typeof(CommentInteractionEnum), type))
-            throw new ArgumentException();
+            throw new ArgumentException("Interaction Type does not allowed! Please provide valid interaction type.");
 
-        CommentInteraction commentInteraction = await _commentInteractionRepository.GetFirstAsync(c => c.CommentId == commentId);
+        CommentInteraction commentInteraction = await _commentInteractionRepository.GetFirstAsync(c => c.CommentId == commentId && c.UserId == userId);
         CommentInteraction interaction = new()
         {
             UserId = userId,
@@ -191,7 +191,7 @@ public class PostCommentService : IPostCommentService
             await _commentInteractionRepository.InsertAsync(interaction);
         }
 
-        else if (commentInteraction == null && !Enum.IsDefined(typeof(CommentInteractionEnum), type))
+        else if (commentInteraction == null && Enum.IsDefined(typeof(CommentInteractionEnum), type))
         {
             await _commentInteractionRepository.InsertAsync(interaction);
         }
