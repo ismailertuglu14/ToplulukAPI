@@ -185,10 +185,14 @@ public class PostCommentService : IPostCommentService
             CommentId = commentId,
             Type = (CommentInteractionType)type
         };
-        if (commentInteraction != null)
+        if (commentInteraction != null && (int)commentInteraction.Type != type)
         {
             _commentInteractionRepository.DeleteById(commentInteraction);
             await _commentInteractionRepository.InsertAsync(interaction);
+        }
+        else if (commentInteraction != null && (int)commentInteraction.Type == type)
+        {
+            _commentInteractionRepository.DeleteById(commentInteraction);
         }
 
         else if (commentInteraction == null && Enum.IsDefined(typeof(CommentInteractionEnum), type))
