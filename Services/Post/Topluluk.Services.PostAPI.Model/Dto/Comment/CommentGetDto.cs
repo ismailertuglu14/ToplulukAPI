@@ -1,4 +1,5 @@
 ﻿using System;
+using Topluluk.Services.PostAPI.Model.Entity;
 using Topluluk.Shared.Enums;
 
 namespace Topluluk.Services.PostAPI.Model.Dto
@@ -16,7 +17,6 @@ namespace Topluluk.Services.PostAPI.Model.Dto
 
 		public DateTime CreatedAt { get; set; }
 
-		
 		public bool IsEdited { get; set; }
 
 		public int ReplyCount { get; set; }

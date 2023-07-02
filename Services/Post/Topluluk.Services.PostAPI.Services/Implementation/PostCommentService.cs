@@ -68,7 +68,7 @@ public class PostCommentService : IPostCommentService
                 ? counts
                 : new CommentLikes();
             
-            comment.IsEdited = response.Where(c => c.Id == comment.Id).FirstOrDefault().PreviousMessages != null ;
+            comment.IsEdited = response.Where(c => c.Id == comment.Id)!.FirstOrDefault()!.PreviousMessages != null ;
         }
             
         return Response<List<CommentGetDto>>.Success(comments,ResponseStatus.Success);

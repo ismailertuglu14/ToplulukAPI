@@ -495,7 +495,7 @@ namespace Topluluk.Services.PostAPI.Services.Implementation
                         commentDto.FirstName = user.FirstName;
                         commentDto.LastName = user.LastName;
                         commentDto.IsEdited =
-                            commentDto.PreviousMessages != null && commentDto.PreviousMessages.Count != 0;
+                            comments.FirstOrDefault(c => c.Id == commentDto.Id)!.PreviousMessages != null &&   comments.FirstOrDefault(c => c.Id == commentDto.Id)!.PreviousMessages.Count != 0;
                         
                         commentDto.Gender = user.Gender;
                         commentDto.ReplyCount = commentReplyCounts.TryGetValue(commentDto.Id, out int value)
